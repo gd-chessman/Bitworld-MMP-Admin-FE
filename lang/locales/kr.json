@@ -1,0 +1,553 @@
+{
+    "dashboard": {
+        "title": "대시보드",
+        "hello": "안녕하세요, 관리자님!",
+        "overview": "시스템 성능 개요입니다.",
+        "totalRevenue": "총 수익",
+        "activeUsers": "활성 사용자",
+        "onlineNow": "현재 온라인",
+        "fromLastMonth": "지난달 대비",
+        "totalWallets": "총 지갑 수",
+        "totalBgAffiliateTrees": "총 BG 어필리에이트 트리 수",
+        "wallets": {
+            "title": "총 지갑",
+            "active": "활성"
+        },
+        "orders": {
+            "title": "총 거래",
+            "executed": "실행된 주문",
+            "totalVolume": "총 거래량",
+            "mostActiveWallet": "가장 활발한 지갑",
+            "orderCount": "{{count}}건 주문"
+        },
+        "referrals": {
+            "title": "총 추천",
+            "members": "멤버",
+            "normal": "일반",
+            "bg": "BG",
+            "rewards": "보상",
+            "wallets": "지갑",
+            "relations": "관계",
+            "trees": "트리",
+            "commission": "수수료",
+            "volume": "거래량"
+        },
+        "tabs": {
+            "overview": "개요",
+            "analytics": "분석",
+            "reports": "보고서"
+        },
+        "revenueOverview": {
+            "title": "수익 개요",
+            "description": "올해 월별 수익 차트"
+        },
+        "userDistribution": {
+            "title": "사용자 분포",
+            "description": "현재 사용자 유형 분포",
+            "masterUsers": "마스터 사용자",
+            "memberUsers": "멤버 사용자",
+            "anonymousUsers": "익명 사용자"
+        },
+        "trafficAnalysis": {
+            "title": "트래픽 분석",
+            "description": "기기 유형 및 브라우저별 실시간 트래픽",
+            "area": "영역",
+            "line": "선"
+        },
+        "deviceDistribution": {
+            "title": "기기 분포",
+            "description": "현재 기기 유형 분포"
+        },
+        "activeConnections": {
+            "title": "활성 연결",
+            "description": "현재 활성 사용자 연결",
+            "clientId": "클라이언트 ID",
+            "walletId": "지갑 ID",
+            "device": "기기",
+            "lastActive": "마지막 활동",
+            "solAddress": "SOL 주소"
+        },
+        "walletsOverview": {
+            "title": "지갑 개요",
+            "description": "지갑 통계 및 활동",
+            "totalWallets": "총 지갑",
+            "activeWallets": "활성 지갑",
+            "newToday": "오늘 신규",
+            "newThisWeek": "이번 주 신규"
+        },
+        "ordersOverview": {
+            "title": "주문 개요",
+            "description": "주문 통계 및 성능",
+            "totalOrders": "총 주문",
+            "executed": "실행됨",
+            "pending": "대기 중"
+        },
+        "referralsOverview": {
+            "title": "추천 개요",
+            "description": "추천 보상 및 수수료 분배",
+            "normalRewards": "일반 보상",
+            "bgCommission": "BG 수수료"
+        },
+        "reports": {
+            "title": "보고서",
+            "description": "여기서 보고서를 보고 생성하세요.",
+            "revenueReport": "수익 보고서",
+            "userActivityReport": "사용자 활동 보고서",
+            "systemPerformanceReport": "시스템 성능 보고서",
+            "viewDetails": "세부 정보 보기 및 보고서 내보내기"
+        }
+    },
+    "list-wallets": {
+        "title": "지갑 목록",
+        "pageTitle": "지갑 목록",
+        "description": "사용자 지갑과 권한을 관리합니다.",
+        "cardTitle": "지갑 목록",
+        "cardDescription": "사용자 지갑과 관련 계정을 보고 관리합니다.",
+        "refresh": "새로고침",
+        "searchPlaceholder": "지갑 ID 또는 닉네임으로 검색 ...",
+        "table": {
+            "walletId": "지갑 ID",
+            "nickname": "닉네임",
+            "authType": "인증 유형",
+            "stream": "스트림",
+            "country": "국가",
+            "loading": "로딩 중...",
+            "noData": "데이터 없음",
+            "master": "마스터",
+            "member": "멤버",
+            "na": "-",
+            "addressCopied": "주소가 클립보드에 복사되었습니다",
+            "copyFailed": "주소 복사 실패",
+            "auths": "권한",
+            "authId": "권한 ID",
+            "userId": "사용자 ID",
+            "type": "유형",
+            "name": "이름",
+            "walletDetails": "지갑 세부정보",
+            "solanaAddress": "솔라나 주소",
+            "ethAddress": "ETH 주소",
+            "status": "상태:",
+            "active": "활성",
+            "inactive": "비활성",
+            "noResults": "결과 없음."
+        },
+        "allTypes": "전체"
+    },
+    "categories-token": {
+        "title": "토큰 분류",
+        "pageTitle": "토큰 분류",
+        "description": "시스템에서 토큰 분류를 관리합니다.",
+        "cardTitle": "토큰 분류 목록",
+        "cardDescription": "시스템의 모든 토큰 분류 목록입니다.",
+        "searchPlaceholder": "분류 검색...",
+        "table": {
+            "id": "ID",
+            "name": "이름",
+            "slug": "슬러그",
+            "prioritize": "우선순위",
+            "status": "상태",
+            "createdAt": "생성일",
+            "updatedAt": "수정일",
+            "actions": "작업",
+            "yes": "예",
+            "no": "아니오",
+            "active": "활성",
+            "hidden": "숨김",
+            "edit": "편집",
+            "delete": "삭제",
+            "categoryUpdated": "분류가 성공적으로 업데이트되었습니다",
+            "updateFailed": "분류 업데이트 실패",
+            "prioritizeUpdated": "분류 우선순위가 성공적으로 업데이트되었습니다",
+            "prioritizeFailed": "분류 우선순위 업데이트 실패",
+            "statusUpdated": "분류 상태가 성공적으로 업데이트되었습니다",
+            "statusFailed": "분류 상태 업데이트 실패",
+            "categoryDeleted": "분류가 성공적으로 삭제되었습니다",
+            "deleteFailed": "분류 삭제 실패",
+            "deleteConfirmTitle": "확실합니까?",
+            "deleteConfirmDescription": "이 작업은 되돌릴 수 없습니다. 이는 분류를 영구적으로 삭제합니다.",
+            "cancel": "취소",
+            "confirm": "확인",
+            "editCategory": "분류 편집",
+            "editDescription": "여기서 분류에 대한 변경사항을 만드세요. 완료되면 저장을 클릭하세요.",
+            "nameLabel": "이름",
+            "slugLabel": "슬러그",
+            "save": "저장",
+            "loading": "로딩 중...",
+            "noData": "데이터 없음",
+            "addNew": "새로 추가",
+            "addCategory": "분류 추가",
+            "addDescription": "시스템에 새로운 토큰 분류를 추가합니다.",
+            "categoryAdded": "분류가 성공적으로 추가되었습니다",
+            "addFailed": "분류 추가 실패"
+        }
+    },
+    "analytics": {
+        "title": "실시간 분석",
+        "description": "사용자 활동 및 연결의 실시간 모니터링.",
+        "stats": {
+            "totalUsers": "총 사용자",
+            "activeNow": "현재 활성",
+            "masterUsers": "마스터 사용자",
+            "memberUsers": "멤버 사용자",
+            "vipUsers": "VIP 사용자",
+            "normalUsers": "일반 사용자",
+            "anonymousUsers": "익명 사용자"
+        },
+        "tabs": {
+            "overview": "개요",
+            "connections": "활성 연결",
+            "devices": "장치"
+        },
+        "charts": {
+            "userTypes": {
+                "title": "사용자 유형",
+                "description": "유형별 활성 사용자 분포"
+            },
+            "deviceTypes": {
+                "title": "장치 유형",
+                "description": "장치별 활성 사용자 분포"
+            },
+            "browsersOS": {
+                "title": "브라우저 & OS",
+                "description": "브라우저 및 운영체제별 분포"
+            }
+        },
+        "connections": {
+            "title": "활성 연결",
+            "description": "시스템에 대한 모든 현재 활성 연결",
+            "table": {
+                "clientId": "클라이언트 ID",
+                "walletId": "지갑 ID",
+                "userType": "사용자 유형",
+                "device": "장치",
+                "ip": "IP",
+                "lastActive": "마지막 활성",
+                "solAddress": "솔라나 주소"
+            }
+        },
+        "devices": {
+            "title": "활성 사용자 세션",
+            "description": "모든 활성 사용자 세션 및 탭의 세부 정보",
+            "connections": "연결",
+            "tabs": "탭",
+            "lastActive": "마지막 활성:"
+        },
+        "userTypes": {
+            "master": "마스터",
+            "member": "멤버",
+            "vip": "VIP",
+            "normal": "일반",
+            "anonymous": "익명",
+            "guest": "게스트"
+        },
+        "timeAgo": {
+            "seconds": "초 전",
+            "minutes": "분 전",
+            "hours": "시간 전"
+        }
+    },
+    "ref": {
+        "title": "추천 설정",
+        "description": "추천 레벨과 해당 보상 비율을 구성하세요.",
+        "cardTitle": "추천 레벨",
+        "cardDescription": "최대 추천 레벨 수와 해당 보상 비율을 설정하세요.",
+        "currentSetting": "현재 설정: {level} 레벨",
+        "maxLevels": "최대 레벨 수",
+        "selectMaxLevel": "최대 레벨 선택",
+        "level": "레벨",
+        "levels": "레벨",
+        "root": "루트",
+        "percentage": "%",
+        "errors": {
+            "levelRange": "레벨은 1에서 {max} 사이여야 합니다",
+            "percentageRange": "비율은 0에서 100 사이여야 합니다",
+            "levelGreaterThanPrevious": "레벨 {current} 비율은 레벨 {previous}보다 클 수 없습니다",
+            "levelLessThanNext": "레벨 {current} 비율은 레벨 {next}보다 작을 수 없습니다",
+            "updateLevelFailed": "레벨 업데이트 실패",
+            "updatePercentageFailed": "비율 업데이트 실패"
+        },
+        "success": {
+            "levelUpdated": "레벨이 성공적으로 업데이트되었습니다",
+            "percentageUpdated": "비율이 성공적으로 업데이트되었습니다"
+        }
+    },
+    "settings": {
+        "title": "설정",
+        "description": "계정 설정 및 기본 설정을 관리하세요.",
+        "tabs": {
+            "profile": "프로필",
+            "security": "보안",
+            "referral": "추천"
+        },
+        "profile": {
+            "title": "프로필 정보",
+            "description": "계정 세부 정보 및 정보",
+            "username": "사용자명",
+            "email": "이메일",
+            "role": "역할",
+            "accountCreated": "계정 생성일",
+            "lastUpdated": "마지막 업데이트"
+        },
+        "security": {
+            "title": "보안 설정",
+            "description": "계정 보안 관리",
+            "currentPassword": "현재 비밀번호",
+            "newPassword": "새 비밀번호",
+            "confirmPassword": "비밀번호 확인",
+            "saveChanges": "변경사항 저장"
+        },
+        "errors": {
+            "fillAllFields": "모든 비밀번호 필드를 입력하세요",
+            "currentPasswordLength": "현재 비밀번호는 최소 4자 이상이어야 합니다",
+            "newPasswordLength": "새 비밀번호는 최소 4자 이상이어야 합니다",
+            "confirmPasswordLength": "비밀번호 확인은 최소 4자 이상이어야 합니다",
+            "passwordsNotMatch": "새 비밀번호와 확인이 일치하지 않습니다",
+            "currentPasswordIncorrect": "현재 비밀번호가 올바르지 않습니다",
+            "changePasswordFailed": "비밀번호 변경 오류"
+        },
+        "success": {
+            "passwordChanged": "비밀번호가 성공적으로 변경되었습니다"
+        }
+    },
+    "navigation": {
+        "dashboard": "대시보드",
+        "listWallets": "지갑 목록",
+        "categoriesToken": "토큰 분류",
+        "analytics": "분석",
+        "referral": "BG 추천",
+        "normalAffiliate": "일반 추천",
+        "settings": "설정",
+        "admin": "관리자",
+        "orders": "거래"
+    },
+    "header": {
+        "accountInformation": "계정 정보",
+        "status": "상태",
+        "role": "역할",
+        "active": "활성",
+        "settings": "설정",
+        "logOut": "로그아웃"
+    },
+    "languageSelector": {
+        "currentLanguage": "현재 언어",
+        "label": "언어 검색...",
+        "noLanguageFound": "언어를 찾을 수 없습니다."
+    },
+    "login": {
+        "title": "AdminPanel",
+        "welcomeTitle": "환영합니다",
+        "adminDashboard": "관리자 대시보드",
+        "welcomeDescription": "강력하고 직관적이며 비즈니스 요구사항에 맞게 설계되었습니다.",
+        "features": {
+            "analytics": {
+                "title": "실시간 분석",
+                "description": "실시간 데이터 인사이트로 성능 모니터링"
+            },
+            "userManagement": {
+                "title": "사용자 관리",
+                "description": "계정, 역할 및 권한 관리"
+            },
+            "security": {
+                "title": "고급 보안",
+                "description": "데이터를 위한 엔터프라이즈급 보호"
+            }
+        },
+        "copyright": "© 2025 AdminPanel. 모든 권리 보유.",
+        "signIn": "로그인",
+        "accessDashboard": "관리자 대시보드에 접속하세요",
+        "username": "사용자명",
+        "usernamePlaceholder": "사용자명을 입력하세요",
+        "password": "비밀번호",
+        "passwordPlaceholder": "••••••••",
+        "forgotPassword": "비밀번호를 잊으셨나요?",
+        "signInButton": "로그인",
+        "signingIn": "로그인 중...",
+        "errors": {
+            "enterBothFields": "사용자명과 비밀번호를 모두 입력하세요",
+            "invalidCredentials": "사용자명 또는 비밀번호가 올바르지 않습니다",
+            "generalError": "오류가 발생했습니다. 다시 시도해 주세요."
+        }
+    },
+    "orders": {
+        "title": "거래 내역",
+        "description": "모든 거래 기록을 보고 검색하세요.",
+        "listTitle": "거래 목록",
+        "listDescription": "모든 거래",
+        "searchPlaceholder": "지갑 주소, 토큰 이름, 토큰 주소로 검색...",
+        "stt": "번호",
+        "solAddress": "SOL 주소",
+        "trade": "거래 종류",
+        "token": "토큰",
+        "quantity": "수량",
+        "price": "가격",
+        "total": "합계",
+        "status": "상태",
+        "createdAt": "생성일",
+        "txHash": "Tx Hash",
+        "buy": "매수",
+        "sell": "매도",
+        "executed": "성공",
+        "failed": "실패",
+        "noData": "거래가 없습니다.",
+        "viewOnSolscan": "Solscan에서 보기",
+        "statistics": {
+            "total": "총 거래",
+            "totalDesc": "시스템의 모든 거래입니다.",
+            "executed": "성공한 거래",
+            "executedDesc": "성공적으로 완료된 거래입니다.",
+            "mostActiveWallet": "가장 많이 거래한 지갑",
+            "mostActiveWalletDesc": "가장 많은 거래를 한 지갑입니다.",
+            "orderCount": "{{count}}건 거래"
+        }
+    },
+    "bg-affiliate": {
+        "title": "BG Affiliate",
+        "description": "제휴 및 수수료 구조 관리",
+        "cardTitle": "제휴",
+        "cardDescription": "모든 BG 제휴 관리 및 모니터링",
+        "searchPlaceholder": "트리 검색...",
+        "newBg": "새 BG",
+        "stats": {
+            "totalTrees": "총 트리",
+            "totalMembers": "총 멤버",
+            "totalCommissionDistributed": "총 분배된 수수료",
+            "totalVolume": "총 거래량"
+        },
+        "table": {
+            "number": "#",
+            "rootWallet": "루트 지갑",
+            "commission": "수수료",
+            "members": "멤버",
+            "created": "생성일",
+            "status": "상태",
+            "actions": "작업",
+            "active": "활성",
+            "inactive": "비활성",
+            "statusUpdated": "트리 상태가 성공적으로 업데이트되었습니다!",
+            "statusUpdateFailed": "트리 상태 업데이트에 실패했습니다. 다시 시도해 주세요.",
+            "loading": "트리 로딩 중...",
+            "error": "트리 로딩 오류. 다시 시도해 주세요.",
+            "noTrees": "트리를 찾을 수 없습니다",
+            "membersCount": "멤버"
+        },
+        "dialogs": {
+            "create": {
+                "title": "새 BG 생성",
+                "selectWallet": "지갑 선택",
+                "selectWalletPlaceholder": "지갑을 검색하고 선택하세요...",
+                "commission": "수수료 (%)",
+                "commissionPlaceholder": "예: 70",
+                "commissionHelp": "0에서 100 사이의 값을 입력하세요",
+                "availableWallets": "사용 가능한 지갑",
+                "createButton": "BG 생성",
+                "creating": "생성 중...",
+                "success": "BG Affiliate가 성공적으로 생성되었습니다!",
+                "error": "BG Affiliate 생성에 실패했습니다. 다시 시도해 주세요.",
+                "walletExists": "지갑이 이미 제휴 트리를 가지고 있습니다"
+            },
+            "updateCommission": {
+                "title": "루트 BG 수수료 업데이트",
+                "treeInfo": "트리 #{treeId}",
+                "rootInfo": "루트: {nickname} ({address})",
+                "currentCommission": "현재 수수료: {percent}%",
+                "newCommission": "새 수수료 (%)",
+                "newCommissionPlaceholder": "예: 60",
+                "newCommissionHelp": "0에서 100 사이의 값을 입력하세요",
+                "updateButton": "수수료 업데이트",
+                "updating": "업데이트 중...",
+                "success": "수수료가 성공적으로 업데이트되었습니다!",
+                "error": "수수료 업데이트에 실패했습니다. 다시 시도해 주세요."
+            }
+        },
+        "detail": {
+            "title": "BG Affiliate 트리 #{treeId}",
+            "rootInfo": "루트: {nickname} ",
+            "stats": {
+                "rootCommission": "루트 수수료",
+                "totalMembers": "총 멤버",
+                "created": "생성일",
+                "totalVolume": "총 거래량",
+                "totalTrans": "총 거래"
+            },
+            "treeStructure": "제휴 트리 구조",
+            "treeDescription": "수수료 비율이 포함된 완전한 제휴 계층 구조의 대화형 보기",
+            "tabs": {
+                "all": "전체",
+                "level": "레벨 {level}"
+            },
+            "table": {
+                "nickname": "닉네임",
+                "solanaAddress": "솔라나 주소",
+                "commission": "수수료 (%)",
+                "level": "레벨",
+                "status": "상태",
+                "active": "활성",
+                "inactive": "비활성",
+                "joined": "가입일",
+                "volume": "거래량",
+                "transactions": "거래수",
+                "noMembers": "멤버를 찾을 수 없습니다",
+                "statusUpdated": "노드 상태가 성공적으로 업데이트되었습니다!",
+                "statusUpdateFailed": "노드 상태 업데이트에 실패했습니다. 다시 시도해 주세요.",
+                "cannotDisableRoot": "루트 BG 상태를 비활성화할 수 없습니다"
+            },
+            "loading": "트리 로딩 중...",
+            "error": "트리 로딩 오류. 다시 시도해 주세요.",
+            "notFound": "트리를 찾을 수 없습니다",
+            "addNode": "노드 추가",
+            "dialogs": {
+                "addNode": {
+                    "title": "새 노드 추가",
+                    "selectWallet": "지갑 선택",
+                    "selectWalletPlaceholder": "지갑을 검색하고 선택하세요...",
+                    "selectParent": "상위 노드 선택",
+                    "selectParentPlaceholder": "상위 노드를 선택하세요...",
+                    "selectParentHelp": "새 노드가 추가될 상위 노드를 선택하세요",
+                    "commission": "수수료 (%)",
+                    "commissionPlaceholder": "예: 15",
+                    "commissionHelp": "이 노드의 수수료 백분율을 입력하세요 (0-100)",
+                    "availableWallets": "사용 가능한 지갑",
+                    "addButton": "노드 추가",
+                    "adding": "추가 중...",
+                    "success": "노드가 성공적으로 추가되었습니다!",
+                    "error": "노드 추가에 실패했습니다. 다시 시도해 주세요.",
+                    "cancel": "취소"
+                }
+            }
+        }
+    },
+    "normal-affiliate": {
+        "title": "일반 추천 관리",
+        "description": "지갑 기반 추천 관계 및 보상 관리",
+        "cardTitle": "지갑 추천 개요",
+        "cardDescription": "모든 지갑 추천 관계와 보상을 보고 관리",
+        "searchPlaceholder": "지갑 검색...",
+        "stats": {
+            "totalWallets": "총 지갑 수",
+            "totalReferralRelations": "총 추천 관계",
+            "totalRewards": "총 보상",
+            "topReferrer": "최고 추천인"
+        },
+        "table": {
+            "walletId": "지갑 ID",
+            "userInfo": "사용자 정보",
+            "stats": "통계",
+            "inviteeRelations": "초대받은 사람 관계",
+            "referrerRelations": "추천인 관계",
+            "total": "총계",
+            "invitee": "초대받은 사람",
+            "referrer": "추천인",
+            "noInviteeRelations": "초대받은 사람 관계 없음",
+            "noReferrerRelations": "추천인 관계 없음",
+            "noWalletsFound": "지갑을 찾을 수 없습니다",
+            "noWalletsMatchingSearch": "검색과 일치하는 지갑을 찾을 수 없습니다",
+            "loading": "지갑 데이터 로딩 중...",
+            "error": "지갑 데이터 로딩 오류"
+        },
+        "copy": {
+            "addressCopied": "주소가 클립보드에 복사되었습니다",
+            "refCodeCopied": "추천 코드가 클립보드에 복사되었습니다",
+            "copyFailed": "클립보드 복사 실패"
+        }
+    }
+}

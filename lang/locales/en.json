@@ -1,0 +1,555 @@
+{
+    "dashboard": {
+        "title": "Dashboard",
+        "hello": "Hello, Admin!",
+        "overview": "Here's an overview of your system's performance",
+        "totalRevenue": "Total Revenue",
+        "activeUsers": "Active Users",
+        "onlineNow": "Online now",
+        "fromLastMonth": "from last month",
+        "totalWallets": "Total Wallets",
+        "totalBgAffiliateTrees": "Total BG Affiliate Trees",
+        "wallets": {
+            "title": "Total Wallets",
+            "active": "active"
+        },
+        "orders": {
+            "title": "Total Transactions",
+            "executed": "Executed Orders",
+            "totalVolume": "Total Volume",
+            "mostActiveWallet": "Most Active Wallet",
+            "orderCount": "{{count}} orders"
+        },
+        "referrals": {
+            "title": "Total Referrals",
+            "members": "members",
+            "normal": "Normal",
+            "bg": "BG",
+            "rewards": "rewards",
+            "wallets": "wallets",
+            "relations": "relations",
+            "trees": "trees",
+            "commission": "commission",
+            "volume": "volume"
+        },
+        "tabs": {
+            "overview": "Overview",
+            "analytics": "Analytics",
+            "reports": "Reports"
+        },
+        "revenueOverview": {
+            "title": "Revenue Overview",
+            "description": "Monthly revenue chart for the current year"
+        },
+        "userDistribution": {
+            "title": "User Distribution",
+            "description": "Current user type distribution",
+            "masterUsers": "Master Users",
+            "memberUsers": "Member Users",
+            "anonymousUsers": "Anonymous Users"
+        },
+        "trafficAnalysis": {
+            "title": "Traffic Analysis",
+            "description": "Real-time traffic by device type and browser",
+            "area": "Area",
+            "line": "Line"
+        },
+        "deviceDistribution": {
+            "title": "Device Distribution",
+            "description": "Current device type distribution"
+        },
+        "activeConnections": {
+            "title": "Active Connections",
+            "description": "Current active user connections",
+            "clientId": "Client ID",
+            "walletId": "Wallet ID",
+            "device": "Device",
+            "lastActive": "Last Active",
+            "solAddress": "SOL Address"
+        },
+        "walletsOverview": {
+            "title": "Wallets Overview",
+            "description": "Wallet statistics and activity",
+            "totalWallets": "Total Wallets",
+            "activeWallets": "Active Wallets",
+            "newToday": "New Today",
+            "newThisWeek": "New This Week"
+        },
+        "ordersOverview": {
+            "title": "Orders Overview",
+            "description": "Order statistics and performance",
+            "totalOrders": "Total Orders",
+            "executed": "Executed",
+            "pending": "Pending"
+        },
+        "referralsOverview": {
+            "title": "Referrals Overview",
+            "description": "Referral rewards and commission distribution",
+            "normalRewards": "Normal Rewards",
+            "bgCommission": "BG Commission"
+        },
+        "reports": {
+            "title": "Reports",
+            "description": "View and create reports here.",
+            "revenueReport": "Revenue Report",
+            "userActivityReport": "User Activity Report",
+            "systemPerformanceReport": "System Performance Report",
+            "viewDetails": "View details and export report"
+        }
+    },
+    "list-wallets": {
+        "title": "List Wallets",
+        "pageTitle": "List Wallets",
+        "description": "Manage user wallets and their authorizations.",
+        "cardTitle": "List Wallets",
+        "cardDescription": "View and manage user wallets and their associated accounts.",
+        "refresh": "Refresh",
+        "searchPlaceholder": "Search by Wallet ID or Nickname ...",
+        "allTypes": "All types",
+        "table": {
+            "walletId": "Wallet ID",
+            "nickname": "Nickname",
+            "authType": "Auth Type",
+            "stream": "Stream",
+            "country": "Country",
+            "loading": "Loading...",
+            "noData": "No data available",
+            "master": "Master",
+            "member": "Member",
+            "na": "-",
+            "addressCopied": "Address copied to clipboard",
+            "copyFailed": "Failed to copy address",
+            "auths": "Authorizations",
+            "authId": "Auth ID",
+            "userId": "User ID",
+            "type": "Type",
+            "name": "Name",
+            "walletDetails": "Wallet Details",
+            "solanaAddress": "Solana Address",
+            "ethAddress": "ETH Address:",
+            "status": "Status:",
+            "active": "Active",
+            "inactive": "Inactive",
+            "noResults": "No results.",
+            "authUpdated": "Auth type updated successfully",
+            "authUpdateFailed": "Failed to update auth type"
+        }
+    },
+    "categories-token": {
+        "title": "Categories Token",
+        "pageTitle": "Categories Token",
+        "description": "Manage token categories in your system.",
+        "cardTitle": "Categories Token List",
+        "cardDescription": "A list of all token categories in your system.",
+        "searchPlaceholder": "Search categories...",
+        "table": {
+            "id": "ID",
+            "name": "Name",
+            "slug": "Slug",
+            "prioritize": "Prioritize",
+            "status": "Status",
+            "createdAt": "Created At",
+            "updatedAt": "Updated At",
+            "actions": "Actions",
+            "yes": "Yes",
+            "no": "No",
+            "active": "Active",
+            "hidden": "Hidden",
+            "edit": "Edit",
+            "delete": "Delete",
+            "categoryUpdated": "Category updated successfully",
+            "updateFailed": "Failed to update category",
+            "prioritizeUpdated": "Category prioritize updated successfully",
+            "prioritizeFailed": "Failed to update category prioritize",
+            "statusUpdated": "Category status updated successfully",
+            "statusFailed": "Failed to update category status",
+            "categoryDeleted": "Category deleted successfully",
+            "deleteFailed": "Failed to delete category",
+            "deleteConfirmTitle": "Are you sure?",
+            "deleteConfirmDescription": "This action cannot be undone. This will permanently delete the category.",
+            "cancel": "Cancel",
+            "confirm": "Confirm",
+            "editCategory": "Edit Category",
+            "editDescription": "Make changes to the category here. Click save when you're done.",
+            "nameLabel": "Name",
+            "slugLabel": "Slug",
+            "save": "Save",
+            "loading": "Loading...",
+            "noData": "No data available",
+            "addNew": "Add New",
+            "addCategory": "Add Category",
+            "addDescription": "Add a new token category to your system.",
+            "categoryAdded": "Category added successfully",
+            "addFailed": "Failed to add category"
+        }
+    },
+    "analytics": {
+        "title": "Realtime Analytics",
+        "description": "Live monitoring of user activity and connections.",
+        "stats": {
+            "totalUsers": "Total Users",
+            "activeNow": "Active now",
+            "masterUsers": "Master Users",
+            "memberUsers": "Member Users",
+            "vipUsers": "VIP Users",
+            "normalUsers": "Normal Users",
+            "anonymousUsers": "Anonymous Users"
+        },
+        "tabs": {
+            "overview": "Overview",
+            "connections": "Active Connections",
+            "devices": "Devices"
+        },
+        "charts": {
+            "userTypes": {
+                "title": "User Types",
+                "description": "Distribution of active users by type"
+            },
+            "deviceTypes": {
+                "title": "Device Types",
+                "description": "Distribution of active users by device"
+            },
+            "browsersOS": {
+                "title": "Browsers & OS",
+                "description": "Distribution by browser and operating system"
+            }
+        },
+        "connections": {
+            "title": "Active Connections",
+            "description": "All current active connections to the system",
+            "table": {
+                "clientId": "Client ID",
+                "walletId": "Wallet ID",
+                "userType": "User Type",
+                "device": "Device",
+                "ip": "IP",
+                "lastActive": "Last Active",
+                "solAddress": "SOL Address"
+            }
+        },
+        "devices": {
+            "title": "Active User Sessions",
+            "description": "Details of all active user sessions and tabs",
+            "connections": "Connections",
+            "tabs": "Tabs",
+            "lastActive": "Last active:"
+        },
+        "userTypes": {
+            "master": "Master",
+            "member": "Member",
+            "vip": "VIP",
+            "normal": "Normal",
+            "anonymous": "Anonymous",
+            "guest": "Guest"
+        },
+        "timeAgo": {
+            "seconds": "s ago",
+            "minutes": "m ago",
+            "hours": "h ago"
+        }
+    },
+    "ref": {
+        "title": "Referral Settings",
+        "description": "Configure referral levels and their corresponding reward percentages.",
+        "cardTitle": "Referral Levels",
+        "cardDescription": "Set the maximum number of referral levels and their corresponding reward percentages.",
+        "currentSetting": "Current setting: {level} levels",
+        "maxLevels": "Maximum Number of Levels",
+        "selectMaxLevel": "Select max level",
+        "level": "Level",
+        "levels": "Levels",
+        "root": "Root",
+        "percentage": "%",
+        "errors": {
+            "levelRange": "Level must be between 1 and {max}",
+            "percentageRange": "Percentage must be between 0 and 100",
+            "levelGreaterThanPrevious": "Level {current} percentage cannot be greater than Level {previous}",
+            "levelLessThanNext": "Level {current} percentage cannot be less than Level {next}",
+            "updateLevelFailed": "Failed to update level",
+            "updatePercentageFailed": "Failed to update percentage"
+        },
+        "success": {
+            "levelUpdated": "Level updated successfully",
+            "percentageUpdated": "Percentage updated successfully"
+        }
+    },
+    "settings": {
+        "title": "Settings",
+        "description": "Manage your account settings and preferences.",
+        "tabs": {
+            "profile": "Profile",
+            "security": "Security",
+            "referral": "Referral"
+        },
+        "profile": {
+            "title": "Profile Information",
+            "description": "Your account details and information",
+            "username": "Username",
+            "email": "Email",
+            "role": "Role",
+            "accountCreated": "Account Created",
+            "lastUpdated": "Last Updated"
+        },
+        "security": {
+            "title": "Security Settings",
+            "description": "Manage your account security",
+            "currentPassword": "Current Password",
+            "newPassword": "New Password",
+            "confirmPassword": "Confirm Password",
+            "saveChanges": "Save Changes"
+        },
+        "errors": {
+            "fillAllFields": "Please fill in all password fields",
+            "currentPasswordLength": "Current password must be at least 4 characters long",
+            "newPasswordLength": "New password must be at least 4 characters long",
+            "confirmPasswordLength": "Confirm password must be at least 4 characters long",
+            "passwordsNotMatch": "New password and confirmation do not match",
+            "currentPasswordIncorrect": "Current password is incorrect",
+            "changePasswordFailed": "Error changing password"
+        },
+        "success": {
+            "passwordChanged": "Password changed successfully"
+        }
+    },
+    "navigation": {
+        "dashboard": "Dashboard",
+        "listWallets": "List Wallets",
+        "categoriesToken": "Categories Token",
+        "analytics": "Analytics",
+        "referral": "BG Affiliate",
+        "normalAffiliate": "Normal Affiliate",
+        "settings": "Settings",
+        "admin": "Admin",
+        "orders": "Transactions"
+    },
+    "header": {
+        "accountInformation": "ACCOUNT INFORMATION",
+        "status": "Status",
+        "role": "Role",
+        "active": "Active",
+        "settings": "Settings",
+        "logOut": "Log Out"
+    },
+    "languageSelector": {
+        "currentLanguage": "Current language",
+        "label": "Search language...",
+        "noLanguageFound": "No language found."
+    },
+    "login": {
+        "title": "AdminPanel",
+        "welcomeTitle": "Welcome to your",
+        "adminDashboard": "Admin Dashboard",
+        "welcomeDescription": "Powerful, intuitive, and designed for your business needs.",
+        "features": {
+            "analytics": {
+                "title": "Real-time Analytics",
+                "description": "Monitor performance with live data insights"
+            },
+            "userManagement": {
+                "title": "User Management",
+                "description": "Manage accounts, roles and permissions"
+            },
+            "security": {
+                "title": "Advanced Security",
+                "description": "Enterprise-grade protection for your data"
+            }
+        },
+        "copyright": "© 2025 AdminPanel. All rights reserved.",
+        "signIn": "Sign in",
+        "accessDashboard": "Access your admin dashboard",
+        "username": "Username",
+        "usernamePlaceholder": "Enter your username",
+        "password": "Password",
+        "passwordPlaceholder": "••••••••",
+        "forgotPassword": "Forgot password?",
+        "signInButton": "Sign in",
+        "signingIn": "Signing in...",
+        "errors": {
+            "enterBothFields": "Please enter both username and password",
+            "invalidCredentials": "Invalid username or password",
+            "generalError": "An error occurred. Please try again."
+        }
+    },
+    "orders": {
+        "title": "Transaction History",
+        "description": "View and search all transaction records.",
+        "listTitle": "Transaction List",
+        "listDescription": "All transactions",
+        "searchPlaceholder": "Search by Wallet Address, Token Name, Token Address...",
+        "stt": "No.",
+        "solAddress": "SOL Address",
+        "trade": "Trade",
+        "token": "Token",
+        "quantity": "Quantity",
+        "price": "Price",
+        "total": "Total",
+        "status": "Status",
+        "createdAt": "Created At",
+        "txHash": "Tx Hash",
+        "buy": "Buy",
+        "sell": "Sell",
+        "executed": "Executed",
+        "failed": "Failed",
+        "noData": "No transactions found.",
+        "viewOnSolscan": "View on Solscan",
+        "statistics": {
+            "total": "Total Transactions",
+            "totalDesc": "All orders in the system.",
+            "executed": "Executed Transactions",
+            "executedDesc": "Orders successfully executed.",
+            "mostActiveWallet": "Most Traded Wallet",
+            "mostActiveWalletDesc": "Wallet with the most transactions.",
+            "orderCount": "{{count}} transactions"
+        }
+    },
+    "bg-affiliate": {
+        "title": "BG Affiliate",
+        "description": "Manage affiliate and commission structures",
+        "cardTitle": "Affiliate",
+        "cardDescription": "Manage and monitor all BG affiliate",
+        "searchPlaceholder": "Search trees...",
+        "newBg": "New BG",
+            "stats": {
+      "totalTrees": "Total Trees",
+      "totalMembers": "Total Members",
+      "totalCommissionDistributed": "Total Commission Distributed",
+      "totalVolume": "Total Volume"
+    },
+        "table": {
+            "number": "#",
+            "rootWallet": "Root Wallet",
+            "commission": "Commission",
+            "members": "Members",
+            "created": "Created",
+            "status": "Status",
+            "actions": "Actions",
+            "active": "Active",
+            "inactive": "Inactive",
+            "statusUpdated": "Tree status updated successfully!",
+            "statusUpdateFailed": "Failed to update tree status. Please try again.",
+            "loading": "Loading trees...",
+            "error": "Error loading trees. Please try again.",
+            "noTrees": "No trees found",
+            "membersCount": "members"
+        },
+        "dialogs": {
+            "create": {
+                "title": "Create New BG",
+                "selectWallet": "Select Wallet",
+                "selectWalletPlaceholder": "Search and select a wallet...",
+                "commission": "Commission (%)",
+                "commissionPlaceholder": "e.g., 70",
+                "commissionHelp": "Enter a value between 0 and 100",
+                "availableWallets": "available wallets",
+                "createButton": "Create BG",
+                "creating": "Creating...",
+                "success": "BG Affiliate created successfully!",
+                "error": "Failed to create BG Affiliate. Please try again.",
+                "walletExists": "The wallet already has an affiliate tree"
+            },
+            "updateCommission": {
+                "title": "Update Root BG Commission",
+                "treeInfo": "Tree #{treeId}",
+                "rootInfo": "Root: {nickname} ({address})",
+                "currentCommission": "Current Commission: {percent}%",
+                "newCommission": "New Commission (%)",
+                "newCommissionPlaceholder": "e.g., 60",
+                "newCommissionHelp": "Enter a value between 0 and 100",
+                "updateButton": "Update Commission",
+                "updating": "Updating...",
+                "success": "Commission updated successfully!",
+                "error": "Failed to update commission. Please try again."
+            }
+        },
+        "detail": {
+            "title": "BG Affiliate Tree #{treeId}",
+            "rootInfo": "Root: {nickname}",
+            "stats": {
+                "rootCommission": "Root Commission",
+                "totalMembers": "Total Members",
+                "created": "Created",
+                "totalVolume": "Total Volume",
+                "totalTrans": "Total Transactions"
+            },
+            "treeStructure": "Affiliate Tree Structure",
+            "treeDescription": "Interactive view of the complete affiliate hierarchy with commission percentages",
+            "tabs": {
+                "all": "All",
+                "level": "Level {level}"
+            },
+            "table": {
+                "nickname": "Nickname",
+                "solanaAddress": "Solana Address",
+                "commission": "Commission (%)",
+                "level": "Level",
+                "status": "Status",
+                "active": "Active",
+                "inactive": "Inactive",
+                "joined": "Joined",
+                "volume": "Volume",
+                "transactions": "Transactions",
+                "noMembers": "No members found",
+                "statusUpdated": "Node status updated successfully!",
+                "statusUpdateFailed": "Failed to update node status. Please try again.",
+                "cannotDisableRoot": "Cannot disable root BG status"
+            },
+            "loading": "Loading tree...",
+            "error": "Error loading tree. Please try again.",
+            "notFound": "Tree not found",
+            "addNode": "Add Node",
+            "dialogs": {
+                "addNode": {
+                    "title": "Add New Node",
+                    "selectWallet": "Select Wallet",
+                    "selectWalletPlaceholder": "Search and select a wallet...",
+                    "selectParent": "Select Parent Node",
+                    "selectParentPlaceholder": "Choose parent node...",
+                    "selectParentHelp": "Select the parent node under which this new node will be added",
+                    "commission": "Commission (%)",
+                    "commissionPlaceholder": "e.g., 15",
+                    "commissionHelp": "Enter commission percentage for this node (0-100)",
+                    "availableWallets": "available wallets",
+                    "addButton": "Add Node",
+                    "adding": "Adding...",
+                    "success": "Node added successfully!",
+                    "error": "Failed to add node. Please try again.",
+                    "cancel": "Cancel"
+                }
+            }
+        }
+    },
+    "normal-affiliate": {
+        "title": "Normal Affiliate Management",
+        "description": "Manage wallet-based referral relationships and rewards",
+        "cardTitle": "Wallet Referral Overview",
+        "cardDescription": "View and manage all wallet referral relationships and their rewards",
+        "searchPlaceholder": "Search wallets...",
+        "stats": {
+            "totalWallets": "Total Wallets",
+            "totalReferralRelations": "Total Referral Relations",
+            "totalRewards": "Total Rewards",
+            "topReferrer": "Top Referrer"
+        },
+        "table": {
+            "walletId": "Wallet ID",
+            "userInfo": "User Info",
+            "stats": "Stats",
+            "inviteeRelations": "Invitee Relations",
+            "referrerRelations": "Referrer Relations",
+            "total": "Total",
+            "invitee": "Invitee",
+            "referrer": "Referrer",
+            "noInviteeRelations": "No invitee relations",
+            "noReferrerRelations": "No referrer relations",
+            "noWalletsFound": "No wallets found",
+            "noWalletsMatchingSearch": "No wallets found matching your search",
+            "loading": "Loading wallet data...",
+            "error": "Error loading wallet data"
+        },
+        "copy": {
+            "addressCopied": "Address copied to clipboard",
+            "refCodeCopied": "Referral code copied to clipboard",
+            "copyFailed": "Failed to copy to clipboard"
+        }
+    }
+}

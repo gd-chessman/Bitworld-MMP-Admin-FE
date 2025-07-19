@@ -1,0 +1,553 @@
+{
+    "dashboard": {
+        "title": "Bảng điều khiển",
+        "hello": "Xin chào, Admin!",
+        "overview": "Đây là tổng quan hiệu suất hệ thống của bạn",
+        "totalRevenue": "Tổng doanh thu",
+        "activeUsers": "Người dùng hoạt động",
+        "onlineNow": "Đang trực tuyến",
+        "fromLastMonth": "so với tháng trước",
+        "totalWallets": "Tổng số ví",
+        "totalBgAffiliateTrees": "Tổng số cây BG Affiliate",
+        "wallets": {
+            "title": "Tổng Ví",
+            "active": "hoạt động"
+        },
+        "orders": {
+            "title": "Tổng Đơn Giao Dịch",
+            "executed": "Đã thực hiện",
+            "totalVolume": "Tổng khối lượng",
+            "mostActiveWallet": "Ví giao dịch nhiều nhất",
+            "orderCount": "{{count}} đơn"
+        },
+        "referrals": {
+            "title": "Tổng Giới Thiệu",
+            "members": "thành viên",
+            "normal": "Giới thiệu thường",
+            "bg": "Giới thiệu BG",
+            "rewards": "thưởng",
+            "wallets": "ví",
+            "relations": "quan hệ",
+            "trees": "cây",
+            "commission": "hoa hồng",
+            "volume": "khối lượng"
+        },
+        "tabs": {
+            "overview": "Tổng quan",
+            "analytics": "Phân tích",
+            "reports": "Báo cáo"
+        },
+        "revenueOverview": {
+            "title": "Tổng quan doanh thu",
+            "description": "Biểu đồ doanh thu hàng tháng cho năm hiện tại"
+        },
+        "userDistribution": {
+            "title": "Phân bố người dùng",
+            "description": "Phân bố loại người dùng hiện tại",
+            "masterUsers": "Người dùng Master",
+            "memberUsers": "Người dùng Member",
+            "anonymousUsers": "Người dùng ẩn danh"
+        },
+        "trafficAnalysis": {
+            "title": "Phân tích lưu lượng",
+            "description": "Lưu lượng thời gian thực theo loại thiết bị và trình duyệt",
+            "area": "Vùng",
+            "line": "Đường"
+        },
+        "deviceDistribution": {
+            "title": "Phân bố thiết bị",
+            "description": "Phân bố loại thiết bị hiện tại"
+        },
+        "activeConnections": {
+            "title": "Kết nối hoạt động",
+            "description": "Các kết nối người dùng hoạt động hiện tại",
+            "clientId": "ID Khách hàng",
+            "walletId": "ID Ví",
+            "device": "Thiết bị",
+            "lastActive": "Hoạt động cuối",
+            "solAddress": "Địa chỉ SOL"
+        },
+        "walletsOverview": {
+            "title": "Tổng quan Ví",
+            "description": "Thống kê và hoạt động ví",
+            "totalWallets": "Tổng số ví",
+            "activeWallets": "Ví đang hoạt động",
+            "newToday": "Mới hôm nay",
+            "newThisWeek": "Mới tuần này"
+        },
+        "ordersOverview": {
+            "title": "Tổng quan Đơn hàng",
+            "description": "Thống kê và hiệu suất đơn hàng",
+            "totalOrders": "Tổng đơn hàng",
+            "executed": "Đã thực hiện",
+            "pending": "Đang chờ"
+        },
+        "referralsOverview": {
+            "title": "Tổng quan Giới thiệu",
+            "description": "Phân phối thưởng và hoa hồng giới thiệu",
+            "normalRewards": "Thưởng thường",
+            "bgCommission": "Hoa hồng BG"
+        },
+        "reports": {
+            "title": "Báo cáo",
+            "description": "Xem và tạo báo cáo tại đây.",
+            "revenueReport": "Báo cáo doanh thu",
+            "userActivityReport": "Báo cáo hoạt động người dùng",
+            "systemPerformanceReport": "Báo cáo hiệu suất hệ thống",
+            "viewDetails": "Xem chi tiết và xuất báo cáo"
+        }
+    },
+    "list-wallets": {
+        "title": "Danh sách ví",
+        "pageTitle": "Danh sách ví",
+        "description": "Quản lý ví người dùng và quyền ủy quyền của họ.",
+        "cardTitle": "Danh sách ví",
+        "cardDescription": "Xem và quản lý ví người dùng và tài khoản liên kết.",
+        "refresh": "Làm mới",
+        "searchPlaceholder": "Tìm kiếm theo ID Ví hoặc Biệt danh ...",
+        "table": {
+            "walletId": "ID Ví",
+            "nickname": "Biệt danh",
+            "authType": "Loại xác thực",
+            "stream": "Luồng",
+            "country": "Quốc gia",
+            "loading": "Đang tải...",
+            "noData": "Không có dữ liệu",
+            "master": "Bậc thầy",
+            "member": "Thành viên",
+            "na": "-",
+            "addressCopied": "Đã sao chép địa chỉ vào clipboard",
+            "copyFailed": "Sao chép địa chỉ thất bại",
+            "auths": "Quyền ủy quyền",
+            "authId": "ID Ủy quyền",
+            "userId": "ID Người dùng",
+            "type": "Loại",
+            "name": "Tên",
+            "walletDetails": "Chi tiết ví",
+            "solanaAddress": "Địa chỉ Solana",
+            "ethAddress": "Địa chỉ ETH:",
+            "status": "Trạng thái:",
+            "active": "Hoạt động",
+            "inactive": "Không hoạt động",
+            "noResults": "Không có kết quả."
+        },
+        "allTypes": "Tất cả"
+    },
+    "categories-token": {
+        "title": "Phân loại token",
+        "pageTitle": "Phân loại token",
+        "description": "Quản lý các phân loại token trong hệ thống.",
+        "cardTitle": "Danh sách phân loại token",
+        "cardDescription": "Danh sách tất cả các phân loại token trong hệ thống.",
+        "searchPlaceholder": "Tìm kiếm phân loại...",
+        "table": {
+            "id": "ID",
+            "name": "Tên",
+            "slug": "Slug",
+            "prioritize": "Ưu tiên",
+            "status": "Trạng thái",
+            "createdAt": "Tạo lúc",
+            "updatedAt": "Cập nhật lúc",
+            "actions": "Hành động",
+            "yes": "Có",
+            "no": "Không",
+            "active": "Hoạt động",
+            "hidden": "Ẩn",
+            "edit": "Sửa",
+            "delete": "Xóa",
+            "categoryUpdated": "Cập nhật phân loại thành công",
+            "updateFailed": "Cập nhật phân loại thất bại",
+            "prioritizeUpdated": "Cập nhật ưu tiên phân loại thành công",
+            "prioritizeFailed": "Cập nhật ưu tiên phân loại thất bại",
+            "statusUpdated": "Cập nhật trạng thái phân loại thành công",
+            "statusFailed": "Cập nhật trạng thái phân loại thất bại",
+            "categoryDeleted": "Xóa phân loại thành công",
+            "deleteFailed": "Xóa phân loại thất bại",
+            "deleteConfirmTitle": "Bạn có chắc chắn?",
+            "deleteConfirmDescription": "Hành động này không thể hoàn tác. Điều này sẽ xóa vĩnh viễn phân loại.",
+            "cancel": "Hủy",
+            "confirm": "Xác nhận",
+            "editCategory": "Sửa phân loại",
+            "editDescription": "Thực hiện thay đổi cho phân loại tại đây. Nhấp vào lưu khi hoàn tất.",
+            "nameLabel": "Tên",
+            "slugLabel": "Slug",
+            "save": "Lưu",
+            "loading": "Đang tải...",
+            "noData": "Không có dữ liệu",
+            "addNew": "Thêm mới",
+            "addCategory": "Thêm phân loại",
+            "addDescription": "Thêm một phân loại token mới vào hệ thống.",
+            "categoryAdded": "Thêm phân loại thành công",
+            "addFailed": "Thêm phân loại thất bại"
+        }
+    },
+    "analytics": {
+        "title": "Phân Tích Thời Gian Thực",
+        "description": "Giám sát trực tiếp hoạt động người dùng và kết nối.",
+        "stats": {
+            "totalUsers": "Tổng Người Dùng",
+            "activeNow": "Đang hoạt động",
+            "masterUsers": "Người Dùng Master",
+            "memberUsers": "Người Dùng Member",
+            "vipUsers": "Người Dùng VIP",
+            "normalUsers": "Người Dùng Thường",
+            "anonymousUsers": "Người Dùng Ẩn Danh"
+        },
+        "tabs": {
+            "overview": "Tổng Quan",
+            "connections": "Kết Nối Đang Hoạt Động",
+            "devices": "Thiết Bị"
+        },
+        "charts": {
+            "userTypes": {
+                "title": "Loại Người Dùng",
+                "description": "Phân bố người dùng đang hoạt động theo loại"
+            },
+            "deviceTypes": {
+                "title": "Loại Thiết Bị",
+                "description": "Phân bố người dùng đang hoạt động theo thiết bị"
+            },
+            "browsersOS": {
+                "title": "Trình Duyệt & Hệ Điều Hành",
+                "description": "Phân bố theo trình duyệt và hệ điều hành"
+            }
+        },
+        "connections": {
+            "title": "Kết Nối Đang Hoạt Động",
+            "description": "Tất cả kết nối đang hoạt động hiện tại đến hệ thống",
+            "table": {
+                "clientId": "ID Khách Hàng",
+                "walletId": "ID Ví",
+                "userType": "Loại Người Dùng",
+                "device": "Thiết Bị",
+                "ip": "IP",
+                "lastActive": "Hoạt Động Cuối",
+                "solAddress": "Địa chỉ SOL"
+            }
+        },
+        "devices": {
+            "title": "Phiên Người Dùng Đang Hoạt Động",
+            "description": "Chi tiết tất cả phiên người dùng đang hoạt động và tab",
+            "connections": "Kết Nối",
+            "tabs": "Tab",
+            "lastActive": "Hoạt động cuối:"
+        },
+        "userTypes": {
+            "master": "Master",
+            "member": "Member",
+            "vip": "VIP",
+            "normal": "Thường",
+            "anonymous": "Ẩn Danh",
+            "guest": "Khách"
+        },
+        "timeAgo": {
+            "seconds": "giây trước",
+            "minutes": "phút trước",
+            "hours": "giờ trước"
+        }
+    },
+    "ref": {
+        "title": "Cài Đặt Giới Thiệu",
+        "description": "Cấu hình các cấp độ giới thiệu và phần trăm thưởng tương ứng.",
+        "cardTitle": "Cấp Độ Giới Thiệu",
+        "cardDescription": "Thiết lập số lượng cấp độ giới thiệu tối đa và phần trăm thưởng tương ứng.",
+        "currentSetting": "Cài đặt hiện tại: {level} cấp độ",
+        "maxLevels": "Số Lượng Cấp Độ Tối Đa",
+        "selectMaxLevel": "Chọn cấp độ tối đa",
+        "level": "Cấp độ",
+        "levels": "Cấp độ",
+        "root": "Gốc",
+        "percentage": "%",
+        "errors": {
+            "levelRange": "Cấp độ phải từ 1 đến {max}",
+            "percentageRange": "Phần trăm phải từ 0 đến 100",
+            "levelGreaterThanPrevious": "Phần trăm cấp độ {current} không thể lớn hơn cấp độ {previous}",
+            "levelLessThanNext": "Phần trăm cấp độ {current} không thể nhỏ hơn cấp độ {next}",
+            "updateLevelFailed": "Cập nhật cấp độ thất bại",
+            "updatePercentageFailed": "Cập nhật phần trăm thất bại"
+        },
+        "success": {
+            "levelUpdated": "Cập nhật cấp độ thành công",
+            "percentageUpdated": "Cập nhật phần trăm thành công"
+        }
+    },
+    "settings": {
+        "title": "Cài Đặt",
+        "description": "Quản lý cài đặt và tùy chọn tài khoản của bạn.",
+        "tabs": {
+            "profile": "Hồ Sơ",
+            "security": "Bảo Mật",
+            "referral": "Giới thiệu"
+        },
+        "profile": {
+            "title": "Thông Tin Hồ Sơ",
+            "description": "Chi tiết và thông tin tài khoản của bạn",
+            "username": "Tên Đăng Nhập",
+            "email": "Email",
+            "role": "Vai Trò",
+            "accountCreated": "Tài Khoản Được Tạo",
+            "lastUpdated": "Cập Nhật Cuối"
+        },
+        "security": {
+            "title": "Cài Đặt Bảo Mật",
+            "description": "Quản lý bảo mật tài khoản của bạn",
+            "currentPassword": "Mật Khẩu Hiện Tại",
+            "newPassword": "Mật Khẩu Mới",
+            "confirmPassword": "Xác Nhận Mật Khẩu",
+            "saveChanges": "Lưu Thay Đổi"
+        },
+        "errors": {
+            "fillAllFields": "Vui lòng điền đầy đủ các trường mật khẩu",
+            "currentPasswordLength": "Mật khẩu hiện tại phải có ít nhất 4 ký tự",
+            "newPasswordLength": "Mật khẩu mới phải có ít nhất 4 ký tự",
+            "confirmPasswordLength": "Xác nhận mật khẩu phải có ít nhất 4 ký tự",
+            "passwordsNotMatch": "Mật khẩu mới và xác nhận không khớp",
+            "currentPasswordIncorrect": "Mật khẩu hiện tại không đúng",
+            "changePasswordFailed": "Lỗi thay đổi mật khẩu"
+        },
+        "success": {
+            "passwordChanged": "Thay đổi mật khẩu thành công"
+        }
+    },
+    "navigation": {
+        "dashboard": "Bảng Điều Khiển",
+        "listWallets": "Danh Sách Ví",
+        "categoriesToken": "Danh Mục Token",
+        "analytics": "Phân Tích",
+        "referral": "Giới thiệu BG",
+        "normalAffiliate": "Giới Thiệu Thường",
+        "settings": "Cài Đặt",
+        "admin": "Quản Trị",
+        "orders": "Giao dịch"
+    },
+    "header": {
+        "accountInformation": "THÔNG TIN TÀI KHOẢN",
+        "status": "Trạng Thái",
+        "role": "Vai Trò",
+        "active": "Hoạt Động",
+        "settings": "Cài Đặt",
+        "logOut": "Đăng Xuất"
+    },
+    "languageSelector": {
+        "currentLanguage": "Ngôn ngữ hiện tại",
+        "label": "Tìm kiếm ngôn ngữ...",
+        "noLanguageFound": "Không tìm thấy ngôn ngữ."
+    },
+    "login": {
+        "title": "AdminPanel",
+        "welcomeTitle": "Chào mừng đến với",
+        "adminDashboard": "Bảng Điều Khiển Admin",
+        "welcomeDescription": "Mạnh mẽ, trực quan và được thiết kế cho nhu cầu kinh doanh của bạn.",
+        "features": {
+            "analytics": {
+                "title": "Phân Tích Thời Gian Thực",
+                "description": "Giám sát hiệu suất với dữ liệu trực tiếp"
+            },
+            "userManagement": {
+                "title": "Quản Lý Người Dùng",
+                "description": "Quản lý tài khoản, vai trò và quyền hạn"
+            },
+            "security": {
+                "title": "Bảo Mật Nâng Cao",
+                "description": "Bảo vệ dữ liệu cấp doanh nghiệp"
+            }
+        },
+        "copyright": "© 2025 AdminPanel. Tất cả quyền được bảo lưu.",
+        "signIn": "Đăng Nhập",
+        "accessDashboard": "Truy cập bảng điều khiển admin của bạn",
+        "username": "Tên Đăng Nhập",
+        "usernamePlaceholder": "Nhập tên đăng nhập của bạn",
+        "password": "Mật Khẩu",
+        "passwordPlaceholder": "••••••••",
+        "forgotPassword": "Quên mật khẩu?",
+        "signInButton": "Đăng Nhập",
+        "signingIn": "Đang đăng nhập...",
+        "errors": {
+            "enterBothFields": "Vui lòng nhập cả tên đăng nhập và mật khẩu",
+            "invalidCredentials": "Tên đăng nhập hoặc mật khẩu không đúng",
+            "generalError": "Đã xảy ra lỗi. Vui lòng thử lại."
+        }
+    },
+    "orders": {
+        "title": "Lịch sử giao dịch",
+        "description": "Xem và tìm kiếm tất cả các giao dịch.",
+        "listTitle": "Danh sách giao dịch",
+        "listDescription": "Tất cả giao dịch",
+        "searchPlaceholder": "Tìm theo địa chỉ ví, tên token, địa chỉ token...",
+        "stt": "STT",
+        "solAddress": "Địa chỉ SOL",
+        "trade": "Loại giao dịch",
+        "token": "Token",
+        "quantity": "Số lượng",
+        "price": "Giá",
+        "total": "Tổng",
+        "status": "Trạng thái",
+        "createdAt": "Thời gian",
+        "txHash": "Tx Hash",
+        "buy": "Mua",
+        "sell": "Bán",
+        "executed": "Thành công",
+        "failed": "Thất bại",
+        "noData": "Không có giao dịch nào.",
+        "viewOnSolscan": "Xem trên Solscan",
+        "statistics": {
+            "total": "Tổng giao dịch",
+            "totalDesc": "Tất cả giao dịch trong hệ thống.",
+            "executed": "Giao dịch thành công",
+            "executedDesc": "Các giao dịch đã thực hiện thành công.",
+            "mostActiveWallet": "Ví giao dịch nhiều nhất",
+            "mostActiveWalletDesc": "Ví có số giao dịch nhiều nhất.",
+            "orderCount": "{{count}} giao dịch"
+        }
+    },
+    "bg-affiliate": {
+        "title": "BG Giới Thiệu",
+        "description": "Quản lý cấu trúc giới thiệu và hoa hồng",
+        "cardTitle": "Giới Thiệu",
+        "cardDescription": "Quản lý và giám sát tất cả BG giới thiệu",
+        "searchPlaceholder": "Tìm kiếm cây...",
+        "newBg": "BG Mới",
+        "stats": {
+            "totalTrees": "Tổng Cây",
+            "totalMembers": "Tổng Thành Viên",
+            "totalCommissionDistributed": "Tổng Hoa Hồng Đã Phân Phối",
+            "totalVolume": "Tổng Khối Lượng"
+        },
+        "table": {
+            "number": "#",
+            "rootWallet": "Ví Gốc",
+            "commission": "Hoa Hồng",
+            "members": "Thành Viên",
+            "created": "Tạo Lúc",
+            "status": "Trạng Thái",
+            "actions": "Hành Động",
+            "active": "Hoạt Động",
+            "inactive": "Không Hoạt Động",
+            "statusUpdated": "Cập nhật trạng thái cây thành công!",
+            "statusUpdateFailed": "Cập nhật trạng thái cây thất bại. Vui lòng thử lại.",
+            "loading": "Đang tải cây...",
+            "error": "Lỗi tải cây. Vui lòng thử lại.",
+            "noTrees": "Không tìm thấy cây nào",
+            "membersCount": "thành viên"
+        },
+        "dialogs": {
+            "create": {
+                "title": "Tạo BG Mới",
+                "selectWallet": "Chọn Ví",
+                "selectWalletPlaceholder": "Tìm kiếm và chọn ví...",
+                "commission": "Hoa Hồng (%)",
+                "commissionPlaceholder": "vd: 70",
+                "commissionHelp": "Nhập giá trị từ 0 đến 100",
+                "availableWallets": "ví có sẵn",
+                "createButton": "Tạo BG",
+                "creating": "Đang tạo...",
+                "success": "Tạo BG Giới Thiệu thành công!",
+                "error": "Tạo BG Giới Thiệu thất bại. Vui lòng thử lại.",
+                "walletExists": "Ví đã có cây giới thiệu"
+            },
+            "updateCommission": {
+                "title": "Cập Nhật Hoa Hồng Root BG",
+                "treeInfo": "Cây #{treeId}",
+                "rootInfo": "Gốc: {nickname} ({address})",
+                "currentCommission": "Hoa Hồng Hiện Tại: {percent}%",
+                "newCommission": "Hoa Hồng Mới (%)",
+                "newCommissionPlaceholder": "vd: 60",
+                "newCommissionHelp": "Nhập giá trị từ 0 đến 100",
+                "updateButton": "Cập Nhật Hoa Hồng",
+                "updating": "Đang cập nhật...",
+                "success": "Cập nhật hoa hồng thành công!",
+                "error": "Cập nhật hoa hồng thất bại. Vui lòng thử lại."
+            }
+        },
+        "detail": {
+            "title": "Cây BG Giới Thiệu #{treeId}",
+            "rootInfo": "Gốc: {nickname} ",
+            "stats": {
+                "rootCommission": "Hoa Hồng Gốc",
+                "totalMembers": "Tổng Thành Viên",
+                "created": "Tạo Lúc",
+                "totalVolume": "Tổng Khối Lượng",
+                "totalTrans": "Tổng Giao Dịch"
+            },
+            "treeStructure": "Cấu Trúc Giới Thiệu",
+            "treeDescription": "Xem tương tác của hệ thống phân cấp giới thiệu hoàn chỉnh với phần trăm hoa hồng",
+            "tabs": {
+                "all": "Tất Cả",
+                "level": "Cấp {level}"
+            },
+            "table": {
+                "nickname": "Biệt Danh",
+                "solanaAddress": "Địa Chỉ Solana",
+                "commission": "Hoa Hồng (%)",
+                "level": "Cấp",
+                "status": "Trạng Thái",
+                "active": "Hoạt Động",
+                "inactive": "Không Hoạt Động",
+                "joined": "Tham Gia",
+                "volume": "Khối Lượng",
+                "transactions": "Giao Dịch",
+                "noMembers": "Không tìm thấy thành viên",
+                "statusUpdated": "Cập nhật trạng thái node thành công!",
+                "statusUpdateFailed": "Cập nhật trạng thái node thất bại. Vui lòng thử lại.",
+                "cannotDisableRoot": "Không thể tắt trạng thái của root BG"
+            },
+            "loading": "Đang tải cây...",
+            "error": "Lỗi tải cây. Vui lòng thử lại.",
+            "notFound": "Không tìm thấy cây",
+            "addNode": "Thêm Node",
+            "dialogs": {
+                "addNode": {
+                    "title": "Thêm Node Mới",
+                    "selectWallet": "Chọn Ví",
+                    "selectWalletPlaceholder": "Tìm kiếm và chọn ví...",
+                    "selectParent": "Chọn Node Cha",
+                    "selectParentPlaceholder": "Chọn node cha...",
+                    "selectParentHelp": "Chọn node cha mà node mới này sẽ được thêm vào dưới",
+                    "commission": "Hoa Hồng (%)",
+                    "commissionPlaceholder": "vd: 15",
+                    "commissionHelp": "Nhập phần trăm hoa hồng cho node này (0-100)",
+                    "availableWallets": "ví có sẵn",
+                    "addButton": "Thêm Node",
+                    "adding": "Đang thêm...",
+                    "success": "Thêm node thành công!",
+                    "error": "Thêm node thất bại. Vui lòng thử lại.",
+                    "cancel": "Hủy"
+                }
+            }
+        }
+    },
+    "normal-affiliate": {
+        "title": "Quản Lý Giới Thiệu Thường",
+        "description": "Quản lý mối quan hệ giới thiệu dựa trên ví và phần thưởng",
+        "cardTitle": "Tổng Quan Giới Thiệu Ví",
+        "cardDescription": "Xem và quản lý tất cả mối quan hệ giới thiệu ví và phần thưởng của họ",
+        "searchPlaceholder": "Tìm kiếm ví...",
+        "stats": {
+            "totalWallets": "Tổng Số Ví",
+            "totalReferralRelations": "Tổng Quan Hệ Giới Thiệu",
+            "totalRewards": "Tổng Phần Thưởng",
+            "topReferrer": "Người Giới Thiệu Hàng Đầu"
+        },
+        "table": {
+            "walletId": "ID Ví",
+            "userInfo": "Thông Tin Người Dùng",
+            "stats": "Thống Kê",
+            "inviteeRelations": "Quan Hệ Người Được Mời",
+            "referrerRelations": "Quan Hệ Người Giới Thiệu",
+            "total": "Tổng",
+            "invitee": "Người Được Mời",
+            "referrer": "Người Giới Thiệu",
+            "noInviteeRelations": "Không có quan hệ người được mời",
+            "noReferrerRelations": "Không có quan hệ người giới thiệu",
+            "noWalletsFound": "Không tìm thấy ví nào",
+            "noWalletsMatchingSearch": "Không tìm thấy ví nào phù hợp với tìm kiếm",
+            "loading": "Đang tải dữ liệu ví...",
+            "error": "Lỗi tải dữ liệu ví"
+        },
+        "copy": {
+            "addressCopied": "Đã sao chép địa chỉ vào clipboard",
+            "refCodeCopied": "Đã sao chép mã giới thiệu vào clipboard",
+            "copyFailed": "Sao chép thất bại"
+        }
+    }
+}
