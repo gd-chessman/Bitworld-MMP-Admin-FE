@@ -35,7 +35,7 @@ export default function UserWalletsPage() {
 
   const { data: listWallets, refetch: refetchListWallets, isLoading } = useQuery({
     queryKey: ["list-wallets", searchQuery, walletAuthType, currentPage],
-    queryFn: () => getListWallets(searchQuery, currentPage, pageSize, walletAuthType === 'all' ? '' : walletAuthType),
+    queryFn: () => getListWallets(searchQuery, currentPage, pageSize, walletAuthType === 'all' ? '' : walletAuthType, 'main'),
     placeholderData: (previousData) => previousData,
   })
 
