@@ -148,13 +148,13 @@ export function AdminSidebar() {
       </Button>
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-40 w-64 backdrop-blur-xl border-r border-border transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 flex flex-col",
+          "fixed inset-y-0 left-0 z-40 w-64 backdrop-blur-xl dark:border-r border-border transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 flex flex-col",
           isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0",
           isCollapsed ? "w-20" : "w-64",
         )}
       >
         <div className="flex-shrink-0">
-          <div className="flex items-center gap-3 h-16 px-6 border-b border-border">
+          <div className="flex items-center gap-3 h-16 px-6 border-b border-[#2a2a2a]/50 bg-[#0e0e0e]">
             <img src="https://static-www.bittworld.com/main-static/img/logo.f3383a1.svg" className="w-32 rounded-lg" alt="logo" />
           </div>
         </div>

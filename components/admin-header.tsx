@@ -57,7 +57,7 @@ export function AdminHeader() {
   }
 
   return (
-    <div className="sticky top-0 z-40 w-full backdrop-blur-xl border-b border-[#2a2a2a]/50 shadow">
+    <div className="sticky top-0 z-40 w-full backdrop-blur-xl dark:border-b border-[#2a2a2a]/50 bg-[#0e0e0e] shadow">
       <div className="flex h-16 items-center justify-end px-6 gap-4">
         <div className="flex items-center gap-4">
           <ThemeToggle />
