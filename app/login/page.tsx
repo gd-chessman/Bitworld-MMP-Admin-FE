@@ -51,14 +51,14 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6 bg-[#0e0e0e]">
-                <Card className="w-full max-w-md bg-[#1a1a1a]/90 backdrop-blur-sm border-[#2a2a2a]/50 shadow-xl">
+    <div className="min-h-screen flex items-center justify-center p-6 bg-background">
+                <Card className="w-full max-w-md bg-card/90 backdrop-blur-sm border-border shadow-xl">
         <CardHeader className="text-center pb-6">
           <div className="flex justify-center mb-4">
             <img src="/logo.png" alt="Logo" className="h-12 w-auto" />
           </div>
-          <h2 className="text-2xl font-bold tracking-tight text-white">{t("login.signIn")}</h2>
-          <p className="text-sm text-slate-300">{t("login.accessDashboard")}</p>
+          <h2 className="text-2xl font-bold tracking-tight text-foreground">{t("login.signIn")}</h2>
+          <p className="text-sm text-muted-foreground">{t("login.accessDashboard")}</p>
         </CardHeader>
         <CardContent>
           <form className="space-y-6" onSubmit={handleSubmit}>
@@ -66,39 +66,39 @@ export default function LoginPage() {
 
             <div className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="username" className="text-white">{t("login.username")}</Label>
+                <Label htmlFor="username" className="text-foreground">{t("login.username")}</Label>
                 <div className="relative">
                   <User className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-                  <Input
-                    id="username"
-                    type="text"
-                    placeholder={t("login.usernamePlaceholder")}
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    className="pl-10 bg-[#2a2a2a]/50 border-[#3a3a3a] text-white placeholder:text-slate-400 focus:border-[#4a4a4a]"
-                    required
-                  />
+                                      <Input
+                      id="username"
+                      type="text"
+                      placeholder={t("login.usernamePlaceholder")}
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                      className="pl-10 bg-background border-input text-foreground placeholder:text-muted-foreground focus:border-ring"
+                      required
+                    />
                 </div>
               </div>
 
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <Label htmlFor="password" className="text-white">{t("login.password")}</Label>
+                  <Label htmlFor="password" className="text-foreground">{t("login.password")}</Label>
                   {/* <Link href="/forgot-password" className="text-sm font-medium text-primary hover:underline">
                     {t("login.forgotPassword")}
                   </Link> */}
                 </div>
                 <div className="relative">
                   <Lock className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-                  <Input
-                    id="password"
-                    type={showPassword ? "text" : "password"}
-                    placeholder={t("login.passwordPlaceholder")}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="pl-10 pr-10 bg-[#2a2a2a]/50 border-[#3a3a3a] text-white placeholder:text-slate-400 focus:border-[#4a4a4a]"
-                    required
-                  />
+                                      <Input
+                      id="password"
+                      type={showPassword ? "text" : "password"}
+                      placeholder={t("login.passwordPlaceholder")}
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="pl-10 pr-10 bg-background border-input text-foreground placeholder:text-muted-foreground focus:border-ring"
+                      required
+                    />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}

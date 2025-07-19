@@ -148,13 +148,13 @@ export function AdminSidebar() {
       </Button>
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-40 w-64 backdrop-blur-xl border-r border-[#2a2a2a]/50 transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 flex flex-col",
+          "fixed inset-y-0 left-0 z-40 w-64 backdrop-blur-xl border-r border-border transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 flex flex-col",
           isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0",
           isCollapsed ? "w-20" : "w-64",
         )}
       >
         <div className="flex-shrink-0">
-          <div className="flex items-center gap-3 h-16 px-6 border-b border-[#2a2a2a]/50">
+          <div className="flex items-center gap-3 h-16 px-6 border-b border-border">
             <img src="https://static-www.bittworld.com/main-static/img/logo.f3383a1.svg" className="w-32 rounded-lg" alt="logo" />
           </div>
         </div>
@@ -164,35 +164,35 @@ export function AdminSidebar() {
             <Link
               key={item.title}
               href={item.href}
-              className={cn(
-                "cursor-pointer flex items-center gap-3 px-4 py-2.5 rounded-lg font-medium text-white transition-all group text-sm",
-                isActive(item)
-                  ? "bg-[#1a1a1a] text-[#00e09e] border border-[#00e09e] shadow-lg shadow-[#00e09e]/20"
-                  : "text-slate-300 hover:bg-[#1a1a1a]/50 hover:text-cyan-200",
-                isCollapsed && "justify-center px-0"
-              )}
+                              className={cn(
+                  "cursor-pointer flex items-center gap-3 px-4 py-2.5 rounded-lg font-medium transition-all group text-sm",
+                  isActive(item)
+                    ? "bg-[#00e09e]/10 text-[#00e09e] border border-[#00e09e] shadow-lg shadow-[#00e09e]/20 dark:bg-[#1a1a1a] dark:text-white"
+                    : "text-muted-foreground hover:bg-muted hover:text-foreground dark:text-white dark:hover:text-white",
+                  isCollapsed && "justify-center px-0"
+                )}
             >
               <item.icon className={cn(
                 "h-5 w-5 mr-2 transition-colors",
-                isActive(item) ? "text-[#00e09e]" : item.color
+                isActive(item) ? "text-[#00e09e]" : "text-muted-foreground group-hover:text-foreground dark:text-white dark:group-hover:text-white"
               )} />
               {!isCollapsed && <span>{item.title}</span>}
             </Link>
           ))}
         </nav>
         
-        <div className="flex-shrink-0 p-4 border-t border-[#2a2a2a]/50">
-          <div className="flex items-center gap-3 rounded-xl bg-[#23284A] p-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r from-cyan-500 to-purple-500 text-white font-bold text-lg shadow-lg shadow-cyan-500/25">
-              {myInfor?.username?.charAt(0).toUpperCase()}
-            </div>
-            {!isCollapsed && (
-              <div className="flex flex-col">
-                <span className="text-sm font-medium text-slate-200">{myInfor?.username}</span>
-                <span className="text-xs text-slate-400 uppercase">{t("navigation.admin")}</span>
+        <div className="flex-shrink-0 p-4 border-t border-border">
+                      <div className="flex items-center gap-3 rounded-xl bg-muted p-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r from-cyan-500 to-purple-500 text-white font-bold text-lg shadow-lg shadow-cyan-500/25">
+                {myInfor?.username?.charAt(0).toUpperCase()}
               </div>
-            )}
-          </div>
+              {!isCollapsed && (
+                <div className="flex flex-col">
+                  <span className="text-sm font-medium text-foreground dark:text-white">{myInfor?.username}</span>
+                  <span className="text-xs text-muted-foreground uppercase dark:text-slate-300">{t("navigation.admin")}</span>
+                </div>
+              )}
+            </div>
         </div>
       </aside>
       {isOpen && (

@@ -47,13 +47,13 @@ export default function RootLayout({
           <QueryClientProvider client={queryClient}>
             <LangProvider>
               {isLoginPage ? (
-                <main className="min-h-screen bg-[#0e0e0e]">{children}</main>
+                <main className="min-h-screen bg-background">{children}</main>
               ) : (
                 <div className="flex min-h-screen">
                   <AdminSidebar />
                   <div className="flex flex-col flex-1 h-screen overflow-auto">
                     <AdminHeader />
-                    <main className="flex-1 p-4 md:p-6 bg-[#0e0e0e]">{children}</main>
+                    <main className="flex-1 p-4 md:p-6 bg-background">{children}</main>
                   </div>  
                 </div>
               )}
