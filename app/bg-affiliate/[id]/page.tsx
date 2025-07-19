@@ -50,7 +50,7 @@ function TreeNode({
       {/* Vertical connector line for non-root nodes */}
       {!isRoot && (
         <div 
-          className="absolute left-6 top-0 w-px bg-[#3a3a3a]/50"
+          className="absolute left-6 top-0 w-px bg-border/50"
           style={{ 
             height: '50%',
             left: `${indent - 12}px`
@@ -61,10 +61,10 @@ function TreeNode({
       {/* Node Content */}
       <div 
         className={`
-          flex items-center gap-3 p-3 my-2 rounded-lg border transition-all duration-200 hover:bg-[#2a2a2a]/30 relative
+          flex items-center gap-3 p-3 my-2 rounded-lg border transition-all duration-200 hover:bg-muted/50 relative
           ${isRoot 
             ? 'bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border-blue-500/30' 
-            : 'bg-[#1a1a1a]/20 border-[#2a2a2a]/30'
+            : 'bg-card/50 border-border'
           }
         `}
         style={{ marginLeft: `${indent}px` }}
@@ -72,7 +72,7 @@ function TreeNode({
         {/* Horizontal connector line for non-root nodes */}
         {!isRoot && (
           <div 
-            className="absolute left-0 top-1/2 w-3 h-px bg-[#3a3a3a]/50 transform -translate-y-1/2"
+            className="absolute left-0 top-1/2 w-3 h-px bg-border/50 transform -translate-y-1/2"
             style={{ left: '-12px' }}
           />
         )}
@@ -82,17 +82,17 @@ function TreeNode({
           {hasChildren ? (
             <button
               onClick={() => setIsExpanded(!isExpanded)}
-              className="p-1 rounded hover:bg-[#2a2a2a]/50 transition-colors"
+              className="p-1 rounded hover:bg-muted/50 transition-colors"
             >
               {isExpanded ? (
-                <ChevronDown className="h-4 w-4 text-slate-400" />
+                <ChevronDown className="h-4 w-4 text-muted-foreground" />
               ) : (
-                <ChevronRight className="h-4 w-4 text-slate-400" />
+                <ChevronRight className="h-4 w-4 text-muted-foreground" />
               )}
             </button>
           ) : (
             <div className="w-6 h-6 flex items-center justify-center">
-              <div className="w-1 h-1 bg-[#4a4a4a] rounded-full"></div>
+              <div className="w-1 h-1 bg-muted-foreground rounded-full"></div>
             </div>
           )}
         </div>
@@ -103,7 +103,7 @@ function TreeNode({
             w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold
             ${isRoot 
               ? 'bg-gradient-to-br from-blue-500 to-cyan-500 text-white' 
-              : 'bg-[#2a2a2a] text-slate-300'
+              : 'bg-muted text-foreground'
             }
           `}>
             {isRoot ? <Crown className="h-5 w-5" /> : (node.walletInfo?.nickName?.charAt(0) || '?').toUpperCase()}
@@ -113,7 +113,7 @@ function TreeNode({
         {/* User Info */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-1">
-            <h4 className={`font-semibold truncate ${isRoot ? 'text-blue-400' : 'text-slate-100'}`}>
+            <h4 className={`font-semibold truncate ${isRoot ? 'text-blue-400' : 'text-foreground'}`}>
               {node.walletInfo?.nickName || '-'}
             </h4>
             {isRoot && (
@@ -126,19 +126,19 @@ function TreeNode({
             </Badge>
           </div>
           
-          <div className="flex items-center gap-4 text-xs text-slate-400">
+          <div className="flex items-center gap-4 text-xs text-muted-foreground">
             <div className="flex items-center gap-1">
               <Wallet className="h-3 w-3" />
               <span>{truncateAddress(node.walletInfo?.solanaAddress || '')}</span>
               <button
-                className="p-1 rounded hover:bg-[#2a2a2a] transition-colors"
+                className="p-1 rounded hover:bg-muted/50 transition-colors"
                 title="Copy address"
                 onClick={() => onCopyAddress(node.walletInfo?.solanaAddress || '')}
               >
                 {copiedAddress === (node.walletInfo?.solanaAddress || '') ? (
                   <Check className="h-3 w-3 text-emerald-400" />
                 ) : (
-                  <Copy className="h-3 w-3 text-slate-400" />
+                  <Copy className="h-3 w-3 text-muted-foreground" />
                 )}
               </button>
             </div>
@@ -151,7 +151,7 @@ function TreeNode({
             {node.totalVolume !== undefined && (
               <div className="flex items-center gap-1">
                 <TrendingUp className="h-3 w-3" />
-                <span className="text-slate-400">{t('bg-affiliate.detail.table.volume')}:</span>
+                <span className="text-muted-foreground">{t('bg-affiliate.detail.table.volume')}:</span>
                 <span className="text-blue-400 font-medium">${node.totalVolume || 0}</span>
               </div>
             )}
@@ -159,7 +159,7 @@ function TreeNode({
             {node.totalTrans !== undefined && (
               <div className="flex items-center gap-1">
                 <BarChart3 className="h-3 w-3" />
-                <span className="text-slate-400">{t('bg-affiliate.detail.table.transactions')}:</span>
+                <span className="text-muted-foreground">{t('bg-affiliate.detail.table.transactions')}:</span>
                 <span className="text-purple-400 font-medium">{node.totalTrans || 0}</span>
               </div>
             )}
@@ -207,7 +207,7 @@ function TreeNode({
         <div className="relative">
           {/* Vertical connector line from parent to children */}
           <div 
-            className="absolute left-6 top-0 w-px bg-[#3a3a3a]/50"
+            className="absolute left-6 top-0 w-px bg-border/50"
             style={{ 
               height: '100%',
               left: `${indent + 12}px`
@@ -270,7 +270,7 @@ export default function BgAffiliateTreeDetailPage() {
 
   // Sau đó mới return điều kiện
   if (isLoading) {
-    return <div className="flex items-center justify-center py-12 text-slate-400">{t('bg-affiliate.detail.loading')}</div>;
+    return <div className="flex items-center justify-center py-12 text-muted-foreground">{t('bg-affiliate.detail.loading')}</div>;
   }
   if (error) {
     return <div className="flex items-center justify-center py-12 text-red-400">{t('bg-affiliate.detail.error')}</div>;
@@ -308,22 +308,22 @@ export default function BgAffiliateTreeDetailPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-slate-100">{t('bg-affiliate.detail.title', { treeId: treeData.treeInfo.treeId })}</h1>
-          <p className="text-slate-400 text-sm">
+          <h1 className="text-2xl font-bold">{t('bg-affiliate.detail.title', { treeId: treeData.treeInfo.treeId })}</h1>
+          <p className="text-muted-foreground text-sm">
             {t('bg-affiliate.detail.rootInfo', { 
               nickname: treeData.currentWallet.nickName
             })} &bull; &nbsp;
             <span className="items-center gap-1 inline-flex">
               {truncateAddress(treeData.currentWallet.solanaAddress)}
               <button
-                className="ml-1 p-1 rounded hover:bg-[#2a2a2a] transition-colors"
+                className="ml-1 p-1 rounded hover:bg-muted/50 transition-colors"
                 title="Copy address"
                 onClick={() => copyToClipboard(treeData.currentWallet.solanaAddress)}
               >
                 {copiedAddress === treeData.currentWallet.solanaAddress ? (
                   <Check className="h-3 w-3 text-emerald-400" />
                 ) : (
-                  <Copy className="h-3 w-3 text-slate-400" />
+                  <Copy className="h-3 w-3 text-muted-foreground" />
                 )}
               </button>
             </span>
@@ -333,11 +333,11 @@ export default function BgAffiliateTreeDetailPage() {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Card className="bg-[#1a1a1a] border-[#2a2a2a]/50">
+        <Card className="dashboard-card">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-slate-400 text-sm">{t('bg-affiliate.detail.stats.rootCommission')}</p>
+                <p className="text-black dark:text-white font-semibold text-sm">{t('bg-affiliate.detail.stats.rootCommission')}</p>
                 <p className="text-2xl font-bold text-emerald-400">{treeData.treeInfo.totalCommissionPercent}%</p>
               </div>
               <div className="h-8 w-8 rounded-lg bg-emerald-500/10 flex items-center justify-center">
@@ -347,11 +347,11 @@ export default function BgAffiliateTreeDetailPage() {
           </CardContent>
         </Card>
 
-        <Card className="bg-[#1a1a1a] border-[#2a2a2a]/50">
+        <Card className="dashboard-card">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-slate-400 text-sm">{t('bg-affiliate.detail.stats.totalMembers')}</p>
+                <p className="text-black dark:text-white font-semibold text-sm">{t('bg-affiliate.detail.stats.totalMembers')}</p>
                 <p className="text-2xl font-bold text-purple-400">{treeData.totalMembers}</p>
               </div>
               <div className="h-8 w-8 rounded-lg bg-purple-500/10 flex items-center justify-center">
@@ -361,11 +361,11 @@ export default function BgAffiliateTreeDetailPage() {
           </CardContent>
         </Card>
 
-        <Card className="bg-[#1a1a1a] border-[#2a2a2a]/50">
+        <Card className="dashboard-card">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-slate-400 text-sm">{t('bg-affiliate.detail.stats.created')}</p>
+                <p className="text-black dark:text-white font-semibold text-sm">{t('bg-affiliate.detail.stats.created')}</p>
                 <p className="text-2xl font-bold text-cyan-400">{new Date(treeData.treeInfo.createdAt).toLocaleDateString()}</p>
               </div>
               <div className="h-8 w-8 rounded-lg bg-cyan-500/10 flex items-center justify-center">
@@ -377,12 +377,12 @@ export default function BgAffiliateTreeDetailPage() {
       </div>
 
       {/* Tree View */}
-      <Card className="bg-[#1a1a1a] border-[#2a2a2a]/50">
+      <Card className="dashboard-card">
         <CardHeader className="pb-4">
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle className="text-slate-100">{t('bg-affiliate.detail.treeStructure')}</CardTitle>
-              <CardDescription className="text-slate-400">
+              <CardTitle className="text-black dark:text-white font-bold">{t('bg-affiliate.detail.treeStructure')}</CardTitle>
+              <CardDescription className="text-muted-foreground">
                 {t('bg-affiliate.detail.treeDescription')}
               </CardDescription>
             </div>
@@ -402,7 +402,7 @@ export default function BgAffiliateTreeDetailPage() {
           </div>
           
           {treeData.totalMembers === 0 && (
-            <div className="text-center text-slate-400 py-8">
+            <div className="text-center text-muted-foreground py-8">
               {t('bg-affiliate.detail.table.noMembers')}
             </div>
           )}
