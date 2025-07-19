@@ -174,7 +174,7 @@ export function AdminSidebar() {
             >
               <item.icon className={cn(
                 "h-5 w-5 mr-2 transition-colors",
-                isActive(item) ? "text-[#00e09e]" : "text-muted-foreground group-hover:text-foreground dark:text-white dark:group-hover:text-white"
+                isActive(item) ? "text-[#00e09e]" : item.color
               )} />
               {!isCollapsed && <span>{item.title}</span>}
             </Link>
