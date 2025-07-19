@@ -179,7 +179,7 @@ export default function BgAffiliateAdminPage() {
           <p className="text-slate-400 text-sm">{t('bg-affiliate.description')}</p>
         </div>
         <Button 
-          className="bg-gradient-to-r from-cyan-600 to-purple-600 hover:from-cyan-700 hover:to-purple-700"
+          className="bg-[#00e09e] hover:bg-[#00d08e] text-black font-medium"
           onClick={() => setShowCreate(true)}
         >
           <Plus className="h-4 w-4 mr-2" />
@@ -191,7 +191,7 @@ export default function BgAffiliateAdminPage() {
       {statsLoading ? (
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {[1, 2, 3, 4].map((i) => (
-            <Card key={i} className="bg-slate-800/50 border-slate-700/50">
+            <Card key={i} className="bg-[#1a1a1a] border-[#2a2a2a]/50">
               <CardContent className="p-4">
                 <div className="flex items-center justify-between">
                   <div>
@@ -209,7 +209,7 @@ export default function BgAffiliateAdminPage() {
       ) : statsError ? (
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {[1, 2, 3, 4].map((i) => (
-            <Card key={i} className="bg-slate-800/50 border-slate-700/50">
+            <Card key={i} className="bg-[#1a1a1a] border-[#2a2a2a]/50">
               <CardContent className="p-4">
                 <div className="flex items-center justify-between">
                   <div>
@@ -226,7 +226,7 @@ export default function BgAffiliateAdminPage() {
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <Card className="bg-slate-800/50 border-slate-700/50">
+          <Card className="bg-[#1a1a1a] border-[#2a2a2a]/50">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
@@ -240,7 +240,7 @@ export default function BgAffiliateAdminPage() {
             </CardContent>
           </Card>
 
-          <Card className="bg-slate-800/50 border-slate-700/50">
+          <Card className="bg-[#1a1a1a] border-[#2a2a2a]/50">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
@@ -254,7 +254,7 @@ export default function BgAffiliateAdminPage() {
             </CardContent>
           </Card>
 
-          <Card className="bg-slate-800/50 border-slate-700/50">
+          <Card className="bg-[#1a1a1a] border-[#2a2a2a]/50">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
@@ -268,7 +268,7 @@ export default function BgAffiliateAdminPage() {
             </CardContent>
           </Card>
 
-          <Card className="bg-slate-800/50 border-slate-700/50">
+          <Card className="bg-[#1a1a1a] border-[#2a2a2a]/50">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
@@ -285,7 +285,7 @@ export default function BgAffiliateAdminPage() {
       )}
 
       {/* Main Content */}
-      <Card className="bg-slate-800/50 border-slate-700/50">
+      <Card className="bg-[#1a1a1a] border-[#2a2a2a]/50">
         <CardHeader className="pb-4">
           <div className="flex items-center justify-between">
             <div>
@@ -303,7 +303,7 @@ export default function BgAffiliateAdminPage() {
               <Input 
                 type="search" 
                 placeholder={t('bg-affiliate.searchPlaceholder')} 
-                className="pl-8 w-full md:max-w-sm bg-slate-700/50 border-slate-600/50"
+                className="pl-8 w-full md:max-w-sm bg-[#2a2a2a]/50 border-[#3a3a3a]/50"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
@@ -321,7 +321,7 @@ export default function BgAffiliateAdminPage() {
             <div className="overflow-x-auto rounded-md border">
               <Table>
                 <TableHeader>
-                  <TableRow className="border-slate-700/50">
+                  <TableRow className="border-[#2a2a2a]/50">
                     <TableHead className="text-slate-300">{t('bg-affiliate.table.number')}</TableHead>
                     <TableHead className="text-slate-300">{t('bg-affiliate.table.rootWallet')}</TableHead>
                     <TableHead className="text-slate-300">{t('bg-affiliate.table.commission')}</TableHead>
@@ -340,7 +340,7 @@ export default function BgAffiliateAdminPage() {
                   </TableRow>
                   ) : (
                     filteredTrees.map((tree: any, index: number) => (
-                      <TableRow key={tree.treeId} className="border-slate-700/30 hover:bg-slate-700/20">
+                      <TableRow key={tree.treeId} className="border-[#2a2a2a]/30 hover:bg-[#2a2a2a]/20">
                         <TableCell className="font-medium text-cyan-400">{index + 1}</TableCell>
                         <TableCell>
                           <div>
@@ -350,7 +350,7 @@ export default function BgAffiliateAdminPage() {
                               <Button
                                 variant="ghost"
                                 size="icon"
-                                className="h-5 w-5 text-slate-400 hover:text-cyan-300 hover:bg-cyan-900/20"
+                                className="h-5 w-5 text-slate-400 hover:text-cyan-300 hover:bg-[#2a2a2a]/50"
                                 onClick={() => copyToClipboard(tree.rootWallet?.solanaAddress || '')}
                                 title="Copy address"
                               >
@@ -416,7 +416,7 @@ export default function BgAffiliateAdminPage() {
                               <Button 
                                 size="sm" 
                                 variant="ghost" 
-                                className="h-8 w-8 p-0 text-slate-400 hover:text-cyan-300 hover:bg-cyan-900/20"
+                                className="h-8 w-8 p-0 text-slate-400 hover:text-cyan-300 hover:bg-[#2a2a2a]/50"
                               >
                                 <Eye className="h-4 w-4" />
                               </Button>
@@ -424,7 +424,7 @@ export default function BgAffiliateAdminPage() {
                             <Button 
                               size="sm" 
                               variant="ghost" 
-                              className="h-8 w-8 p-0 text-slate-400 hover:text-emerald-300 hover:bg-emerald-900/20"
+                              className="h-8 w-8 p-0 text-slate-400 hover:text-emerald-300 hover:bg-[#2a2a2a]/50"
                               onClick={() => handleUpdateCommission(tree)}
                             >
                               <Edit className="h-4 w-4" />
@@ -443,7 +443,7 @@ export default function BgAffiliateAdminPage() {
 
       {/* Create Tree Dialog */}
       <Dialog open={showCreate} onOpenChange={setShowCreate}>
-        <DialogContent className="bg-slate-900 border-slate-700/50">
+        <DialogContent className="bg-[#1a1a1a] border-[#2a2a2a]/50">
           <DialogHeader>
             <DialogTitle className="text-slate-100">{t('bg-affiliate.dialogs.create.title')}</DialogTitle>
           </DialogHeader>
@@ -484,7 +484,7 @@ export default function BgAffiliateAdminPage() {
                 placeholder={t('bg-affiliate.dialogs.create.commissionPlaceholder')} 
                 value={createForm.totalCommissionPercent} 
                 onChange={e => setCreateForm(f => ({ ...f, totalCommissionPercent: e.target.value }))} 
-                className="bg-slate-800/50 border-slate-600/50" 
+                className="bg-[#2a2a2a]/50 border-[#3a3a3a]/50" 
                 disabled={createBgAffiliateMutation.isPending}
                 min="0"
                 max="100"
@@ -516,13 +516,13 @@ export default function BgAffiliateAdminPage() {
 
       {/* Update Commission Dialog */}
       <Dialog open={showUpdateCommission} onOpenChange={setShowUpdateCommission}>
-        <DialogContent className="bg-slate-900/95 border-slate-700/50">
+        <DialogContent className="bg-[#1a1a1a]/95 border-[#2a2a2a]/50">
           <DialogHeader>
             <DialogTitle className="text-slate-100">{t('bg-affiliate.dialogs.updateCommission.title')}</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
             {selectedTree && (
-              <div className="p-3 rounded-lg bg-slate-800/30 border border-slate-600/30">
+              <div className="p-3 rounded-lg bg-[#2a2a2a]/30 border border-[#3a3a3a]/30">
                 <p className="text-sm text-slate-400">
                   {t('bg-affiliate.dialogs.updateCommission.rootInfo', { 
                     nickname: selectedTree.rootWallet?.nickName || 'Unknown', 
@@ -543,7 +543,7 @@ export default function BgAffiliateAdminPage() {
                 placeholder={t('bg-affiliate.dialogs.updateCommission.newCommissionPlaceholder')} 
                 value={updateCommissionForm.newPercent} 
                 onChange={e => setUpdateCommissionForm(f => ({ ...f, newPercent: e.target.value }))} 
-                className="bg-slate-800/50 border-slate-600/50" 
+                className="bg-[#2a2a2a]/50 border-[#3a3a3a]/50" 
                 disabled={updateCommissionMutation.isPending}
                 min="0"
                 max="100"

@@ -51,8 +51,8 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
-      <Card className="w-full max-w-md bg-slate-800/90 backdrop-blur-sm border-slate-700/50 shadow-xl">
+    <div className="min-h-screen flex items-center justify-center p-6 bg-[#0e0e0e]">
+                <Card className="w-full max-w-md bg-[#1a1a1a]/90 backdrop-blur-sm border-[#2a2a2a]/50 shadow-xl">
         <CardHeader className="text-center pb-6">
           <div className="flex justify-center mb-4">
             <img src="/logo.png" alt="Logo" className="h-12 w-auto" />
@@ -75,7 +75,7 @@ export default function LoginPage() {
                     placeholder={t("login.usernamePlaceholder")}
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                    className="pl-10 bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400 focus:border-slate-500"
+                    className="pl-10 bg-[#2a2a2a]/50 border-[#3a3a3a] text-white placeholder:text-slate-400 focus:border-[#4a4a4a]"
                     required
                   />
                 </div>
@@ -96,7 +96,7 @@ export default function LoginPage() {
                     placeholder={t("login.passwordPlaceholder")}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="pl-10 pr-10 bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400 focus:border-slate-500"
+                    className="pl-10 pr-10 bg-[#2a2a2a]/50 border-[#3a3a3a] text-white placeholder:text-slate-400 focus:border-[#4a4a4a]"
                     required
                   />
                   <button
