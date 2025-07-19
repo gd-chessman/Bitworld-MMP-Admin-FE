@@ -24,18 +24,18 @@ export default function UserWalletsPage() {
   const [isRefreshing, setIsRefreshing] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
   const [copiedAddress, setCopiedAddress] = useState<string | null>(null)
-  const [walletAuthType, setWalletAuthType] = useState('all')
+
   const pageSize = 10
   const queryClient = useQueryClient()
 
-  // Reset to page 1 when search hoặc loại ví thay đổi
+  // Reset to page 1 when search changes
   useEffect(() => {
     setCurrentPage(1)
-  }, [searchQuery, walletAuthType])
+  }, [searchQuery])
 
   const { data: listWallets, refetch: refetchListWallets, isLoading } = useQuery({
-    queryKey: ["list-wallets", searchQuery, walletAuthType, currentPage],
-    queryFn: () => getListWallets(searchQuery, currentPage, pageSize, walletAuthType === 'all' ? '' : walletAuthType, 'main'),
+    queryKey: ["list-wallets", searchQuery, currentPage],
+    queryFn: () => getListWallets(searchQuery, currentPage, pageSize, '', 'main'),
     placeholderData: (previousData) => previousData,
   })
 
@@ -106,16 +106,7 @@ export default function UserWalletsPage() {
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
-            <Select value={walletAuthType} onValueChange={value => setWalletAuthType(value)}>
-              <SelectTrigger className="w-32">
-                <SelectValue placeholder={t('list-wallets.selectType')} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">{t('list-wallets.allTypes')}</SelectItem>
-                <SelectItem value="member">{t('list-wallets.table.member')}</SelectItem>
-                <SelectItem value="master">{t('list-wallets.table.master')}</SelectItem>
-              </SelectContent>
-            </Select>
+
           </div>
           <div className="space-y-4">
             <div className="rounded-md border">
@@ -125,14 +116,12 @@ export default function UserWalletsPage() {
                     <TableHead>{t('list-wallets.table.walletId')}</TableHead>
                     <TableHead>{t('list-wallets.table.solanaAddress')}</TableHead>
                     <TableHead>{t('list-wallets.table.nickname')}</TableHead>
-                    <TableHead>{t('list-wallets.table.authType')}</TableHead>
-                    <TableHead>{t('list-wallets.table.stream')}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {isLoading ? (
                     <TableRow>
-                      <TableCell colSpan={6} className="h-24 text-center">
+                      <TableCell colSpan={3} className="h-24 text-center">
                         {t('list-wallets.table.loading')}
                       </TableCell>
                     </TableRow>
@@ -158,36 +147,11 @@ export default function UserWalletsPage() {
                           </div>
                         </TableCell>
                         <TableCell>{row.wallet_nick_name || t('list-wallets.table.na')}</TableCell>
-                        <TableCell>
-                          <div className="flex">
-                            <Select value={row.wallet_auth} onValueChange={(value) => handleUpdateAuth(row.wallet_id, value)}>
-                              <SelectTrigger className="w-28 h-8 text-xs bg-slate-800 border-slate-600 text-slate-200">
-                                <SelectValue />
-                              </SelectTrigger>
-                              <SelectContent>
-                                <SelectItem value="master">{t('list-wallets.table.master')}</SelectItem>
-                                <SelectItem value="member">{t('list-wallets.table.member')}</SelectItem>
-                              </SelectContent>
-                            </Select>
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          {row.wallet_stream ? (
-                            <Badge
-                              variant="outline"
-                              className="bg-emerald-50 text-emerald-600 border-emerald-200 dark:bg-emerald-950/30 dark:text-emerald-400 dark:border-emerald-800/50"
-                            >
-                              {row.wallet_stream}
-                            </Badge>
-                          ) : (
-                            t('list-wallets.table.na')
-                          )}
-                        </TableCell>
                       </TableRow>
                     ))
                   ) : (
                     <TableRow>
-                      <TableCell colSpan={5} className="h-24 text-center">
+                      <TableCell colSpan={3} className="h-24 text-center">
                         {t('list-wallets.table.noResults')}
                       </TableCell>
                     </TableRow>
