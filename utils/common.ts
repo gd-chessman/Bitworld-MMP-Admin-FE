@@ -4,59 +4,59 @@
 export const selectStyles = {
     control: (provided: any, state: any) => ({
       ...provided,
-      backgroundColor: 'rgba(30, 41, 59, 0.5)',
-      borderColor: state.isFocused ? 'rgb(34, 197, 94)' : 'rgba(71, 85, 105, 0.5)',
+      backgroundColor: 'hsl(var(--background))',
+      borderColor: state.isFocused ? 'hsl(var(--primary))' : 'hsl(var(--border))',
       borderWidth: '1px',
       borderRadius: '6px',
-      boxShadow: state.isFocused ? '0 0 0 1px rgb(34, 197, 94)' : 'none',
+      boxShadow: state.isFocused ? '0 0 0 1px hsl(var(--primary))' : 'none',
       '&:hover': {
-        borderColor: 'rgba(71, 85, 105, 0.7)',
+        borderColor: 'hsl(var(--border))',
       },
     }),
     menu: (provided: any) => ({
       ...provided,
-      backgroundColor: 'rgba(15, 23, 42)',
-      border: '1px solid rgba(71, 85, 105, 0.5)',
+      backgroundColor: 'hsl(var(--background))',
+      border: '1px solid hsl(var(--border))',
       borderRadius: '6px',
-      boxShadow: '0 10px 25px rgba(0, 0, 0, 0.5)',
+      boxShadow: '0 10px 25px rgba(0, 0, 0, 0.1)',
     }),
     option: (provided: any, state: any) => ({
       ...provided,
-      backgroundColor: state.isFocused ? 'rgba(71, 85, 105, 0.5)' : 'transparent',
-      color: state.isFocused ? 'rgb(241, 245, 249)' : 'rgb(148, 163, 184)',
+      backgroundColor: state.isFocused ? 'hsl(var(--muted))' : 'transparent',
+      color: state.isFocused ? 'hsl(var(--foreground))' : 'hsl(var(--muted-foreground))',
       '&:hover': {
-        backgroundColor: 'rgba(71, 85, 105, 0.5)',
-        color: 'rgb(241, 245, 249)',
+        backgroundColor: 'hsl(var(--muted))',
+        color: 'hsl(var(--foreground))',
       },
     }),
     singleValue: (provided: any) => ({
       ...provided,
-      color: 'rgb(241, 245, 249)',
+      color: 'hsl(var(--foreground))',
     }),
     input: (provided: any) => ({
       ...provided,
-      color: 'rgb(241, 245, 249)',
+      color: 'hsl(var(--foreground))',
     }),
     placeholder: (provided: any) => ({
       ...provided,
-      color: 'rgb(148, 163, 184)',
+      color: 'hsl(var(--muted-foreground))',
     }),
     indicatorSeparator: (provided: any) => ({
       ...provided,
-      backgroundColor: 'rgba(71, 85, 105, 0.5)',
+      backgroundColor: 'hsl(var(--border))',
     }),
     dropdownIndicator: (provided: any) => ({
       ...provided,
-      color: 'rgb(148, 163, 184)',
+      color: 'hsl(var(--muted-foreground))',
       '&:hover': {
-        color: 'rgb(34, 197, 94)',
+        color: 'hsl(var(--primary))',
       },
     }),
     clearIndicator: (provided: any) => ({
       ...provided,
-      color: 'rgb(148, 163, 184)',
+      color: 'hsl(var(--muted-foreground))',
       '&:hover': {
-        color: 'rgb(239, 68, 68)',
+        color: 'hsl(var(--destructive))',
       },
     }),
   };

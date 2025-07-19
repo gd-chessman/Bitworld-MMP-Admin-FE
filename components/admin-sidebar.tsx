@@ -154,7 +154,7 @@ export function AdminSidebar() {
         )}
       >
         <div className="flex-shrink-0">
-          <div className="flex items-center gap-3 h-16 px-6 border-b border-[#2a2a2a]/50 bg-[#0e0e0e]">
+          <div className="flex items-center gap-3 h-16 px-6 border-b border-black dark:border-border bg-[#0e0e0e]">
             <img src="https://static-www.bittworld.com/main-static/img/logo.f3383a1.svg" className="w-32 rounded-lg" alt="logo" />
           </div>
         </div>
@@ -167,8 +167,8 @@ export function AdminSidebar() {
                               className={cn(
                   "cursor-pointer flex items-center gap-3 px-4 py-2.5 rounded-lg font-medium transition-all group text-sm",
                   isActive(item)
-                    ? "bg-[#00e09e]/10 text-[#00e09e] border border-[#00e09e] shadow-lg shadow-[#00e09e]/20 dark:bg-[#1a1a1a] dark:text-white"
-                    : "text-muted-foreground hover:bg-muted hover:text-foreground dark:text-white dark:hover:text-white",
+                    ? "bg-[#00e09e]/10 text-[#00e09e] border border-[#00e09e] shadow-lg shadow-[#00e09e]/20"
+                    : "text-black dark:text-white hover:bg-muted hover:text-foreground",
                   isCollapsed && "justify-center px-0"
                 )}
             >
@@ -188,8 +188,8 @@ export function AdminSidebar() {
               </div>
               {!isCollapsed && (
                 <div className="flex flex-col">
-                  <span className="text-sm font-medium text-foreground dark:text-white">{myInfor?.username}</span>
-                  <span className="text-xs text-muted-foreground uppercase dark:text-slate-300">{t("navigation.admin")}</span>
+                  <span className="text-sm font-medium text-black dark:text-white">{myInfor?.username}</span>
+                  <span className="text-xs text-black dark:text-slate-300 uppercase">{t("navigation.admin")}</span>
                 </div>
               )}
             </div>

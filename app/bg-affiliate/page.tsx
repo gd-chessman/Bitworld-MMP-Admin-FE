@@ -496,7 +496,7 @@ export default function BgAffiliateAdminPage() {
           </div>
           <DialogFooter>
             <Button 
-              className="bg-gradient-to-r from-cyan-600 to-purple-600 hover:from-cyan-700 hover:to-purple-700" 
+              className="bg-[#00e09e] hover:bg-[#00d08e] text-black font-medium" 
               disabled={!createForm.selectedWallet || !createForm.totalCommissionPercent || createBgAffiliateMutation.isPending || parseFloat(createForm.totalCommissionPercent) < 0 || parseFloat(createForm.totalCommissionPercent) > 100}
               onClick={() => {
                 if (createForm.selectedWallet && createForm.totalCommissionPercent) {
@@ -561,7 +561,7 @@ export default function BgAffiliateAdminPage() {
               Cancel
             </Button>
             <Button 
-              className="bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700" 
+              className="bg-[#00e09e] hover:bg-[#00d08e] text-black font-medium" 
               disabled={!updateCommissionForm.newPercent || updateCommissionMutation.isPending || parseFloat(updateCommissionForm.newPercent) < 0 || parseFloat(updateCommissionForm.newPercent) > 100}
               onClick={() => {
                 if (selectedTree && updateCommissionForm.newPercent) {

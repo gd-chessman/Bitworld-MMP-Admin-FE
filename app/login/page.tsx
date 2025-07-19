@@ -52,10 +52,10 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-6 bg-background">
-                <Card className="w-full max-w-md bg-card/90 backdrop-blur-sm border-border shadow-xl">
+        <Card className="w-full max-w-md bg-card/90 backdrop-blur-sm border-border shadow-xl">
         <CardHeader className="text-center pb-6">
           <div className="flex justify-center mb-4">
-            <img src="/logo.png" alt="Logo" className="h-12 w-auto" />
+            <img src="https://static-www.bittworld.com/main-static/img/logo.f3383a1.svg" alt="Logo" className="h-12 w-auto bg-black p-1 rounded" />
           </div>
           <h2 className="text-2xl font-bold tracking-tight text-foreground">{t("login.signIn")}</h2>
           <p className="text-sm text-muted-foreground">{t("login.accessDashboard")}</p>
@@ -110,7 +110,11 @@ export default function LoginPage() {
               </div>
             </div>
 
-            <Button type="submit" className="w-full" disabled={isLoading}>
+            <Button 
+              type="submit" 
+              className="w-full bg-[#00e09e] hover:bg-[#00e09e]/90 text-black font-medium" 
+              disabled={isLoading}
+            >
               {isLoading ? t("login.signingIn") : t("login.signInButton")}
             </Button>
           </form>

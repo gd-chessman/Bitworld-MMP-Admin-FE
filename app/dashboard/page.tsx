@@ -176,18 +176,18 @@ export default function AdminDashboard() {
           </div>
           <div className="flex-1 flex flex-col justify-center gap-2">
             <div className="flex justify-between px-2">
-              <span className="text-slate-400 font-medium text-xs">{t('dashboard.orders.executed').charAt(0).toUpperCase() + t('dashboard.orders.executed').slice(1)}:</span>
-              <span className="text-emerald-300 font-bold text-sm">{dashboardStats?.orders?.executedOrders ?? 0}</span>
+              <span className="text-black dark:text-white font-medium text-xs">{t('dashboard.orders.executed').charAt(0).toUpperCase() + t('dashboard.orders.executed').slice(1)}:</span>
+              <span className="text-emerald-600 dark:text-emerald-300 font-bold text-sm">{dashboardStats?.orders?.executedOrders ?? 0}</span>
             </div>
             <div className="flex justify-between px-2">
-              <span className="text-slate-400 font-medium text-xs">{t('dashboard.orders.totalVolume').charAt(0).toUpperCase() + t('dashboard.orders.totalVolume').slice(1)}:</span>
-              <span className="text-blue-300 font-bold text-sm">${dashboardStats?.orders?.totalVolume ?? 0}</span>
+              <span className="text-black dark:text-white font-medium text-xs">{t('dashboard.orders.totalVolume').charAt(0).toUpperCase() + t('dashboard.orders.totalVolume').slice(1)}:</span>
+              <span className="text-blue-600 dark:text-blue-300 font-bold text-sm">${dashboardStats?.orders?.totalVolume ?? 0}</span>
             </div>
             {dashboardStats?.orders?.mostActiveWallet && (
               <div className="flex flex-col gap-1 px-2 mt-2">
-                <span className="text-slate-400 font-medium text-xs">{t('dashboard.orders.mostActiveWallet')}</span>
-                <span className="text-slate-200 font-bold text-sm">{dashboardStats.orders.mostActiveWallet.nickName || '-'} ({dashboardStats.orders.mostActiveWallet.solanaAddress?.slice(0,4)}...{dashboardStats.orders.mostActiveWallet.solanaAddress?.slice(-4)})</span>
-                <span className="text-slate-400 text-xs">{t('dashboard.orders.orderCount', { count: dashboardStats.orders.mostActiveWallet.orderCount })}</span>
+                <span className="text-black dark:text-white font-medium text-xs">{t('dashboard.orders.mostActiveWallet')}</span>
+                <span className="text-black dark:text-white font-bold text-sm">{dashboardStats.orders.mostActiveWallet.nickName || '-'} ({dashboardStats.orders.mostActiveWallet.solanaAddress?.slice(0,4)}...{dashboardStats.orders.mostActiveWallet.solanaAddress?.slice(-4)})</span>
+                <span className="text-black dark:text-white text-xs">{t('dashboard.orders.orderCount', { count: dashboardStats.orders.mostActiveWallet.orderCount })}</span>
               </div>
             )}
           </div>
@@ -227,20 +227,20 @@ export default function AdminDashboard() {
           </div>
           <div className="flex-1 flex flex-col justify-center gap-2">
             <div className="flex justify-between px-2">
-              <span className="text-slate-400 font-medium text-xs">{t('dashboard.referrals.trees').charAt(0).toUpperCase() + t('dashboard.referrals.trees').slice(1)}:</span>
-              <span className="text-slate-200 font-bold text-sm">{dashboardStats?.referrals?.bgAffiliate?.totalTrees ?? 0}</span>
+              <span className="text-black dark:text-white font-medium text-xs">{t('dashboard.referrals.trees').charAt(0).toUpperCase() + t('dashboard.referrals.trees').slice(1)}:</span>
+              <span className="text-black dark:text-white font-bold text-sm">{dashboardStats?.referrals?.bgAffiliate?.totalTrees ?? 0}</span>
             </div>
             <div className="flex justify-between px-2">
-              <span className="text-slate-400 font-medium text-xs">{t('dashboard.referrals.members').charAt(0).toUpperCase() + t('dashboard.referrals.members').slice(1)}:</span>
-              <span className="text-slate-200 font-bold text-sm">{dashboardStats?.referrals?.bgAffiliate?.totalMembers ?? 0}</span>
+              <span className="text-black dark:text-white font-medium text-xs">{t('dashboard.referrals.members').charAt(0).toUpperCase() + t('dashboard.referrals.members').slice(1)}:</span>
+              <span className="text-black dark:text-white font-bold text-sm">{dashboardStats?.referrals?.bgAffiliate?.totalMembers ?? 0}</span>
             </div>
             <div className="flex justify-between px-2">
-              <span className="text-slate-400 font-medium text-xs">{t('dashboard.referrals.commission').charAt(0).toUpperCase() + t('dashboard.referrals.commission').slice(1)}:</span>
-              <span className="text-blue-300 font-bold text-sm">${dashboardStats?.referrals?.bgAffiliate?.totalCommissionDistributed ?? 0}</span>
+              <span className="text-black dark:text-white font-medium text-xs">{t('dashboard.referrals.commission').charAt(0).toUpperCase() + t('dashboard.referrals.commission').slice(1)}:</span>
+              <span className="text-blue-600 dark:text-blue-300 font-bold text-sm">${dashboardStats?.referrals?.bgAffiliate?.totalCommissionDistributed ?? 0}</span>
             </div>
             <div className="flex justify-between px-2">
-              <span className="text-slate-400 font-medium text-xs">{t('dashboard.referrals.volume').charAt(0).toUpperCase() + t('dashboard.referrals.volume').slice(1)}:</span>
-              <span className="text-orange-300 font-bold text-sm">${dashboardStats?.referrals?.bgAffiliate?.totalVolume ?? 0}</span>
+              <span className="text-black dark:text-white font-medium text-xs">{t('dashboard.referrals.volume').charAt(0).toUpperCase() + t('dashboard.referrals.volume').slice(1)}:</span>
+              <span className="text-orange-600 dark:text-orange-300 font-bold text-sm">${dashboardStats?.referrals?.bgAffiliate?.totalVolume ?? 0}</span>
             </div>
           </div>
         </Card>
