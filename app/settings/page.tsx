@@ -132,9 +132,8 @@ export default function SettingsPage() {
       </div>
 
       <Tabs defaultValue="profile" className="space-y-4">
-        <TabsList className="grid w-full grid-cols-3 lg:w-auto">
+        <TabsList className="grid w-full grid-cols-2 lg:w-auto">
           <TabsTrigger value="profile">{t("settings.tabs.profile")}</TabsTrigger>
-          <TabsTrigger value="referral">{t("settings.tabs.referral")}</TabsTrigger>
           <TabsTrigger value="security">{t("settings.tabs.security")}</TabsTrigger>
         </TabsList>
 
@@ -200,9 +199,7 @@ export default function SettingsPage() {
           </Card>
         </TabsContent>
 
-        <TabsContent value="referral" className="space-y-4">
-          <ReferralSettingsTab />
-        </TabsContent>
+
 
         <TabsContent value="security" className="space-y-4">
           <Card className="dashboard-card">
