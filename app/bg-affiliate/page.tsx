@@ -175,8 +175,8 @@ export default function BgAffiliateAdminPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-slate-100">{t('bg-affiliate.title')}</h1>
-          <p className="text-slate-400 text-sm">{t('bg-affiliate.description')}</p>
+          <h1 className="text-2xl font-bold">{t('bg-affiliate.title')}</h1>
+          <p className="text-muted-foreground text-sm">{t('bg-affiliate.description')}</p>
         </div>
         <Button 
           className="bg-[#00e09e] hover:bg-[#00d08e] text-black font-medium"
@@ -191,15 +191,15 @@ export default function BgAffiliateAdminPage() {
       {statsLoading ? (
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {[1, 2, 3, 4].map((i) => (
-            <Card key={i} className="bg-[#1a1a1a] border-[#2a2a2a]/50">
+            <Card key={i} className="dashboard-card">
               <CardContent className="p-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-slate-400 text-sm">Loading...</p>
-                    <p className="text-2xl font-bold text-slate-400">...</p>
+                    <p className="text-muted-foreground text-sm">Loading...</p>
+                    <p className="text-2xl font-bold text-muted-foreground">...</p>
                   </div>
-                  <div className="h-8 w-8 rounded-lg bg-slate-500/10 flex items-center justify-center">
-                    <div className="h-4 w-4 bg-slate-400 rounded animate-pulse"></div>
+                  <div className="h-8 w-8 rounded-lg bg-muted/10 flex items-center justify-center">
+                    <div className="h-4 w-4 bg-muted-foreground rounded animate-pulse"></div>
                   </div>
                 </div>
               </CardContent>
@@ -209,11 +209,11 @@ export default function BgAffiliateAdminPage() {
       ) : statsError ? (
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {[1, 2, 3, 4].map((i) => (
-            <Card key={i} className="bg-[#1a1a1a] border-[#2a2a2a]/50">
+            <Card key={i} className="dashboard-card">
               <CardContent className="p-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-slate-400 text-sm">Error</p>
+                    <p className="text-muted-foreground text-sm">Error</p>
                     <p className="text-2xl font-bold text-red-400">-</p>
                   </div>
                   <div className="h-8 w-8 rounded-lg bg-red-500/10 flex items-center justify-center">
@@ -226,11 +226,11 @@ export default function BgAffiliateAdminPage() {
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <Card className="bg-[#1a1a1a] border-[#2a2a2a]/50">
+          <Card className="dashboard-card">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-slate-400 text-sm">{t('bg-affiliate.stats.totalTrees')}</p>
+                  <p className="text-black dark:text-white font-semibold text-sm">{t('bg-affiliate.stats.totalTrees')}</p>
                   <p className="text-2xl font-bold text-cyan-400">{statisticsData?.totalTrees || 0}</p>
                 </div>
                 <div className="h-8 w-8 rounded-lg bg-cyan-500/10 flex items-center justify-center">
@@ -240,11 +240,11 @@ export default function BgAffiliateAdminPage() {
             </CardContent>
           </Card>
 
-          <Card className="bg-[#1a1a1a] border-[#2a2a2a]/50">
+          <Card className="dashboard-card">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-slate-400 text-sm">{t('bg-affiliate.stats.totalMembers')}</p>
+                  <p className="text-black dark:text-white font-semibold text-sm">{t('bg-affiliate.stats.totalMembers')}</p>
                   <p className="text-2xl font-bold text-emerald-400">{statisticsData?.totalMembers || 0}</p>
                 </div>
                 <div className="h-8 w-8 rounded-lg bg-emerald-500/10 flex items-center justify-center">
@@ -254,11 +254,11 @@ export default function BgAffiliateAdminPage() {
             </CardContent>
           </Card>
 
-          <Card className="bg-[#1a1a1a] border-[#2a2a2a]/50">
+          <Card className="dashboard-card">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-slate-400 text-sm">{t('bg-affiliate.stats.totalCommissionDistributed')}</p>
+                  <p className="text-black dark:text-white font-semibold text-sm">{t('bg-affiliate.stats.totalCommissionDistributed')}</p>
                   <p className="text-2xl font-bold text-pink-400">${statisticsData?.totalCommissionDistributed || 0}</p>
                 </div>
                 <div className="h-8 w-8 rounded-lg bg-pink-500/10 flex items-center justify-center">
@@ -268,11 +268,11 @@ export default function BgAffiliateAdminPage() {
             </CardContent>
           </Card>
 
-          <Card className="bg-[#1a1a1a] border-[#2a2a2a]/50">
+          <Card className="dashboard-card">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-slate-400 text-sm">{t('bg-affiliate.stats.totalVolume')}</p>
+                  <p className="text-black dark:text-white font-semibold text-sm">{t('bg-affiliate.stats.totalVolume')}</p>
                   <p className="text-2xl font-bold text-purple-400">${statisticsData?.totalVolume || 0}</p>
                 </div>
                 <div className="h-8 w-8 rounded-lg bg-purple-500/10 flex items-center justify-center">
@@ -285,12 +285,12 @@ export default function BgAffiliateAdminPage() {
       )}
 
       {/* Main Content */}
-      <Card className="bg-[#1a1a1a] border-[#2a2a2a]/50">
+      <Card className="dashboard-card">
         <CardHeader className="pb-4">
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle className="text-slate-100">{t('bg-affiliate.cardTitle')}</CardTitle>
-              <CardDescription className="text-slate-400">
+              <CardTitle className="text-foreground font-bold">{t('bg-affiliate.cardTitle')}</CardTitle>
+              <CardDescription className="text-muted-foreground">
                 {t('bg-affiliate.cardDescription')}
               </CardDescription>
             </div>
@@ -299,11 +299,11 @@ export default function BgAffiliateAdminPage() {
         <CardContent>
           <div className="flex items-center gap-2 mb-4">
             <div className="relative flex-1">
-              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-slate-400" />
+              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
               <Input 
                 type="search" 
                 placeholder={t('bg-affiliate.searchPlaceholder')} 
-                className="pl-8 w-full md:max-w-sm bg-[#2a2a2a]/50 border-[#3a3a3a]/50"
+                className="pl-8 w-full md:max-w-sm"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
@@ -311,7 +311,7 @@ export default function BgAffiliateAdminPage() {
           </div>
           {treesLoading ? (
             <div className="flex items-center justify-center py-8">
-              <div className="text-slate-400">{t('bg-affiliate.table.loading')}</div>
+              <div className="text-muted-foreground">{t('bg-affiliate.table.loading')}</div>
             </div>
           ) : treesError ? (
             <div className="flex items-center justify-center py-8">
@@ -321,36 +321,36 @@ export default function BgAffiliateAdminPage() {
             <div className="overflow-x-auto rounded-md border">
               <Table>
                 <TableHeader>
-                  <TableRow className="border-[#2a2a2a]/50">
-                    <TableHead className="text-slate-300">{t('bg-affiliate.table.number')}</TableHead>
-                    <TableHead className="text-slate-300">{t('bg-affiliate.table.rootWallet')}</TableHead>
-                    <TableHead className="text-slate-300">{t('bg-affiliate.table.commission')}</TableHead>
-                    <TableHead className="text-slate-300">{t('bg-affiliate.table.members')}</TableHead>
-                    <TableHead className="text-slate-300">{t('bg-affiliate.table.created')}</TableHead>
-                    <TableHead className="text-slate-300">{t('bg-affiliate.table.status')}</TableHead>
-                    <TableHead className="text-slate-300">{t('bg-affiliate.table.actions')}</TableHead>
+                  <TableRow>
+                    <TableHead className="font-semibold text-foreground">{t('bg-affiliate.table.number')}</TableHead>
+                    <TableHead className="font-semibold text-foreground">{t('bg-affiliate.table.rootWallet')}</TableHead>
+                    <TableHead className="font-semibold text-foreground">{t('bg-affiliate.table.commission')}</TableHead>
+                    <TableHead className="font-semibold text-foreground">{t('bg-affiliate.table.members')}</TableHead>
+                    <TableHead className="font-semibold text-foreground">{t('bg-affiliate.table.created')}</TableHead>
+                    <TableHead className="font-semibold text-foreground">{t('bg-affiliate.table.status')}</TableHead>
+                    <TableHead className="font-semibold text-foreground">{t('bg-affiliate.table.actions')}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {filteredTrees.length === 0 ? (
-                                      <TableRow>
-                    <TableCell colSpan={7} className="text-center py-8 text-slate-400">
+                    <TableRow>
+                    <TableCell colSpan={7} className="text-center py-8 text-muted-foreground">
                       {t('bg-affiliate.table.noTrees')}
                     </TableCell>
                   </TableRow>
                   ) : (
                     filteredTrees.map((tree: any, index: number) => (
-                      <TableRow key={tree.treeId} className="border-[#2a2a2a]/30 hover:bg-[#2a2a2a]/20">
+                      <TableRow key={tree.treeId} className="hover:bg-muted/50">
                         <TableCell className="font-medium text-cyan-400">{index + 1}</TableCell>
                         <TableCell>
                           <div>
-                            <p className="font-medium text-slate-100">{tree.rootWallet?.nickName || 'Unknown'}</p>
+                            <p className="font-medium">{tree.rootWallet?.nickName || 'Unknown'}</p>
                             <div className="flex items-center gap-2">
-                              <p className="text-xs text-slate-400">{truncateAddress(tree.rootWallet?.solanaAddress || '')}</p>
+                              <p className="text-xs text-muted-foreground">{truncateAddress(tree.rootWallet?.solanaAddress || '')}</p>
                               <Button
                                 variant="ghost"
                                 size="icon"
-                                className="h-5 w-5 text-slate-400 hover:text-cyan-300 hover:bg-[#2a2a2a]/50"
+                                className="h-5 w-5 text-muted-foreground hover:text-cyan-300 hover:bg-muted/50"
                                 onClick={() => copyToClipboard(tree.rootWallet?.solanaAddress || '')}
                                 title="Copy address"
                               >
@@ -371,10 +371,10 @@ export default function BgAffiliateAdminPage() {
                         <TableCell>
                           <div className="flex items-center gap-2">
                             <span className="font-medium text-purple-400">{tree.totalMembers || 0}</span>
-                            <span className="text-xs text-slate-400">{t('bg-affiliate.table.membersCount')}</span>
+                            <span className="text-xs text-muted-foreground">{t('bg-affiliate.table.membersCount')}</span>
                           </div>
                         </TableCell>
-                        <TableCell className="text-slate-400 text-sm">
+                        <TableCell className="text-muted-foreground text-sm">
                           {tree.createdAt ? new Date(tree.createdAt).toLocaleDateString() : 'Unknown'}
                         </TableCell>
                         <TableCell>
@@ -416,7 +416,7 @@ export default function BgAffiliateAdminPage() {
                               <Button 
                                 size="sm" 
                                 variant="ghost" 
-                                className="h-8 w-8 p-0 text-slate-400 hover:text-cyan-300 hover:bg-[#2a2a2a]/50"
+                                className="h-8 w-8 p-0 text-muted-foreground hover:text-cyan-300 hover:bg-muted/50"
                               >
                                 <Eye className="h-4 w-4" />
                               </Button>
@@ -424,7 +424,7 @@ export default function BgAffiliateAdminPage() {
                             <Button 
                               size="sm" 
                               variant="ghost" 
-                              className="h-8 w-8 p-0 text-slate-400 hover:text-emerald-300 hover:bg-[#2a2a2a]/50"
+                              className="h-8 w-8 p-0 text-muted-foreground hover:text-emerald-300 hover:bg-muted/50"
                               onClick={() => handleUpdateCommission(tree)}
                             >
                               <Edit className="h-4 w-4" />
@@ -443,13 +443,13 @@ export default function BgAffiliateAdminPage() {
 
       {/* Create Tree Dialog */}
       <Dialog open={showCreate} onOpenChange={setShowCreate}>
-        <DialogContent className="bg-[#1a1a1a] border-[#2a2a2a]/50">
+        <DialogContent>
           <DialogHeader>
-            <DialogTitle className="text-slate-100">{t('bg-affiliate.dialogs.create.title')}</DialogTitle>
+            <DialogTitle className="text-foreground font-bold">{t('bg-affiliate.dialogs.create.title')}</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
             <div className="space-y-2">
-              <label className="block text-sm font-medium text-slate-300">{t('bg-affiliate.dialogs.create.selectWallet')}</label>
+              <label className="block text-sm font-medium">{t('bg-affiliate.dialogs.create.selectWallet')}</label>
               <Select
                 options={walletOptions as any}
                 value={createForm.selectedWallet ? {
@@ -465,7 +465,7 @@ export default function BgAffiliateAdminPage() {
                 isClearable
                 isSearchable
                 styles={selectStyles}
-                className="text-slate-100"
+
                 noOptionsMessage={() => "No wallets available"}
                 loadingMessage={() => "Loading wallets..."}
                 isLoading={walletsLoading}
@@ -473,24 +473,23 @@ export default function BgAffiliateAdminPage() {
                 filterOption={() => true}
                 isOptionDisabled={() => false}
               />
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-muted-foreground">
                 {availableWallets?.pagination?.total || 0} {t('bg-affiliate.dialogs.create.availableWallets')}
               </p>
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-2">{t('bg-affiliate.dialogs.create.commission')}</label>
+              <label className="block text-sm font-medium mb-2">{t('bg-affiliate.dialogs.create.commission')}</label>
               <Input 
                 type="number" 
                 placeholder={t('bg-affiliate.dialogs.create.commissionPlaceholder')} 
                 value={createForm.totalCommissionPercent} 
                 onChange={e => setCreateForm(f => ({ ...f, totalCommissionPercent: e.target.value }))} 
-                className="bg-[#2a2a2a]/50 border-[#3a3a3a]/50" 
                 disabled={createBgAffiliateMutation.isPending}
                 min="0"
                 max="100"
                 step="0.01"
               />
-              <p className="text-xs text-slate-400 mt-1">
+              <p className="text-xs text-muted-foreground mt-1">
                 {t('bg-affiliate.dialogs.create.commissionHelp')}
               </p>
             </div>
@@ -516,20 +515,20 @@ export default function BgAffiliateAdminPage() {
 
       {/* Update Commission Dialog */}
       <Dialog open={showUpdateCommission} onOpenChange={setShowUpdateCommission}>
-        <DialogContent className="bg-[#1a1a1a]/95 border-[#2a2a2a]/50">
+        <DialogContent>
           <DialogHeader>
-            <DialogTitle className="text-slate-100">{t('bg-affiliate.dialogs.updateCommission.title')}</DialogTitle>
+            <DialogTitle className="text-foreground font-bold">{t('bg-affiliate.dialogs.updateCommission.title')}</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
             {selectedTree && (
-              <div className="p-3 rounded-lg bg-[#2a2a2a]/30 border border-[#3a3a3a]/30">
-                <p className="text-sm text-slate-400">
+              <div className="p-3 rounded-lg bg-muted/30 border border-border">
+                <p className="text-sm text-muted-foreground">
                   {t('bg-affiliate.dialogs.updateCommission.rootInfo', { 
                     nickname: selectedTree.rootWallet?.nickName || 'Unknown', 
                     address: truncateAddress(selectedTree.rootWallet?.solanaAddress || '') 
                   })}
                 </p>
-                <p className="text-sm text-slate-400">
+                <p className="text-sm text-muted-foreground">
                   {t('bg-affiliate.dialogs.updateCommission.currentCommission', { 
                     percent: selectedTree.totalCommissionPercent 
                   })}
@@ -537,19 +536,18 @@ export default function BgAffiliateAdminPage() {
               </div>
             )}
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-2">{t('bg-affiliate.dialogs.updateCommission.newCommission')}</label>
+              <label className="block text-sm font-medium mb-2">{t('bg-affiliate.dialogs.updateCommission.newCommission')}</label>
               <Input 
                 type="number" 
                 placeholder={t('bg-affiliate.dialogs.updateCommission.newCommissionPlaceholder')} 
                 value={updateCommissionForm.newPercent} 
                 onChange={e => setUpdateCommissionForm(f => ({ ...f, newPercent: e.target.value }))} 
-                className="bg-[#2a2a2a]/50 border-[#3a3a3a]/50" 
                 disabled={updateCommissionMutation.isPending}
                 min="0"
                 max="100"
                 step="0.01"
               />
-              <p className="text-xs text-slate-400 mt-1">
+              <p className="text-xs text-muted-foreground mt-1">
                 {t('bg-affiliate.dialogs.updateCommission.newCommissionHelp')}
               </p>
             </div>
