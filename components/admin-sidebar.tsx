@@ -62,24 +62,24 @@ export function AdminSidebar() {
       icon: Wallet,
       color: "text-emerald-400 hover:text-emerald-300",
     },
-    {
-      title: t("navigation.categoriesToken"),
-      href: "/categories-token",
-      icon: Tag,
-      color: "text-amber-400 hover:text-amber-300",
-    },
+    // {
+    //   title: t("navigation.categoriesToken"),
+    //   href: "/categories-token",
+    //   icon: Tag,
+    //   color: "text-amber-400 hover:text-amber-300",
+    // },
     {
       title: t("navigation.orders"),
       href: "/orders",
       icon: Receipt,
       color: "text-pink-400 hover:text-pink-300",
     },
-    {
-      title: t("navigation.normalAffiliate"),
-      href: "/normal-affiliate",
-      icon: UserCheck,
-      color: "text-orange-400 hover:text-orange-300",
-    },
+    // {
+    //   title: t("navigation.normalAffiliate"),
+    //   href: "/normal-affiliate",
+    //   icon: UserCheck,
+    //   color: "text-orange-400 hover:text-orange-300",
+    // },
     {
       title: t("navigation.referral"),
       href: "/bg-affiliate",
@@ -155,8 +155,7 @@ export function AdminSidebar() {
       >
         <div className="flex-shrink-0">
           <div className="flex items-center gap-3 h-16 px-6 border-b border-slate-700/50">
-            <img src="/logo.png" className="h-8 w-8 rounded-lg" alt="logo" />
-            <span className="text-base font-semibold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent uppercase tracking-wide">MEMEPUMP</span>
+            <img src="https://static-www.bittworld.com/main-static/img/logo.f3383a1.svg" className="w-32 rounded-lg" alt="logo" />
           </div>
         </div>
         

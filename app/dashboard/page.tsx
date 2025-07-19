@@ -150,7 +150,7 @@ export default function AdminDashboard() {
         <p className="text-muted-foreground">{t('dashboard.overview')}</p>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {/* Wallets Card */}
         <Card className="stat-card min-h-[140px] flex flex-col justify-between">
           <div className="flex justify-between">
@@ -194,7 +194,7 @@ export default function AdminDashboard() {
         </Card>
 
         {/* Normal Affiliate Card */}
-        <Card className="stat-card min-h-[180px] flex flex-col justify-between border-emerald-500/30 bg-emerald-500/5">
+        {/* <Card className="stat-card min-h-[180px] flex flex-col justify-between border-emerald-500/30 bg-emerald-500/5">
           <div className="flex items-center gap-2 mb-2">
             <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
             <span className="text-emerald-400 font-semibold text-base">{t('dashboard.referrals.normal')}</span>
@@ -217,7 +217,7 @@ export default function AdminDashboard() {
               <span className="text-orange-300 font-bold text-sm">${dashboardStats?.referrals?.traditionalReferrals?.totalVolume ?? 0}</span>
             </div>
           </div>
-        </Card>
+        </Card> */}
 
         {/* BG Affiliate Card */}
         <Card className="stat-card min-h-[180px] flex flex-col justify-between border-blue-500/30 bg-blue-500/5">
