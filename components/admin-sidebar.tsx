@@ -50,12 +50,12 @@ export function AdminSidebar() {
       icon: LayoutDashboard,
       color: "text-blue-400 hover:text-blue-300",
     },
-    // {
-    //   title: "Users",
-    //   href: "/admin/users",
-    //   icon: Users,
-    //   color: "text-purple-400 hover:text-purple-300",
-    // },
+    {
+      title: "Users",
+      href: "/users",
+      icon: Users,
+      color: "text-purple-400 hover:text-purple-300",
+    },
     {
       title: t("navigation.listWallets"),
       href: "/list-wallets",
