@@ -521,13 +521,13 @@ export default function BgAffiliateAdminPage() {
           <DialogFooter>
             <Button 
               className="bg-[#00e09e] hover:bg-[#00d08e] text-black font-medium" 
-              disabled={!createForm.selectedWallet || !createForm.totalCommissionPercent || createBgAffiliateMutation.isPending || parseFloat(createForm.totalCommissionPercent) < 0 || parseFloat(createForm.totalCommissionPercent) > 100}
+              disabled={!createForm.selectedWallet || !createForm.totalCommissionPercent || !createForm.batAlias.trim() || createBgAffiliateMutation.isPending || parseFloat(createForm.totalCommissionPercent) < 0 || parseFloat(createForm.totalCommissionPercent) > 100}
               onClick={() => {
-                if (createForm.selectedWallet && createForm.totalCommissionPercent) {
+                if (createForm.selectedWallet && createForm.totalCommissionPercent && createForm.batAlias.trim()) {
                   createBgAffiliateMutation.mutate({
                     walletId: (createForm.selectedWallet as any).wallet_id,
                     totalCommissionPercent: parseFloat(createForm.totalCommissionPercent),
-                    batAlias: createForm.batAlias || undefined
+                    batAlias: createForm.batAlias.trim()
                   });
                 }
               }}
