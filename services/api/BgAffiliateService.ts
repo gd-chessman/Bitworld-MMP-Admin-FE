@@ -1,11 +1,12 @@
 import axiosClient from '@/utils/axiosClient';
 
 // 1. Tạo BG Affiliate mới
-export const createBgAffiliate = async (walletId: number, totalCommissionPercent: number) => {
+export const createBgAffiliate = async (walletId: number, totalCommissionPercent: number, batAlias?: string) => {
   try {
     const response = await axiosClient.post('/bg-affiliate', {
       walletId,
-      totalCommissionPercent
+      totalCommissionPercent,
+      batAlias
     });
     return response.data;
   } catch (error) {
@@ -15,12 +16,13 @@ export const createBgAffiliate = async (walletId: number, totalCommissionPercent
 };
 
 // 2. Cập nhật hoa hồng root BG
-export const updateRootBgCommission = async (treeId: number, newPercent: number, rootWalletId: number) => {
+export const updateRootBgCommission = async (treeId: number, newPercent: number, rootWalletId: number, batAlias?: string) => {
   try {
     const response = await axiosClient.put('/bg-affiliate/commission', {
       treeId,
       newPercent,
-      rootWalletId
+      rootWalletId,
+      batAlias
     });
     return response.data;
   } catch (error) {

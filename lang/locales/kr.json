@@ -135,7 +135,8 @@
             "waName": "사용자 이름",
             "isBittworld": "Bittworld",
             "yes": "예",
-            "no": "아니오"
+            "no": "아니오",
+            "walletCodeRef": "추천 코드"
         },
         "allTypes": "전체"
     },
@@ -424,6 +425,7 @@
             "number": "#",
             "rootWallet": "루트 지갑",
             "commission": "수수료",
+            "batAlias": "추천 별칭",
             "members": "멤버",
             "created": "생성일",
             "status": "상태",
@@ -445,6 +447,9 @@
                 "commission": "수수료 (%)",
                 "commissionPlaceholder": "예: 70",
                 "commissionHelp": "0에서 100 사이의 값을 입력하세요",
+                "batAlias": "추천 별칭",
+                "batAliasPlaceholder": "추천 별칭 입력...",
+                "batAliasHelp": "이 BG 제휴 트리의 고유 식별자를 입력하세요",
                 "availableWallets": "사용 가능한 지갑",
                 "createButton": "BG 생성",
                 "creating": "생성 중...",
@@ -453,17 +458,20 @@
                 "walletExists": "지갑이 이미 제휴 트리를 가지고 있습니다"
             },
             "updateCommission": {
-                "title": "루트 BG 수수료 업데이트",
+                "title": "BG 제휴 업데이트",
                 "treeInfo": "트리 #{treeId}",
                 "rootInfo": "루트: {nickname} ({address})",
                 "currentCommission": "현재 수수료: {percent}%",
                 "newCommission": "새 수수료 (%)",
                 "newCommissionPlaceholder": "예: 60",
                 "newCommissionHelp": "0에서 100 사이의 값을 입력하세요",
-                "updateButton": "수수료 업데이트",
+                "batAlias": "추천 별칭",
+                "batAliasPlaceholder": "추천 별칭 입력...",
+                "batAliasHelp": "이 BG 제휴 트리의 고유 식별자를 입력하세요",
+                "updateButton": "업데이트",
                 "updating": "업데이트 중...",
-                "success": "수수료가 성공적으로 업데이트되었습니다!",
-                "error": "수수료 업데이트에 실패했습니다. 다시 시도해 주세요."
+                "success": "BG 제휴가 성공적으로 업데이트되었습니다!",
+                "error": "BG 제휴 업데이트에 실패했습니다. 다시 시도해 주세요."
             }
         },
         "detail": {

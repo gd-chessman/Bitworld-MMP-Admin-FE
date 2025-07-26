@@ -117,12 +117,13 @@ export default function UserWalletsPage() {
                     <TableHead>{t('list-wallets.table.waName')}</TableHead>
                     <TableHead>{t('list-wallets.table.nickname')}</TableHead>
                     <TableHead>{t('list-wallets.table.solanaAddress')}</TableHead>
+                    <TableHead>{t('list-wallets.table.walletCodeRef')}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {isLoading ? (
                     <TableRow>
-                      <TableCell colSpan={3} className="h-24 text-center">
+                      <TableCell colSpan={4} className="h-24 text-center">
                         {t('list-wallets.table.loading')}
                       </TableCell>
                     </TableRow>
@@ -157,11 +158,16 @@ export default function UserWalletsPage() {
                             )}
                           </div>
                         </TableCell>
+                        <TableCell>
+                          <span className="text-sm text-muted-foreground">
+                            {row.wallet_code_ref || '-'}
+                          </span>
+                        </TableCell>
                       </TableRow>
                     ))
                   ) : (
                     <TableRow>
-                      <TableCell colSpan={3} className="h-24 text-center">
+                      <TableCell colSpan={4} className="h-24 text-center">
                         {t('list-wallets.table.noResults')}
                       </TableCell>
                     </TableRow>

@@ -136,7 +136,8 @@
             "waName": "User Name",
             "isBittworld": "Bittworld",
             "yes": "Yes",
-            "no": "No"
+            "no": "No",
+            "walletCodeRef": "Referral Code"
         }
     },
     "categories-token": {
@@ -424,6 +425,7 @@
             "number": "#",
             "rootWallet": "Root Wallet",
             "commission": "Commission",
+            "batAlias": "Referral Alias",
             "members": "Members",
             "created": "Created",
             "status": "Status",
@@ -445,6 +447,9 @@
                 "commission": "Commission (%)",
                 "commissionPlaceholder": "e.g., 70",
                 "commissionHelp": "Enter a value between 0 and 100",
+                "batAlias": "Referral Alias",
+                "batAliasPlaceholder": "Enter referral alias...",
+                "batAliasHelp": "Enter a unique identifier for this BG affiliate tree",
                 "availableWallets": "available wallets",
                 "createButton": "Create BG",
                 "creating": "Creating...",
@@ -453,17 +458,20 @@
                 "walletExists": "The wallet already has an affiliate tree"
             },
             "updateCommission": {
-                "title": "Update Root BG Commission",
+                "title": "Update BG Affiliate",
                 "treeInfo": "Tree #{treeId}",
                 "rootInfo": "Root: {nickname} ({address})",
                 "currentCommission": "Current Commission: {percent}%",
                 "newCommission": "New Commission (%)",
                 "newCommissionPlaceholder": "e.g., 60",
                 "newCommissionHelp": "Enter a value between 0 and 100",
-                "updateButton": "Update Commission",
+                "batAlias": "Referral Alias",
+                "batAliasPlaceholder": "Enter referral alias...",
+                "batAliasHelp": "Enter a unique identifier for this BG affiliate tree",
+                "updateButton": "Update",
                 "updating": "Updating...",
-                "success": "Commission updated successfully!",
-                "error": "Failed to update commission. Please try again."
+                "success": "BG Affiliate updated successfully!",
+                "error": "Failed to update BG Affiliate. Please try again."
             }
         },
         "detail": {

@@ -135,7 +135,8 @@
             "waName": "Tên người dùng",
             "isBittworld": "Bittworld",
             "yes": "Có",
-            "no": "Không"
+            "no": "Không",
+            "walletCodeRef": "Mã giới thiệu"
         },
         "allTypes": "Tất cả"
     },
@@ -424,6 +425,7 @@
             "number": "#",
             "rootWallet": "Ví Gốc",
             "commission": "Hoa Hồng",
+            "batAlias": "Bí danh giới thiệu",
             "members": "Thành Viên",
             "created": "Tạo Lúc",
             "status": "Trạng Thái",
@@ -445,6 +447,9 @@
                 "commission": "Hoa Hồng (%)",
                 "commissionPlaceholder": "vd: 70",
                 "commissionHelp": "Nhập giá trị từ 0 đến 100",
+                "batAlias": "Bí danh giới thiệu",
+                "batAliasPlaceholder": "Nhập bí danh giới thiệu...",
+                "batAliasHelp": "Nhập định danh duy nhất cho cây BG affiliate này",
                 "availableWallets": "ví có sẵn",
                 "createButton": "Tạo BG",
                 "creating": "Đang tạo...",
@@ -453,17 +458,20 @@
                 "walletExists": "Ví đã có cây giới thiệu"
             },
             "updateCommission": {
-                "title": "Cập Nhật Hoa Hồng Root BG",
+                "title": "Cập Nhật BG Affiliate",
                 "treeInfo": "Cây #{treeId}",
                 "rootInfo": "Gốc: {nickname} ({address})",
                 "currentCommission": "Hoa Hồng Hiện Tại: {percent}%",
                 "newCommission": "Hoa Hồng Mới (%)",
                 "newCommissionPlaceholder": "vd: 60",
                 "newCommissionHelp": "Nhập giá trị từ 0 đến 100",
-                "updateButton": "Cập Nhật Hoa Hồng",
+                "batAlias": "Bí danh giới thiệu",
+                "batAliasPlaceholder": "Nhập bí danh giới thiệu...",
+                "batAliasHelp": "Nhập định danh duy nhất cho cây BG affiliate này",
+                "updateButton": "Cập Nhật",
                 "updating": "Đang cập nhật...",
-                "success": "Cập nhật hoa hồng thành công!",
-                "error": "Cập nhật hoa hồng thất bại. Vui lòng thử lại."
+                "success": "Cập nhật BG Affiliate thành công!",
+                "error": "Cập nhật BG Affiliate thất bại. Vui lòng thử lại."
             }
         },
         "detail": {

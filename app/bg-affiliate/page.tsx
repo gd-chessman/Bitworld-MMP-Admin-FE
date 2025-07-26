@@ -38,11 +38,13 @@ export default function BgAffiliateAdminPage() {
   // Form states
   const [createForm, setCreateForm] = useState({ 
     selectedWallet: null, 
-    totalCommissionPercent: "" 
+    totalCommissionPercent: "",
+    batAlias: ""
   });
 
   const [updateCommissionForm, setUpdateCommissionForm] = useState({
-    newPercent: ""
+    newPercent: "",
+    batAlias: ""
   });
 
   // Fetch BG Affiliate trees
@@ -69,13 +71,13 @@ export default function BgAffiliateAdminPage() {
 
   // Create BG Affiliate mutation
   const createBgAffiliateMutation = useMutation({
-    mutationFn: ({ walletId, totalCommissionPercent }: { walletId: number, totalCommissionPercent: number }) =>
-      createBgAffiliate(walletId, totalCommissionPercent),
+    mutationFn: ({ walletId, totalCommissionPercent, batAlias }: { walletId: number, totalCommissionPercent: number, batAlias?: string }) =>
+      createBgAffiliate(walletId, totalCommissionPercent, batAlias),
     onSuccess: (data) => {
       console.log('BG Affiliate created successfully:', data);
       // Close dialog and reset form
       setShowCreate(false);
-      setCreateForm({ selectedWallet: null, totalCommissionPercent: "" });
+      setCreateForm({ selectedWallet: null, totalCommissionPercent: "", batAlias: "" });
       // Invalidate and refetch trees list
       queryClient.invalidateQueries({ queryKey: ['bg-affiliate-trees'] });
       // Show success toast
@@ -95,14 +97,14 @@ export default function BgAffiliateAdminPage() {
 
   // Update Root BG Commission mutation
   const updateCommissionMutation = useMutation({
-    mutationFn: ({ treeId, newPercent, rootWalletId }: { treeId: number, newPercent: number, rootWalletId: number }) =>
-      updateRootBgCommission(treeId, newPercent, rootWalletId),
+    mutationFn: ({ treeId, newPercent, rootWalletId, batAlias }: { treeId: number, newPercent: number, rootWalletId: number, batAlias?: string }) =>
+      updateRootBgCommission(treeId, newPercent, rootWalletId, batAlias),
     onSuccess: (data) => {
       console.log('Commission updated successfully:', data);
       // Close dialog and reset form
       setShowUpdateCommission(false);
       setSelectedTree(null);
-      setUpdateCommissionForm({ newPercent: "" });
+      setUpdateCommissionForm({ newPercent: "", batAlias: "" });
       // Invalidate and refetch trees list
       queryClient.invalidateQueries({ queryKey: ['bg-affiliate-trees'] });
       // Show success toast
@@ -154,7 +156,10 @@ export default function BgAffiliateAdminPage() {
 
   const handleUpdateCommission = (tree: any) => {
     setSelectedTree(tree);
-    setUpdateCommissionForm({ newPercent: Number(tree.totalCommissionPercent).toString() });
+    setUpdateCommissionForm({ 
+      newPercent: Number(tree.totalCommissionPercent).toString(),
+      batAlias: tree.batAlias || ""
+    });
     setShowUpdateCommission(true);
   };
 
@@ -323,6 +328,7 @@ export default function BgAffiliateAdminPage() {
                 <TableHeader>
                   <TableRow>
                     <TableHead className="font-semibold text-foreground">{t('bg-affiliate.table.number')}</TableHead>
+                    <TableHead className="font-semibold text-foreground">{t('bg-affiliate.table.batAlias')}</TableHead>
                     <TableHead className="font-semibold text-foreground">{t('bg-affiliate.table.rootWallet')}</TableHead>
                     <TableHead className="font-semibold text-foreground">{t('bg-affiliate.table.commission')}</TableHead>
                     <TableHead className="font-semibold text-foreground">{t('bg-affiliate.table.members')}</TableHead>
@@ -334,7 +340,7 @@ export default function BgAffiliateAdminPage() {
                 <TableBody>
                   {filteredTrees.length === 0 ? (
                     <TableRow>
-                    <TableCell colSpan={7} className="text-center py-8 text-muted-foreground">
+                    <TableCell colSpan={8} className="text-center py-8 text-muted-foreground">
                       {t('bg-affiliate.table.noTrees')}
                     </TableCell>
                   </TableRow>
@@ -342,6 +348,11 @@ export default function BgAffiliateAdminPage() {
                     filteredTrees.map((tree: any, index: number) => (
                       <TableRow key={tree.treeId} className="hover:bg-muted/50">
                         <TableCell className="font-medium text-cyan-400">{index + 1}</TableCell>
+                        <TableCell>
+                          <span className="text-sm text-muted-foreground">
+                            {tree.batAlias || '-'}
+                          </span>
+                        </TableCell>
                         <TableCell>
                           <div>
                             <p className="font-medium">{tree.rootWallet?.nickName || 'Unknown'}</p>
@@ -493,6 +504,19 @@ export default function BgAffiliateAdminPage() {
                 {t('bg-affiliate.dialogs.create.commissionHelp')}
               </p>
             </div>
+            <div>
+              <label className="block text-sm font-medium mb-2">{t('bg-affiliate.dialogs.create.batAlias')}</label>
+              <Input 
+                type="text" 
+                placeholder={t('bg-affiliate.dialogs.create.batAliasPlaceholder')} 
+                value={createForm.batAlias} 
+                onChange={e => setCreateForm(f => ({ ...f, batAlias: e.target.value }))} 
+                disabled={createBgAffiliateMutation.isPending}
+              />
+              <p className="text-xs text-muted-foreground mt-1">
+                {t('bg-affiliate.dialogs.create.batAliasHelp')}
+              </p>
+            </div>
           </div>
           <DialogFooter>
             <Button 
@@ -502,7 +526,8 @@ export default function BgAffiliateAdminPage() {
                 if (createForm.selectedWallet && createForm.totalCommissionPercent) {
                   createBgAffiliateMutation.mutate({
                     walletId: (createForm.selectedWallet as any).wallet_id,
-                    totalCommissionPercent: parseFloat(createForm.totalCommissionPercent)
+                    totalCommissionPercent: parseFloat(createForm.totalCommissionPercent),
+                    batAlias: createForm.batAlias || undefined
                   });
                 }
               }}
@@ -551,6 +576,19 @@ export default function BgAffiliateAdminPage() {
                 {t('bg-affiliate.dialogs.updateCommission.newCommissionHelp')}
               </p>
             </div>
+            <div>
+              <label className="block text-sm font-medium mb-2">{t('bg-affiliate.dialogs.updateCommission.batAlias')}</label>
+              <Input 
+                type="text" 
+                placeholder={t('bg-affiliate.dialogs.updateCommission.batAliasPlaceholder')} 
+                value={updateCommissionForm.batAlias} 
+                onChange={e => setUpdateCommissionForm(f => ({ ...f, batAlias: e.target.value }))} 
+                disabled={updateCommissionMutation.isPending}
+              />
+              <p className="text-xs text-muted-foreground mt-1">
+                {t('bg-affiliate.dialogs.updateCommission.batAliasHelp')}
+              </p>
+            </div>
           </div>
           <DialogFooter>
             <Button 
@@ -568,7 +606,8 @@ export default function BgAffiliateAdminPage() {
                   updateCommissionMutation.mutate({
                     treeId: selectedTree.treeId,
                     newPercent: parseFloat(updateCommissionForm.newPercent),
-                    rootWalletId: selectedTree.rootWallet.walletId
+                    rootWalletId: selectedTree.rootWallet.walletId,
+                    batAlias: updateCommissionForm.batAlias || undefined
                   });
                 }
               }}

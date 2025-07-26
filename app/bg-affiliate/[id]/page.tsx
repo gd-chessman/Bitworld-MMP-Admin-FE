@@ -327,12 +327,20 @@ export default function BgAffiliateTreeDetailPage() {
                 )}
               </button>
             </span>
+            {treeData.treeInfo.batAlias && (
+              <>
+                &bull; &nbsp;
+                <span className="text-blue-400 font-medium">
+                  {t('bg-affiliate.table.batAlias')}: {treeData.treeInfo.batAlias}
+                </span>
+              </>
+            )}
           </p>
         </div>
       </div>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <Card className="dashboard-card">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
@@ -356,6 +364,20 @@ export default function BgAffiliateTreeDetailPage() {
               </div>
               <div className="h-8 w-8 rounded-lg bg-purple-500/10 flex items-center justify-center">
                 <Users className="h-4 w-4 text-purple-400" />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="dashboard-card">
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-black dark:text-white font-semibold text-sm">{t('bg-affiliate.table.batAlias')}</p>
+                <p className="text-2xl font-bold text-blue-400">{treeData.treeInfo.batAlias || '-'}</p>
+              </div>
+              <div className="h-8 w-8 rounded-lg bg-blue-500/10 flex items-center justify-center">
+                <Crown className="h-4 w-4 text-blue-400" />
               </div>
             </div>
           </CardContent>
