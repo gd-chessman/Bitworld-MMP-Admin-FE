@@ -43,6 +43,12 @@ interface NavItem {
 export function AdminSidebar() {
   const { t } = useLang()
   
+  const { data: myInfor} = useQuery({
+    queryKey: ["my-infor"],
+    queryFn: getMyInfor,
+    refetchOnMount: true,
+  });
+
   const navItems: NavItem[] = [
     {
       title: t("navigation.dashboard"),
@@ -50,12 +56,12 @@ export function AdminSidebar() {
       icon: LayoutDashboard,
       color: "text-blue-400 hover:text-blue-300",
     },
-    {
+    ...(myInfor?.role !== "partner" ? [{
       title: t("navigation.users"),
       href: "/users",
       icon: Users,
       color: "text-purple-400 hover:text-purple-300",
-    },
+    }] : []),
     {
       title: t("navigation.listWallets"),
       href: "/list-wallets",
@@ -99,12 +105,6 @@ export function AdminSidebar() {
       color: "text-slate-400 hover:text-slate-300",
     },
   ]
-
-  const { data: myInfor} = useQuery({
-    queryKey: ["my-infor"],
-    queryFn: getMyInfor,
-    refetchOnMount: true,
-  });
   const { data: setting, isLoading } = useQuery({
     queryKey: ["setting"],
     queryFn: getSetting,

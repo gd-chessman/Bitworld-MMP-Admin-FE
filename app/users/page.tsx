@@ -20,7 +20,7 @@ import {
 } from "lucide-react"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
-import { createUser, getUsers, getUserStats, deleteUser } from "@/services/api/UserAdminService"
+import { createUser, getUsers, getUserStats, deleteUser, getMyInfor } from "@/services/api/UserAdminService"
 import { toast } from "sonner"
 import { useLang } from "@/lang/useLang"
 
@@ -96,6 +96,12 @@ export default function UsersPage() {
     }
   })
 
+  // Lấy thông tin user hiện tại
+  const { data: currentUser } = useQuery({
+    queryKey: ["current-user"],
+    queryFn: getMyInfor
+  });
+
   // Lấy dữ liệu thống kê user
   const { data: stats, isLoading: statsLoading, isError: statsError } = useQuery({
     queryKey: ["user-stats"],
@@ -124,6 +130,11 @@ export default function UsersPage() {
       default:
         return <Badge variant="outline">{role}</Badge>;
     }
+  }
+
+  // Nếu user có role partner thì không hiển thị gì
+  if (currentUser?.role === "partner") {
+    return null;
   }
 
   return (
@@ -310,17 +321,17 @@ export default function UsersPage() {
                   <TableHead>{t('users.table.email')}</TableHead>
                   <TableHead>{t('users.table.role')}</TableHead>
                   <TableHead>{t('users.table.createdAt')}</TableHead>
-                  <TableHead>{t('users.table.actions')}</TableHead>
+                  {currentUser?.role === "admin" && <TableHead>{t('users.table.actions')}</TableHead>}
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {isLoading ? (
                   <TableRow>
-                    <TableCell colSpan={6} className="h-24 text-center">{t('users.table.loading')}</TableCell>
+                    <TableCell colSpan={currentUser?.role === "admin" ? 6 : 5} className="h-24 text-center">{t('users.table.loading')}</TableCell>
                   </TableRow>
                 ) : filteredUsers.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan={6} className="h-24 text-center">{t('users.table.noUsersFound')}</TableCell>
+                    <TableCell colSpan={currentUser?.role === "admin" ? 6 : 5} className="h-24 text-center">{t('users.table.noUsersFound')}</TableCell>
                   </TableRow>
                 ) : (
                   filteredUsers.map((user: any, idx: number) => (
@@ -332,20 +343,22 @@ export default function UsersPage() {
                       <TableCell className="text-muted-foreground">{user.email}</TableCell>
                       <TableCell>{getRoleBadge(user.role)}</TableCell>
                       <TableCell className="text-muted-foreground">{user.createdAt ? new Date(user.createdAt).toLocaleString() : ""}</TableCell>
-                      <TableCell>
-                        {user.role !== "admin" && (
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="h-8 w-8 p-0 text-destructive"
-                            disabled={deletingId === user.id}
-                            onClick={() => setConfirmDeleteId(user.id)}
-                            title={t('users.deleteUser.title')}
-                          >
-                            <Trash className="h-5 w-5" />
-                          </Button>
-                        )}
-                      </TableCell>
+                      {currentUser?.role === "admin" && (
+                        <TableCell>
+                          {user.role !== "admin" && (
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="h-8 w-8 p-0 text-destructive"
+                              disabled={deletingId === user.id}
+                              onClick={() => setConfirmDeleteId(user.id)}
+                              title={t('users.deleteUser.title')}
+                            >
+                              <Trash className="h-5 w-5" />
+                            </Button>
+                          )}
+                        </TableCell>
+                      )}
                     </TableRow>
                   ))
                 )}
