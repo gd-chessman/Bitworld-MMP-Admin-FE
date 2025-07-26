@@ -600,14 +600,14 @@ export default function BgAffiliateAdminPage() {
             </Button>
             <Button 
               className="bg-[#00e09e] hover:bg-[#00d08e] text-black font-medium" 
-              disabled={!updateCommissionForm.newPercent || updateCommissionMutation.isPending || parseFloat(updateCommissionForm.newPercent) < 0 || parseFloat(updateCommissionForm.newPercent) > 100}
+              disabled={!updateCommissionForm.newPercent || !updateCommissionForm.batAlias.trim() || updateCommissionMutation.isPending || parseFloat(updateCommissionForm.newPercent) < 0 || parseFloat(updateCommissionForm.newPercent) > 100}
               onClick={() => {
-                if (selectedTree && updateCommissionForm.newPercent) {
+                if (selectedTree && updateCommissionForm.newPercent && updateCommissionForm.batAlias.trim()) {
                   updateCommissionMutation.mutate({
                     treeId: selectedTree.treeId,
                     newPercent: parseFloat(updateCommissionForm.newPercent),
                     rootWalletId: selectedTree.rootWallet.walletId,
-                    batAlias: updateCommissionForm.batAlias || undefined
+                    batAlias: updateCommissionForm.batAlias.trim()
                   });
                 }
               }}
