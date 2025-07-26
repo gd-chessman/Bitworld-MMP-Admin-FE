@@ -66,7 +66,8 @@ export default function UsersPage() {
       const res = await createUser(form)
       toast.success("User created successfully!")
       setOpenDialog(false)
-      setForm({ username: "", password: "", email: "", role: "partner" })
+      setForm({ username: "", password: "", email: "", role: "member" })
+      refetch()
     } catch (err) {
       toast.error("Failed to create user!")
     } finally {
