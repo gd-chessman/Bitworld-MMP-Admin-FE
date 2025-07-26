@@ -37,7 +37,7 @@ export default function UsersPage() {
     username: "",
     password: "",
     email: "",
-    role: "partner"
+    role: "member"
   })
   const [formError, setFormError] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
