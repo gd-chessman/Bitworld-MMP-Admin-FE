@@ -549,5 +549,80 @@
             "refCodeCopied": "Đã sao chép mã giới thiệu vào clipboard",
             "copyFailed": "Sao chép thất bại"
         }
+    },
+    "users": {
+        "title": "Quản Lý Người Dùng",
+        "description": "Quản lý người dùng hệ thống và vai trò của họ",
+        "cardTitle": "Tổng Quan Người Dùng",
+        "cardDescription": "Xem và quản lý tất cả người dùng hệ thống",
+        "searchPlaceholder": "Tìm kiếm người dùng...",
+        "stats": {
+            "totalUsers": "Tổng Số Người Dùng",
+            "activeUsers": "Người Dùng Hoạt Động",
+            "newToday": "Mới Hôm Nay",
+            "newThisWeek": "Mới Tuần Này"
+        },
+        "table": {
+            "username": "Tên Đăng Nhập",
+            "email": "Email",
+            "role": "Vai Trò",
+            "status": "Trạng Thái",
+            "createdAt": "Ngày Tạo",
+            "actions": "Thao Tác",
+            "noUsersFound": "Không tìm thấy người dùng nào",
+            "noUsersMatchingSearch": "Không tìm thấy người dùng nào phù hợp với tìm kiếm",
+            "loading": "Đang tải dữ liệu người dùng...",
+            "error": "Lỗi tải dữ liệu người dùng"
+        },
+        "roles": {
+            "admin": "Quản Trị Viên",
+            "member": "Thành Viên",
+            "partner": "Đối Tác"
+        },
+        "status": {
+            "active": "Hoạt Động",
+            "inactive": "Không Hoạt Động"
+        },
+        "addUser": {
+            "title": "Thêm Người Dùng Mới",
+            "username": "Tên Đăng Nhập",
+            "usernamePlaceholder": "Nhập tên đăng nhập",
+            "password": "Mật Khẩu",
+            "passwordPlaceholder": "Nhập mật khẩu (tối thiểu 6 ký tự)",
+            "email": "Email",
+            "emailPlaceholder": "Nhập địa chỉ email",
+            "role": "Vai Trò",
+            "rolePlaceholder": "Chọn vai trò",
+            "addButton": "Thêm Người Dùng",
+            "adding": "Đang thêm...",
+            "success": "Thêm người dùng thành công!",
+            "error": "Không thể thêm người dùng. Vui lòng thử lại.",
+            "cancel": "Hủy",
+            "validation": {
+                "usernameRequired": "Tên đăng nhập là bắt buộc",
+                "passwordRequired": "Mật khẩu là bắt buộc",
+                "passwordMinLength": "Mật khẩu phải có ít nhất 6 ký tự",
+                "emailRequired": "Email là bắt buộc",
+                "emailInvalid": "Vui lòng nhập địa chỉ email hợp lệ",
+                "roleRequired": "Vai trò là bắt buộc"
+            }
+        },
+        "deleteUser": {
+            "title": "Xóa Người Dùng",
+            "description": "Bạn có chắc chắn muốn xóa người dùng này? Hành động này không thể hoàn tác.",
+            "deleteButton": "Xóa Người Dùng",
+            "deleting": "Đang xóa...",
+            "success": "Xóa người dùng thành công!",
+            "error": "Không thể xóa người dùng. Vui lòng thử lại.",
+            "cancel": "Hủy"
+        },
+        "pagination": {
+            "showing": "Hiển thị",
+            "to": "đến",
+            "of": "trong tổng số",
+            "entries": "mục",
+            "previous": "Trước",
+            "next": "Tiếp"
+        }
     }
 }

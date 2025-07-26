@@ -1,45 +1,33 @@
 "use client"
 
-import { useState, useRef } from "react"
-import { useQuery } from "@tanstack/react-query"
+import { useState, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Dialog as ConfirmDialog, DialogContent as ConfirmDialogContent, DialogHeader as ConfirmDialogHeader, DialogTitle as ConfirmDialogTitle, DialogFooter as ConfirmDialogFooter } from "@/components/ui/dialog"
 import { 
-  DropdownMenu, 
-  DropdownMenuContent, 
-  DropdownMenuItem, 
-  DropdownMenuLabel, 
-  DropdownMenuSeparator, 
-  DropdownMenuTrigger 
-} from "@/components/ui/dropdown-menu"
-import { 
-  Search, 
-  Filter, 
-  MoreHorizontal, 
-  Pencil, 
+  Users, 
+  UserPlus, 
   Trash, 
-  Eye, 
-  UserPlus,
+  Search, 
   ChevronLeft,
-  ChevronRight,
-  Users,
   Shield,
   Clock,
   Mail
 } from "lucide-react"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogTrigger } from "@/components/ui/dialog"
-import { Dialog as ConfirmDialog, DialogContent as ConfirmDialogContent, DialogHeader as ConfirmDialogHeader, DialogTitle as ConfirmDialogTitle, DialogFooter as ConfirmDialogFooter } from "@/components/ui/dialog"
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 import { createUser, getUsers, getUserStats, deleteUser } from "@/services/api/UserAdminService"
 import { toast } from "sonner"
+import { useLang } from "@/lang/useLang"
 
 
 
 export default function UsersPage() {
+  const { t } = useLang()
   const [searchTerm, setSearchTerm] = useState("")
   const [roleFilter, setRoleFilter] = useState<string>("all")
   const [currentPage, setCurrentPage] = useState(1)
@@ -141,8 +129,8 @@ export default function UsersPage() {
     <div className="flex flex-col space-y-6">
       {/* Header */}
       <div className="flex flex-col space-y-2">
-        <h2 className="text-3xl font-bold tracking-tight text-black dark:text-white">Users Management</h2>
-        <p className="text-muted-foreground">Manage your system users, roles and permissions.</p>
+        <h2 className="text-3xl font-bold tracking-tight text-black dark:text-white">{t('users.title')}</h2>
+        <p className="text-muted-foreground">{t('users.description')}</p>
       </div>
 
       {/* Stats Cards */}
@@ -151,7 +139,7 @@ export default function UsersPage() {
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-muted-foreground">Total Users</p>
+                <p className="text-sm font-medium text-muted-foreground">{t('users.stats.totalUsers')}</p>
                 <p className="text-2xl font-bold text-black dark:text-white">
                   {statsLoading ? '...' : stats?.total ?? '--'}
                 </p>
@@ -164,7 +152,7 @@ export default function UsersPage() {
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-muted-foreground">Admin</p>
+                <p className="text-sm font-medium text-muted-foreground">{t('users.roles.admin')}</p>
                 <p className="text-2xl font-bold text-amber-600 dark:text-amber-400">
                   {statsLoading ? '...' : stats?.byRole?.admin ?? '--'}
                 </p>
@@ -177,7 +165,7 @@ export default function UsersPage() {
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-muted-foreground">Member</p>
+                <p className="text-sm font-medium text-muted-foreground">{t('users.roles.member')}</p>
                 <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">
                   {statsLoading ? '...' : stats?.byRole?.member ?? '--'}
                 </p>
@@ -190,7 +178,7 @@ export default function UsersPage() {
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-muted-foreground">Partner</p>
+                <p className="text-sm font-medium text-muted-foreground">{t('users.roles.partner')}</p>
                 <p className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">
                   {statsLoading ? '...' : stats?.byRole?.partner ?? '--'}
                 </p>
@@ -203,7 +191,7 @@ export default function UsersPage() {
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-muted-foreground">Created Last 7 Days</p>
+                <p className="text-sm font-medium text-muted-foreground">{t('users.stats.newThisWeek')}</p>
                 <p className="text-2xl font-bold text-black dark:text-white">
                   {statsLoading ? '...' : stats?.createdLast7Days ?? '--'}
                 </p>
@@ -219,64 +207,64 @@ export default function UsersPage() {
         <CardHeader className="pb-4">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <CardTitle className="text-black dark:text-white font-bold">All Users</CardTitle>
-              <CardDescription>A list of all users in your system.</CardDescription>
+              <CardTitle className="text-black dark:text-white font-bold">{t('users.cardTitle')}</CardTitle>
+              <CardDescription>{t('users.cardDescription')}</CardDescription>
             </div>
             <Dialog open={openDialog} onOpenChange={setOpenDialog}>
               <DialogTrigger asChild>
                 <Button className="bg-[#00e09e] hover:bg-[#00d08e] text-black font-medium">
                   <UserPlus className="mr-2 h-4 w-4" />
-                  Add User
+                  {t('users.addUser.addButton')}
                 </Button>
               </DialogTrigger>
               <DialogContent className="max-w-md">
                 <DialogHeader>
-                  <DialogTitle>Add New User</DialogTitle>
+                  <DialogTitle>{t('users.addUser.title')}</DialogTitle>
                 </DialogHeader>
                 <form onSubmit={handleFormSubmit} className="space-y-4">
                   <div className="space-y-2">
-                    <label className="block text-sm font-medium text-foreground">Username</label>
+                    <label className="block text-sm font-medium text-foreground">{t('users.addUser.username')}</label>
                     <Input
                       value={form.username}
                       onChange={e => handleFormChange("username", e.target.value)}
-                      placeholder="Enter username"
+                      placeholder={t('users.addUser.usernamePlaceholder')}
                       autoFocus
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="block text-sm font-medium text-foreground">Password</label>
+                    <label className="block text-sm font-medium text-foreground">{t('users.addUser.password')}</label>
                     <Input
                       type="password"
                       value={form.password}
                       onChange={e => handleFormChange("password", e.target.value)}
-                      placeholder="Enter password"
+                      placeholder={t('users.addUser.passwordPlaceholder')}
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="block text-sm font-medium text-foreground">Email</label>
+                    <label className="block text-sm font-medium text-foreground">{t('users.addUser.email')}</label>
                     <Input
                       type="email"
                       value={form.email}
                       onChange={e => handleFormChange("email", e.target.value)}
-                      placeholder="Enter email"
+                      placeholder={t('users.addUser.emailPlaceholder')}
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="block text-sm font-medium text-foreground">Role</label>
+                    <label className="block text-sm font-medium text-foreground">{t('users.addUser.role')}</label>
                     <Select value={form.role} onValueChange={v => handleFormChange("role", v)}>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select role" />
+                        <SelectValue placeholder={t('users.addUser.rolePlaceholder')} />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="member">Member</SelectItem>
-                        <SelectItem value="partner">Partner</SelectItem>
+                        <SelectItem value="member">{t('users.roles.member')}</SelectItem>
+                        <SelectItem value="partner">{t('users.roles.partner')}</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                   {formError && <div className="text-red-500 text-sm">{formError}</div>}
                   <DialogFooter>
                     <Button type="submit" className="w-full bg-[#00e09e] hover:bg-[#00d08e] text-black font-medium" disabled={isSubmitting}>
-                      {isSubmitting ? "Creating..." : "Create User"}
+                      {isSubmitting ? t('users.addUser.adding') : t('users.addUser.addButton')}
                     </Button>
                   </DialogFooter>
                 </form>
@@ -291,7 +279,7 @@ export default function UsersPage() {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input 
                 type="search" 
-                placeholder="Search users by name or email..." 
+                placeholder={t('users.searchPlaceholder')} 
                 className="pl-10 w-full"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -300,13 +288,13 @@ export default function UsersPage() {
             <Select value={roleFilter} onValueChange={setRoleFilter}>
               <SelectTrigger className="w-[140px]">
                 <Shield className="mr-2 h-4 w-4" />
-                <SelectValue placeholder="Role" />
+                <SelectValue placeholder={t('users.table.role')} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All Roles</SelectItem>
-                <SelectItem value="admin">Admin</SelectItem>
-                <SelectItem value="member">Member</SelectItem>
-                <SelectItem value="partner">Partner</SelectItem>
+                <SelectItem value="all">{t('users.table.role')}</SelectItem>
+                <SelectItem value="admin">{t('users.roles.admin')}</SelectItem>
+                <SelectItem value="member">{t('users.roles.member')}</SelectItem>
+                <SelectItem value="partner">{t('users.roles.partner')}</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -317,21 +305,21 @@ export default function UsersPage() {
               <TableHeader className="sticky top-0 bg-background z-20 border-b">
                 <TableRow>
                   <TableHead className="w-12">#</TableHead>
-                  <TableHead>Username</TableHead>
-                  <TableHead>Email</TableHead>
-                  <TableHead>Role</TableHead>
-                  <TableHead>Created At</TableHead>
-                  <TableHead>Actions</TableHead>
+                  <TableHead>{t('users.table.username')}</TableHead>
+                  <TableHead>{t('users.table.email')}</TableHead>
+                  <TableHead>{t('users.table.role')}</TableHead>
+                  <TableHead>{t('users.table.createdAt')}</TableHead>
+                  <TableHead>{t('users.table.actions')}</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {isLoading ? (
                   <TableRow>
-                    <TableCell colSpan={6} className="h-24 text-center">Loading...</TableCell>
+                    <TableCell colSpan={6} className="h-24 text-center">{t('users.table.loading')}</TableCell>
                   </TableRow>
                 ) : filteredUsers.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan={6} className="h-24 text-center">No users found.</TableCell>
+                    <TableCell colSpan={6} className="h-24 text-center">{t('users.table.noUsersFound')}</TableCell>
                   </TableRow>
                 ) : (
                   filteredUsers.map((user: any, idx: number) => (
@@ -351,7 +339,7 @@ export default function UsersPage() {
                             className="h-8 w-8 p-0 text-destructive"
                             disabled={deletingId === user.id}
                             onClick={() => setConfirmDeleteId(user.id)}
-                            title="Delete User"
+                            title={t('users.deleteUser.title')}
                           >
                             <Trash className="h-5 w-5" />
                           </Button>
@@ -395,11 +383,11 @@ export default function UsersPage() {
       <ConfirmDialog open={!!confirmDeleteId} onOpenChange={open => { if (!open) setConfirmDeleteId(null); }}>
         <ConfirmDialogContent>
           <ConfirmDialogHeader>
-            <ConfirmDialogTitle>Bạn có chắc chắn muốn xoá user này không?</ConfirmDialogTitle>
+            <ConfirmDialogTitle>{t('users.deleteUser.title')}</ConfirmDialogTitle>
           </ConfirmDialogHeader>
-          <div className="py-2 text-muted-foreground">Hành động này không thể hoàn tác.</div>
+          <div className="py-2 text-muted-foreground">{t('users.deleteUser.description')}</div>
           <ConfirmDialogFooter>
-            <Button variant="outline" onClick={() => setConfirmDeleteId(null)} disabled={!!deletingId}>Huỷ</Button>
+            <Button variant="outline" onClick={() => setConfirmDeleteId(null)} disabled={!!deletingId}>{t('users.deleteUser.cancel')}</Button>
             <Button 
               variant="destructive" 
               onClick={async () => {
@@ -407,18 +395,18 @@ export default function UsersPage() {
                 setDeletingId(confirmDeleteId);
                 try {
                   await deleteUser(confirmDeleteId);
-                  toast.success("User deleted successfully!");
+                  toast.success(t('users.deleteUser.success'));
                   setConfirmDeleteId(null);
                   refetch();
                 } catch (err) {
-                  toast.error("Failed to delete user!");
+                  toast.error(t('users.deleteUser.error'));
                 } finally {
                   setDeletingId(null);
                 }
               }}
               disabled={!!deletingId}
             >
-              {deletingId ? "Đang xoá..." : "Xoá"}
+              {deletingId ? t('users.deleteUser.deleting') : t('users.deleteUser.deleteButton')}
             </Button>
           </ConfirmDialogFooter>
         </ConfirmDialogContent>
