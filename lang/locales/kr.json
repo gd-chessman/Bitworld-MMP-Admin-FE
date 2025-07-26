@@ -311,6 +311,7 @@
     },
     "navigation": {
         "dashboard": "대시보드",
+        "users": "관리",
         "listWallets": "지갑 목록",
         "categoriesToken": "토큰 분류",
         "analytics": "분석",

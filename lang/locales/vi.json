@@ -311,6 +311,7 @@
     },
     "navigation": {
         "dashboard": "Bảng Điều Khiển",
+        "users": "Quản trị",
         "listWallets": "Danh Sách Ví",
         "categoriesToken": "Danh Mục Token",
         "analytics": "Phân Tích",

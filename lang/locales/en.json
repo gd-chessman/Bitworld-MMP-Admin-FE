@@ -313,6 +313,7 @@
     },
     "navigation": {
         "dashboard": "Dashboard",
+        "users": "Administration",
         "listWallets": "List Wallets",
         "categoriesToken": "Categories Token",
         "analytics": "Analytics",

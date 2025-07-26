@@ -115,11 +115,11 @@ export default function UsersPage() {
   const getRoleBadge = (role: string) => {
     switch (role) {
       case "admin":
-        return <Badge className="bg-amber-500 hover:bg-amber-600 text-white">Admin</Badge>;
+        return <Badge className="bg-amber-500 hover:bg-amber-600 text-white">{t('users.roles.admin')}</Badge>;
       case "member":
-        return <Badge className="bg-blue-500 hover:bg-blue-600 text-white">Member</Badge>;
+        return <Badge className="bg-blue-500 hover:bg-blue-600 text-white">{t('users.roles.member')}</Badge>;
       case "partner":
-        return <Badge className="bg-emerald-500 hover:bg-emerald-600 text-white">Partner</Badge>;
+        return <Badge className="bg-emerald-500 hover:bg-emerald-600 text-white">{t('users.roles.partner')}</Badge>;
       default:
         return <Badge variant="outline">{role}</Badge>;
     }

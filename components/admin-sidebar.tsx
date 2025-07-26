@@ -51,7 +51,7 @@ export function AdminSidebar() {
       color: "text-blue-400 hover:text-blue-300",
     },
     {
-      title: "Users",
+      title: t("navigation.users"),
       href: "/users",
       icon: Users,
       color: "text-purple-400 hover:text-purple-300",
