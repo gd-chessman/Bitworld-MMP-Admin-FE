@@ -132,7 +132,11 @@
             "inactive": "Inactive",
             "noResults": "No results.",
             "authUpdated": "Auth type updated successfully",
-            "authUpdateFailed": "Failed to update auth type"
+            "authUpdateFailed": "Failed to update auth type",
+            "waName": "User Name",
+            "isBittworld": "Bittworld",
+            "yes": "Yes",
+            "no": "No"
         }
     },
     "categories-token": {

@@ -17,6 +17,7 @@ import { truncateString } from "@/utils/format"
 import { toast } from "react-toastify"
 import { Fragment } from "react"
 import { ChevronLeft, Copy, Check } from "lucide-react"
+import Image from "next/image"
 
 export default function UserWalletsPage() {
   const { t } = useLang()
@@ -113,9 +114,9 @@ export default function UserWalletsPage() {
               <Table>
                 <TableHeader className="sticky top-0 bg-background z-20 border-b">
                   <TableRow>
-                    <TableHead>{t('list-wallets.table.walletId')}</TableHead>
-                    <TableHead>{t('list-wallets.table.solanaAddress')}</TableHead>
+                    <TableHead>{t('list-wallets.table.waName')}</TableHead>
                     <TableHead>{t('list-wallets.table.nickname')}</TableHead>
+                    <TableHead>{t('list-wallets.table.solanaAddress')}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -128,7 +129,8 @@ export default function UserWalletsPage() {
                   ) : listWallets?.data?.length ? (
                     listWallets.data.map((row: any) => (
                       <TableRow key={row.wallet_id}>
-                        <TableCell className="font-medium">{row.wallet_id}</TableCell>
+                        <TableCell className="font-medium">{row.wallet_auths?.[0]?.wa_name || t('list-wallets.table.na')}</TableCell>
+                        <TableCell>{row.wallet_nick_name || t('list-wallets.table.na')}</TableCell>
                         <TableCell>
                           <div className="flex items-center gap-2">
                             <span className="text-xs break-all">{truncateString(row.wallet_solana_address, 14)}</span>
@@ -144,9 +146,17 @@ export default function UserWalletsPage() {
                                 <Copy className="h-3.5 w-3.5" />
                               )}
                             </Button>
+                            {row.isBittworld && (
+                              <Image
+                                src="/favicon.png"
+                                alt="Bittworld"
+                                width={16}
+                                height={16}
+                                className="w-4 h-4 rounded"
+                              />
+                            )}
                           </div>
                         </TableCell>
-                        <TableCell>{row.wallet_nick_name || t('list-wallets.table.na')}</TableCell>
                       </TableRow>
                     ))
                   ) : (

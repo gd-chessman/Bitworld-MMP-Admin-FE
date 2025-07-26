@@ -129,7 +129,13 @@
             "status": "상태:",
             "active": "활성",
             "inactive": "비활성",
-            "noResults": "결과 없음."
+            "noResults": "결과 없음.",
+            "authUpdated": "인증 유형이 성공적으로 업데이트되었습니다",
+            "authUpdateFailed": "인증 유형 업데이트 실패",
+            "waName": "사용자 이름",
+            "isBittworld": "Bittworld",
+            "yes": "예",
+            "no": "아니오"
         },
         "allTypes": "전체"
     },

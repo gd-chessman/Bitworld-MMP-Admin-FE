@@ -129,7 +129,13 @@
             "status": "Trạng thái:",
             "active": "Hoạt động",
             "inactive": "Không hoạt động",
-            "noResults": "Không có kết quả."
+            "noResults": "Không có kết quả.",
+            "authUpdated": "Cập nhật loại xác thực thành công",
+            "authUpdateFailed": "Cập nhật loại xác thực thất bại",
+            "waName": "Tên người dùng",
+            "isBittworld": "Bittworld",
+            "yes": "Có",
+            "no": "Không"
         },
         "allTypes": "Tất cả"
     },
