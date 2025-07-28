@@ -23,6 +23,7 @@ import {
   Users2,
   Network,
   UserCheck,
+  DollarSign,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -62,6 +63,12 @@ export function AdminSidebar() {
       icon: Users,
       color: "text-purple-400 hover:text-purple-300",
     }] : []),
+    {
+      title: "Swap Investors",
+      href: "/swap-investors",
+      icon: DollarSign,
+      color: "text-green-400 hover:text-green-300",
+    },
     {
       title: t("navigation.listWallets"),
       href: "/list-wallets",
