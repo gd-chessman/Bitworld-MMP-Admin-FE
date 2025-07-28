@@ -105,6 +105,11 @@
         "cardDescription": "Xem và quản lý ví người dùng và tài khoản liên kết.",
         "refresh": "Làm mới",
         "searchPlaceholder": "Tìm kiếm theo ID Ví hoặc Biệt danh ...",
+        "filters": {
+            "allTypes": "Tất cả loại",
+            "bittworld": "Bittworld",
+            "nonBittworld": "Memepump"
+        },
         "table": {
             "walletId": "ID Ví",
             "nickname": "Biệt danh",
@@ -137,8 +142,7 @@
             "yes": "Có",
             "no": "Không",
             "walletCodeRef": "Mã giới thiệu"
-        },
-        "allTypes": "Tất cả"
+        }
     },
     "categories-token": {
         "title": "Phân loại token",

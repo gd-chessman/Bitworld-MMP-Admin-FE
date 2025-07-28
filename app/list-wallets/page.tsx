@@ -25,18 +25,19 @@ export default function UserWalletsPage() {
   const [isRefreshing, setIsRefreshing] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
   const [copiedAddress, setCopiedAddress] = useState<string | null>(null)
+  const [isBittworldFilter, setIsBittworldFilter] = useState<boolean | undefined>(undefined)
 
   const pageSize = 10
   const queryClient = useQueryClient()
 
-  // Reset to page 1 when search changes
+  // Reset to page 1 when search or filter changes
   useEffect(() => {
     setCurrentPage(1)
-  }, [searchQuery])
+  }, [searchQuery, isBittworldFilter])
 
   const { data: listWallets, refetch: refetchListWallets, isLoading } = useQuery({
-    queryKey: ["list-wallets", searchQuery, currentPage],
-    queryFn: () => getListWallets(searchQuery, currentPage, pageSize, '', 'main'),
+    queryKey: ["list-wallets", searchQuery, currentPage, isBittworldFilter],
+    queryFn: () => getListWallets(searchQuery, currentPage, pageSize, '', 'main', isBittworldFilter),
     placeholderData: (previousData) => previousData,
   })
 
@@ -107,7 +108,24 @@ export default function UserWalletsPage() {
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
-
+            <Select value={isBittworldFilter === undefined ? "all" : isBittworldFilter ? "bittworld" : "non-bittworld"} onValueChange={(value) => {
+              if (value === "all") {
+                setIsBittworldFilter(undefined)
+              } else if (value === "bittworld") {
+                setIsBittworldFilter(true)
+              } else {
+                setIsBittworldFilter(false)
+              }
+            }}>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">{t('list-wallets.filters.allTypes')}</SelectItem>
+                <SelectItem value="bittworld">{t('list-wallets.filters.bittworld')}</SelectItem>
+                <SelectItem value="non-bittworld">{t('list-wallets.filters.nonBittworld')}</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
           <div className="space-y-4">
             <div className="rounded-md border">

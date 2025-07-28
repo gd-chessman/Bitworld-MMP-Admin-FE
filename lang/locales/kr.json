@@ -105,6 +105,11 @@
         "cardDescription": "사용자 지갑과 관련 계정을 보고 관리합니다.",
         "refresh": "새로고침",
         "searchPlaceholder": "지갑 ID 또는 닉네임으로 검색 ...",
+        "filters": {
+            "allTypes": "전체 유형",
+            "bittworld": "Bittworld",
+            "nonBittworld": "Memepump"
+        },
         "table": {
             "walletId": "지갑 ID",
             "nickname": "닉네임",
@@ -137,8 +142,7 @@
             "yes": "예",
             "no": "아니오",
             "walletCodeRef": "추천 코드"
-        },
-        "allTypes": "전체"
+        }
     },
     "categories-token": {
         "title": "토큰 분류",

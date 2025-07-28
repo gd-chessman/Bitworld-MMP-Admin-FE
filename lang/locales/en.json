@@ -105,7 +105,11 @@
         "cardDescription": "View and manage user wallets and their associated accounts.",
         "refresh": "Refresh",
         "searchPlaceholder": "Search by Wallet ID or Nickname ...",
-        "allTypes": "All types",
+        "filters": {
+            "allTypes": "All types",
+            "bittworld": "Bittworld",
+            "nonBittworld": "Memepump"
+        },
         "table": {
             "walletId": "Wallet ID",
             "nickname": "Nickname",

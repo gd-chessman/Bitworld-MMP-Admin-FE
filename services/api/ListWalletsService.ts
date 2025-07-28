@@ -1,7 +1,7 @@
 import axiosClient from "@/utils/axiosClient";
 
 
-export const getListWallets = async (search: string = '', page: number = 1, limit: number = 10, walletAuth: string = '', walletType: string = '') => {
+export const getListWallets = async (search: string = '', page: number = 1, limit: number = 10, walletAuth: string = '', walletType: string = '', isBittworld?: boolean) => {
   try {
     const params = new URLSearchParams();
     if (search) params.append('search', search);
@@ -9,6 +9,7 @@ export const getListWallets = async (search: string = '', page: number = 1, limi
     if (limit) params.append('limit', limit.toString());
     if (walletAuth) params.append('wallet_auth', walletAuth);
     if (walletType) params.append('wallet_type', walletType);
+    if (isBittworld !== undefined) params.append('isBittworld', isBittworld.toString());
     const temp = await axiosClient.get(`/list-wallets?${params.toString()}`);
     return temp.data;
   } catch (error) {
