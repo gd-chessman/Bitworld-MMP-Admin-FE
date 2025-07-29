@@ -63,12 +63,12 @@ export function AdminSidebar() {
       icon: Users,
       color: "text-purple-400 hover:text-purple-300",
     }] : []),
-    {
-      title: "Swap Investors",
-      href: "/swap-investors",
-      icon: DollarSign,
-      color: "text-green-400 hover:text-green-300",
-    },
+    // {
+    //   title: "Swap Investors",
+    //   href: "/swap-investors",
+    //   icon: DollarSign,
+    //   color: "text-green-400 hover:text-green-300",
+    // },
     {
       title: t("navigation.listWallets"),
       href: "/list-wallets",
@@ -171,7 +171,7 @@ export function AdminSidebar() {
             <Link
               key={item.title}
               href={item.href}
-                              className={cn(
+              className={cn(
                   "cursor-pointer flex items-center gap-3 px-4 py-2.5 rounded-lg font-medium transition-all group text-sm",
                   isActive(item)
                     ? "bg-[#00e09e]/10 text-[#00e09e] border border-[#00e09e] shadow-lg shadow-[#00e09e]/20"
@@ -189,7 +189,7 @@ export function AdminSidebar() {
         </nav>
         
         <div className="flex-shrink-0 p-4 border-t border-border">
-                      <div className="flex items-center gap-3 rounded-xl bg-muted p-3">
+              <div className="flex items-center gap-3 rounded-xl bg-muted p-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r from-cyan-500 to-purple-500 text-white font-bold text-lg shadow-lg shadow-cyan-500/25">
                 {myInfor?.username?.charAt(0).toUpperCase()}
               </div>

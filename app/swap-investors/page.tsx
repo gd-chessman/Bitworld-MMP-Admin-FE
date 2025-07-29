@@ -3,7 +3,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { Search, RefreshCw, Plus, Settings, DollarSign, Users, TrendingUp } from "lucide-react"
+import { Search, Plus, Settings, DollarSign, Users, TrendingUp, Gift } from "lucide-react"
 import { useState, useEffect } from "react"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
@@ -13,8 +13,11 @@ import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { toast } from "sonner"
-import { createSwapInvestor, getSwapInvestors } from "@/services/api/SwapInvestorService"
+import { createSwapInvestor, getSwapInvestors, getSwapInvestorsStats, getSwapInvestorRewards } from "@/services/api/SwapInvestorService"
+import { getSwapSetting, updateSwapSetting } from "@/services/api/SwapSetting"
 import { useQuery } from "@tanstack/react-query"
+import { ChevronLeft } from "lucide-react"
+import { useLang } from "@/lang/useLang"
 
 // Mock data
 const mockInvestors = [
@@ -50,14 +53,14 @@ const mockSettings = {
 };
 
 export default function SwapInvestorsPage() {
+  const { t } = useLang()
   const [searchQuery, setSearchQuery] = useState('')
   const [coinFilter, setCoinFilter] = useState('all')
-  const [isRefreshing, setIsRefreshing] = useState(false)
   const [openCreateDialog, setOpenCreateDialog] = useState(false)
   const [openSettingsDialog, setOpenSettingsDialog] = useState(false)
-  const [deletingId, setDeletingId] = useState<number | null>(null)
-  const [confirmDeleteId, setConfirmDeleteId] = useState<number | null>(null)
   const [currentPage, setCurrentPage] = useState(1)
+  const [rewardsPage, setRewardsPage] = useState(1)
+  const [rewardsSearchQuery, setRewardsSearchQuery] = useState('')
 
   // Form states
   const [createForm, setCreateForm] = useState({
@@ -65,8 +68,8 @@ export default function SwapInvestorsPage() {
   })
 
   const [settingsForm, setSettingsForm] = useState({
-    swap_fee_percent: mockSettings.swap_fee_percent.toString(),
-    investor_share_percent: mockSettings.investor_share_percent.toString()
+    swap_fee_percent: '',
+    investor_share_percent: ''
   })
 
   // Fetch investors with useQuery
@@ -75,69 +78,92 @@ export default function SwapInvestorsPage() {
     queryFn: () => getSwapInvestors(currentPage, 10, searchQuery),
   })
 
-  const handleRefresh = async () => {
-    setIsRefreshing(true)
-    await refetch()
-    setTimeout(() => {
-      setIsRefreshing(false)
-      toast.success("Data refreshed successfully!")
-    }, 1000)
-  }
+  // Fetch settings with useQuery
+  const { data: settingsRes, refetch: refetchSettings } = useQuery({
+    queryKey: ["swap-settings"],
+    queryFn: () => getSwapSetting(),
+  })
+
+  // Fetch stats with useQuery
+  const { data: statsRes } = useQuery({
+    queryKey: ["swap-investors-stats"],
+    queryFn: () => getSwapInvestorsStats(),
+  })
+
+  // Fetch rewards with useQuery
+  const { data: rewardsRes, isLoading: rewardsLoading } = useQuery({
+    queryKey: ["swap-investor-rewards", rewardsPage, rewardsSearchQuery],
+    queryFn: () => getSwapInvestorRewards(rewardsPage, 10, rewardsSearchQuery),
+  })
+
+  // Update settings form when data is loaded
+  useEffect(() => {
+    if (settingsRes?.data) {
+      setSettingsForm({
+        swap_fee_percent: settingsRes.data.swap_fee_percent || '',
+        investor_share_percent: settingsRes.data.investor_share_percent || ''
+      })
+    }
+  }, [settingsRes])
 
   const handleCreateInvestor = async () => {
     if (!createForm.wallet_address) {
-      toast.error("Please fill in wallet address")
+      toast.error(t('swap-investors.investors.dialog.walletAddressRequired'))
       return
     }
 
     try {
       await createSwapInvestor(createForm.wallet_address)
-      toast.success("Investor created successfully!")
+      toast.success(t('swap-investors.investors.dialog.createSuccess'))
       setOpenCreateDialog(false)
       setCreateForm({
         wallet_address: ''
       })
       // Refresh data after creating
-      handleRefresh()
+      refetch()
     } catch (error) {
-      toast.error("Failed to create investor. Please try again.")
+      toast.error(t('swap-investors.investors.dialog.createError'))
     }
   }
 
-  const handleUpdateSettings = () => {
+  const handleUpdateSettings = async () => {
     const swapFee = parseFloat(settingsForm.swap_fee_percent)
     const investorShare = parseFloat(settingsForm.investor_share_percent)
 
     if (isNaN(swapFee) || swapFee < 0 || swapFee > 100) {
-      toast.error("Swap fee must be between 0 and 100")
+      toast.error(t('swap-investors.settings.dialog.validation.swapFeeRange'))
       return
     }
 
     if (isNaN(investorShare) || investorShare < 0 || investorShare > 100) {
-      toast.error("Investor share must be between 0 and 100")
+      toast.error(t('swap-investors.settings.dialog.validation.investorShareRange'))
       return
     }
 
-    // Simulate API call
-    toast.success("Settings updated successfully!")
-    setOpenSettingsDialog(false)
-  }
+    if (investorShare > swapFee) {
+      toast.error(t('swap-investors.settings.dialog.validation.investorShareGreater'))
+      return
+    }
 
-  const handleDeleteInvestor = (id: number) => {
-    setConfirmDeleteId(id)
-  }
-
-  const confirmDelete = () => {
-    if (confirmDeleteId) {
-      // Simulate API call
-      toast.success("Investor deleted successfully!")
-      setConfirmDeleteId(null)
+    try {
+      await updateSwapSetting({
+        swap_fee_percent: swapFee,
+        investor_share_percent: investorShare
+      })
+      toast.success(t('swap-investors.settings.dialog.updateSuccess'))
+      setOpenSettingsDialog(false)
+      refetchSettings()
+    } catch (error) {
+      toast.error(t('swap-investors.settings.dialog.updateError'))
     }
   }
 
   // Use real data from API
   const investors = investorsRes?.data || []
   const pagination = investorsRes?.pagination || { total: 0, totalPages: 1, currentPage: 1 }
+  const stats = statsRes?.data || { totalInvestors: 0, activeInvestors: 0, totalAmount: 0, swapFee: 0 }
+  const rewards = rewardsRes?.data || []
+  const rewardsPagination = rewardsRes?.pagination || { total: 0, totalPages: 1, currentPage: 1 }
 
   const filteredInvestors = investors.filter((investor: any) => {
     const matchesSearch = investor.wallet_address.toLowerCase().includes(searchQuery.toLowerCase())
@@ -145,25 +171,23 @@ export default function SwapInvestorsPage() {
     return matchesSearch && matchesCoin
   })
 
-  const stats = {
-    total: pagination.total,
-    active: investors.filter((i: any) => i.active).length,
-    totalAmount: investors.reduce((sum: number, i: any) => sum + (i.amount_usd || 0), 0),
-    byCoin: investors.reduce((acc: any, i: any) => {
-      if (Array.isArray(i.coins)) {
-        i.coins.forEach((coin: string) => {
-          acc[coin] = (acc[coin] || 0) + 1
-        })
-      }
-      return acc
-    }, {} as Record<string, number>)
+  const handleRewardsPreviousPage = () => {
+    if (rewardsPage > 1) {
+      setRewardsPage(rewardsPage - 1)
+    }
+  }
+
+  const handleRewardsNextPage = () => {
+    if (rewardsPagination.totalPages && rewardsPage < rewardsPagination.totalPages) {
+      setRewardsPage(rewardsPage + 1)
+    }
   }
 
   return (
     <div className="flex flex-col space-y-6">
       <div className="flex flex-col space-y-2">
-        <h2 className="text-3xl font-bold tracking-tight text-black dark:text-white">Swap Investors Management</h2>
-        <p className="text-muted-foreground">Manage swap investors and configure reward settings</p>
+        <h2 className="text-3xl font-bold tracking-tight text-black dark:text-white">{t('swap-investors.pageTitle')}</h2>
+        <p className="text-muted-foreground">{t('swap-investors.description')}</p>
       </div>
 
       {/* Stats Cards */}
@@ -172,8 +196,8 @@ export default function SwapInvestorsPage() {
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-black dark:text-white font-semibold text-sm">Total Investors</p>
-                <p className="text-2xl font-bold text-blue-400">{stats.total}</p>
+                <p className="text-black dark:text-white font-semibold text-sm">{t('swap-investors.stats.totalInvestors')}</p>
+                <p className="text-2xl font-bold text-blue-400">{stats.totalInvestors}</p>
               </div>
               <div className="h-8 w-8 rounded-lg bg-blue-500/10 flex items-center justify-center">
                 <Users className="h-4 w-4 text-blue-400" />
@@ -186,8 +210,8 @@ export default function SwapInvestorsPage() {
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-black dark:text-white font-semibold text-sm">Active Investors</p>
-                <p className="text-2xl font-bold text-emerald-400">{stats.active}</p>
+                <p className="text-black dark:text-white font-semibold text-sm">{t('swap-investors.stats.activeInvestors')}</p>
+                <p className="text-2xl font-bold text-emerald-400">{stats.activeInvestors}</p>
               </div>
               <div className="h-8 w-8 rounded-lg bg-emerald-500/10 flex items-center justify-center">
                 <TrendingUp className="h-4 w-4 text-emerald-400" />
@@ -200,7 +224,7 @@ export default function SwapInvestorsPage() {
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-black dark:text-white font-semibold text-sm">Total Amount</p>
+                <p className="text-black dark:text-white font-semibold text-sm">{t('swap-investors.stats.totalAmount')}</p>
                 <p className="text-2xl font-bold text-purple-400">${stats.totalAmount.toLocaleString()}</p>
               </div>
               <div className="h-8 w-8 rounded-lg bg-purple-500/10 flex items-center justify-center">
@@ -214,8 +238,8 @@ export default function SwapInvestorsPage() {
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-black dark:text-white font-semibold text-sm">Swap Fee</p>
-                <p className="text-2xl font-bold text-orange-400">{mockSettings.swap_fee_percent}%</p>
+                <p className="text-black dark:text-white font-semibold text-sm">{t('swap-investors.stats.swapFee')}</p>
+                <p className="text-2xl font-bold text-orange-400">{stats.swapFee}%</p>
               </div>
               <div className="h-8 w-8 rounded-lg bg-orange-500/10 flex items-center justify-center">
                 <Settings className="h-4 w-4 text-orange-400" />
@@ -227,8 +251,9 @@ export default function SwapInvestorsPage() {
 
       <Tabs defaultValue="investors" className="space-y-4">
         <TabsList>
-          <TabsTrigger value="investors">Investors</TabsTrigger>
-          <TabsTrigger value="settings">Settings</TabsTrigger>
+          <TabsTrigger value="investors">{t('swap-investors.tabs.investors')}</TabsTrigger>
+          <TabsTrigger value="rewards">{t('swap-investors.tabs.rewards')}</TabsTrigger>
+          <TabsTrigger value="settings">{t('swap-investors.tabs.settings')}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="investors" className="space-y-4">
@@ -236,33 +261,24 @@ export default function SwapInvestorsPage() {
             <CardHeader className="pb-2">
               <div className="flex items-center justify-between">
                 <div>
-                  <CardTitle className="text-black dark:text-white font-bold">Swap Investors</CardTitle>
-                  <CardDescription className="text-muted-foreground">Manage and monitor swap investors</CardDescription>
+                  <CardTitle className="text-black dark:text-white font-bold">{t('swap-investors.investors.title')}</CardTitle>
+                  <CardDescription className="text-muted-foreground">{t('swap-investors.investors.description')}</CardDescription>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={handleRefresh}
-                    disabled={isRefreshing}
-                  >
-                    <RefreshCw className={`h-4 w-4 mr-2 ${isRefreshing ? 'animate-spin' : ''}`} />
-                    Refresh
-                  </Button>
                   <Dialog open={openCreateDialog} onOpenChange={setOpenCreateDialog}>
                     <DialogTrigger asChild>
                       <Button className="bg-[#00e09e] hover:bg-[#00d08e] text-black font-medium">
                         <Plus className="mr-2 h-4 w-4" />
-                        Add New Investor
+                        {t('swap-investors.investors.addNew')}
                       </Button>
                     </DialogTrigger>
                     <DialogContent className="max-w-md">
                       <DialogHeader>
-                        <DialogTitle>Add New Swap Investor</DialogTitle>
+                        <DialogTitle>{t('swap-investors.investors.dialog.title')}</DialogTitle>
                       </DialogHeader>
                       <div className="space-y-4">
                         <div>
-                          <Label>Wallet Address <span className="text-red-500">*</span></Label>
+                          <Label>{t('swap-investors.investors.dialog.walletAddress')} <span className="text-red-500">*</span></Label>
                           <Input
                             placeholder="Enter wallet address..."
                             value={createForm.wallet_address}
@@ -274,10 +290,10 @@ export default function SwapInvestorsPage() {
                       </div>
                       <DialogFooter>
                         <Button variant="outline" onClick={() => setOpenCreateDialog(false)}>
-                          Cancel
+                          {t('swap-investors.investors.dialog.cancel')}
                         </Button>
                         <Button onClick={handleCreateInvestor} className="bg-[#00e09e] hover:bg-[#00d08e] text-black font-medium">
-                          Create
+                          {t('swap-investors.investors.dialog.create')}
                         </Button>
                       </DialogFooter>
                     </DialogContent>
@@ -291,7 +307,7 @@ export default function SwapInvestorsPage() {
                   <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                   <Input
                     type="search"
-                    placeholder="Search by wallet address..."
+                    placeholder={t('swap-investors.investors.searchPlaceholder')}
                     className="pl-8 w-full md:max-w-sm"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
@@ -302,9 +318,9 @@ export default function SwapInvestorsPage() {
                     <SelectValue />
                   </SelectTrigger>
                                      <SelectContent>
-                     <SelectItem value="all">All Coins</SelectItem>
-                     <SelectItem value="SOL">SOL</SelectItem>
-                     <SelectItem value="USDT">USDT</SelectItem>
+                     <SelectItem value="all">{t('swap-investors.investors.filters.allCoins')}</SelectItem>
+                     <SelectItem value="SOL">{t('swap-investors.investors.filters.sol')}</SelectItem>
+                     <SelectItem value="USDT">{t('swap-investors.investors.filters.usdt')}</SelectItem>
                    </SelectContent>
                 </Select>
               </div>
@@ -313,13 +329,12 @@ export default function SwapInvestorsPage() {
                 <Table>
                   <TableHeader className="sticky top-0 bg-background z-20 border-b">
                     <TableRow>
-                      <TableHead className="font-semibold text-foreground">ID</TableHead>
-                      <TableHead className="font-semibold text-foreground">Wallet Address</TableHead>
-                      <TableHead className="font-semibold text-foreground">Coin</TableHead>
-                      <TableHead className="font-semibold text-foreground">Amount</TableHead>
-                      <TableHead className="font-semibold text-foreground">Status</TableHead>
-                      <TableHead className="font-semibold text-foreground">Created At</TableHead>
-                      <TableHead className="font-semibold text-foreground">Actions</TableHead>
+                      <TableHead className="font-semibold text-foreground">{t('swap-investors.investors.table.id')}</TableHead>
+                      <TableHead className="font-semibold text-foreground">{t('swap-investors.investors.table.walletAddress')}</TableHead>
+                      <TableHead className="font-semibold text-foreground">{t('swap-investors.investors.table.coin')}</TableHead>
+                      <TableHead className="font-semibold text-foreground">{t('swap-investors.investors.table.amount')}</TableHead>
+                      <TableHead className="font-semibold text-foreground">{t('swap-investors.investors.table.status')}</TableHead>
+                      <TableHead className="font-semibold text-foreground">{t('swap-investors.investors.table.createdAt')}</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -337,7 +352,7 @@ export default function SwapInvestorsPage() {
                               {Array.isArray(investor.coins) ? investor.coins.map((coin: string) => (
                                 <Badge key={coin} variant="outline">{coin}</Badge>
                               )) : (
-                                <span className="text-muted-foreground">No coins</span>
+                                <span className="text-muted-foreground">{t('swap-investors.investors.table.noCoins')}</span>
                               )}
                             </div>
                           </TableCell>
@@ -362,7 +377,7 @@ export default function SwapInvestorsPage() {
                           </TableCell>
                           <TableCell>
                             <Badge variant={investor.active ? "default" : "secondary"}>
-                              {investor.active ? "Active" : "Inactive"}
+                              {investor.active ? t('swap-investors.investors.table.active') : t('swap-investors.investors.table.inactive')}
                             </Badge>
                           </TableCell>
                           <TableCell>
@@ -370,24 +385,12 @@ export default function SwapInvestorsPage() {
                               {new Date(investor.created_at).toLocaleDateString()}
                             </span>
                           </TableCell>
-                          <TableCell>
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              className="h-8 w-8 p-0 text-destructive"
-                              onClick={() => handleDeleteInvestor(investor.swap_investor_id)}
-                            >
-                              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                              </svg>
-                            </Button>
-                          </TableCell>
                         </TableRow>
                       ))
                     ) : (
                       <TableRow>
-                        <TableCell colSpan={7} className="h-24 text-center text-muted-foreground">
-                          No investors found
+                        <TableCell colSpan={6} className="h-24 text-center text-muted-foreground">
+                          {t('swap-investors.investors.table.noResults')}
                         </TableCell>
                       </TableRow>
                     )}
@@ -398,63 +401,186 @@ export default function SwapInvestorsPage() {
           </Card>
         </TabsContent>
 
+        <TabsContent value="rewards" className="space-y-4">
+          <Card className="dashboard-card">
+            <CardHeader className="pb-2">
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle className="text-black dark:text-white font-bold">{t('swap-investors.rewards.title')}</CardTitle>
+                  <CardDescription className="text-muted-foreground">{t('swap-investors.rewards.description')}</CardDescription>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center gap-2 mb-4">
+                <div className="relative flex-1">
+                  <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    type="search"
+                    placeholder={t('swap-investors.rewards.searchPlaceholder')}
+                    className="pl-8 w-full md:max-w-sm"
+                    value={rewardsSearchQuery}
+                    onChange={(e) => setRewardsSearchQuery(e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <div className="rounded-md border">
+                <Table>
+                  <TableHeader className="sticky top-0 bg-background z-20 border-b">
+                    <TableRow>
+                      <TableHead className="font-semibold text-foreground">{t('swap-investors.rewards.table.rewardId')}</TableHead>
+                      <TableHead className="font-semibold text-foreground">{t('swap-investors.rewards.table.investorWallet')}</TableHead>
+                      <TableHead className="font-semibold text-foreground">{t('swap-investors.rewards.table.solAmount')}</TableHead>
+                      <TableHead className="font-semibold text-foreground">{t('swap-investors.rewards.table.swapOrder')}</TableHead>
+                      <TableHead className="font-semibold text-foreground">{t('swap-investors.rewards.table.swapType')}</TableHead>
+                      <TableHead className="font-semibold text-foreground">{t('swap-investors.rewards.table.transactionHash')}</TableHead>
+                      <TableHead className="font-semibold text-foreground">{t('swap-investors.rewards.table.status')}</TableHead>
+                      <TableHead className="font-semibold text-foreground">{t('swap-investors.rewards.table.createdAt')}</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {rewardsLoading ? (
+                      <TableRow>
+                        <TableCell colSpan={8} className="h-24 text-center">
+                          {t('swap-investors.rewards.table.loading')}
+                        </TableCell>
+                      </TableRow>
+                    ) : rewards.length > 0 ? (
+                      rewards.map((reward: any) => (
+                        <TableRow key={reward.swap_investor_reward_id}>
+                          <TableCell className="font-medium">#{reward.swap_investor_reward_id}</TableCell>
+                          <TableCell>
+                            <span className="text-sm font-mono">
+                              {reward.investor_wallet_address.slice(0, 8)}...{reward.investor_wallet_address.slice(-6)}
+                            </span>
+                          </TableCell>
+                          <TableCell>
+                            <span className="text-sm font-semibold text-green-600 dark:text-green-400">
+                              {reward.reward_sol_amount.toFixed(6)} SOL
+                            </span>
+                          </TableCell>
+                          <TableCell>
+                            <span className="text-sm">#{reward.swap_order_id}</span>
+                          </TableCell>
+                          <TableCell>
+                            <Badge variant="outline">
+                              {reward.swapOrder?.swap_type || 'N/A'}
+                            </Badge>
+                          </TableCell>
+                          <TableCell>
+                            <span className="text-xs font-mono text-muted-foreground">
+                              {reward.swapOrder?.transaction_hash ? 
+                                `${reward.swapOrder.transaction_hash.slice(0, 8)}...${reward.swapOrder.transaction_hash.slice(-6)}` : 
+                                'N/A'
+                              }
+                            </span>
+                          </TableCell>
+                          <TableCell>
+                            <Badge variant={reward.swapOrder?.status === 'completed' ? "default" : "secondary"}>
+                              {reward.swapOrder?.status || 'N/A'}
+                            </Badge>
+                          </TableCell>
+                          <TableCell>
+                            <span className="text-sm text-muted-foreground">
+                              {new Date(reward.created_at).toLocaleDateString()}
+                            </span>
+                          </TableCell>
+                        </TableRow>
+                      ))
+                    ) : (
+                      <TableRow>
+                        <TableCell colSpan={8} className="h-24 text-center text-muted-foreground">
+                          {t('swap-investors.rewards.table.noResults')}
+                        </TableCell>
+                      </TableRow>
+                    )}
+                  </TableBody>
+                </Table>
+              </div>
+              
+              <div className="flex items-center justify-center space-x-4 mt-4">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleRewardsPreviousPage}
+                  disabled={rewardsPage <= 1}
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                </Button>
+                <span className="text-sm text-muted-foreground">
+                  {rewardsPage} / {rewardsPagination.totalPages || 1}
+                </span>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleRewardsNextPage}
+                  disabled={!rewardsPagination.totalPages || rewardsPage >= rewardsPagination.totalPages}
+                >
+                  <ChevronLeft className="h-4 w-4 rotate-180" />
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
         <TabsContent value="settings" className="space-y-4">
           <Card className="dashboard-card">
             <CardHeader className="pb-2">
               <div className="flex items-center justify-between">
                 <div>
-                  <CardTitle className="text-black dark:text-white font-bold">Reward Settings</CardTitle>
-                  <CardDescription className="text-muted-foreground">Configure swap fees and investor share percentages</CardDescription>
+                  <CardTitle className="text-black dark:text-white font-bold">{t('swap-investors.settings.title')}</CardTitle>
+                  <CardDescription className="text-muted-foreground">{t('swap-investors.settings.description')}</CardDescription>
                 </div>
                 <Dialog open={openSettingsDialog} onOpenChange={setOpenSettingsDialog}>
                   <DialogTrigger asChild>
                     <Button className="bg-[#00e09e] hover:bg-[#00d08e] text-black font-medium">
                       <Settings className="mr-2 h-4 w-4" />
-                      Edit Settings
+                      {t('swap-investors.settings.editSettings')}
                     </Button>
                   </DialogTrigger>
                   <DialogContent className="max-w-md">
                     <DialogHeader>
-                      <DialogTitle>Edit Reward Settings</DialogTitle>
+                      <DialogTitle>{t('swap-investors.settings.dialog.title')}</DialogTitle>
                     </DialogHeader>
                     <div className="space-y-4">
                       <div>
-                        <Label>Swap Fee Percentage <span className="text-red-500">*</span></Label>
+                        <Label>{t('swap-investors.settings.dialog.swapFeeLabel')} <span className="text-red-500">*</span></Label>
                         <Input
                           type="number"
                           step="0.01"
                           min="0"
                           max="100"
-                          placeholder="2.5"
+                          placeholder="3"
                           value={settingsForm.swap_fee_percent}
                           onChange={e => setSettingsForm(f => ({ ...f, swap_fee_percent: e.target.value }))}
                         />
                         <p className="text-xs text-muted-foreground mt-1">
-                          Percentage of swap fee charged on transactions
+                          {t('swap-investors.settings.dialog.swapFeeDescription')}
                         </p>
                       </div>
                       <div>
-                        <Label>Investor Share Percentage <span className="text-red-500">*</span></Label>
+                        <Label>{t('swap-investors.settings.dialog.investorShareLabel')} <span className="text-red-500">*</span></Label>
                         <Input
                           type="number"
                           step="0.01"
                           min="0"
                           max="100"
-                          placeholder="80"
+                          placeholder="2"
                           value={settingsForm.investor_share_percent}
                           onChange={e => setSettingsForm(f => ({ ...f, investor_share_percent: e.target.value }))}
                         />
                         <p className="text-xs text-muted-foreground mt-1">
-                          Percentage of fees shared with investors
+                          {t('swap-investors.settings.dialog.investorShareDescription')}
                         </p>
                       </div>
                     </div>
                     <DialogFooter>
                       <Button variant="outline" onClick={() => setOpenSettingsDialog(false)}>
-                        Cancel
+                        {t('swap-investors.settings.dialog.cancel')}
                       </Button>
                       <Button onClick={handleUpdateSettings} className="bg-[#00e09e] hover:bg-[#00d08e] text-black font-medium">
-                        Update
+                        {t('swap-investors.settings.dialog.update')}
                       </Button>
                     </DialogFooter>
                   </DialogContent>
@@ -465,21 +591,21 @@ export default function SwapInvestorsPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-4">
                   <div>
-                    <Label className="text-sm font-medium">Current Swap Fee</Label>
-                    <p className="text-2xl font-bold text-blue-400">{mockSettings.swap_fee_percent}%</p>
+                    <Label className="text-sm font-medium">{t('swap-investors.settings.currentSwapFee')}</Label>
+                    <p className="text-2xl font-bold text-blue-400">{settingsRes?.data?.swap_fee_percent || '0'}%</p>
                   </div>
                   <div>
-                    <Label className="text-sm font-medium">Current Investor Share</Label>
-                    <p className="text-2xl font-bold text-emerald-400">{mockSettings.investor_share_percent}%</p>
+                    <Label className="text-sm font-medium">{t('swap-investors.settings.currentInvestorShare')}</Label>
+                    <p className="text-2xl font-bold text-emerald-400">{settingsRes?.data?.investor_share_percent || '0'}%</p>
                   </div>
                 </div>
                 <div className="space-y-4">
                   <div className="p-4 bg-muted rounded-lg">
-                    <h4 className="font-semibold mb-2">Information</h4>
+                    <h4 className="font-semibold mb-2">{t('swap-investors.settings.information')}</h4>
                     <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>• Swap fee is charged on all swap transactions</li>
-                      <li>• Investor share determines how much of fees go to investors</li>
-                      <li>• Total percentage should not exceed 100%</li>
+                      <li>{t('swap-investors.settings.infoPoints.swapFee')}</li>
+                      <li>{t('swap-investors.settings.infoPoints.investorShare')}</li>
+                      <li>{t('swap-investors.settings.infoPoints.totalPercentage')}</li>
                     </ul>
                   </div>
                 </div>
@@ -488,24 +614,6 @@ export default function SwapInvestorsPage() {
           </Card>
         </TabsContent>
       </Tabs>
-
-      {/* Confirmation Dialog */}
-      <Dialog open={!!confirmDeleteId} onOpenChange={() => setConfirmDeleteId(null)}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Confirm Delete</DialogTitle>
-          </DialogHeader>
-          <p>Are you sure you want to delete this investor? This action cannot be undone.</p>
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setConfirmDeleteId(null)}>
-              Cancel
-            </Button>
-            <Button variant="destructive" onClick={confirmDelete}>
-              Delete
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
     </div>
   )
 } 

@@ -18,6 +18,7 @@ import { toast } from "react-toastify"
 import { Fragment } from "react"
 import { ChevronLeft, Copy, Check } from "lucide-react"
 import Image from "next/image"
+import { getMyInfor } from "@/services/api/UserAdminService"
 
 export default function UserWalletsPage() {
   const { t } = useLang()
@@ -26,18 +27,25 @@ export default function UserWalletsPage() {
   const [currentPage, setCurrentPage] = useState(1)
   const [copiedAddress, setCopiedAddress] = useState<string | null>(null)
   const [isBittworldFilter, setIsBittworldFilter] = useState<boolean | undefined>(undefined)
+  const [bittworldUidFilter, setBittworldUidFilter] = useState<string>('all')
 
   const pageSize = 10
   const queryClient = useQueryClient()
 
+  const { data: myInfor } = useQuery({
+    queryKey: ["my-infor"],
+    queryFn: getMyInfor,
+    refetchOnMount: true,
+  });
+
   // Reset to page 1 when search or filter changes
   useEffect(() => {
     setCurrentPage(1)
-  }, [searchQuery, isBittworldFilter])
+  }, [searchQuery, isBittworldFilter, bittworldUidFilter])
 
   const { data: listWallets, refetch: refetchListWallets, isLoading } = useQuery({
-    queryKey: ["list-wallets", searchQuery, currentPage, isBittworldFilter],
-    queryFn: () => getListWallets(searchQuery, currentPage, pageSize, '', 'main', isBittworldFilter),
+    queryKey: ["list-wallets", searchQuery, currentPage, isBittworldFilter, bittworldUidFilter],
+    queryFn: () => getListWallets(searchQuery, currentPage, pageSize, '', 'main', isBittworldFilter, bittworldUidFilter),
     placeholderData: (previousData) => previousData,
   })
 
@@ -100,33 +108,45 @@ export default function UserWalletsPage() {
           </div>
         </CardHeader>
         <CardContent>
-          <div className="flex items-center gap-2 mb-4">
-            <div className="relative flex-1">
-              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-              <Input type="search" placeholder={t('list-wallets.searchPlaceholder')} className="pl-8 w-full md:max-w-sm"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
+          {myInfor?.role !== 'partner' && (
+            <div className="flex items-center gap-2 mb-4">
+              <div className="relative flex-1">
+                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                <Input type="search" placeholder={t('list-wallets.searchPlaceholder')} className="pl-8 w-full md:max-w-sm"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+              </div>
+              <Select value={isBittworldFilter === undefined ? "all" : isBittworldFilter ? "bittworld" : "non-bittworld"} onValueChange={(value) => {
+                if (value === "all") {
+                  setIsBittworldFilter(undefined)
+                } else if (value === "bittworld") {
+                  setIsBittworldFilter(true)
+                } else {
+                  setIsBittworldFilter(false)
+                }
+              }}>
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">{t('list-wallets.filters.allTypes')}</SelectItem>
+                  <SelectItem value="bittworld">{t('list-wallets.filters.bittworld')}</SelectItem>
+                  <SelectItem value="non-bittworld">{t('list-wallets.filters.nonBittworld')}</SelectItem>
+                </SelectContent>
+              </Select>
+              <Select value={bittworldUidFilter} onValueChange={setBittworldUidFilter}>
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">{t('list-wallets.filters.allUid')}</SelectItem>
+                  <SelectItem value="has_uid">{t('list-wallets.filters.hasUid')}</SelectItem>
+                  <SelectItem value="no_uid">{t('list-wallets.filters.noUid')}</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
-            <Select value={isBittworldFilter === undefined ? "all" : isBittworldFilter ? "bittworld" : "non-bittworld"} onValueChange={(value) => {
-              if (value === "all") {
-                setIsBittworldFilter(undefined)
-              } else if (value === "bittworld") {
-                setIsBittworldFilter(true)
-              } else {
-                setIsBittworldFilter(false)
-              }
-            }}>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">{t('list-wallets.filters.allTypes')}</SelectItem>
-                <SelectItem value="bittworld">{t('list-wallets.filters.bittworld')}</SelectItem>
-                <SelectItem value="non-bittworld">{t('list-wallets.filters.nonBittworld')}</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
+          )}
           <div className="space-y-4">
             <div className="rounded-md border">
               <Table>
@@ -136,12 +156,13 @@ export default function UserWalletsPage() {
                     <TableHead>{t('list-wallets.table.nickname')}</TableHead>
                     <TableHead>{t('list-wallets.table.solanaAddress')}</TableHead>
                     <TableHead>{t('list-wallets.table.walletCodeRef')}</TableHead>
+                    <TableHead>{t('list-wallets.table.bittworldUid')}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {isLoading ? (
                     <TableRow>
-                      <TableCell colSpan={4} className="h-24 text-center">
+                      <TableCell colSpan={5} className="h-24 text-center">
                         {t('list-wallets.table.loading')}
                       </TableCell>
                     </TableRow>
@@ -181,11 +202,20 @@ export default function UserWalletsPage() {
                             {row.wallet_code_ref || '-'}
                           </span>
                         </TableCell>
+                        <TableCell>
+                          {row.isBittworld ? (
+                            <span className="text-sm font-mono text-blue-600 dark:text-blue-400">
+                              {row.bittworld_uid || '-'}
+                            </span>
+                          ) : (
+                            <span className="text-sm text-muted-foreground">-</span>
+                          )}
+                        </TableCell>
                       </TableRow>
                     ))
                   ) : (
                     <TableRow>
-                      <TableCell colSpan={4} className="h-24 text-center">
+                      <TableCell colSpan={5} className="h-24 text-center">
                         {t('list-wallets.table.noResults')}
                       </TableCell>
                     </TableRow>

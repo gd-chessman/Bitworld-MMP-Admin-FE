@@ -106,9 +106,12 @@
         "refresh": "Refresh",
         "searchPlaceholder": "Search by Wallet ID or Nickname ...",
         "filters": {
-            "allTypes": "All types",
+            "allTypes": "All Types",
             "bittworld": "Bittworld",
-            "nonBittworld": "Memepump"
+            "nonBittworld": "Memepump",
+            "allUid": "All UID",
+            "hasUid": "Has UID",
+            "noUid": "No UID"
         },
         "table": {
             "walletId": "Wallet ID",
@@ -141,7 +144,8 @@
             "isBittworld": "Bittworld",
             "yes": "Yes",
             "no": "No",
-            "walletCodeRef": "Referral Code"
+            "walletCodeRef": "Referral Code",
+            "bittworldUid": "Bittworld UID"
         }
     },
     "categories-token": {
@@ -642,6 +646,99 @@
             "entries": "entries",
             "previous": "Previous",
             "next": "Next"
+        }
+    },
+    "swap-investors": {
+        "pageTitle": "Swap Investors Management",
+        "description": "Manage swap investors and configure reward settings",
+        "stats": {
+            "totalInvestors": "Total Investors",
+            "activeInvestors": "Active Investors",
+            "totalAmount": "Total Amount",
+            "swapFee": "Swap Fee"
+        },
+        "tabs": {
+            "investors": "Investors",
+            "rewards": "Rewards",
+            "settings": "Settings"
+        },
+        "investors": {
+            "title": "Swap Investors",
+            "description": "Manage and monitor swap investors",
+            "addNew": "Add New Investor",
+            "searchPlaceholder": "Search by wallet address...",
+            "filters": {
+                "allCoins": "All Coins",
+                "sol": "SOL",
+                "usdt": "USDT"
+            },
+            "table": {
+                "id": "ID",
+                "walletAddress": "Wallet Address",
+                "coin": "Coin",
+                "amount": "Amount",
+                "status": "Status",
+                "createdAt": "Created At",
+                "noCoins": "No coins",
+                "active": "Active",
+                "inactive": "Inactive",
+                "noResults": "No investors found"
+            },
+            "dialog": {
+                "title": "Add New Swap Investor",
+                "walletAddress": "Wallet Address",
+                "walletAddressRequired": "Please fill in wallet address",
+                "createSuccess": "Investor created successfully!",
+                "createError": "Failed to create investor. Please try again.",
+                "cancel": "Cancel",
+                "create": "Create"
+            }
+        },
+        "rewards": {
+            "title": "Swap Investor Rewards",
+            "description": "View and track swap investor rewards",
+            "searchPlaceholder": "Search by wallet address or transaction hash...",
+            "table": {
+                "rewardId": "Reward ID",
+                "investorWallet": "Investor Wallet",
+                "solAmount": "SOL Amount",
+                "swapOrder": "Swap Order",
+                "swapType": "Swap Type",
+                "transactionHash": "Transaction Hash",
+                "status": "Status",
+                "createdAt": "Created At",
+                "loading": "Loading...",
+                "noResults": "No rewards found"
+            }
+        },
+        "settings": {
+            "title": "Reward Settings",
+            "description": "Configure swap fees and investor share percentages",
+            "editSettings": "Edit Settings",
+            "currentSwapFee": "Current Swap Fee",
+            "currentInvestorShare": "Current Investor Share",
+            "information": "Information",
+            "infoPoints": {
+                "swapFee": "• Swap fee is charged on all swap transactions",
+                "investorShare": "• Investor share determines how much of fees go to investors",
+                "totalPercentage": "• Total percentage should not exceed 100%"
+            },
+            "dialog": {
+                "title": "Edit Reward Settings",
+                "swapFeeLabel": "Swap Fee Percentage",
+                "swapFeeDescription": "Percentage of swap fee charged on transactions",
+                "investorShareLabel": "Investor Share Percentage",
+                "investorShareDescription": "Percentage of fees shared with investors",
+                "validation": {
+                    "swapFeeRange": "Swap fee must be between 0 and 100",
+                    "investorShareRange": "Investor share must be between 0 and 100",
+                    "investorShareGreater": "Investor share percentage cannot be greater than swap fee percentage"
+                },
+                "updateSuccess": "Settings updated successfully!",
+                "updateError": "Failed to update settings. Please try again.",
+                "cancel": "Cancel",
+                "update": "Update"
+            }
         }
     }
 }

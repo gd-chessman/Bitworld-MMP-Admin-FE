@@ -108,7 +108,10 @@
         "filters": {
             "allTypes": "Tất cả loại",
             "bittworld": "Bittworld",
-            "nonBittworld": "Memepump"
+            "nonBittworld": "Memepump",
+            "allUid": "Tất cả UID",
+            "hasUid": "Có UID",
+            "noUid": "Không có UID"
         },
         "table": {
             "walletId": "ID Ví",
@@ -141,7 +144,8 @@
             "isBittworld": "Bittworld",
             "yes": "Có",
             "no": "Không",
-            "walletCodeRef": "Mã giới thiệu"
+            "walletCodeRef": "Mã giới thiệu",
+            "bittworldUid": "Bittworld UID"
         }
     },
     "categories-token": {
@@ -642,6 +646,99 @@
             "entries": "mục",
             "previous": "Trước",
             "next": "Tiếp"
+        }
+    },
+    "swap-investors": {
+        "pageTitle": "Quản lý nhà đầu tư Swap",
+        "description": "Quản lý nhà đầu tư swap và cấu hình phần thưởng",
+        "stats": {
+            "totalInvestors": "Tổng nhà đầu tư",
+            "activeInvestors": "Nhà đầu tư hoạt động",
+            "totalAmount": "Tổng số tiền",
+            "swapFee": "Phí Swap"
+        },
+        "tabs": {
+            "investors": "Nhà đầu tư",
+            "rewards": "Phần thưởng",
+            "settings": "Cài đặt"
+        },
+        "investors": {
+            "title": "Nhà đầu tư Swap",
+            "description": "Quản lý và theo dõi nhà đầu tư swap",
+            "addNew": "Thêm nhà đầu tư mới",
+            "searchPlaceholder": "Tìm kiếm theo địa chỉ ví...",
+            "filters": {
+                "allCoins": "Tất cả coin",
+                "sol": "SOL",
+                "usdt": "USDT"
+            },
+            "table": {
+                "id": "ID",
+                "walletAddress": "Địa chỉ ví",
+                "coin": "Coin",
+                "amount": "Số tiền",
+                "status": "Trạng thái",
+                "createdAt": "Ngày tạo",
+                "noCoins": "Không có coin",
+                "active": "Hoạt động",
+                "inactive": "Không hoạt động",
+                "noResults": "Không tìm thấy nhà đầu tư"
+            },
+            "dialog": {
+                "title": "Thêm nhà đầu tư Swap mới",
+                "walletAddress": "Địa chỉ ví",
+                "walletAddressRequired": "Vui lòng nhập địa chỉ ví",
+                "createSuccess": "Tạo nhà đầu tư thành công!",
+                "createError": "Tạo nhà đầu tư thất bại. Vui lòng thử lại.",
+                "cancel": "Hủy",
+                "create": "Tạo"
+            }
+        },
+        "rewards": {
+            "title": "Phần thưởng nhà đầu tư Swap",
+            "description": "Xem và theo dõi phần thưởng nhà đầu tư swap",
+            "searchPlaceholder": "Tìm kiếm theo địa chỉ ví hoặc hash giao dịch...",
+            "table": {
+                "rewardId": "ID phần thưởng",
+                "investorWallet": "Ví nhà đầu tư",
+                "solAmount": "Số lượng SOL",
+                "swapOrder": "Lệnh Swap",
+                "swapType": "Loại Swap",
+                "transactionHash": "Hash giao dịch",
+                "status": "Trạng thái",
+                "createdAt": "Ngày tạo",
+                "loading": "Đang tải...",
+                "noResults": "Không tìm thấy phần thưởng"
+            }
+        },
+        "settings": {
+            "title": "Cài đặt phần thưởng",
+            "description": "Cấu hình phí swap và tỷ lệ phần trăm chia sẻ nhà đầu tư",
+            "editSettings": "Chỉnh sửa cài đặt",
+            "currentSwapFee": "Phí Swap hiện tại",
+            "currentInvestorShare": "Chia sẻ nhà đầu tư hiện tại",
+            "information": "Thông tin",
+            "infoPoints": {
+                "swapFee": "• Phí swap được tính trên tất cả giao dịch swap",
+                "investorShare": "• Chia sẻ nhà đầu tư quyết định bao nhiêu phí sẽ chia cho nhà đầu tư",
+                "totalPercentage": "• Tổng tỷ lệ phần trăm không được vượt quá 100%"
+            },
+            "dialog": {
+                "title": "Chỉnh sửa cài đặt phần thưởng",
+                "swapFeeLabel": "Tỷ lệ phần trăm phí Swap",
+                "swapFeeDescription": "Tỷ lệ phần trăm phí swap được tính trên giao dịch",
+                "investorShareLabel": "Tỷ lệ phần trăm chia sẻ nhà đầu tư",
+                "investorShareDescription": "Tỷ lệ phần trăm phí chia cho nhà đầu tư",
+                "validation": {
+                    "swapFeeRange": "Phí swap phải từ 0 đến 100",
+                    "investorShareRange": "Chia sẻ nhà đầu tư phải từ 0 đến 100",
+                    "investorShareGreater": "Tỷ lệ phần trăm chia sẻ nhà đầu tư không được lớn hơn tỷ lệ phần trăm phí swap"
+                },
+                "updateSuccess": "Cập nhật cài đặt thành công!",
+                "updateError": "Cập nhật cài đặt thất bại. Vui lòng thử lại.",
+                "cancel": "Hủy",
+                "update": "Cập nhật"
+            }
         }
     }
 }
