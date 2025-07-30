@@ -111,7 +111,10 @@
             "nonBittworld": "Memepump",
             "allUid": "All UID",
             "hasUid": "Has UID",
-            "noUid": "No UID"
+            "noUid": "No UID",
+            "allBgAffiliate": "All BG Affiliate",
+            "bgAffiliate": "BG Affiliate",
+            "nonBgAffiliate": "Non BG Affiliate"
         },
         "table": {
             "walletId": "Wallet ID",
@@ -145,7 +148,8 @@
             "yes": "Yes",
             "no": "No",
             "walletCodeRef": "Referral Code",
-            "bittworldUid": "Bittworld UID"
+            "bittworldUid": "Bittworld UID",
+            "totalWallets": "Total Wallets"
         }
     },
     "categories-token": {
@@ -445,7 +449,9 @@
             "loading": "Loading trees...",
             "error": "Error loading trees. Please try again.",
             "noTrees": "No trees found",
-            "membersCount": "members"
+            "membersCount": "members",
+            "active": "Active",
+            "inactive": "Inactive"
         },
         "dialogs": {
             "create": {

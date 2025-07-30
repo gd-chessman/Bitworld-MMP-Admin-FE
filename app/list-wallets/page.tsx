@@ -28,6 +28,7 @@ export default function UserWalletsPage() {
   const [copiedAddress, setCopiedAddress] = useState<string | null>(null)
   const [isBittworldFilter, setIsBittworldFilter] = useState<boolean | undefined>(undefined)
   const [bittworldUidFilter, setBittworldUidFilter] = useState<string>('all')
+  const [bgAffiliateFilter, setBgAffiliateFilter] = useState<string>('all')
 
   const pageSize = 10
   const queryClient = useQueryClient()
@@ -41,11 +42,11 @@ export default function UserWalletsPage() {
   // Reset to page 1 when search or filter changes
   useEffect(() => {
     setCurrentPage(1)
-  }, [searchQuery, isBittworldFilter, bittworldUidFilter])
+  }, [searchQuery, isBittworldFilter, bittworldUidFilter, bgAffiliateFilter])
 
   const { data: listWallets, refetch: refetchListWallets, isLoading } = useQuery({
-    queryKey: ["list-wallets", searchQuery, currentPage, isBittworldFilter, bittworldUidFilter],
-    queryFn: () => getListWallets(searchQuery, currentPage, pageSize, '', 'main', isBittworldFilter, bittworldUidFilter),
+    queryKey: ["list-wallets", searchQuery, currentPage, isBittworldFilter, bittworldUidFilter, bgAffiliateFilter],
+    queryFn: () => getListWallets(searchQuery, currentPage, pageSize, '', 'main', isBittworldFilter, bittworldUidFilter, bgAffiliateFilter),
     placeholderData: (previousData) => previousData,
   })
 
@@ -108,46 +109,59 @@ export default function UserWalletsPage() {
           </div>
         </CardHeader>
         <CardContent>
-          {myInfor?.role !== 'partner' && (
-            <div className="flex items-center gap-2 mb-4">
-              <div className="relative flex-1">
-                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                <Input type="search" placeholder={t('list-wallets.searchPlaceholder')} className="pl-8 w-full md:max-w-sm"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-              </div>
-              <Select value={isBittworldFilter === undefined ? "all" : isBittworldFilter ? "bittworld" : "non-bittworld"} onValueChange={(value) => {
-                if (value === "all") {
-                  setIsBittworldFilter(undefined)
-                } else if (value === "bittworld") {
-                  setIsBittworldFilter(true)
-                } else {
-                  setIsBittworldFilter(false)
-                }
-              }}>
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">{t('list-wallets.filters.allTypes')}</SelectItem>
-                  <SelectItem value="bittworld">{t('list-wallets.filters.bittworld')}</SelectItem>
-                  <SelectItem value="non-bittworld">{t('list-wallets.filters.nonBittworld')}</SelectItem>
-                </SelectContent>
-              </Select>
-              <Select value={bittworldUidFilter} onValueChange={setBittworldUidFilter}>
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">{t('list-wallets.filters.allUid')}</SelectItem>
-                  <SelectItem value="has_uid">{t('list-wallets.filters.hasUid')}</SelectItem>
-                  <SelectItem value="no_uid">{t('list-wallets.filters.noUid')}</SelectItem>
-                </SelectContent>
-              </Select>
+          <div className="flex items-center gap-2 mb-4">
+            <div className="relative flex-1">
+              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+              <Input type="search" placeholder={t('list-wallets.searchPlaceholder')} className="pl-8 w-full md:max-w-sm"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
             </div>
-          )}
+            <Select value={isBittworldFilter === undefined ? "all" : isBittworldFilter ? "bittworld" : "non-bittworld"} onValueChange={(value) => {
+              if (value === "all") {
+                setIsBittworldFilter(undefined)
+              } else if (value === "bittworld") {
+                setIsBittworldFilter(true)
+              } else {
+                setIsBittworldFilter(false)
+              }
+            }}>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">{t('list-wallets.filters.allTypes')}</SelectItem>
+                <SelectItem value="bittworld">{t('list-wallets.filters.bittworld')}</SelectItem>
+                <SelectItem value="non-bittworld">{t('list-wallets.filters.nonBittworld')}</SelectItem>
+              </SelectContent>
+            </Select>
+            <Select value={bittworldUidFilter} onValueChange={setBittworldUidFilter}>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">{t('list-wallets.filters.allUid')}</SelectItem>
+                <SelectItem value="has_uid">{t('list-wallets.filters.hasUid')}</SelectItem>
+                <SelectItem value="no_uid">{t('list-wallets.filters.noUid')}</SelectItem>
+              </SelectContent>
+            </Select>
+            <Select value={bgAffiliateFilter} onValueChange={setBgAffiliateFilter}>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">{t('list-wallets.filters.allBgAffiliate')}</SelectItem>
+                <SelectItem value="bg">{t('list-wallets.filters.bgAffiliate')}</SelectItem>
+                <SelectItem value="non_bg">{t('list-wallets.filters.nonBgAffiliate')}</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
           <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <div className="text-sm text-muted-foreground">
+                {t('list-wallets.table.totalWallets')}: <span className="font-semibold">{listWallets?.pagination?.total || 0}</span>
+              </div>
+            </div>
             <div className="rounded-md border">
               <Table>
                 <TableHeader className="sticky top-0 bg-background z-20 border-b">

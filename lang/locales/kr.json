@@ -111,7 +111,10 @@
             "nonBittworld": "Memepump",
             "allUid": "전체 UID",
             "hasUid": "UID 있음",
-            "noUid": "UID 없음"
+            "noUid": "UID 없음",
+            "allBgAffiliate": "모든 BG Affiliate",
+            "bgAffiliate": "BG Affiliate",
+            "nonBgAffiliate": "BG Affiliate 아님"
         },
         "table": {
             "walletId": "지갑 ID",
@@ -145,7 +148,8 @@
             "yes": "예",
             "no": "아니오",
             "walletCodeRef": "추천 코드",
-            "bittworldUid": "Bittworld UID"
+            "bittworldUid": "Bittworld UID",
+            "totalWallets": "총 지갑"
         }
     },
     "categories-token": {
@@ -445,7 +449,9 @@
             "loading": "트리 로딩 중...",
             "error": "트리 로딩 오류. 다시 시도해 주세요.",
             "noTrees": "트리를 찾을 수 없습니다",
-            "membersCount": "멤버"
+            "membersCount": "멤버",
+            "active": "활성",
+            "inactive": "비활성"
         },
         "dialogs": {
             "create": {

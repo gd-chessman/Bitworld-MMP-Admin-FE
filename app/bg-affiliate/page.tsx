@@ -9,6 +9,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge";
 import { Plus, Eye, Users, Wallet, Percent, Calendar, ChevronRight, ChevronDown, Search, MoreHorizontal, TrendingUp, Activity, Edit, Copy, Check } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import Select from "react-select";
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { getListWallets } from '@/services/api/ListWalletsService';
@@ -16,6 +17,7 @@ import { createBgAffiliate, getBgAffiliateTrees, updateRootBgCommission, updateB
 import { selectStyles } from "@/utils/common";
 import { toast } from "sonner";
 import { useLang } from "@/lang/useLang";
+import { getMyInfor } from "@/services/api/UserAdminService";
 
 
 // Helper function to truncate address
@@ -34,6 +36,13 @@ export default function BgAffiliateAdminPage() {
   const [walletSearchQuery, setWalletSearchQuery] = useState("");
   const [copiedAddress, setCopiedAddress] = useState<string | null>(null);
   const queryClient = useQueryClient();
+
+  // Get user info
+  const { data: myInfor } = useQuery({
+    queryKey: ["my-infor"],
+    queryFn: getMyInfor,
+    refetchOnMount: true,
+  });
 
   // Form states
   const [createForm, setCreateForm] = useState({ 
@@ -63,8 +72,12 @@ export default function BgAffiliateAdminPage() {
 
   // Fetch available wallets when dialog is open
   const { data: availableWallets = [], isLoading: walletsLoading } = useQuery({
-    queryKey: ["list-wallets-bg-affiliate", walletSearchQuery, 'all', 1],
-    queryFn: () => getListWallets(walletSearchQuery, 1, 30, '', 'main'),
+    queryKey: ["list-wallets-bg-affiliate", walletSearchQuery, 'all', 1, myInfor?.role],
+    queryFn: () => {
+      // For partner role, always set isBittworld to true
+      const isBittworld = myInfor?.role === 'partner' ? true : undefined;
+      return getListWallets(walletSearchQuery, 1, 30, '', 'main', isBittworld);
+    },
     enabled: showCreate, // Only fetch when dialog is open
     placeholderData: (previousData) => previousData,
   });
@@ -371,6 +384,15 @@ export default function BgAffiliateAdminPage() {
                                   <Copy className="h-3 w-3" />
                                 )}
                               </Button>
+                              {tree.rootWallet?.isBittworld && (
+                                <Image
+                                  src="/favicon.png"
+                                  alt="Bittworld"
+                                  width={16}
+                                  height={16}
+                                  className="w-4 h-4 rounded"
+                                />
+                              )}
                             </div>
                           </div>
                         </TableCell>
@@ -389,37 +411,43 @@ export default function BgAffiliateAdminPage() {
                           {tree.createdAt ? new Date(tree.createdAt).toLocaleDateString() : 'Unknown'}
                         </TableCell>
                         <TableCell>
-                          <div className="flex items-center gap-2">
-                            <div className="relative">
-                              <input
-                                type="checkbox"
-                                checked={tree.status !== false}
-                                onChange={(e) => {
-                                  updateTreeStatusMutation.mutate({
-                                    walletId: tree.rootWallet.walletId,
-                                    status: e.target.checked
-                                  });
-                                }}
-                                disabled={updateTreeStatusMutation.isPending}
-                                className="sr-only"
-                                id={`toggle-tree-${tree.treeId}`}
-                              />
-                              <label
-                                htmlFor={`toggle-tree-${tree.treeId}`}
-                                className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors duration-200 ease-in-out cursor-pointer ${
-                                  tree.status !== false 
-                                    ? 'bg-emerald-500' 
-                                    : 'bg-slate-600'
-                                } ${updateTreeStatusMutation.isPending ? 'opacity-50 cursor-not-allowed' : ''}`}
-                              >
-                                <span
-                                  className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform duration-200 ease-in-out ${
-                                    tree.status !== false ? 'translate-x-5' : 'translate-x-1'
-                                  }`}
+                          {!(myInfor?.role === 'partner' && !tree.rootWallet?.isBittworld) ? (
+                            <div className="flex items-center gap-2">
+                              <div className="relative">
+                                <input
+                                  type="checkbox"
+                                  checked={tree.status !== false}
+                                  onChange={(e) => {
+                                    updateTreeStatusMutation.mutate({
+                                      walletId: tree.rootWallet.walletId,
+                                      status: e.target.checked
+                                    });
+                                  }}
+                                  disabled={updateTreeStatusMutation.isPending}
+                                  className="sr-only"
+                                  id={`toggle-tree-${tree.treeId}`}
                                 />
-                              </label>
+                                <label
+                                  htmlFor={`toggle-tree-${tree.treeId}`}
+                                  className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors duration-200 ease-in-out cursor-pointer ${
+                                    tree.status !== false 
+                                      ? 'bg-emerald-500' 
+                                      : 'bg-slate-600'
+                                  } ${updateTreeStatusMutation.isPending ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                >
+                                  <span
+                                    className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform duration-200 ease-in-out ${
+                                      tree.status !== false ? 'translate-x-5' : 'translate-x-1'
+                                    }`}
+                                  />
+                                </label>
+                              </div>
                             </div>
-                          </div>
+                          ) : (
+                            <Badge variant={tree.status !== false ? "default" : "secondary"}>
+                              {tree.status !== false ? t('bg-affiliate.table.active') : t('bg-affiliate.table.inactive')}
+                            </Badge>
+                          )}
                         </TableCell>
                         <TableCell>
                           <div className="flex items-center gap-2">
@@ -432,14 +460,16 @@ export default function BgAffiliateAdminPage() {
                                 <Eye className="h-4 w-4" />
                               </Button>
                             </Link>
-                            <Button 
-                              size="sm" 
-                              variant="ghost" 
-                              className="h-8 w-8 p-0 text-muted-foreground hover:text-emerald-300 hover:bg-muted/50"
-                              onClick={() => handleUpdateCommission(tree)}
-                            >
-                              <Edit className="h-4 w-4" />
-                            </Button>
+                            {!(myInfor?.role === 'partner' && !tree.rootWallet?.isBittworld) && (
+                              <Button 
+                                size="sm" 
+                                variant="ghost" 
+                                className="h-8 w-8 p-0 text-muted-foreground hover:text-emerald-300 hover:bg-muted/50"
+                                onClick={() => handleUpdateCommission(tree)}
+                              >
+                                <Edit className="h-4 w-4" />
+                              </Button>
+                            )}
                           </div>
                         </TableCell>
                       </TableRow>

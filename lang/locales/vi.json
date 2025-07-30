@@ -106,12 +106,15 @@
         "refresh": "Làm mới",
         "searchPlaceholder": "Tìm kiếm theo ID Ví hoặc Biệt danh ...",
         "filters": {
-            "allTypes": "Tất cả loại",
+            "allTypes": "Lọc theo loại",
             "bittworld": "Bittworld",
             "nonBittworld": "Memepump",
-            "allUid": "Tất cả UID",
+            "allUid": "Lọc theo UID",
             "hasUid": "Có UID",
-            "noUid": "Không có UID"
+            "noUid": "Không có UID",
+            "allBgAffiliate": "Lọc theo BG Affiliate",
+            "bgAffiliate": "BG Affiliate",
+            "nonBgAffiliate": "Không phải BG Affiliate"
         },
         "table": {
             "walletId": "ID Ví",
@@ -145,7 +148,8 @@
             "yes": "Có",
             "no": "Không",
             "walletCodeRef": "Mã giới thiệu",
-            "bittworldUid": "Bittworld UID"
+            "bittworldUid": "Bittworld UID",
+            "totalWallets": "Tổng ví"
         }
     },
     "categories-token": {
@@ -444,8 +448,12 @@
             "statusUpdateFailed": "Cập nhật trạng thái cây thất bại. Vui lòng thử lại.",
             "loading": "Đang tải cây...",
             "error": "Lỗi tải cây. Vui lòng thử lại.",
-            "noTrees": "Không tìm thấy cây nào",
-            "membersCount": "thành viên"
+            "noTrees": "Không tìm thấy cây affiliate",
+            "membersCount": "thành viên",
+            "loading": "Đang tải...",
+            "error": "Lỗi tải dữ liệu",
+            "active": "Hoạt động",
+            "inactive": "Không hoạt động"
         },
         "dialogs": {
             "create": {

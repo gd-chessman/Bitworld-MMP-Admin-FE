@@ -8,6 +8,7 @@ import { ChevronRight, ChevronDown, Percent, Users, Calendar, Wallet, Activity, 
 import { notFound, useParams } from "next/navigation";
 import { toast } from "sonner";
 import { getBgAffiliateTreeDetail, updateBgAffiliateNodeStatus } from '@/services/api/BgAffiliateService';
+import { getMyInfor } from "@/services/api/UserAdminService";
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useLang } from "@/lang/useLang";
 
@@ -28,6 +29,7 @@ interface TreeNodeProps {
   isUpdating: boolean;
   isRoot?: boolean;
   isLastChild?: boolean;
+  myInfor?: any;
 }
 
 function TreeNode({ 
@@ -38,7 +40,8 @@ function TreeNode({
   onCopyAddress, 
   isUpdating,
   isRoot = false,
-  isLastChild = false
+  isLastChild = false,
+  myInfor
 }: TreeNodeProps) {
   const { t } = useLang();
   const [isExpanded, setIsExpanded] = useState(isRoot);
@@ -175,30 +178,36 @@ function TreeNode({
 
         {/* Status Toggle */}
         <div className="flex-shrink-0">
-          <div className="relative">
-            <input
-              type="checkbox"
-              checked={node.status !== false}
-              onChange={(e) => onStatusChange(node.walletId, e.target.checked)}
-              disabled={isUpdating}
-              className="sr-only"
-              id={`toggle-${node.walletId}`}
-            />
-            <label
-              htmlFor={`toggle-${node.walletId}`}
-              className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors duration-200 ease-in-out cursor-pointer ${
-                node.status !== false 
-                  ? 'bg-emerald-500' 
-                  : 'bg-slate-600'
-              } ${isUpdating ? 'opacity-50 cursor-not-allowed' : ''}`}
-            >
-              <span
-                className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform duration-200 ease-in-out ${
-                  node.status !== false ? 'translate-x-5' : 'translate-x-1'
-                }`}
+          {!(myInfor?.role === 'partner' && !node.walletInfo?.isBittworld) ? (
+            <div className="relative">
+              <input
+                type="checkbox"
+                checked={node.status !== false}
+                onChange={(e) => onStatusChange(node.walletId, e.target.checked)}
+                disabled={isUpdating}
+                className="sr-only"
+                id={`toggle-${node.walletId}`}
               />
-            </label>
-          </div>
+              <label
+                htmlFor={`toggle-${node.walletId}`}
+                className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors duration-200 ease-in-out cursor-pointer ${
+                  node.status !== false 
+                    ? 'bg-emerald-500' 
+                    : 'bg-slate-600'
+                } ${isUpdating ? 'opacity-50 cursor-not-allowed' : ''}`}
+              >
+                <span
+                  className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform duration-200 ease-in-out ${
+                    node.status !== false ? 'translate-x-5' : 'translate-x-1'
+                  }`}
+                />
+              </label>
+            </div>
+          ) : (
+            <Badge variant={node.status !== false ? "default" : "secondary"}>
+              {node.status !== false ? t('bg-affiliate.table.active') : t('bg-affiliate.table.inactive')}
+            </Badge>
+          )}
         </div>
       </div>
 
@@ -225,6 +234,7 @@ function TreeNode({
                 onCopyAddress={onCopyAddress}
                 isUpdating={isUpdating}
                 isLastChild={index === node.children.length - 1}
+                myInfor={myInfor}
               />
             ))}
           </div>
@@ -240,6 +250,13 @@ export default function BgAffiliateTreeDetailPage() {
   const params = useParams();
   const id = params?.id ? Number(params.id) : undefined;
   const queryClient = useQueryClient();
+
+  // Get user info
+  const { data: myInfor } = useQuery({
+    queryKey: ["my-infor"],
+    queryFn: getMyInfor,
+    refetchOnMount: true,
+  });
 
   // Tất cả hook phải ở đầu
   const { data: treeData, isLoading, error } = useQuery({
@@ -420,6 +437,7 @@ export default function BgAffiliateTreeDetailPage() {
               onCopyAddress={copyToClipboard}
               isUpdating={updateNodeStatusMutation.isPending}
               isRoot={true}
+              myInfor={myInfor}
             />
           </div>
           

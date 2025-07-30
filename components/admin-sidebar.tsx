@@ -57,12 +57,12 @@ export function AdminSidebar() {
       icon: LayoutDashboard,
       color: "text-blue-400 hover:text-blue-300",
     },
-    ...(myInfor?.role !== "partner" ? [{
-      title: t("navigation.users"),
-      href: "/users",
-      icon: Users,
-      color: "text-purple-400 hover:text-purple-300",
-    }] : []),
+    // ...(myInfor?.role !== "partner" ? [{
+    //   title: t("navigation.users"),
+    //   href: "/users",
+    //   icon: Users,
+    //   color: "text-purple-400 hover:text-purple-300",
+    // }] : []),
     // {
     //   title: "Swap Investors",
     //   href: "/swap-investors",
