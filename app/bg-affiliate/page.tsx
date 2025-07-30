@@ -98,7 +98,7 @@ export default function BgAffiliateAdminPage() {
     },
     onError: (error: any) => {
       console.error('Error creating BG Affiliate:', error);
-      if (error.response?.data?.message === "Wallet đã có cây affiliate") {
+      if (error.response?.data?.message == "Wallet already has a BG affiliate tree, cannot create another one") {
         // Show error toast
         toast.error(t('bg-affiliate.dialogs.create.walletExists'));
       } else {
