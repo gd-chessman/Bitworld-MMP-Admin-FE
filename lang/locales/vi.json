@@ -106,13 +106,13 @@
         "refresh": "Làm mới",
         "searchPlaceholder": "Tìm kiếm theo ID Ví hoặc Biệt danh ...",
         "filters": {
-            "allTypes": "Lọc theo loại",
+            "allTypes": "Tất cả nền tảng",
             "bittworld": "Bittworld",
             "nonBittworld": "Memepump",
             "allUid": "Lọc theo UID",
             "hasUid": "Có UID",
             "noUid": "Không có UID",
-            "allBgAffiliate": "Lọc theo BG Affiliate",
+            "allBgAffiliate": "Tất cả giới thiệu",
             "bgAffiliate": "BG Affiliate",
             "nonBgAffiliate": "Không phải BG Affiliate"
         },

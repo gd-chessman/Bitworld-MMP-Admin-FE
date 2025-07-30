@@ -135,16 +135,6 @@ export default function UserWalletsPage() {
                 <SelectItem value="non-bittworld">{t('list-wallets.filters.nonBittworld')}</SelectItem>
               </SelectContent>
             </Select>
-            <Select value={bittworldUidFilter} onValueChange={setBittworldUidFilter}>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">{t('list-wallets.filters.allUid')}</SelectItem>
-                <SelectItem value="has_uid">{t('list-wallets.filters.hasUid')}</SelectItem>
-                <SelectItem value="no_uid">{t('list-wallets.filters.noUid')}</SelectItem>
-              </SelectContent>
-            </Select>
             <Select value={bgAffiliateFilter} onValueChange={setBgAffiliateFilter}>
               <SelectTrigger className="w-[180px]">
                 <SelectValue />
@@ -153,6 +143,16 @@ export default function UserWalletsPage() {
                 <SelectItem value="all">{t('list-wallets.filters.allBgAffiliate')}</SelectItem>
                 <SelectItem value="bg">{t('list-wallets.filters.bgAffiliate')}</SelectItem>
                 <SelectItem value="non_bg">{t('list-wallets.filters.nonBgAffiliate')}</SelectItem>
+              </SelectContent>
+            </Select>
+            <Select value={bittworldUidFilter} onValueChange={setBittworldUidFilter}>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">{t('list-wallets.filters.allUid')}</SelectItem>
+                <SelectItem value="has_uid">{t('list-wallets.filters.hasUid')}</SelectItem>
+                <SelectItem value="no_uid">{t('list-wallets.filters.noUid')}</SelectItem>
               </SelectContent>
             </Select>
           </div>

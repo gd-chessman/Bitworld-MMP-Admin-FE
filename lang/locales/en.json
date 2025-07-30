@@ -106,13 +106,13 @@
         "refresh": "Refresh",
         "searchPlaceholder": "Search by Wallet ID or Nickname ...",
         "filters": {
-            "allTypes": "All Types",
+            "allTypes": "All Platforms",
             "bittworld": "Bittworld",
             "nonBittworld": "Memepump",
-            "allUid": "All UID",
+            "allUid": "Filter by UID",
             "hasUid": "Has UID",
             "noUid": "No UID",
-            "allBgAffiliate": "All BG Affiliate",
+            "allBgAffiliate": "All Referrals",
             "bgAffiliate": "BG Affiliate",
             "nonBgAffiliate": "Non BG Affiliate"
         },

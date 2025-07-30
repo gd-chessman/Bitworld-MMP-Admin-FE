@@ -106,13 +106,13 @@
         "refresh": "새로고침",
         "searchPlaceholder": "지갑 ID 또는 닉네임으로 검색 ...",
         "filters": {
-            "allTypes": "전체 유형",
+            "allTypes": "모든 플랫폼",
             "bittworld": "Bittworld",
             "nonBittworld": "Memepump",
-            "allUid": "전체 UID",
+            "allUid": "UID로 필터링",
             "hasUid": "UID 있음",
             "noUid": "UID 없음",
-            "allBgAffiliate": "모든 BG Affiliate",
+            "allBgAffiliate": "모든 추천",
             "bgAffiliate": "BG Affiliate",
             "nonBgAffiliate": "BG Affiliate 아님"
         },
