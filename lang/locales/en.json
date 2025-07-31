@@ -391,7 +391,7 @@
     },
     "orders": {
         "title": "Transaction History",
-        "description": "View and search all transaction records.",
+        "description": "View and search all transactions on MEMEPUMP & Bittworld.",
         "listTitle": "Transaction List",
         "listDescription": "All transactions",
         "searchPlaceholder": "Search by Wallet Address, Token Name, Token Address...",

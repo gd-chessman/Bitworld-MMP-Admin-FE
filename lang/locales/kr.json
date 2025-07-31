@@ -391,7 +391,7 @@
     },
     "orders": {
         "title": "거래 내역",
-        "description": "모든 거래 기록을 보고 검색하세요.",
+        "description": "MEMEPUMP & Bittworld의 모든 거래를 보고 검색하세요.",
         "listTitle": "거래 목록",
         "listDescription": "모든 거래",
         "searchPlaceholder": "지갑 주소, 토큰 이름, 토큰 주소로 검색...",
