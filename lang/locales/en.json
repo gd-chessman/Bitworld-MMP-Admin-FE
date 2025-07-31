@@ -419,6 +419,11 @@
             "mostActiveWallet": "Most Traded Wallet",
             "mostActiveWalletDesc": "Wallet with the most transactions.",
             "orderCount": "{{count}} transactions"
+        },
+        "filters": {
+            "all": "All",
+            "bittworld": "Bittworld",
+            "nonBittworld": "Memepump"
         }
     },
     "bg-affiliate": {

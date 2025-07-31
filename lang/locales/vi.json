@@ -391,7 +391,7 @@
     },
     "orders": {
         "title": "Lịch sử giao dịch",
-        "description": "Xem và tìm kiếm tất cả các giao dịch.",
+        "description": "Xem và tìm kiếm tất cả các giao dịch trên MEMEPUMP & Bittworld.",
         "listTitle": "Danh sách giao dịch",
         "listDescription": "Tất cả giao dịch",
         "searchPlaceholder": "Tìm theo địa chỉ ví, tên token, địa chỉ token...",
@@ -419,6 +419,11 @@
             "mostActiveWallet": "Ví giao dịch nhiều nhất",
             "mostActiveWalletDesc": "Ví có số giao dịch nhiều nhất.",
             "orderCount": "{{count}} giao dịch"
+        },
+        "filters": {
+            "all": "Tất cả nền tảng",
+            "bittworld": "Bittworld",
+            "nonBittworld": "Memepump"
         }
     },
     "bg-affiliate": {

@@ -7,18 +7,22 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Search, Copy, Check, ChevronLeft, ExternalLink, ArrowDownLeft, ArrowUpRight, BarChart3, CheckCircle, Wallet as WalletIcon } from "lucide-react"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useLang } from "@/lang/useLang"
+import Image from "next/image"
 
 export default function OrdersPage() {
   const { t } = useLang()
   const [search, setSearch] = useState('')
+  const [isBittworldFilter, setIsBittworldFilter] = useState<'all' | 'true' | 'false'>('all')
   const [page, setPage] = useState(1)
   const limit = 10
   const [copiedTxHash, setCopiedTxHash] = useState<string | null>(null)
-  useEffect(() => { setPage(1) }, [search])
+  
+  useEffect(() => { setPage(1) }, [search, isBittworldFilter])
   const { data, isLoading } = useQuery({
-    queryKey: ["orders-history", search, page],
-    queryFn: () => getOrderHistory(search, page, limit),
+    queryKey: ["orders-history", search, isBittworldFilter, page],
+    queryFn: () => getOrderHistory(search, page, limit, isBittworldFilter),
   })
   const { data: statistics, isLoading: isLoadingStats } = useQuery({
     queryKey: ["orders-statistics"],
@@ -136,6 +140,19 @@ export default function OrdersPage() {
                 onChange={e => setSearch(e.target.value)}
               />
             </div>
+            <Select 
+              value={isBittworldFilter} 
+              onValueChange={(value: 'all' | 'true' | 'false') => setIsBittworldFilter(value)}
+            >
+              <SelectTrigger className="w-[180px]">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">{t("orders.filters.all")}</SelectItem>
+                <SelectItem value="true">{t("orders.filters.bittworld")}</SelectItem>
+                <SelectItem value="false">{t("orders.filters.nonBittworld")}</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
           <div className="rounded-md border overflow-x-auto">
             <table className="w-full text-sm">
@@ -175,6 +192,15 @@ export default function OrdersPage() {
                                 <Copy className="h-3 w-3" />
                               )}
                             </button>
+                          )}
+                          {order.isBittworld && (
+                            <Image
+                              src="/favicon.png"
+                              alt="Bittworld"
+                              width={16}
+                              height={16}
+                              className="w-4 h-4 rounded"
+                            />
                           )}
                         </div>
                       </td>

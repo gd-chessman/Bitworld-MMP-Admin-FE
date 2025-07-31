@@ -27,7 +27,7 @@ export default function UserWalletsPage() {
   const [currentPage, setCurrentPage] = useState(1)
   const [copiedAddress, setCopiedAddress] = useState<string | null>(null)
   const [isBittworldFilter, setIsBittworldFilter] = useState<boolean | undefined>(undefined)
-  const [bittworldUidFilter, setBittworldUidFilter] = useState<string>('all')
+  const [bittworldUidFilter, setBittworldUidFilter] = useState<string>('has_uid')
   const [bgAffiliateFilter, setBgAffiliateFilter] = useState<string>('all')
 
   const pageSize = 10
@@ -150,7 +150,6 @@ export default function UserWalletsPage() {
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">{t('list-wallets.filters.allUid')}</SelectItem>
                 <SelectItem value="has_uid">{t('list-wallets.filters.hasUid')}</SelectItem>
                 <SelectItem value="no_uid">{t('list-wallets.filters.noUid')}</SelectItem>
               </SelectContent>

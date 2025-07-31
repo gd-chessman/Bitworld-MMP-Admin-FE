@@ -419,6 +419,11 @@
             "mostActiveWallet": "가장 많이 거래한 지갑",
             "mostActiveWalletDesc": "가장 많은 거래를 한 지갑입니다.",
             "orderCount": "{{count}}건 거래"
+        },
+        "filters": {
+            "all": "모두",
+            "bittworld": "Bittworld",
+            "nonBittworld": "Memepump"
         }
     },
     "bg-affiliate": {
