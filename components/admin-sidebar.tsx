@@ -24,6 +24,7 @@ import {
   Network,
   UserCheck,
   DollarSign,
+  Database,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -104,6 +105,12 @@ export function AdminSidebar() {
       href: "/analytics",
       icon: BarChart3,
       color: "text-purple-400 hover:text-purple-300",
+    },
+    {
+      title: "Pools",
+      href: "/pools",
+      icon: Database,
+      color: "text-indigo-400 hover:text-indigo-300",
     },
     {
       title: t("navigation.settings"),
