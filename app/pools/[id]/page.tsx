@@ -22,6 +22,7 @@ import {
   Crown
 } from "lucide-react"
 import { getAirdropPoolDetail } from "@/services/api/AirdropService"
+import { useLang } from "@/lang/useLang"
 
 // API response structure matches the provided JSON format
 
@@ -69,6 +70,7 @@ interface PoolData {
 }
 
 export default function PoolDetailPage() {
+  const { t } = useLang()
   const params = useParams()
   const router = useRouter()
   const poolId = params.id as string
@@ -109,11 +111,13 @@ export default function PoolDetailPage() {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "active":
-        return <Badge className="bg-green-500/10 text-green-500 border-green-500/20">Active</Badge>
+        return <Badge className="bg-green-500/10 text-green-500 border-green-500/20">{t('pool-detail.status.active')}</Badge>
       case "pending":
-        return <Badge className="bg-yellow-500/10 text-yellow-500 border-yellow-500/20">Pending</Badge>
-      case "completed":
-        return <Badge className="bg-blue-500/10 text-blue-500 border-blue-500/20">Completed</Badge>
+        return <Badge className="bg-yellow-500/10 text-yellow-500 border-yellow-500/20">{t('pool-detail.status.pending')}</Badge>
+      case "end":
+        return <Badge className="bg-blue-500/10 text-blue-500 border-blue-500/20">{t('pool-detail.status.end')}</Badge>
+      case "error":
+        return <Badge className="bg-red-500/10 text-red-500 border-red-500/20">{t('pool-detail.status.error')}</Badge>
       default:
         return <Badge variant="secondary">{status}</Badge>
     }
@@ -143,12 +147,12 @@ export default function PoolDetailPage() {
         <div className="flex items-center space-x-4">
           <Button variant="outline" size="sm" onClick={() => router.back()}>
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Back
+            {t('pool-detail.back')}
           </Button>
         </div>
         <div className="text-center py-8">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
-          <p className="mt-2 text-muted-foreground">Loading pool details...</p>
+          <p className="mt-2 text-muted-foreground">{t('pool-detail.loading')}</p>
         </div>
       </div>
     )
@@ -160,11 +164,11 @@ export default function PoolDetailPage() {
         <div className="flex items-center space-x-4">
           <Button variant="outline" size="sm" onClick={() => router.back()}>
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Back
+            {t('pool-detail.back')}
           </Button>
         </div>
         <div className="text-center py-8 text-muted-foreground">
-          Pool not found
+          {t('pool-detail.notFound')}
         </div>
       </div>
     )
@@ -180,7 +184,7 @@ export default function PoolDetailPage() {
         </Button>
         <div>
           <h2 className="text-3xl font-bold tracking-tight">{poolData.name}</h2>
-          <p className="text-muted-foreground">Pool ID: {poolData.poolId}</p>
+          <p className="text-muted-foreground">{t('pool-detail.poolId')}: {poolData.poolId}</p>
         </div>
       </div>
 
@@ -189,11 +193,11 @@ export default function PoolDetailPage() {
         <Card className="stat-card min-h-[140px] flex flex-col justify-between">
           <div className="flex justify-between">
             <div>
-              <p className="stat-label">Total Members</p>
+              <p className="stat-label">{t('pool-detail.stats.totalMembers')}</p>
               <p className="stat-value">{poolData.memberCount}</p>
               <p className="stat-change stat-change-positive flex items-center gap-1">
                 <Users className="h-3 w-3" />
-                <span>Active participants</span>
+                <span>{t('pool-detail.stats.activeParticipants')}</span>
               </p>
             </div>
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-500/10">
@@ -205,11 +209,11 @@ export default function PoolDetailPage() {
         <Card className="stat-card min-h-[140px] flex flex-col justify-between">
           <div className="flex justify-between">
             <div>
-              <p className="stat-label">Total Volume</p>
+              <p className="stat-label">{t('pool-detail.stats.totalVolume')}</p>
               <p className="stat-value">{poolData.totalVolume}</p>
               <p className="stat-change stat-change-positive flex items-center gap-1">
                 <DollarSign className="h-3 w-3" />
-                <span>Combined stakes</span>
+                <span>{t('pool-detail.stats.combinedStakes')}</span>
               </p>
             </div>
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-500/10">
@@ -221,11 +225,13 @@ export default function PoolDetailPage() {
         <Card className="stat-card min-h-[140px] flex flex-col justify-between">
           <div className="flex justify-between">
             <div>
-              <p className="stat-label">Status</p>
-              <p className="stat-value">{poolData.status}</p>
+              <p className="stat-label">{t('pool-detail.stats.status')}</p>
+              <div className="stat-value">
+                {getStatusBadge(poolData.status)}
+              </div>
               <p className="stat-change stat-change-positive flex items-center gap-1">
                 <Activity className="h-3 w-3" />
-                <span>Pool status</span>
+                <span>{t('pool-detail.stats.poolStatus')}</span>
               </p>
             </div>
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500/10">
@@ -237,11 +243,11 @@ export default function PoolDetailPage() {
         <Card className="stat-card min-h-[140px] flex flex-col justify-between">
           <div className="flex justify-between">
             <div>
-              <p className="stat-label">Transactions</p>
+              <p className="stat-label">{t('pool-detail.stats.transactions')}</p>
               <p className="stat-value">{poolData.transactions.length}</p>
               <p className="stat-change stat-change-positive flex items-center gap-1">
                 <Database className="h-3 w-3" />
-                <span>Total transactions</span>
+                <span>{t('pool-detail.stats.totalTransactions')}</span>
               </p>
             </div>
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-purple-500/10">
@@ -254,9 +260,9 @@ export default function PoolDetailPage() {
       {/* Tabs */}
       <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
         <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="members">Members</TabsTrigger>
-          <TabsTrigger value="transactions">Transactions</TabsTrigger>
+          <TabsTrigger value="overview">{t('pool-detail.tabs.overview')}</TabsTrigger>
+          <TabsTrigger value="members">{t('pool-detail.tabs.members')}</TabsTrigger>
+          <TabsTrigger value="transactions">{t('pool-detail.tabs.transactions')}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview" className="space-y-6">
@@ -265,8 +271,8 @@ export default function PoolDetailPage() {
             {/* Pool Information */}
             <Card className="dashboard-card">
               <CardHeader>
-                <CardTitle>Pool Information</CardTitle>
-                <CardDescription>Basic information about this pool</CardDescription>
+                <CardTitle>{t('pool-detail.overview.poolInfo.title')}</CardTitle>
+                <CardDescription>{t('pool-detail.overview.poolInfo.description')}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-center space-x-4">
@@ -288,17 +294,17 @@ export default function PoolDetailPage() {
                 
                 <div className="space-y-3">
                   <div>
-                    <label className="text-sm font-medium text-muted-foreground">Description</label>
+                    <label className="text-sm font-medium text-muted-foreground">{t('pool-detail.overview.poolInfo.description')}</label>
                     <p className="text-sm">{poolData.describe}</p>
                   </div>
                   
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="text-sm font-medium text-muted-foreground">Creation Date</label>
+                      <label className="text-sm font-medium text-muted-foreground">{t('pool-detail.overview.poolInfo.creationDate')}</label>
                       <p className="text-sm">{formatDate(poolData.creationDate)}</p>
                     </div>
                     <div>
-                      <label className="text-sm font-medium text-muted-foreground">End Date</label>
+                      <label className="text-sm font-medium text-muted-foreground">{t('pool-detail.overview.poolInfo.endDate')}</label>
                       <p className="text-sm">{formatDate(poolData.endDate)}</p>
                     </div>
                   </div>
@@ -309,23 +315,23 @@ export default function PoolDetailPage() {
             {/* Creator Information */}
             <Card className="dashboard-card">
               <CardHeader>
-                <CardTitle>Creator Information</CardTitle>
-                <CardDescription>Pool creator details</CardDescription>
+                <CardTitle>{t('pool-detail.overview.creatorInfo.title')}</CardTitle>
+                <CardDescription>{t('pool-detail.overview.creatorInfo.description')}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-center space-x-2">
                   <Crown className="h-5 w-5 text-yellow-500" />
-                  <span className="font-semibold">Pool Creator</span>
+                  <span className="font-semibold">{t('pool-detail.overview.creatorInfo.poolCreator')}</span>
                 </div>
                 
                 <div className="space-y-3">
                   <div>
-                    <label className="text-sm font-medium text-muted-foreground">Bittworld UID</label>
+                    <label className="text-sm font-medium text-muted-foreground">{t('pool-detail.overview.creatorInfo.bittworldUid')}</label>
                     <p className="text-sm font-mono">{poolData.creatorBittworldUid}</p>
                   </div>
                   
                   <div>
-                    <label className="text-sm font-medium text-muted-foreground">Solana Address</label>
+                    <label className="text-sm font-medium text-muted-foreground">{t('pool-detail.overview.creatorInfo.solanaAddress')}</label>
                     <div className="flex items-center space-x-2">
                       <span className="text-sm font-mono">{truncateAddress(poolData.creatorAddress)}</span>
                       <button
@@ -342,7 +348,7 @@ export default function PoolDetailPage() {
                   </div>
                   
                   <div>
-                    <label className="text-sm font-medium text-muted-foreground">Transaction Hash</label>
+                    <label className="text-sm font-medium text-muted-foreground">{t('pool-detail.overview.creatorInfo.transactionHash')}</label>
                     <div className="flex items-center space-x-2">
                       <span className="text-sm font-mono">{truncateAddress(poolData.transactionHash)}</span>
                       <button
@@ -367,20 +373,20 @@ export default function PoolDetailPage() {
            {/* Members List */}
            <Card className="dashboard-card">
              <CardHeader>
-               <CardTitle>Members</CardTitle>
-               <CardDescription>All members in this pool</CardDescription>
+               <CardTitle>{t('pool-detail.members.title')}</CardTitle>
+               <CardDescription>{t('pool-detail.members.description')}</CardDescription>
              </CardHeader>
              <CardContent>
                <div className="rounded-md border">
                  <Table>
                    <TableHeader>
                      <TableRow>
-                       <TableHead>Member</TableHead>
-                       <TableHead>Bittworld UID</TableHead>
-                       <TableHead>Total Staked</TableHead>
-                       <TableHead>Stake Count</TableHead>
-                       <TableHead>Status</TableHead>
-                       <TableHead>Join Date</TableHead>
+                       <TableHead>{t('pool-detail.members.table.member')}</TableHead>
+                       <TableHead>{t('pool-detail.members.table.bittworldUid')}</TableHead>
+                       <TableHead>{t('pool-detail.members.table.totalStaked')}</TableHead>
+                       <TableHead>{t('pool-detail.members.table.stakeCount')}</TableHead>
+                       <TableHead>{t('pool-detail.members.table.status')}</TableHead>
+                       <TableHead>{t('pool-detail.members.table.joinDate')}</TableHead>
                      </TableRow>
                    </TableHeader>
                    <TableBody>
@@ -427,20 +433,20 @@ export default function PoolDetailPage() {
           {/* Transactions List */}
           <Card className="dashboard-card">
             <CardHeader>
-              <CardTitle>Transactions</CardTitle>
-              <CardDescription>All transactions in this pool</CardDescription>
+              <CardTitle>{t('pool-detail.transactions.title')}</CardTitle>
+              <CardDescription>{t('pool-detail.transactions.description')}</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="rounded-md border">
                 <Table>
                     <TableHeader>
                      <TableRow>
-                       <TableHead>Member</TableHead>
-                       <TableHead>Bittworld UID</TableHead>
-                       <TableHead>Stake Amount</TableHead>
-                       <TableHead>Status</TableHead>
-                       <TableHead>Date</TableHead>
-                       <TableHead>Transaction Hash</TableHead>
+                       <TableHead>{t('pool-detail.transactions.table.member')}</TableHead>
+                       <TableHead>{t('pool-detail.transactions.table.bittworldUid')}</TableHead>
+                       <TableHead>{t('pool-detail.transactions.table.stakeAmount')}</TableHead>
+                       <TableHead>{t('pool-detail.transactions.table.status')}</TableHead>
+                       <TableHead>{t('pool-detail.transactions.table.date')}</TableHead>
+                       <TableHead>{t('pool-detail.transactions.table.transactionHash')}</TableHead>
                      </TableRow>
                    </TableHeader>
                   <TableBody>

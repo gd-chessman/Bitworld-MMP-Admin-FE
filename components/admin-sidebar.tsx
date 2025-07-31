@@ -101,16 +101,16 @@ export function AdminSidebar() {
       color: "text-cyan-400 hover:text-cyan-300",
     },
     {
+      title: t("navigation.pools"),
+      href: "/pools",
+      icon: Database,
+      color: "text-indigo-400 hover:text-indigo-300",
+    },
+    {
       title: t("navigation.analytics"),
       href: "/analytics",
       icon: BarChart3,
       color: "text-purple-400 hover:text-purple-300",
-    },
-    {
-      title: "Pools",
-      href: "/pools",
-      icon: Database,
-      color: "text-indigo-400 hover:text-indigo-300",
     },
     {
       title: t("navigation.settings"),

@@ -336,6 +336,7 @@
         "analytics": "Phân Tích",
         "referral": "Giới thiệu BG",
         "normalAffiliate": "Giới Thiệu Thường",
+        "pools": "Pools",
         "settings": "Cài Đặt",
         "admin": "Quản Trị",
         "orders": "Giao dịch"
@@ -747,6 +748,112 @@
                 "cancel": "Hủy",
                 "update": "Cập nhật"
             }
+        }
+    },
+    "pools": {
+        "title": "Quản lý Pools",
+        "description": "Theo dõi và quản lý tất cả pools trong hệ thống",
+        "stats": {
+            "totalPools": "Tổng Pools",
+            "activePools": "Pools Hoạt động",
+            "totalMembers": "Tổng Thành viên",
+            "totalVolume": "Tổng Khối lượng",
+            "combinedVolume": "Khối lượng kết hợp",
+            "currentlyRunning": "Đang chạy",
+            "acrossAllPools": "Trên tất cả pools"
+        },
+        "list": {
+            "title": "Danh sách Pools",
+            "description": "Xem và quản lý tất cả pools trong hệ thống",
+            "searchPlaceholder": "Tìm kiếm pools...",
+            "table": {
+                "pool": "Pool",
+                "members": "Thành viên",
+                "volume": "Khối lượng",
+                "status": "Trạng thái",
+                "creator": "Người tạo",
+                "dates": "Ngày tháng",
+                "actions": "Hành động",
+                "view": "Xem",
+                "created": "Tạo",
+                "ends": "Kết thúc"
+            },
+            "status": {
+                "active": "Hoạt động",
+                "pending": "Chờ xử lý",
+                "end": "Kết thúc",
+                "error": "Lỗi"
+            },
+            "noResults": "Không tìm thấy pools phù hợp",
+            "loading": "Đang tải pools..."
+        }
+    },
+    "pool-detail": {
+        "back": "Quay lại",
+        "poolId": "ID Pool",
+        "loading": "Đang tải chi tiết pool...",
+        "notFound": "Không tìm thấy pool",
+        "stats": {
+            "totalMembers": "Tổng Thành viên",
+            "totalVolume": "Tổng Khối lượng",
+            "status": "Trạng thái",
+            "transactions": "Giao dịch",
+            "activeParticipants": "Người tham gia hoạt động",
+            "combinedStakes": "Tổng cược kết hợp",
+            "poolStatus": "Trạng thái pool",
+            "totalTransactions": "Tổng giao dịch"
+        },
+        "tabs": {
+            "overview": "Tổng quan",
+            "members": "Thành viên",
+            "transactions": "Giao dịch"
+        },
+        "overview": {
+            "poolInfo": {
+                "title": "Thông tin Pool",
+                "description": "Thông tin cơ bản về pool này",
+                "description": "Mô tả",
+                "creationDate": "Ngày tạo",
+                "endDate": "Ngày kết thúc"
+            },
+            "creatorInfo": {
+                "title": "Thông tin Người tạo",
+                "description": "Chi tiết người tạo pool",
+                "poolCreator": "Người tạo Pool",
+                "bittworldUid": "Bittworld UID",
+                "solanaAddress": "Địa chỉ Solana",
+                "transactionHash": "Hash giao dịch"
+            }
+        },
+        "members": {
+            "title": "Thành viên",
+            "description": "Tất cả thành viên trong pool này",
+            "table": {
+                "member": "Thành viên",
+                "bittworldUid": "Bittworld UID",
+                "totalStaked": "Tổng cược",
+                "stakeCount": "Số lần cược",
+                "status": "Trạng thái",
+                "joinDate": "Ngày tham gia"
+            }
+        },
+        "transactions": {
+            "title": "Giao dịch",
+            "description": "Tất cả giao dịch trong pool này",
+            "table": {
+                "member": "Thành viên",
+                "bittworldUid": "Bittworld UID",
+                "stakeAmount": "Số tiền cược",
+                "status": "Trạng thái",
+                "date": "Ngày",
+                "transactionHash": "Hash giao dịch"
+            }
+        },
+        "status": {
+            "active": "Hoạt động",
+            "pending": "Chờ xử lý",
+            "end": "Kết thúc",
+            "error": "Lỗi"
         }
     }
 }

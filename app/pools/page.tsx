@@ -21,6 +21,7 @@ import {
   Database
 } from "lucide-react"
 import { getAirdropPools, getAirdropPoolsStats } from "@/services/api/AirdropService"
+import { useLang } from "@/lang/useLang"
 
 // Types for API response
 interface AirdropPool {
@@ -60,6 +61,7 @@ interface PoolsStats {
 }
 
 export default function PoolsPage() {
+  const { t } = useLang()
   const router = useRouter()
   const [searchTerm, setSearchTerm] = useState("")
   const [copiedAddress, setCopiedAddress] = useState<string | null>(null)
@@ -127,11 +129,13 @@ export default function PoolsPage() {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "active":
-        return <Badge className="bg-green-500/10 text-green-500 border-green-500/20">Active</Badge>
+        return <Badge className="bg-green-500/10 text-green-500 border-green-500/20">{t('pools.list.status.active')}</Badge>
       case "pending":
-        return <Badge className="bg-yellow-500/10 text-yellow-500 border-yellow-500/20">Pending</Badge>
-      case "completed":
-        return <Badge className="bg-blue-500/10 text-blue-500 border-blue-500/20">Completed</Badge>
+        return <Badge className="bg-yellow-500/10 text-yellow-500 border-yellow-500/20">{t('pools.list.status.pending')}</Badge>
+      case "end":
+        return <Badge className="bg-blue-500/10 text-blue-500 border-blue-500/20">{t('pools.list.status.end')}</Badge>
+      case "error":
+        return <Badge className="bg-red-500/10 text-red-500 border-red-500/20">{t('pools.list.status.error')}</Badge>
       default:
         return <Badge variant="secondary">{status}</Badge>
     }
@@ -157,8 +161,8 @@ export default function PoolsPage() {
     <div className="flex flex-col space-y-6">
       {/* Header */}
       <div className="flex flex-col space-y-2">
-        <h2 className="text-3xl font-bold tracking-tight">Pools Management</h2>
-        <p className="text-muted-foreground">Monitor and manage all pools in the system</p>
+        <h2 className="text-3xl font-bold tracking-tight">{t('pools.title')}</h2>
+        <p className="text-muted-foreground">{t('pools.description')}</p>
       </div>
 
       {/* Statistics Cards */}
@@ -166,11 +170,11 @@ export default function PoolsPage() {
         <Card className="stat-card min-h-[140px] flex flex-col justify-between">
           <div className="flex justify-between">
             <div>
-              <p className="stat-label">Total Pools</p>
+              <p className="stat-label">{t('pools.stats.totalPools')}</p>
               <p className="stat-value">{isLoadingStats ? '...' : poolsStats.totalPools}</p>
               <p className="stat-change stat-change-positive flex items-center gap-1">
                 <Activity className="h-3 w-3" />
-                <span>{isLoadingStats ? '...' : poolsStats.activePools} active pools</span>
+                <span>{isLoadingStats ? '...' : poolsStats.activePools} {t('pools.stats.activePools').toLowerCase()}</span>
               </p>
             </div>
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-indigo-500/10">
@@ -182,11 +186,11 @@ export default function PoolsPage() {
         <Card className="stat-card min-h-[140px] flex flex-col justify-between">
           <div className="flex justify-between">
             <div>
-              <p className="stat-label">Total Members</p>
+              <p className="stat-label">{t('pools.stats.totalMembers')}</p>
               <p className="stat-value">{isLoadingStats ? '...' : poolsStats.totalMembers.toLocaleString()}</p>
               <p className="stat-change stat-change-positive flex items-center gap-1">
                 <Users className="h-3 w-3" />
-                <span>Across all pools</span>
+                <span>{t('pools.stats.acrossAllPools')}</span>
               </p>
             </div>
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-500/10">
@@ -198,11 +202,11 @@ export default function PoolsPage() {
         <Card className="stat-card min-h-[140px] flex flex-col justify-between">
           <div className="flex justify-between">
             <div>
-              <p className="stat-label">Total Volume</p>
+              <p className="stat-label">{t('pools.stats.totalVolume')}</p>
               <p className="stat-value">{isLoadingStats ? '...' : poolsStats.totalVolume}</p>
               <p className="stat-change stat-change-positive flex items-center gap-1">
                 <DollarSign className="h-3 w-3" />
-                <span>Combined volume</span>
+                <span>{t('pools.stats.combinedVolume')}</span>
               </p>
             </div>
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-500/10">
@@ -214,11 +218,11 @@ export default function PoolsPage() {
         <Card className="stat-card min-h-[140px] flex flex-col justify-between">
           <div className="flex justify-between">
             <div>
-              <p className="stat-label">Active Pools</p>
+              <p className="stat-label">{t('pools.stats.activePools')}</p>
               <p className="stat-value">{isLoadingStats ? '...' : poolsStats.currentlyRunning}</p>
               <p className="stat-change stat-change-positive flex items-center gap-1">
                 <TrendingUp className="h-3 w-3" />
-                <span>Currently running</span>
+                <span>{t('pools.stats.currentlyRunning')}</span>
               </p>
             </div>
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500/10">
@@ -231,15 +235,15 @@ export default function PoolsPage() {
       {/* Pools List */}
       <Card className="dashboard-card">
         <CardHeader>
-          <CardTitle>Pools List</CardTitle>
-          <CardDescription>View and manage all pools in the system</CardDescription>
+          <CardTitle>{t('pools.list.title')}</CardTitle>
+          <CardDescription>{t('pools.list.description')}</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="mb-6">
             <div className="relative max-w-sm">
               <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
               <Input
-                placeholder="Search pools..."
+                placeholder={t('pools.list.searchPlaceholder')}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="pl-10"
@@ -252,20 +256,20 @@ export default function PoolsPage() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Pool</TableHead>
-                  <TableHead>Members</TableHead>
-                  <TableHead>Volume</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Creator</TableHead>
-                  <TableHead>Dates</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
+                  <TableHead>{t('pools.list.table.pool')}</TableHead>
+                  <TableHead>{t('pools.list.table.members')}</TableHead>
+                  <TableHead>{t('pools.list.table.volume')}</TableHead>
+                  <TableHead>{t('pools.list.table.status')}</TableHead>
+                  <TableHead>{t('pools.list.table.creator')}</TableHead>
+                  <TableHead>{t('pools.list.table.dates')}</TableHead>
+                  <TableHead className="text-right">{t('pools.list.table.actions')}</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {isLoading ? (
                   <TableRow>
                     <TableCell colSpan={7} className="text-center py-8">
-                      Loading pools...
+                      {t('pools.list.loading')}
                     </TableCell>
                   </TableRow>
                 ) : (
@@ -326,11 +330,11 @@ export default function PoolsPage() {
                         <div className="space-y-1">
                           <div className="flex items-center space-x-1 text-xs">
                             <Calendar className="h-3 w-3 text-muted-foreground" />
-                            <span>Created: {formatDate(pool.apl_creation_date)}</span>
+                            <span>{t('pools.list.table.created')}: {formatDate(pool.apl_creation_date)}</span>
                           </div>
                           <div className="flex items-center space-x-1 text-xs">
                             <Clock className="h-3 w-3 text-muted-foreground" />
-                            <span>Ends: {formatDate(pool.apl_end_date)}</span>
+                            <span>{t('pools.list.table.ends')}: {formatDate(pool.apl_end_date)}</span>
                           </div>
                         </div>
                       </TableCell>
@@ -341,7 +345,7 @@ export default function PoolsPage() {
                         onClick={() => router.push(`/pools/${pool.alp_id}`)}
                       >
                         <Eye className="h-4 w-4 mr-2" />
-                        View
+                        {t('pools.list.table.view')}
                       </Button>
                     </TableCell>
                     </TableRow>
@@ -353,7 +357,7 @@ export default function PoolsPage() {
 
           {!isLoading && poolsData.data.length === 0 && (
             <div className="text-center py-8 text-muted-foreground">
-              No pools found matching your criteria
+              {t('pools.list.noResults')}
             </div>
           )}
         </CardContent>

@@ -336,6 +336,7 @@
         "analytics": "분석",
         "referral": "BG 추천",
         "normalAffiliate": "일반 추천",
+        "pools": "풀",
         "settings": "설정",
         "admin": "관리자",
         "orders": "거래"
@@ -745,6 +746,112 @@
                 "cancel": "취소",
                 "update": "업데이트"
             }
+        }
+    },
+    "pools": {
+        "title": "풀 관리",
+        "description": "시스템의 모든 풀을 모니터링하고 관리합니다",
+        "stats": {
+            "totalPools": "총 풀",
+            "activePools": "활성 풀",
+            "totalMembers": "총 멤버",
+            "totalVolume": "총 볼륨",
+            "combinedVolume": "결합된 볼륨",
+            "currentlyRunning": "현재 실행 중",
+            "acrossAllPools": "모든 풀에서"
+        },
+        "list": {
+            "title": "풀 목록",
+            "description": "시스템의 모든 풀을 보고 관리합니다",
+            "searchPlaceholder": "풀 검색...",
+            "table": {
+                "pool": "풀",
+                "members": "멤버",
+                "volume": "볼륨",
+                "status": "상태",
+                "creator": "생성자",
+                "dates": "날짜",
+                "actions": "작업",
+                "view": "보기",
+                "created": "생성됨",
+                "ends": "종료"
+            },
+            "status": {
+                "active": "활성",
+                "pending": "대기 중",
+                "end": "종료",
+                "error": "오류"
+            },
+            "noResults": "조건에 맞는 풀을 찾을 수 없습니다",
+            "loading": "풀 로딩 중..."
+        }
+    },
+    "pool-detail": {
+        "back": "뒤로",
+        "poolId": "풀 ID",
+        "loading": "풀 세부사항 로딩 중...",
+        "notFound": "풀을 찾을 수 없습니다",
+        "stats": {
+            "totalMembers": "총 멤버",
+            "totalVolume": "총 볼륨",
+            "status": "상태",
+            "transactions": "거래",
+            "activeParticipants": "활성 참가자",
+            "combinedStakes": "결합된 스테이크",
+            "poolStatus": "풀 상태",
+            "totalTransactions": "총 거래"
+        },
+        "tabs": {
+            "overview": "개요",
+            "members": "멤버",
+            "transactions": "거래"
+        },
+        "overview": {
+            "poolInfo": {
+                "title": "풀 정보",
+                "description": "이 풀에 대한 기본 정보",
+                "description": "설명",
+                "creationDate": "생성일",
+                "endDate": "종료일"
+            },
+            "creatorInfo": {
+                "title": "생성자 정보",
+                "description": "풀 생성자 세부사항",
+                "poolCreator": "풀 생성자",
+                "bittworldUid": "Bittworld UID",
+                "solanaAddress": "솔라나 주소",
+                "transactionHash": "거래 해시"
+            }
+        },
+        "members": {
+            "title": "멤버",
+            "description": "이 풀의 모든 멤버",
+            "table": {
+                "member": "멤버",
+                "bittworldUid": "Bittworld UID",
+                "totalStaked": "총 스테이크",
+                "stakeCount": "스테이크 횟수",
+                "status": "상태",
+                "joinDate": "가입일"
+            }
+        },
+        "transactions": {
+            "title": "거래",
+            "description": "이 풀의 모든 거래",
+            "table": {
+                "member": "멤버",
+                "bittworldUid": "Bittworld UID",
+                "stakeAmount": "스테이크 금액",
+                "status": "상태",
+                "date": "날짜",
+                "transactionHash": "거래 해시"
+            }
+        },
+        "status": {
+            "active": "활성",
+            "pending": "대기 중",
+            "end": "종료",
+            "error": "오류"
         }
     }
 }

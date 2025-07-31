@@ -336,6 +336,7 @@
         "analytics": "Analytics",
         "referral": "BG Affiliate",
         "normalAffiliate": "Normal Affiliate",
+        "pools": "Pools",
         "settings": "Settings",
         "admin": "Admin",
         "orders": "Transactions"
@@ -745,6 +746,112 @@
                 "cancel": "Cancel",
                 "update": "Update"
             }
+        }
+    },
+    "pools": {
+        "title": "Pools Management",
+        "description": "Monitor and manage all pools in the system",
+        "stats": {
+            "totalPools": "Total Pools",
+            "activePools": "Active Pools",
+            "totalMembers": "Total Members",
+            "totalVolume": "Total Volume",
+            "combinedVolume": "Combined volume",
+            "currentlyRunning": "Currently running",
+            "acrossAllPools": "Across all pools"
+        },
+        "list": {
+            "title": "Pools List",
+            "description": "View and manage all pools in the system",
+            "searchPlaceholder": "Search pools...",
+            "table": {
+                "pool": "Pool",
+                "members": "Members",
+                "volume": "Volume",
+                "status": "Status",
+                "creator": "Creator",
+                "dates": "Dates",
+                "actions": "Actions",
+                "view": "View",
+                "created": "Created",
+                "ends": "Ends"
+            },
+            "status": {
+                "active": "Active",
+                "pending": "Pending",
+                "end": "End",
+                "error": "Error"
+            },
+            "noResults": "No pools found matching your criteria",
+            "loading": "Loading pools..."
+        }
+    },
+    "pool-detail": {
+        "back": "Back",
+        "poolId": "Pool ID",
+        "loading": "Loading pool details...",
+        "notFound": "Pool not found",
+        "stats": {
+            "totalMembers": "Total Members",
+            "totalVolume": "Total Volume",
+            "status": "Status",
+            "transactions": "Transactions",
+            "activeParticipants": "Active participants",
+            "combinedStakes": "Combined stakes",
+            "poolStatus": "Pool status",
+            "totalTransactions": "Total transactions"
+        },
+        "tabs": {
+            "overview": "Overview",
+            "members": "Members",
+            "transactions": "Transactions"
+        },
+        "overview": {
+            "poolInfo": {
+                "title": "Pool Information",
+                "description": "Basic information about this pool",
+                "description": "Description",
+                "creationDate": "Creation Date",
+                "endDate": "End Date"
+            },
+            "creatorInfo": {
+                "title": "Creator Information",
+                "description": "Pool creator details",
+                "poolCreator": "Pool Creator",
+                "bittworldUid": "Bittworld UID",
+                "solanaAddress": "Solana Address",
+                "transactionHash": "Transaction Hash"
+            }
+        },
+        "members": {
+            "title": "Members",
+            "description": "All members in this pool",
+            "table": {
+                "member": "Member",
+                "bittworldUid": "Bittworld UID",
+                "totalStaked": "Total Staked",
+                "stakeCount": "Stake Count",
+                "status": "Status",
+                "joinDate": "Join Date"
+            }
+        },
+        "transactions": {
+            "title": "Transactions",
+            "description": "All transactions in this pool",
+            "table": {
+                "member": "Member",
+                "bittworldUid": "Bittworld UID",
+                "stakeAmount": "Stake Amount",
+                "status": "Status",
+                "date": "Date",
+                "transactionHash": "Transaction Hash"
+            }
+        },
+        "status": {
+            "active": "Active",
+            "pending": "Pending",
+            "end": "End",
+            "error": "Error"
         }
     }
 }
