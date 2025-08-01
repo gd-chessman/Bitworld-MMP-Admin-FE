@@ -532,7 +532,7 @@ export default function AdminDashboard() {
               </CardContent>
             </Card>
           </div>
-          <Card className="dashboard-card">
+          {/* <Card className="dashboard-card">
             <CardHeader>
               <CardTitle>{t('dashboard.activeConnections.title')}</CardTitle>
               <CardDescription>{t('dashboard.activeConnections.description')}</CardDescription>
@@ -591,7 +591,7 @@ export default function AdminDashboard() {
                 </div>
               </div>
             </CardContent>
-          </Card>
+          </Card> */}
         </TabsContent>
       </Tabs>
     </div>
