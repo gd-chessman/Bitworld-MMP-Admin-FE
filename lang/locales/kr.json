@@ -397,6 +397,7 @@
         "searchPlaceholder": "지갑 주소, 토큰 이름, 토큰 주소로 검색...",
         "stt": "번호",
         "solAddress": "SOL 주소",
+        "bittworldUid": "Bittworld UID",
         "trade": "거래 종류",
         "token": "토큰",
         "quantity": "수량",
@@ -442,6 +443,7 @@
         "table": {
             "number": "#",
             "rootWallet": "루트 지갑",
+            "bittworldUid": "Bittworld UID",
             "commission": "수수료",
             "batAlias": "추천 별칭",
             "members": "멤버",
@@ -775,6 +777,7 @@
                 "volume": "볼륨",
                 "status": "상태",
                 "creator": "생성자",
+                "bittworldUid": "Bittworld UID",
                 "dates": "날짜",
                 "actions": "작업",
                 "view": "보기",

@@ -397,6 +397,7 @@
         "searchPlaceholder": "Search by Wallet Address, Token Name, Token Address...",
         "stt": "No.",
         "solAddress": "SOL Address",
+        "bittworldUid": "Bittworld UID",
         "trade": "Trade",
         "token": "Token",
         "quantity": "Quantity",
@@ -442,6 +443,7 @@
         "table": {
             "number": "#",
             "rootWallet": "Root Wallet",
+            "bittworldUid": "Bittworld UID",
             "commission": "Commission",
             "batAlias": "Referral Alias",
             "members": "Members",
@@ -775,6 +777,7 @@
                 "volume": "Volume",
                 "status": "Status",
                 "creator": "Creator",
+                "bittworldUid": "Bittworld UID",
                 "dates": "Dates",
                 "actions": "Actions",
                 "view": "View",

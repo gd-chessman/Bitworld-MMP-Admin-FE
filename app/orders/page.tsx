@@ -160,6 +160,7 @@ export default function OrdersPage() {
                 <tr className="border-b bg-muted/50">
                   <th className="h-12 px-4 text-left font-medium whitespace-nowrap">{t("orders.stt")}</th>
                   <th className="h-12 px-4 text-left font-medium whitespace-nowrap">{t("orders.solAddress")}</th>
+                  <th className="h-12 px-4 text-left font-medium whitespace-nowrap">{t("orders.bittworldUid")}</th>
                   <th className="h-12 px-4 text-left font-medium whitespace-nowrap">{t("orders.trade")}</th>
                   <th className="h-12 px-4 text-left font-medium whitespace-nowrap">{t("orders.token")}</th>
                   <th className="h-12 px-4 text-left font-medium whitespace-nowrap">{t("orders.quantity")}</th>
@@ -172,7 +173,7 @@ export default function OrdersPage() {
               </thead>
               <tbody>
                 {isLoading ? (
-                  <tr><td colSpan={11} className="text-center py-8">Loading...</td></tr>
+                  <tr><td colSpan={12} className="text-center py-8">Loading...</td></tr>
                 ) : orders.length ? (
                   orders.map((order: any, idx: number) => (
                     <tr key={order.order_id} className="border-b hover:bg-muted/50">
@@ -203,6 +204,13 @@ export default function OrdersPage() {
                             />
                           )}
                         </div>
+                      </td>
+                      <td className="px-4 py-2 text-xs">
+                        {order.isBittworld && order.bittworldUid ? (
+                          <span className="font-mono">{order.bittworldUid}</span>
+                        ) : (
+                          <span className="text-muted-foreground">-</span>
+                        )}
                       </td>
                       <td className="px-4 py-2">
                         <span
@@ -270,7 +278,7 @@ export default function OrdersPage() {
                     </tr>
                   ))
                 ) : (
-                  <tr><td colSpan={11} className="text-center py-8">{t("orders.noData")}</td></tr>
+                  <tr><td colSpan={12} className="text-center py-8">{t("orders.noData")}</td></tr>
                 )}
               </tbody>
             </table>

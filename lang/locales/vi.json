@@ -397,6 +397,7 @@
         "searchPlaceholder": "Tìm theo địa chỉ ví, tên token, địa chỉ token...",
         "stt": "STT",
         "solAddress": "Địa chỉ SOL",
+        "bittworldUid": "Bittworld UID",
         "trade": "Loại giao dịch",
         "token": "Token",
         "quantity": "Số lượng",
@@ -442,6 +443,7 @@
         "table": {
             "number": "#",
             "rootWallet": "Ví Gốc",
+            "bittworldUid": "Bittworld UID",
             "commission": "Hoa Hồng",
             "batAlias": "Bí danh giới thiệu",
             "members": "Thành Viên",
@@ -777,6 +779,7 @@
                 "volume": "Khối lượng",
                 "status": "Trạng thái",
                 "creator": "Người tạo",
+                "bittworldUid": "Bittworld UID",
                 "dates": "Ngày tháng",
                 "actions": "Hành động",
                 "view": "Xem",

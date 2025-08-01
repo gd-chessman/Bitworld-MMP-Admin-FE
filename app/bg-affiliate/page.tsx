@@ -343,6 +343,7 @@ export default function BgAffiliateAdminPage() {
                     <TableHead className="font-semibold text-foreground">{t('bg-affiliate.table.number')}</TableHead>
                     <TableHead className="font-semibold text-foreground">{t('bg-affiliate.table.batAlias')}</TableHead>
                     <TableHead className="font-semibold text-foreground">{t('bg-affiliate.table.rootWallet')}</TableHead>
+                    <TableHead className="font-semibold text-foreground">{t('bg-affiliate.table.bittworldUid')}</TableHead>
                     <TableHead className="font-semibold text-foreground">{t('bg-affiliate.table.commission')}</TableHead>
                     <TableHead className="font-semibold text-foreground">{t('bg-affiliate.table.members')}</TableHead>
                     <TableHead className="font-semibold text-foreground">{t('bg-affiliate.table.created')}</TableHead>
@@ -353,7 +354,7 @@ export default function BgAffiliateAdminPage() {
                 <TableBody>
                   {filteredTrees.length === 0 ? (
                     <TableRow>
-                    <TableCell colSpan={8} className="text-center py-8 text-muted-foreground">
+                    <TableCell colSpan={9} className="text-center py-8 text-muted-foreground">
                       {t('bg-affiliate.table.noTrees')}
                     </TableCell>
                   </TableRow>
@@ -395,6 +396,13 @@ export default function BgAffiliateAdminPage() {
                               )}
                             </div>
                           </div>
+                        </TableCell>
+                        <TableCell className="text-xs">
+                          {tree.rootWallet?.isBittworld && tree.rootWallet?.bittworldUid ? (
+                            <span className="font-mono">{tree.rootWallet.bittworldUid}</span>
+                          ) : (
+                            <span className="text-muted-foreground">-</span>
+                          )}
                         </TableCell>
                         <TableCell>
                           <Badge variant="secondary" className="bg-emerald-900/20 text-emerald-400 border-emerald-500/30">

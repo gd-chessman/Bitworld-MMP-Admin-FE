@@ -146,6 +146,13 @@ function TreeNode({
               </button>
             </div>
             
+            {node.walletInfo?.isBittworld && node.walletInfo?.bittworldUid && (
+              <div className="flex items-center gap-1">
+                <span className="text-muted-foreground">{t('bg-affiliate.table.bittworldUid')}:</span>
+                <span className="font-mono text-blue-400">{node.walletInfo.bittworldUid}</span>
+              </div>
+            )}
+            
             <div className="flex items-center gap-1">
               <Percent className="h-3 w-3" />
               <span className="text-emerald-400 font-medium">{node.commissionPercent}%</span>
@@ -344,6 +351,14 @@ export default function BgAffiliateTreeDetailPage() {
                 )}
               </button>
             </span>
+            {treeData.currentWallet.isBittworld && treeData.currentWallet.bittworldUid && (
+              <>
+                &bull; &nbsp;
+                <span className="text-blue-400 font-medium">
+                  {t('bg-affiliate.table.bittworldUid')}: {treeData.currentWallet.bittworldUid}
+                </span>
+              </>
+            )}
             {treeData.treeInfo.batAlias && (
               <>
                 &bull; &nbsp;

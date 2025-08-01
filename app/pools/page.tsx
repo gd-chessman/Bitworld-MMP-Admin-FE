@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
+import Image from "next/image"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -23,56 +24,21 @@ import {
 import { getAirdropPools, getAirdropPoolsStats } from "@/services/api/AirdropService"
 import { useLang } from "@/lang/useLang"
 
-// Types for API response
-interface AirdropPool {
-  alp_id: number
-  alp_originator: number
-  alp_name: string
-  alp_slug: string
-  alp_describe: string
-  alp_logo: string
-  alp_member_num: number
-  apl_volume: number
-  apl_creation_date: string
-  apl_end_date: string
-  apl_status: string
-  apl_hash: string
-  originator: {
-    wallet_id: number
-    solana_address: string
-    nick_name: string
-  }
-}
 
-interface PoolsResponse {
-  data: AirdropPool[]
-  total: number
-  page: number
-  limit: number
-  totalPages: number
-}
-
-interface PoolsStats {
-  totalPools: number
-  activePools: number
-  totalMembers: number
-  totalVolume: number
-  currentlyRunning: number
-}
 
 export default function PoolsPage() {
   const { t } = useLang()
   const router = useRouter()
   const [searchTerm, setSearchTerm] = useState("")
   const [copiedAddress, setCopiedAddress] = useState<string | null>(null)
-  const [poolsData, setPoolsData] = useState<PoolsResponse>({
+  const [poolsData, setPoolsData] = useState<any>({
     data: [],
     total: 0,
     page: 1,
     limit: 20,
     totalPages: 0
   })
-  const [poolsStats, setPoolsStats] = useState<PoolsStats>({
+  const [poolsStats, setPoolsStats] = useState<any>({
     totalPools: 0,
     activePools: 0,
     totalMembers: 0,
@@ -261,6 +227,7 @@ export default function PoolsPage() {
                   <TableHead>{t('pools.list.table.volume')}</TableHead>
                   <TableHead>{t('pools.list.table.status')}</TableHead>
                   <TableHead>{t('pools.list.table.creator')}</TableHead>
+                  <TableHead>{t('pools.list.table.bittworldUid')}</TableHead>
                   <TableHead>{t('pools.list.table.dates')}</TableHead>
                   <TableHead className="text-right">{t('pools.list.table.actions')}</TableHead>
                 </TableRow>
@@ -268,12 +235,12 @@ export default function PoolsPage() {
               <TableBody>
                 {isLoading ? (
                   <TableRow>
-                    <TableCell colSpan={7} className="text-center py-8">
+                    <TableCell colSpan={8} className="text-center py-8">
                       {t('pools.list.loading')}
                     </TableCell>
                   </TableRow>
                 ) : (
-                  poolsData.data.map((pool) => (
+                  poolsData.data.map((pool: any) => (
                     <TableRow key={pool.alp_id}>
                       <TableCell>
                         <div className="flex items-center space-x-3">
@@ -323,8 +290,24 @@ export default function PoolsPage() {
                                 <Copy className="h-3 w-3" />
                               )}
                             </button>
+                            {pool.originator.isBittworld && (
+                              <Image
+                                src="/favicon.png"
+                                alt="Bittworld"
+                                width={16}
+                                height={16}
+                                className="w-4 h-4 rounded"
+                              />
+                            )}
                           </div>
                         </div>
+                      </TableCell>
+                      <TableCell className="text-xs">
+                        {pool.originator.isBittworld && pool.originator.bittworldUid ? (
+                          <span className="font-mono">{pool.originator.bittworldUid}</span>
+                        ) : (
+                          <span className="text-muted-foreground">-</span>
+                        )}
                       </TableCell>
                       <TableCell>
                         <div className="space-y-1">
