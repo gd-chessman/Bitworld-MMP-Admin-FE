@@ -19,7 +19,8 @@ import {
   Check,
   TrendingUp,
   Activity,
-  Database
+  Database,
+  Crown
 } from "lucide-react"
 import { getAirdropPools, getAirdropPoolsStats } from "@/services/api/AirdropService"
 import { useLang } from "@/lang/useLang"
@@ -195,6 +196,17 @@ export default function PoolsPage() {
               <TrendingUp className="h-6 w-6 text-emerald-500" />
             </div>
           </div>
+          {/* <div className="mt-4">
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="w-full"
+              onClick={() => router.push('/pools-ranking')}
+            >
+              <Crown className="h-4 w-4 mr-2" />
+              VIP
+            </Button>
+          </div> */}
         </Card>
       </div>
 
@@ -266,7 +278,7 @@ export default function PoolsPage() {
                         </div>
                       </TableCell>
                       <TableCell>
-                        <div className="font-medium">{pool.apl_volume}</div>
+                        <div className="font-medium">{pool.apl_total_volume}</div>
                       </TableCell>
                       <TableCell>
                         {getStatusBadge(pool.apl_status)}
