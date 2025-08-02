@@ -210,7 +210,7 @@ export default function PoolDetailPage() {
           <div className="flex justify-between">
             <div>
               <p className="stat-label">{t('pool-detail.stats.totalVolume')}</p>
-              <p className="stat-value">{poolData.totalVolume}</p>
+              <p className="stat-value">{poolData.totalVolume?.toLocaleString()}</p>
               <p className="stat-change stat-change-positive flex items-center gap-1">
                 <DollarSign className="h-3 w-3" />
                 <span>{t('pool-detail.stats.combinedStakes')}</span>
@@ -409,7 +409,7 @@ export default function PoolDetailPage() {
                            <div className="text-sm font-mono">{member.bittworldUid}</div>
                          </TableCell>
                          <TableCell>
-                           <div className="font-medium">{member.totalStaked}</div>
+                           <div className="font-medium">{member.totalStaked?.toLocaleString()}</div>
                          </TableCell>
                          <TableCell>
                            <div className="text-sm">{member.stakeCount}</div>
@@ -469,7 +469,7 @@ export default function PoolDetailPage() {
                            <div className="text-sm font-mono">{transaction.bittworldUid}</div>
                          </TableCell>
                          <TableCell>
-                           <div className="font-medium">{transaction.stakeAmount}</div>
+                           <div className="font-medium">{transaction.stakeAmount?.toLocaleString()}</div>
                          </TableCell>
                         <TableCell>
                           {getStatusBadge(transaction.status)}

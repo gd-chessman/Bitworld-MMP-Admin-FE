@@ -433,6 +433,11 @@
         "cardTitle": "Giới Thiệu",
         "cardDescription": "Quản lý và giám sát tất cả BG giới thiệu",
         "searchPlaceholder": "Tìm kiếm cây...",
+        "filters": {
+            "all": "Tất cả nền tảng",
+            "bittworld": "Bittworld",
+            "memepump": "Memepump"
+        },
         "newBg": "BG Mới",
         "stats": {
             "totalTrees": "Tổng Cây",

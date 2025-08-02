@@ -7,6 +7,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
+import { Select as UISelect, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Plus, Eye, Users, Wallet, Percent, Calendar, ChevronRight, ChevronDown, Search, MoreHorizontal, TrendingUp, Activity, Edit, Copy, Check } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -33,6 +34,7 @@ export default function BgAffiliateAdminPage() {
   const [showUpdateCommission, setShowUpdateCommission] = useState(false);
   const [selectedTree, setSelectedTree] = useState<any>(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [isBittworldFilter, setIsBittworldFilter] = useState<'all' | 'true' | 'false'>('all');
   const [walletSearchQuery, setWalletSearchQuery] = useState("");
   const [copiedAddress, setCopiedAddress] = useState<string | null>(null);
   const queryClient = useQueryClient();
@@ -58,8 +60,8 @@ export default function BgAffiliateAdminPage() {
 
   // Fetch BG Affiliate trees
   const { data: bgAffiliateTrees = [], isLoading: treesLoading, error: treesError } = useQuery({
-    queryKey: ['bg-affiliate-trees'],
-    queryFn: getBgAffiliateTrees,
+    queryKey: ['bg-affiliate-trees', isBittworldFilter],
+    queryFn: () => getBgAffiliateTrees(isBittworldFilter),
     refetchInterval: 30000, // Refetch every 30 seconds
   });
 
@@ -326,6 +328,19 @@ export default function BgAffiliateAdminPage() {
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
+            <UISelect 
+              value={isBittworldFilter} 
+              onValueChange={(value: 'all' | 'true' | 'false') => setIsBittworldFilter(value)}
+            >
+              <SelectTrigger className="w-[180px]">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">{t('bg-affiliate.filters.all')}</SelectItem>
+                <SelectItem value="true">{t('bg-affiliate.filters.bittworld')}</SelectItem>
+                <SelectItem value="false">{t('bg-affiliate.filters.memepump')}</SelectItem>
+              </SelectContent>
+            </UISelect>
           </div>
           {treesLoading ? (
             <div className="flex items-center justify-center py-8">

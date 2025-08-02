@@ -433,6 +433,11 @@
         "cardTitle": "제휴",
         "cardDescription": "모든 BG 제휴 관리 및 모니터링",
         "searchPlaceholder": "트리 검색...",
+        "filters": {
+            "all": "모든 플랫폼",
+            "bittworld": "Bittworld",
+            "memepump": "Memepump"
+        },
         "newBg": "새 BG",
         "stats": {
             "totalTrees": "총 트리",

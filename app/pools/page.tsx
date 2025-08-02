@@ -170,7 +170,7 @@ export default function PoolsPage() {
           <div className="flex justify-between">
             <div>
               <p className="stat-label">{t('pools.stats.totalVolume')}</p>
-              <p className="stat-value">{isLoadingStats ? '...' : poolsStats.totalVolume}</p>
+              <p className="stat-value">{isLoadingStats ? '...' : poolsStats.totalVolume?.toLocaleString()}</p>
               <p className="stat-change stat-change-positive flex items-center gap-1">
                 <DollarSign className="h-3 w-3" />
                 <span>{t('pools.stats.combinedVolume')}</span>
@@ -278,7 +278,7 @@ export default function PoolsPage() {
                         </div>
                       </TableCell>
                       <TableCell>
-                        <div className="font-medium">{pool.apl_total_volume}</div>
+                        <div className="font-medium">{pool.apl_total_volume?.toLocaleString()}</div>
                       </TableCell>
                       <TableCell>
                         {getStatusBadge(pool.apl_status)}

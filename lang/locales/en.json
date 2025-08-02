@@ -433,6 +433,11 @@
         "cardTitle": "Affiliate",
         "cardDescription": "Manage and monitor all BG affiliate",
         "searchPlaceholder": "Search trees...",
+        "filters": {
+            "all": "All Platforms",
+            "bittworld": "Bittworld",
+            "memepump": "Memepump"
+        },
         "newBg": "New BG",
             "stats": {
       "totalTrees": "Total Trees",

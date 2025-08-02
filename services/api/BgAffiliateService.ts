@@ -32,9 +32,13 @@ export const updateRootBgCommission = async (treeId: number, newPercent: number,
 };
 
 // 3. Lấy danh sách tất cả BG affiliate trees
-export const getBgAffiliateTrees = async () => {
+export const getBgAffiliateTrees = async (isBittworld?: 'all' | 'true' | 'false') => {
   try {
-    const response = await axiosClient.get('/bg-affiliate/trees');
+    const params = new URLSearchParams();
+    if (isBittworld && isBittworld !== 'all') {
+      params.append('isBittworld', isBittworld);
+    }
+    const response = await axiosClient.get(`/bg-affiliate/trees?${params.toString()}`);
     return response.data;
   } catch (error) {
     return [];
