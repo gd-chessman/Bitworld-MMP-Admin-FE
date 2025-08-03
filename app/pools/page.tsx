@@ -200,10 +200,10 @@ export default function PoolsPage() {
             <Button 
               variant="outline" 
               size="sm" 
-              className="w-full"
+              className="w-full dark:border-white"
               onClick={() => router.push('/pools-ranking')}
             >
-              <Crown className="h-4 w-4 mr-2" />
+              <Crown className="h-4 w-4 mr-2 text-yellow-400" />
               VIP
             </Button>
           </div>
