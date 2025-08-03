@@ -1,4 +1,7 @@
 {
+    "common": {
+        "back": "Quay lại"
+    },
     "dashboard": {
         "title": "Bảng điều khiển",
         "hello": "Xin chào, Admin!",

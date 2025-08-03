@@ -1,4 +1,7 @@
 {
+    "common": {
+        "back": "Back"
+    },
     "dashboard": {
         "title": "Dashboard",
         "hello": "Hello, Admin!",
