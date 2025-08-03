@@ -39,3 +39,19 @@ export const getAirdropPoolDetail = async (id: number) => {
         return {};
     }
 }
+
+
+export const getAirdropPoolLeaderboard = async (minVolume: number = 0, maxVolume?: number) => {
+    try {
+        const params = new URLSearchParams();
+        params.append('minVolume', minVolume.toString());
+        if (maxVolume !== undefined) {
+            params.append('maxVolume', maxVolume.toString());
+        }
+        const temp = await axiosClient.get(`/airdrop-pools/leaderboard?${params.toString()}`);
+        return temp.data;
+    } catch (error) {
+        console.log(error);
+        return {};
+    }
+}

@@ -866,5 +866,29 @@
             "end": "종료",
             "error": "오류"
         }
+    },
+    "pools-ranking": {
+        "title": "VIP 풀 랭킹",
+        "description": "최고 볼륨과 성능을 가진 독점 풀",
+        "cardTitle": "VIP 풀 랭킹 테이블",
+        "cardDescription": "볼륨과 랭킹별로 정렬된 모든 VIP 풀",
+        "loading": "데이터 로딩 중...",
+        "error": "데이터 로딩 오류",
+        "noData": "데이터 없음",
+        "filters": {
+            "vip7": "VIP 7 (30M+)",
+            "vip6": "VIP 6 (20M-30M)",
+            "vip5": "VIP 5 (10M-20M)"
+        },
+        "table": {
+            "rank": "순위",
+            "pool": "풀",
+            "volume": "볼륨",
+            "members": "멤버",
+            "status": "상태",
+            "wallet": "지갑",
+            "bittworldUid": "Bittworld UID",
+            "created": "생성일"
+        }
     }
 }

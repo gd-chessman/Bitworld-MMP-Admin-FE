@@ -868,5 +868,29 @@
             "end": "Kết thúc",
             "error": "Lỗi"
         }
+    },
+    "pools-ranking": {
+        "title": "Bảng Xếp Hạng VIP Pools",
+        "description": "Các pool VIP với khối lượng và hiệu suất cao nhất",
+        "cardTitle": "Bảng Xếp Hạng VIP Pools",
+        "cardDescription": "Tất cả pool VIP được sắp xếp theo khối lượng và xếp hạng",
+        "loading": "Đang tải dữ liệu...",
+        "error": "Lỗi tải dữ liệu",
+        "noData": "Không có dữ liệu",
+        "filters": {
+            "vip7": "VIP 7 (30M+)",
+            "vip6": "VIP 6 (20M-30M)",
+            "vip5": "VIP 5 (10M-20M)"
+        },
+        "table": {
+            "rank": "Xếp hạng",
+            "pool": "Pool",
+            "volume": "Khối lượng",
+            "members": "Thành viên",
+            "status": "Trạng thái",
+            "wallet": "Ví",
+            "bittworldUid": "Bittworld UID",
+            "created": "Ngày tạo"
+        }
     }
 }

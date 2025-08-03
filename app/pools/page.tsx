@@ -196,7 +196,7 @@ export default function PoolsPage() {
               <TrendingUp className="h-6 w-6 text-emerald-500" />
             </div>
           </div>
-          {/* <div className="mt-4">
+          <div className="mt-4">
             <Button 
               variant="outline" 
               size="sm" 
@@ -206,7 +206,7 @@ export default function PoolsPage() {
               <Crown className="h-4 w-4 mr-2" />
               VIP
             </Button>
-          </div> */}
+          </div>
         </Card>
       </div>
 

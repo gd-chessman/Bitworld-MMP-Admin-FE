@@ -822,7 +822,6 @@
         "overview": {
             "poolInfo": {
                 "title": "Pool Information",
-                "description": "Basic information about this pool",
                 "description": "Description",
                 "creationDate": "Creation Date",
                 "endDate": "End Date"
@@ -865,6 +864,30 @@
             "pending": "Pending",
             "end": "End",
             "error": "Error"
+        }
+    },
+    "pools-ranking": {
+        "title": "VIP Pools Ranking",
+        "description": "Exclusive pools with highest volume and performance",
+        "cardTitle": "VIP Pools Ranking Table",
+        "cardDescription": "All VIP pools sorted by volume and rank",
+        "loading": "Loading data...",
+        "error": "Error loading data",
+        "noData": "No data available",
+        "filters": {
+            "vip7": "VIP 7 (30M+)",
+            "vip6": "VIP 6 (20M-30M)",
+            "vip5": "VIP 5 (10M-20M)"
+        },
+        "table": {
+            "rank": "Rank",
+            "pool": "Pool",
+            "volume": "Volume",
+            "members": "Members",
+            "status": "Status",
+            "wallet": "Wallet",
+            "bittworldUid": "Bittworld UID",
+            "created": "Created"
         }
     }
 }
