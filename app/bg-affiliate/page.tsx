@@ -305,7 +305,7 @@ export default function BgAffiliateAdminPage() {
       )}
 
       {/* Main Content */}
-      <Card className="dashboard-card">
+      <Card className="dashboard-card p-0 md:p-4">
         <CardHeader className="pb-4">
           <div className="flex items-center justify-between">
             <div>

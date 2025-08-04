@@ -211,7 +211,7 @@ export default function PoolsPage() {
       </div>
 
       {/* Pools List */}
-      <Card className="dashboard-card">
+      <Card className="dashboard-card p-0 md:p-4">
         <CardHeader>
           <CardTitle>{t('pools.list.title')}</CardTitle>
           <CardDescription>{t('pools.list.description')}</CardDescription>
@@ -266,8 +266,8 @@ export default function PoolsPage() {
                             }}
                           />
                           <div>
-                            <div className="font-medium">{pool.alp_name}</div>
-                            <div className="text-sm text-muted-foreground">{pool.alp_slug}</div>
+                            <div className="font-medium whitespace-nowrap">{pool.alp_name}</div>
+                            <div className="text-sm text-muted-foreground whitespace-nowrap">{pool.alp_slug}</div>
                           </div>
                         </div>
                       </TableCell>
@@ -280,7 +280,7 @@ export default function PoolsPage() {
                       <TableCell>
                         <div className="font-medium">{pool.apl_total_volume?.toLocaleString()}</div>
                       </TableCell>
-                      <TableCell>
+                      <TableCell className="whitespace-nowrap">
                         {getStatusBadge(pool.apl_status)}
                       </TableCell>
                       <TableCell>
@@ -325,11 +325,11 @@ export default function PoolsPage() {
                         <div className="space-y-1">
                           <div className="flex items-center space-x-1 text-xs">
                             <Calendar className="h-3 w-3 text-muted-foreground" />
-                            <span>{t('pools.list.table.created')}: {formatDate(pool.apl_creation_date)}</span>
+                            <span className="whitespace-nowrap">{t('pools.list.table.created')}: {formatDate(pool.apl_creation_date)}</span>
                           </div>
                           <div className="flex items-center space-x-1 text-xs">
                             <Clock className="h-3 w-3 text-muted-foreground" />
-                            <span>{t('pools.list.table.ends')}: {formatDate(pool.apl_end_date)}</span>
+                            <span className="whitespace-nowrap">{t('pools.list.table.ends')}: {formatDate(pool.apl_end_date)}</span>
                           </div>
                         </div>
                       </TableCell>

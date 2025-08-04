@@ -152,9 +152,9 @@ export default function PoolsRankingPage() {
       {/* VIP Pools Table */}
       <Card>
         <CardHeader>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between flex-wrap gap-2">
             <div>
-              <CardTitle>{t('pools-ranking.cardTitle')}</CardTitle>
+              <CardTitle className="whitespace-nowrap">{t('pools-ranking.cardTitle')}</CardTitle>
               <CardDescription>{t('pools-ranking.cardDescription')}</CardDescription>
             </div>
             <div className="flex items-center space-x-2">

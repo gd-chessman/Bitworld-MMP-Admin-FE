@@ -193,3 +193,10 @@ body {
     @apply text-slate-300 text-sm;
   }
 }
+
+
+@media screen and (max-width : 480px){
+	html{
+		font-size: 12.8px;
+	}
+}

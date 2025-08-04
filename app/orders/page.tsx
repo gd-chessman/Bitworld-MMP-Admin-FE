@@ -119,7 +119,7 @@ export default function OrdersPage() {
         <h2 className="text-3xl font-bold tracking-tight">{t("orders.title")}</h2>
         <p className="text-muted-foreground">{t("orders.description")}</p>
       </div>
-      <Card className="dashboard-card">
+      <Card className="dashboard-card p-0 md:p-4">
         <CardHeader className="pb-2">
           <div className="flex items-center justify-between">
             <div>
@@ -216,8 +216,8 @@ export default function OrdersPage() {
                         <span
                           className={
                             order.order_trade_type === 'buy'
-                              ? 'inline-flex items-center gap-1 bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full text-[11px] font-semibold shadow-sm border border-emerald-200'
-                              : 'inline-flex items-center gap-1 bg-red-100 text-red-700 px-2 py-0.5 rounded-full text-[11px] font-semibold shadow-sm border border-red-200'
+                              ? 'inline-flex whitespace-nowrap items-center gap-1 bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full text-[11px] font-semibold shadow-sm border border-emerald-200'
+                              : 'inline-flex whitespace-nowrap items-center gap-1 bg-red-100 text-red-700 px-2 py-0.5 rounded-full text-[11px] font-semibold shadow-sm border border-red-200'
                           }
                         >
                           {order.order_trade_type === 'buy' ? (
@@ -253,8 +253,8 @@ export default function OrdersPage() {
                       <td className="px-4 py-2">
                         <span className={
                           order.order_status === 'executed'
-                            ? 'bg-emerald-100 text-emerald-700 px-2 py-1 rounded text-xs'
-                            : 'bg-red-100 text-red-700 px-2 py-1 rounded text-xs'
+                            ? 'bg-emerald-100 whitespace-nowrap text-emerald-700 px-2 py-1 rounded text-xs'
+                            : 'bg-red-100 whitespace-nowrap text-red-700 px-2 py-1 rounded text-xs'
                         }>
                           {t(`orders.${order.order_status}`)}
                         </span>

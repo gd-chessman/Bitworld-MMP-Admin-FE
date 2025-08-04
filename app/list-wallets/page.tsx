@@ -99,7 +99,7 @@ export default function UserWalletsPage() {
         <p className="text-muted-foreground">{t('list-wallets.description')}</p>
       </div>
 
-      <Card className="dashboard-card">
+      <Card className="dashboard-card p-0 md:p-4">
         <CardHeader className="pb-2">
           <div className="flex items-center justify-between">
             <div>
@@ -109,14 +109,15 @@ export default function UserWalletsPage() {
           </div>
         </CardHeader>
         <CardContent>
-          <div className="flex items-center gap-2 mb-4">
+          <div className="flex items-center gap-2 mb-4 flex-wrap">
             <div className="relative flex-1">
               <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-              <Input type="search" placeholder={t('list-wallets.searchPlaceholder')} className="pl-8 w-full md:max-w-sm"
+              <Input type="search" placeholder={t('list-wallets.searchPlaceholder')} className="pl-8 w-full md:max-w-sm min-w-[140px]"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
+            <div className="flex items-center gap-2 overflow-x-auto">
             <Select value={isBittworldFilter === undefined ? "all" : isBittworldFilter ? "bittworld" : "non-bittworld"} onValueChange={(value) => {
               if (value === "all") {
                 setIsBittworldFilter(undefined)
@@ -154,6 +155,7 @@ export default function UserWalletsPage() {
                 <SelectItem value="no_uid">{t('list-wallets.filters.noUid')}</SelectItem>
               </SelectContent>
             </Select>
+            </div>
           </div>
           <div className="space-y-4">
             <div className="flex items-center justify-between">
@@ -186,7 +188,7 @@ export default function UserWalletsPage() {
                         <TableCell>{row.wallet_nick_name || t('list-wallets.table.na')}</TableCell>
                         <TableCell>
                           <div className="flex items-center gap-2">
-                            <span className="text-xs break-all">{truncateString(row.wallet_solana_address, 14)}</span>
+                            <span className="text-xs break-all whitespace-nowrap">{truncateString(row.wallet_solana_address, 14)}</span>
                             <Button
                               variant="ghost"
                               size="icon"

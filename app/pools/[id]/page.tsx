@@ -373,7 +373,7 @@ export default function PoolDetailPage() {
 
          <TabsContent value="members" className="space-y-4">
            {/* Members List */}
-           <Card className="dashboard-card">
+           <Card className="dashboard-card p-0 md:p-4">
              <CardHeader>
                <CardTitle>{t('pool-detail.members.title')}</CardTitle>
                <CardDescription>{t('pool-detail.members.description')}</CardDescription>
@@ -433,7 +433,7 @@ export default function PoolDetailPage() {
 
          <TabsContent value="transactions" className="space-y-4">
           {/* Transactions List */}
-          <Card className="dashboard-card">
+          <Card className="dashboard-card p-0 md:p-4">
             <CardHeader>
               <CardTitle>{t('pool-detail.transactions.title')}</CardTitle>
               <CardDescription>{t('pool-detail.transactions.description')}</CardDescription>

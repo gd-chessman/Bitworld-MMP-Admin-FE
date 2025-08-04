@@ -214,7 +214,7 @@ export default function BittworldRewardsPage() {
         </Card>
       </div>
 
-      <Card className="dashboard-card">
+      <Card className="dashboard-card p-0 md:p-4">
         <CardHeader className="pb-2">
           <div className="flex items-center justify-between">
             <div>
