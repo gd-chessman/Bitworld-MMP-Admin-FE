@@ -340,6 +340,7 @@
         "referral": "Giới thiệu BG",
         "normalAffiliate": "Giới Thiệu Thường",
         "pools": "Pools",
+        "bittworldRewards": "Phần Thưởng Bittworld",
         "settings": "Cài Đặt",
         "admin": "Quản Trị",
         "orders": "Giao dịch"
@@ -429,6 +430,61 @@
             "bittworld": "Bittworld",
             "nonBittworld": "Memepump"
         }
+    },
+    "bittworld-rewards": {
+        "title": "Phần Thưởng Bittworld",
+        "description": "Xem và quản lý thống kê phần thưởng Bittworld",
+        "statistics": {
+            "totalRewards": "Tổng Phần Thưởng",
+            "totalRewardsDesc": "Tổng số phần thưởng",
+            "totalAmountUSD": "Tổng Số Tiền USD",
+            "totalAmountUSDDesc": "Tổng số tiền bằng USD",
+            "canWithdraw": "Có Thể Rút",
+            "canWithdrawDesc": "Phần thưởng sẵn sàng rút",
+            "averageReward": "Phần Thưởng Trung Bình",
+            "averageRewardDesc": "Phần thưởng trung bình mỗi giao dịch"
+        },
+        "withdrawals": {
+            "title": "Lịch Sử Rút Tiền",
+            "description": "Xem tất cả lịch sử rút tiền Bittworld",
+            "searchPlaceholder": "Tìm kiếm rút tiền...",
+            "filters": {
+                "all": "Tất Cả Trạng Thái",
+                "pending": "Đang Chờ",
+                "success": "Thành Công",
+                "error": "Lỗi",
+                "cancel": "Đã Hủy"
+            },
+            "noData": "Không tìm thấy lịch sử rút tiền"
+        },
+        "dialog": {
+            "title": "Xác Nhận Rút Tiền",
+            "description": "Bạn có chắc chắn muốn kích hoạt quá trình rút tiền? Hành động này không thể hoàn tác.",
+            "currentStatus": "Trạng Thái Hiện Tại:",
+            "canWithdraw": "Có Thể Rút: {count} phần thưởng",
+            "totalRewards": "Tổng Phần Thưởng: {count} phần thưởng",
+            "totalAmount": "Tổng Số Tiền: ${amount}",
+            "cancel": "Hủy",
+            "confirm": "Xác Nhận Rút Tiền",
+            "processing": "Đang Xử Lý..."
+        },
+        "table": {
+            "id": "ID",
+            "amountSOL": "Số Lượng SOL",
+            "amountUSD": "Số Lượng USD",
+            "address": "Địa Chỉ",
+            "date": "Ngày",
+            "status": "Trạng Thái",
+            "txHash": "Hash Giao Dịch"
+        },
+        "status": {
+            "pending": "Đang Chờ",
+            "success": "Thành Công",
+            "error": "Lỗi",
+            "cancel": "Đã Hủy"
+        },
+        "loading": "Đang Tải...",
+        "noData": "Không tìm thấy dữ liệu"
     },
     "bg-affiliate": {
         "title": "BG Giới Thiệu",

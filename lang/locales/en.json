@@ -340,6 +340,7 @@
         "referral": "BG Affiliate",
         "normalAffiliate": "Normal Affiliate",
         "pools": "Pools",
+        "bittworldRewards": "Bittworld Rewards",
         "settings": "Settings",
         "admin": "Admin",
         "orders": "Transactions"
@@ -429,6 +430,61 @@
             "bittworld": "Bittworld",
             "nonBittworld": "Memepump"
         }
+    },
+    "bittworld-rewards": {
+        "title": "Bittworld Rewards",
+        "description": "View and manage Bittworld rewards statistics",
+        "statistics": {
+            "totalRewards": "Total Rewards",
+            "totalRewardsDesc": "Total number of rewards",
+            "totalAmountUSD": "Total Amount USD",
+            "totalAmountUSDDesc": "Total amount in USD",
+            "canWithdraw": "Can Withdraw",
+            "canWithdrawDesc": "Rewards ready to withdraw",
+            "averageReward": "Average Reward",
+            "averageRewardDesc": "Average reward per transaction"
+        },
+        "withdrawals": {
+            "title": "Withdrawals History",
+            "description": "View all Bittworld withdrawal history",
+            "searchPlaceholder": "Search withdrawals...",
+            "filters": {
+                "all": "All Status",
+                "pending": "Pending",
+                "success": "Success",
+                "error": "Error",
+                "cancel": "Cancelled"
+            },
+            "noData": "No withdrawals found"
+        },
+        "dialog": {
+            "title": "Confirm Withdrawal",
+            "description": "Are you sure you want to trigger the withdrawal process? This action cannot be undone.",
+            "currentStatus": "Current Status:",
+            "canWithdraw": "Can Withdraw: {count} rewards",
+            "totalRewards": "Total Rewards: {count} rewards",
+            "totalAmount": "Total Amount: ${amount}",
+            "cancel": "Cancel",
+            "confirm": "Confirm Withdrawal",
+            "processing": "Processing..."
+        },
+        "table": {
+            "id": "ID",
+            "amountSOL": "Amount SOL",
+            "amountUSD": "Amount USD",
+            "address": "Address",
+            "date": "Date",
+            "status": "Status",
+            "txHash": "TX Hash"
+        },
+        "status": {
+            "pending": "Pending",
+            "success": "Success",
+            "error": "Error",
+            "cancel": "Cancelled"
+        },
+        "loading": "Loading...",
+        "noData": "No data found"
     },
     "bg-affiliate": {
         "title": "BG Affiliate",

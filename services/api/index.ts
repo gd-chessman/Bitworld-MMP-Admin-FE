@@ -5,3 +5,4 @@ export * as SettingService from './SettingService';
 export * as UserWalletsService from './ListWalletsService';
 export * as ReferentSettings from './ReferentSettings';
 export * as ReferentLevelRewards from './ReferentLevelRewards';
+export * as BittworldService from './BittworldService';

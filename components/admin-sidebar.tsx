@@ -25,6 +25,7 @@ import {
   UserCheck,
   DollarSign,
   Database,
+  Coins,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -105,6 +106,12 @@ export function AdminSidebar() {
       href: "/pools",
       icon: Database,
       color: "text-indigo-400 hover:text-indigo-300",
+    },
+    {
+      title: t("navigation.bittworldRewards"),
+      href: "/bittworld-rewards",
+      icon: Coins,
+      color: "text-yellow-400 hover:text-yellow-300",
     },
     {
       title: t("navigation.analytics"),

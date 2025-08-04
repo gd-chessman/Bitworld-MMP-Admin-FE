@@ -340,6 +340,7 @@
         "referral": "BG 추천",
         "normalAffiliate": "일반 추천",
         "pools": "풀",
+        "bittworldRewards": "비트월드 보상",
         "settings": "설정",
         "admin": "관리자",
         "orders": "거래"
@@ -429,6 +430,61 @@
             "bittworld": "Bittworld",
             "nonBittworld": "Memepump"
         }
+    },
+    "bittworld-rewards": {
+        "title": "비트월드 보상",
+        "description": "비트월드 보상 통계 보기 및 관리",
+        "statistics": {
+            "totalRewards": "총 보상",
+            "totalRewardsDesc": "총 보상 수",
+            "totalAmountUSD": "총 USD 금액",
+            "totalAmountUSDDesc": "USD 총 금액",
+            "canWithdraw": "출금 가능",
+            "canWithdrawDesc": "출금 준비된 보상",
+            "averageReward": "평균 보상",
+            "averageRewardDesc": "거래당 평균 보상"
+        },
+        "withdrawals": {
+            "title": "출금 내역",
+            "description": "모든 비트월드 출금 내역 보기",
+            "searchPlaceholder": "출금 검색...",
+            "filters": {
+                "all": "모든 상태",
+                "pending": "대기 중",
+                "success": "성공",
+                "error": "오류",
+                "cancel": "취소됨"
+            },
+            "noData": "출금 내역을 찾을 수 없습니다"
+        },
+        "dialog": {
+            "title": "출금 확인",
+            "description": "출금 프로세스를 트리거하시겠습니까? 이 작업은 되돌릴 수 없습니다.",
+            "currentStatus": "현재 상태:",
+            "canWithdraw": "출금 가능: {count} 보상",
+            "totalRewards": "총 보상: {count} 보상",
+            "totalAmount": "총 금액: ${amount}",
+            "cancel": "취소",
+            "confirm": "출금 확인",
+            "processing": "처리 중..."
+        },
+        "table": {
+            "id": "ID",
+            "amountSOL": "SOL 금액",
+            "amountUSD": "USD 금액",
+            "address": "주소",
+            "date": "날짜",
+            "status": "상태",
+            "txHash": "거래 해시"
+        },
+        "status": {
+            "pending": "대기 중",
+            "success": "성공",
+            "error": "오류",
+            "cancel": "취소됨"
+        },
+        "loading": "로딩 중...",
+        "noData": "데이터를 찾을 수 없습니다"
     },
     "bg-affiliate": {
         "title": "BG Affiliate",
