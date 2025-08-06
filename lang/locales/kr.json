@@ -866,7 +866,7 @@
         "notFound": "풀을 찾을 수 없습니다",
         "stats": {
             "totalMembers": "총 멤버",
-            "totalVolume": "총 볼륨",
+            "totalVolume": "총수량",
             "status": "상태",
             "transactions": "거래",
             "activeParticipants": "활성 참가자",
