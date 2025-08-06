@@ -122,6 +122,7 @@
         "table": {
             "walletId": "Wallet ID",
             "nickname": "Nickname",
+            "email": "Email",
             "authType": "Auth Type",
             "stream": "Stream",
             "country": "Country",

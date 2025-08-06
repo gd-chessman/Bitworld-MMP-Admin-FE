@@ -64,7 +64,7 @@ function TreeNode({
       {/* Node Content */}
       <div 
         className={`
-          flex items-center gap-3 p-3 my-2 rounded-lg border transition-all duration-200 hover:bg-muted/50 relative
+          flex md:flex-row flex-col md:items-center items-start gap-3 p-3 md:p-3 py-2 md:py-4 my-1 md:my-2 rounded-lg border transition-all duration-200 hover:bg-muted/50 relative
           ${isRoot 
             ? 'bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border-blue-500/30' 
             : 'bg-card/50 border-border'
@@ -103,33 +103,34 @@ function TreeNode({
         {/* User Avatar/Icon */}
         <div className="flex-shrink-0">
           <div className={`
-            w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold
+            w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-xs md:text-sm font-semibold
             ${isRoot 
               ? 'bg-gradient-to-br from-blue-500 to-cyan-500 text-white' 
               : 'bg-muted text-foreground'
             }
           `}>
-            {isRoot ? <Crown className="h-5 w-5" /> : (node.walletInfo?.nickName?.charAt(0) || '?').toUpperCase()}
+            {isRoot ? <Crown className="h-4 w-4 md:h-5 md:w-5" /> : (node.walletInfo?.nickName?.charAt(0) || '?').toUpperCase()}
           </div>
         </div>
 
         {/* User Info */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-1">
-            <h4 className={`font-semibold truncate ${isRoot ? 'text-blue-400' : 'text-foreground'}`}>
+            <h4 className={`font-semibold truncate text-sm md:text-base ${isRoot ? 'text-blue-400' : 'text-foreground'}`}>
               {node.walletInfo?.nickName || '-'}
             </h4>
             {isRoot && (
-              <Badge variant="secondary" className="bg-blue-500/20 text-blue-300 border-blue-500/30">
+              <Badge variant="secondary" className="bg-blue-500/20 text-blue-300 border-blue-500/30 text-xs px-1 py-0">
                 {t('ref.root')}
               </Badge>
             )}
-            <Badge variant="outline" className="text-xs">
+            <Badge variant="outline" className="text-xs px-1 py-0">
               {t('ref.level')} {level}
             </Badge>
           </div>
           
-          <div className="flex items-center gap-4 text-xs text-muted-foreground">
+          {/* Desktop: Horizontal layout */}
+          <div className="hidden md:flex items-center gap-4 text-xs text-muted-foreground">
             <div className="flex items-center gap-1">
               <Wallet className="h-3 w-3" />
               <span>{truncateAddress(node.walletInfo?.solanaAddress || '')}</span>
@@ -181,10 +182,70 @@ function TreeNode({
               </div>
             )}
           </div>
+
+          {/* Mobile: Grid layout with 2 columns */}
+          <div className="md:hidden">
+            {/* Address - Full width */}
+            <div className="flex items-center gap-1 text-xs mb-1">
+              <Wallet className="h-3 w-3 text-muted-foreground flex-shrink-0" />
+              <span className="text-muted-foreground">{truncateAddress(node.walletInfo?.solanaAddress || '')}</span>
+              <button
+                className="p-0.5 rounded hover:bg-muted/50 transition-colors flex-shrink-0"
+                title="Copy address"
+                onClick={() => onCopyAddress(node.walletInfo?.solanaAddress || '')}
+              >
+                {copiedAddress === (node.walletInfo?.solanaAddress || '') ? (
+                  <Check className="h-3 w-3 text-emerald-400" />
+                ) : (
+                  <Copy className="h-3 w-3 text-muted-foreground" />
+                )}
+              </button>
+            </div>
+
+            {/* Grid for other info - 2 columns */}
+            <div className="grid grid-cols-2 gap-x-2 gap-y-0.5">
+              {/* Commission */}
+              <div className="flex items-center gap-1 text-xs">
+                <Percent className="h-3 w-3 text-muted-foreground flex-shrink-0" />
+                <span className="text-emerald-400 font-medium">{node.commissionPercent}%</span>
+              </div>
+
+              {/* Volume */}
+              {node.totalVolume !== undefined && (
+                <div className="flex items-center gap-1 text-xs">
+                  <TrendingUp className="h-3 w-3 text-muted-foreground flex-shrink-0" />
+                  <span className="text-blue-400 font-medium">${node.totalVolume || 0}</span>
+                </div>
+              )}
+
+              {/* Transactions */}
+              {node.totalTrans !== undefined && (
+                <div className="flex items-center gap-1 text-xs">
+                  <BarChart3 className="h-3 w-3 text-muted-foreground flex-shrink-0" />
+                  <span className="text-purple-400 font-medium">{node.totalTrans || 0}</span>
+                </div>
+              )}
+
+              {/* Effective Date */}
+              {node.effectiveFrom && (
+                <div className="flex items-center gap-1 text-xs">
+                  <Calendar className="h-3 w-3 text-muted-foreground flex-shrink-0" />
+                  <span>{new Date(node.effectiveFrom).toLocaleDateString()}</span>
+                </div>
+              )}
+
+              {/* Bittworld UID - if exists, takes one column */}
+              {node.walletInfo?.isBittworld && node.walletInfo?.bittworldUid && (
+                <div className="flex items-center gap-1 text-xs">
+                  <span className="font-mono text-blue-400">{node.walletInfo.bittworldUid}</span>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
 
         {/* Status Toggle */}
-        <div className="flex-shrink-0">
+        <div className="flex-shrink-0 md:self-center self-end">
           {!(myInfor?.role === 'partner' && !node.walletInfo?.isBittworld) ? (
             <div className="relative">
               <input
@@ -431,7 +492,7 @@ export default function BgAffiliateTreeDetailPage() {
       </div>
 
       {/* Tree View */}
-      <Card className="dashboard-card">
+      <Card className="dashboard-card p-0 md:p-4">
         <CardHeader className="pb-4">
           <div className="flex items-center justify-between">
             <div>

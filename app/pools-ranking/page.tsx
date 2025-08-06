@@ -65,15 +65,16 @@ export default function PoolsRankingPage() {
   const getVolumeRange = (tier: string) => {
     switch (tier) {
       case 'v7':
-        return { minVolume: 30000000, maxVolume: undefined }
+        return { minVolume: 30000000, maxVolume: undefined };
       case 'v6':
-        return { minVolume: 20000000, maxVolume: 30000000 }
+        return { minVolume: 20000000, maxVolume: 29999999 };
       case 'v5':
-        return { minVolume: 10000000, maxVolume: 20000000 }
+        return { minVolume: 10000000, maxVolume: 19999999 };
       default:
-        return { minVolume: 30000000, maxVolume: undefined }
+        return { minVolume: 30000000, maxVolume: undefined };
     }
-  }
+  };
+  
 
   const volumeRange = getVolumeRange(selectedTier)
 

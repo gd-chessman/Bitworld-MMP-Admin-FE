@@ -122,6 +122,7 @@
         "table": {
             "walletId": "ID Ví",
             "nickname": "Biệt danh",
+            "email": "Email",
             "authType": "Loại xác thực",
             "stream": "Luồng",
             "country": "Quốc gia",

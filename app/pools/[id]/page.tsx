@@ -19,7 +19,8 @@ import {
   Activity,
   Database,
   ExternalLink,
-  Crown
+  Crown,
+  BarChart3
 } from "lucide-react"
 import { getAirdropPoolDetail } from "@/services/api/AirdropService"
 import { useLang } from "@/lang/useLang"
@@ -214,12 +215,11 @@ export default function PoolDetailPage() {
               <p className="stat-label">{t('pool-detail.stats.totalVolume')}</p>
               <p className="stat-value">{poolData.totalVolume?.toLocaleString()}</p>
               <p className="stat-change stat-change-positive flex items-center gap-1">
-                <DollarSign className="h-3 w-3" />
                 <span>{t('pool-detail.stats.combinedStakes')}</span>
               </p>
             </div>
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-500/10">
-              <DollarSign className="h-6 w-6 text-green-500" />
+              <BarChart3 className="h-6 w-6 text-blue-500" />
             </div>
           </div>
         </Card>
@@ -416,11 +416,11 @@ export default function PoolDetailPage() {
                          <TableCell>
                            <div className="text-sm">{member.stakeCount}</div>
                          </TableCell>
-                         <TableCell>
+                         <TableCell className="whitespace-nowrap">
                            {getStatusBadge(member.status)}
                          </TableCell>
                          <TableCell>
-                           <div className="text-sm">{formatDate(member.joinDate)}</div>
+                           <div className="text-sm whitespace-nowrap">{formatDate(member.joinDate)}</div>
                          </TableCell>
                        </TableRow>
                      ))}
@@ -473,11 +473,11 @@ export default function PoolDetailPage() {
                          <TableCell>
                            <div className="font-medium">{transaction.stakeAmount?.toLocaleString()}</div>
                          </TableCell>
-                        <TableCell>
+                        <TableCell className="whitespace-nowrap">
                           {getStatusBadge(transaction.status)}
                         </TableCell>
                         <TableCell>
-                          <div className="text-sm">{formatDate(transaction.transactionDate)}</div>
+                          <div className="text-sm whitespace-nowrap">{formatDate(transaction.transactionDate)}</div>
                         </TableCell>
                         <TableCell>
                           <div className="flex items-center space-x-2">

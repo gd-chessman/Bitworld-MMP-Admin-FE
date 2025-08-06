@@ -230,7 +230,7 @@ export default function BittworldRewardsPage() {
               <Input
                 type="search"
                 placeholder={t('bittworld-rewards.withdrawals.searchPlaceholder')}
-                className="pl-8 w-full md:max-w-sm"
+                className="pl-8 w-full md:max-w-sm min-w-[140px]"
                 value={search}
                 onChange={e => setSearch(e.target.value)}
               />

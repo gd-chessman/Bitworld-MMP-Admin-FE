@@ -122,6 +122,7 @@
         "table": {
             "walletId": "지갑 ID",
             "nickname": "닉네임",
+            "email": "이메일",
             "authType": "인증 유형",
             "stream": "스트림",
             "country": "국가",
@@ -826,7 +827,7 @@
             "totalPools": "총 풀",
             "activePools": "활성 풀",
             "totalMembers": "총 멤버",
-            "totalVolume": "총 볼륨",
+            "totalVolume": "총수량",
             "combinedVolume": "결합된 볼륨",
             "currentlyRunning": "현재 실행 중",
             "acrossAllPools": "모든 풀에서"
@@ -838,7 +839,7 @@
             "table": {
                 "pool": "풀",
                 "members": "멤버",
-                "volume": "볼륨",
+                "volume": "총수량",
                 "status": "상태",
                 "creator": "생성자",
                 "bittworldUid": "Bittworld UID",

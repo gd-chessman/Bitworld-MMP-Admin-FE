@@ -20,7 +20,8 @@ import {
   TrendingUp,
   Activity,
   Database,
-  Crown
+  Crown,
+  BarChart3
 } from "lucide-react"
 import { getAirdropPools, getAirdropPoolsStats } from "@/services/api/AirdropService"
 import { useLang } from "@/lang/useLang"
@@ -172,12 +173,11 @@ export default function PoolsPage() {
               <p className="stat-label">{t('pools.stats.totalVolume')}</p>
               <p className="stat-value">{isLoadingStats ? '...' : poolsStats.totalVolume?.toLocaleString()}</p>
               <p className="stat-change stat-change-positive flex items-center gap-1">
-                <DollarSign className="h-3 w-3" />
                 <span>{t('pools.stats.combinedVolume')}</span>
               </p>
             </div>
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-500/10">
-              <DollarSign className="h-6 w-6 text-green-500" />
+              <BarChart3 className="h-6 w-6 text-green-500" />
             </div>
           </div>
         </Card>

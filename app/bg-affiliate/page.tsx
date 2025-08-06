@@ -323,7 +323,7 @@ export default function BgAffiliateAdminPage() {
               <Input 
                 type="search" 
                 placeholder={t('bg-affiliate.searchPlaceholder')} 
-                className="pl-8 w-full md:max-w-sm"
+                className="pl-8 w-full md:max-w-sm min-w-[140px]"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />

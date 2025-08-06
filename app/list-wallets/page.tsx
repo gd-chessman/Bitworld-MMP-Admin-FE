@@ -169,6 +169,7 @@ export default function UserWalletsPage() {
                   <TableRow>
                     <TableHead>{t('list-wallets.table.waName')}</TableHead>
                     <TableHead>{t('list-wallets.table.nickname')}</TableHead>
+                    <TableHead>{t('list-wallets.table.email')}</TableHead>
                     <TableHead>{t('list-wallets.table.solanaAddress')}</TableHead>
                     <TableHead>{t('list-wallets.table.walletCodeRef')}</TableHead>
                     <TableHead>{t('list-wallets.table.bittworldUid')}</TableHead>
@@ -177,7 +178,7 @@ export default function UserWalletsPage() {
                 <TableBody>
                   {isLoading ? (
                     <TableRow>
-                      <TableCell colSpan={5} className="h-24 text-center">
+                      <TableCell colSpan={6} className="h-24 text-center">
                         {t('list-wallets.table.loading')}
                       </TableCell>
                     </TableRow>
@@ -186,6 +187,11 @@ export default function UserWalletsPage() {
                       <TableRow key={row.wallet_id}>
                         <TableCell className="font-medium">{row.wallet_auths?.[0]?.wa_name || t('list-wallets.table.na')}</TableCell>
                         <TableCell>{row.wallet_nick_name || t('list-wallets.table.na')}</TableCell>
+                        <TableCell>
+                          <span className="text-sm text-muted-foreground">
+                            {row.email || row.wallet_auths?.[0]?.wa_user?.uw_email || t('list-wallets.table.na')}
+                          </span>
+                        </TableCell>
                         <TableCell>
                           <div className="flex items-center gap-2">
                             <span className="text-xs break-all whitespace-nowrap">{truncateString(row.wallet_solana_address, 14)}</span>
@@ -230,7 +236,7 @@ export default function UserWalletsPage() {
                     ))
                   ) : (
                     <TableRow>
-                      <TableCell colSpan={5} className="h-24 text-center">
+                      <TableCell colSpan={6} className="h-24 text-center">
                         {t('list-wallets.table.noResults')}
                       </TableCell>
                     </TableRow>
