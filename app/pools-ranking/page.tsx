@@ -43,6 +43,7 @@ interface LeaderboardItem {
   percentageOfPool: number
   isCreator: boolean
   stakingDate: string
+  status: string
 }
 
 interface LeaderboardResponse {
@@ -116,18 +117,18 @@ export default function PoolsRankingPage() {
     }
   }
 
-  const getRankBadge = (rank: string) => {
-    switch (rank) {
-      case 'v7':
-        return <Badge className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-white border-0 whitespace-nowrap">VIP 7</Badge>
-      case 'v6':
-        return <Badge className="bg-gradient-to-r from-orange-400 to-orange-600 text-white border-0 whitespace-nowrap">VIP 6</Badge>
-      case 'v5':
-        return <Badge className="bg-gradient-to-r from-blue-400 to-blue-600 text-white border-0 whitespace-nowrap">VIP 5</Badge>
-      case 'v4':
-        return <Badge className="bg-gradient-to-r from-purple-400 to-purple-600 text-white border-0 whitespace-nowrap">VIP 4</Badge>
+  const getStatusBadge = (status: string) => {
+    switch (status) {
+      case "active":
+        return <Badge className="bg-green-500/10 text-green-500 border-green-500/20">{t('pool-detail.status.active')}</Badge>
+      case "pending":
+        return <Badge className="bg-yellow-500/10 text-yellow-500 border-yellow-500/20">{t('pool-detail.status.pending')}</Badge>
+      case "end":
+        return <Badge className="bg-blue-500/10 text-blue-500 border-blue-500/20">{t('pool-detail.status.end')}</Badge>
+      case "error":
+        return <Badge className="bg-red-500/10 text-red-500 border-red-500/20">{t('pool-detail.status.error')}</Badge>
       default:
-        return <Badge variant="secondary" className="whitespace-nowrap">{rank}</Badge>
+        return <Badge variant="secondary">{status}</Badge>
     }
   }
 
@@ -158,7 +159,7 @@ export default function PoolsRankingPage() {
               <CardTitle className="whitespace-nowrap">{t('pools-ranking.cardTitle')}</CardTitle>
               <CardDescription>{t('pools-ranking.cardDescription')}</CardDescription>
             </div>
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2 overflow-x-auto">
               <Button
                 variant={selectedTier === 'v7' ? 'default' : 'outline'}
                 size="sm"
@@ -192,12 +193,12 @@ export default function PoolsRankingPage() {
               <TableHeader>
                 <TableRow>
                   <TableHead className="w-16">{t('pools-ranking.table.rank')}</TableHead>
+                  <TableHead>{t('pools-ranking.table.wallet')}</TableHead>
+                  <TableHead>{t('pools-ranking.table.bittworldUid')}</TableHead>
                   <TableHead>{t('pools-ranking.table.pool')}</TableHead>
                   <TableHead>{t('pools-ranking.table.volume')}</TableHead>
                   <TableHead>{t('pools-ranking.table.members')}</TableHead>
                   <TableHead>{t('pools-ranking.table.status')}</TableHead>
-                  <TableHead>{t('pools-ranking.table.wallet')}</TableHead>
-                  <TableHead>{t('pools-ranking.table.bittworldUid')}</TableHead>
                   <TableHead>{t('pools-ranking.table.created')}</TableHead>
                 </TableRow>
               </TableHeader>
@@ -227,45 +228,6 @@ export default function PoolsRankingPage() {
                         <div className="flex items-center space-x-2">
                           <span className="text-sm font-medium text-muted-foreground">#{item.rank}</span>
                         </div>
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex items-center space-x-3">
-                          <div className="h-10 w-10 rounded-full overflow-hidden">
-                            {item.poolLogo ? (
-                              <Image
-                                src={item.poolLogo}
-                                alt={item.poolName || 'Pool'}
-                                width={40}
-                                height={40}
-                                className="w-full h-full object-cover"
-                                onError={(e) => {
-                                  const target = e.target as HTMLImageElement
-                                  target.src = "https://via.placeholder.com/40x40?text=Pool"
-                                }}
-                              />
-                            ) : (
-                              <div className="h-full w-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm">
-                                {item.poolName?.charAt(0)?.toUpperCase() || 'P'}
-                              </div>
-                            )}
-                          </div>
-                          <div>
-                            <div className="font-medium">{item.poolName || 'Unknown Pool'}</div>
-                            <div className="text-sm text-muted-foreground">{item.poolSlug || '-'}</div>
-                          </div>
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <div className="font-semibold text-green-600">{formatVolume(item.stakedVolume || 0)}</div>
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex items-center space-x-1">
-                          <Users className="h-4 w-4 text-muted-foreground" />
-                          <span>{(item.memberCount || 0).toLocaleString()}</span>
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <Badge className="bg-green-500/10 text-green-500 border-green-500/20">Active</Badge>
                       </TableCell>
                       <TableCell>
                         <div className="space-y-1">
@@ -303,6 +265,44 @@ export default function PoolsRankingPage() {
                         ) : (
                           <span className="text-sm text-muted-foreground">-</span>
                         )}
+                      </TableCell>
+                      <TableCell>
+                        <div className="flex items-center space-x-3 whitespace-nowrap">
+                          <div className="h-10 w-10 rounded-full overflow-hidden whitespace-nowrap">
+                            {item.poolLogo ? (
+                              <Image
+                                src={item.poolLogo}
+                                alt={item.poolName || 'Pool'}
+                                width={40}
+                                height={40}
+                                className="w-full h-full object-cover size-10"
+                                onError={(e) => {
+                                  const target = e.target as HTMLImageElement
+                                  target.src = "https://via.placeholder.com/40x40?text=Pool"
+                                }}
+                              />
+                            ) : (
+                              <div className="h-full w-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm">
+                                {item.poolName?.charAt(0)?.toUpperCase() || 'P'}
+                              </div>
+                            )}
+                          </div>
+                          <div>
+                            <div className="font-medium">{item.poolName || 'Unknown Pool'}</div>
+                          </div>
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <div className="font-semibold text-green-600">{formatVolume(item.stakedVolume || 0)}</div>
+                      </TableCell>
+                      <TableCell>
+                        <div className="flex items-center space-x-1">
+                          <Users className="h-4 w-4 text-muted-foreground" />
+                          <span>{(item.memberCount || 0).toLocaleString()}</span>
+                        </div>
+                      </TableCell>
+                      <TableCell className="whitespace-nowrap">
+                        {getStatusBadge(item.status)}
                       </TableCell>
                       <TableCell>
                         <div className="text-sm">{item.stakingDate ? formatDate(item.stakingDate) : '-'}</div>

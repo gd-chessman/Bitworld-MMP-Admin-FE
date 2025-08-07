@@ -267,7 +267,6 @@ export default function PoolsPage() {
                           />
                           <div>
                             <div className="font-medium whitespace-nowrap">{pool.alp_name}</div>
-                            <div className="text-sm text-muted-foreground whitespace-nowrap">{pool.alp_slug}</div>
                           </div>
                         </div>
                       </TableCell>

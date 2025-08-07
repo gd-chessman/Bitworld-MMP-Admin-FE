@@ -289,8 +289,7 @@ export default function PoolDetailPage() {
                   />
                   <div>
                     <h3 className="font-semibold">{poolData.name}</h3>
-                    <p className="text-sm text-muted-foreground">{poolData.slug}</p>
-                    {getStatusBadge(poolData.status)}
+                    <p className="my-1">{getStatusBadge(poolData.status)}</p>
                   </div>
                 </div>
                 
