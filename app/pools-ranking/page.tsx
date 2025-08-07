@@ -195,8 +195,8 @@ export default function PoolsRankingPage() {
                   <TableHead className="w-16">{t('pools-ranking.table.rank')}</TableHead>
                   <TableHead>{t('pools-ranking.table.wallet')}</TableHead>
                   <TableHead>{t('pools-ranking.table.bittworldUid')}</TableHead>
-                  <TableHead>{t('pools-ranking.table.pool')}</TableHead>
                   <TableHead>{t('pools-ranking.table.volume')}</TableHead>
+                  <TableHead>{t('pools-ranking.table.pool')}</TableHead>
                   <TableHead>{t('pools-ranking.table.members')}</TableHead>
                   <TableHead>{t('pools-ranking.table.status')}</TableHead>
                   <TableHead>{t('pools-ranking.table.created')}</TableHead>
@@ -267,6 +267,9 @@ export default function PoolsRankingPage() {
                         )}
                       </TableCell>
                       <TableCell>
+                        <div className="font-semibold text-green-600">{formatVolume(item.stakedVolume || 0)}</div>
+                      </TableCell>
+                      <TableCell>
                         <div className="flex items-center space-x-3 whitespace-nowrap">
                           <div className="h-10 w-10 rounded-full overflow-hidden whitespace-nowrap">
                             {item.poolLogo ? (
@@ -291,9 +294,6 @@ export default function PoolsRankingPage() {
                             <div className="font-medium">{item.poolName || 'Unknown Pool'}</div>
                           </div>
                         </div>
-                      </TableCell>
-                      <TableCell>
-                        <div className="font-semibold text-green-600">{formatVolume(item.stakedVolume || 0)}</div>
                       </TableCell>
                       <TableCell>
                         <div className="flex items-center space-x-1">
