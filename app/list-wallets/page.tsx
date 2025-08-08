@@ -173,12 +173,13 @@ export default function UserWalletsPage() {
                     <TableHead>{t('list-wallets.table.solanaAddress')}</TableHead>
                     <TableHead>{t('list-wallets.table.walletCodeRef')}</TableHead>
                     <TableHead>{t('list-wallets.table.bittworldUid')}</TableHead>
+                    <TableHead>{t('list-wallets.table.referrerBittworldUid')}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {isLoading ? (
                     <TableRow>
-                      <TableCell colSpan={6} className="h-24 text-center">
+                      <TableCell colSpan={7} className="h-24 text-center">
                         {t('list-wallets.table.loading')}
                       </TableCell>
                     </TableRow>
@@ -232,11 +233,20 @@ export default function UserWalletsPage() {
                             <span className="text-sm text-muted-foreground">-</span>
                           )}
                         </TableCell>
+                        <TableCell>
+                          {row.referrer_bittworld_uid ? (
+                            <span className="text-sm font-mono text-blue-600 dark:text-blue-400">
+                              {row.referrer_bittworld_uid}
+                            </span>
+                          ) : (
+                            <span className="text-sm text-muted-foreground">-</span>
+                          )}
+                        </TableCell>
                       </TableRow>
                     ))
                   ) : (
                     <TableRow>
-                      <TableCell colSpan={6} className="h-24 text-center">
+                      <TableCell colSpan={7} className="h-24 text-center">
                         {t('list-wallets.table.noResults')}
                       </TableCell>
                     </TableRow>

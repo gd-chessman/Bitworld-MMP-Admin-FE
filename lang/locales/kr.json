@@ -153,6 +153,7 @@
             "no": "아니오",
             "walletCodeRef": "추천 코드",
             "bittworldUid": "Bittworld UID",
+            "referrerBittworldUid": "추천인 Bittworld UID",
             "totalWallets": "총 지갑"
         }
     },

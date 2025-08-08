@@ -153,6 +153,7 @@
             "no": "No",
             "walletCodeRef": "Referral Code",
             "bittworldUid": "Bittworld UID",
+            "referrerBittworldUid": "Referrer Bittworld UID",
             "totalWallets": "Total Wallets"
         }
     },

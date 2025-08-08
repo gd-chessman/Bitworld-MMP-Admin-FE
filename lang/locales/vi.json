@@ -153,6 +153,7 @@
             "no": "Không",
             "walletCodeRef": "Mã giới thiệu",
             "bittworldUid": "Bittworld UID",
+            "referrerBittworldUid": "Bittworld UID người giới thiệu",
             "totalWallets": "Tổng ví"
         }
     },
