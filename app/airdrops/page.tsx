@@ -510,7 +510,7 @@ export default function AirdropAdminPage() {
                       <SelectItem value="all">{t("airdrops.rewards.filters.allTokens")}</SelectItem>
                       {endedTokens.map((token) => (
                         <SelectItem key={token.alt_id} value={token.alt_token_mint}>
-                          {truncateMiddle(token.alt_token_mint, 10, 10)}
+                          {token.alt_token_name}
                         </SelectItem>
                       ))}
                     </SelectContent>
