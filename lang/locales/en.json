@@ -989,10 +989,10 @@
                 "error": "Update token failed"
             },
             "calculate": {
-                "button": "Calculate Rewards",
-                "calculating": "Calculating...",
-                "success": "Rewards calculated",
-                "error": "Calculate failed",
+                "button": "Distribute Airdrops",
+                "calculating": "Distributing...",
+                "success": "Airdrops distributed successfully",
+                "error": "Distribution failed",
                 "noActiveTokens": "No active airdrop tokens found"
             },
             "status": {
@@ -1009,7 +1009,8 @@
             "filters": {
                 "canWithdraw": "Can Withdraw",
                 "withdrawn": "Withdrawn",
-                "all": "All"
+                "all": "All",
+                "allTokens": "All Tokens"
             },
             "table": {
                 "token": "Token",
@@ -1032,7 +1033,8 @@
         },
         "placeholders": {
             "roundStatus": "Status",
-            "status": "Status"
+            "status": "Status",
+            "token": "Token"
         },
         "labels": {
             "copyTokenMint": "Copy token mint",

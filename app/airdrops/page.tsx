@@ -10,7 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Separator } from "@/components/ui/separator"
 import { toast } from "sonner"
-import { Search, Calculator, Plus, Copy, Check, Loader2, Edit } from "lucide-react"
+import { Search, Gift, Plus, Copy, Check, Loader2, Edit } from "lucide-react"
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Label } from "@/components/ui/label"
 import { useQuery } from "@tanstack/react-query"
@@ -52,6 +52,7 @@ export default function AirdropAdminPage() {
   // UI state for rewards
   const [searchReward, setSearchReward] = useState("")
   const [rewardStatus, setRewardStatus] = useState<"can_withdraw" | "withdrawn" | "all">("can_withdraw")
+  const [rewardTokenMint, setRewardTokenMint] = useState<string>("all")
 
   // Server data: Tokens
   const [tokensPage, setTokensPage] = useState(1)
@@ -70,17 +71,36 @@ export default function AirdropAdminPage() {
   })
   const tokens: any[] = tokensResp?.data ?? []
 
+  // Server data: Ended Tokens (for filter dropdown)
+  const { data: endedTokensResp } = useQuery({
+    queryKey: ["airdrop-tokens-ended"],
+    queryFn: () =>
+      getAirdropTokens({
+        page: 1,
+        limit: 100, // Get more items for dropdown
+        status_1: "end",
+      }),
+    placeholderData: (prev) => prev,
+  })
+  const allEndedTokens: any[] = endedTokensResp?.data ?? []
+  
+  // Remove duplicate tokens by alt_token_mint
+  const endedTokens: any[] = allEndedTokens.filter((token, index, arr) => 
+    arr.findIndex(t => t.alt_token_mint === token.alt_token_mint) === index
+  )
+
   // Server data: Rewards
   const [rewardsPage, setRewardsPage] = useState(1)
   const rewardsLimit = 20
   const { data: rewardsResp, isLoading: rewardsLoading, refetch: refetchRewards } = useQuery({
-    queryKey: ["airdrop-rewards", rewardsPage, searchReward, rewardStatus],
+    queryKey: ["airdrop-rewards", rewardsPage, searchReward, rewardStatus, rewardTokenMint],
     queryFn: () =>
       getAirdropRewards({
         page: rewardsPage,
         limit: rewardsLimit,
         status: (rewardStatus === "all" ? undefined : rewardStatus) as any,
         search: searchReward || undefined,
+        token_mint: (rewardTokenMint === "all" ? undefined : rewardTokenMint),
       }),
     placeholderData: (prev) => prev,
   })
@@ -92,7 +112,7 @@ export default function AirdropAdminPage() {
 
   useEffect(() => {
     setRewardsPage(1)
-  }, [searchReward, rewardStatus])
+  }, [searchReward, rewardStatus, rewardTokenMint])
 
   // Handlers (call services directly like other pages)
 
@@ -232,6 +252,8 @@ export default function AirdropAdminPage() {
     }
   }
 
+  console.log(endedTokens)
+
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-1">
@@ -295,7 +317,11 @@ export default function AirdropAdminPage() {
                       </DialogFooter>
                     </DialogContent>
                   </Dialog>
-                  <Button onClick={() => handleCalculateRewards(false)} disabled={isCalculating}>
+                  <Button 
+                    onClick={() => handleCalculateRewards(false)} 
+                    disabled={isCalculating}
+                    className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white border-0 shadow-lg"
+                  >
                     {isCalculating ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -303,7 +329,7 @@ export default function AirdropAdminPage() {
                       </>
                     ) : (
                       <>
-                        <Calculator className="h-4 w-4 mr-2" />
+                        <Gift className="h-4 w-4 mr-2" />
                         {t("airdrops.tokens.calculate.button")}
                       </>
                     )}
@@ -463,6 +489,17 @@ export default function AirdropAdminPage() {
                   <Input className="pl-8 w-full md:max-w-sm min-w-[140px]" placeholder={t("airdrops.rewards.searchPlaceholder")} value={searchReward} onChange={(e) => setSearchReward(e.target.value)} />
                 </div>
                 <div className="flex items-center gap-2 ml-auto w-full md:w-auto justify-end">
+                  <Select value={rewardTokenMint} onValueChange={(v) => setRewardTokenMint(v)}>
+                    <SelectTrigger className="w-[200px]"><SelectValue placeholder={t("airdrops.placeholders.token")} /></SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">{t("airdrops.rewards.filters.allTokens")}</SelectItem>
+                      {endedTokens.map((token) => (
+                        <SelectItem key={token.alt_id} value={token.alt_token_mint}>
+                          {truncateMiddle(token.alt_token_mint, 10, 10)}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                   <Select value={rewardStatus} onValueChange={(v) => setRewardStatus(v as any)}>
                     <SelectTrigger className="w-[200px]"><SelectValue placeholder={t("airdrops.placeholders.status")} /></SelectTrigger>
                     <SelectContent>

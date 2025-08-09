@@ -992,10 +992,10 @@
                 "error": "Cập nhật token thất bại"
             },
             "calculate": {
-                "button": "Tính Toán Phần Thưởng",
-                "calculating": "Đang tính toán...",
-                "success": "Phần thưởng đã được tính toán",
-                "error": "Tính toán thất bại",
+                "button": "Trả Thưởng Airdrops",
+                "calculating": "Đang trả thưởng...",
+                "success": "Đã trả thưởng thành công",
+                "error": "Trả thưởng thất bại",
                 "noActiveTokens": "Không tìm thấy token airdrop đang hoạt động"
             },
             "status": {
@@ -1010,9 +1010,10 @@
             "description": "Danh sách phần thưởng được tạo bởi tính toán.",
             "searchPlaceholder": "Tìm kiếm theo địa chỉ, email...",
             "filters": {
-                "canWithdraw": "Có Thể Rút",
-                "withdrawn": "Đã Rút",
-                "all": "Tất cả"
+                "canWithdraw": "Có thể trả",
+                "withdrawn": "Đã trả",
+                "all": "Tất cả",
+                "allTokens": "Tất cả Token"
             },
             "table": {
                 "token": "Token",
@@ -1026,8 +1027,8 @@
                 "noResults": "Không có kết quả"
             },
             "status": {
-                "can_withdraw": "Có Thể Rút",
-                "withdrawn": "Đã Rút"
+                "can_withdraw": "Có thể trả",
+                "withdrawn": "Đã trả"
             }
         },
         "common": {
@@ -1035,7 +1036,8 @@
         },
         "placeholders": {
             "roundStatus": "Trạng thái",
-            "status": "Trạng thái"
+            "status": "Trạng thái",
+            "token": "Token"
         },
         "labels": {
             "copyTokenMint": "Sao chép token mint",

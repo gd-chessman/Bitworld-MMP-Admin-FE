@@ -990,10 +990,10 @@
                 "error": "토큰 업데이트 실패"
             },
             "calculate": {
-                "button": "보상 계산",
-                "calculating": "계산 중...",
-                "success": "보상이 계산되었습니다",
-                "error": "계산 실패",
+                "button": "에어드롭 배포",
+                "calculating": "배포 중...",
+                "success": "에어드롭이 성공적으로 배포되었습니다",
+                "error": "배포 실패",
                 "noActiveTokens": "활성화된 에어드롭 토큰을 찾을 수 없습니다"
             },
             "status": {
@@ -1010,7 +1010,8 @@
             "filters": {
                 "canWithdraw": "출금 가능",
                 "withdrawn": "출금됨",
-                "all": "전체"
+                "all": "전체",
+                "allTokens": "모든 토큰"
             },
             "table": {
                 "token": "토큰",
@@ -1033,7 +1034,8 @@
         },
         "placeholders": {
             "roundStatus": "상태",
-            "status": "상태"
+            "status": "상태",
+            "token": "토큰"
         },
         "labels": {
             "copyTokenMint": "토큰 민트 복사",
