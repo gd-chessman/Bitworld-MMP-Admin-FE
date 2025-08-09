@@ -343,6 +343,7 @@
         "normalAffiliate": "Giới Thiệu Thường",
         "pools": "Pools",
         "bittworldRewards": "Phần Thưởng Bittworld",
+        "airdrops": "Airdrops",
         "settings": "Cài Đặt",
         "admin": "Quản Trị",
         "orders": "Giao dịch"
@@ -928,6 +929,118 @@
             "pending": "Chờ xử lý",
             "end": "Kết thúc",
             "error": "Lỗi"
+        }
+    },
+    "airdrops": {
+        "title": "Quản Lý Airdrop",
+        "description": "Quản lý token airdrop và phần thưởng",
+        "tabs": {
+            "tokens": "Token",
+            "rewards": "Phần Thưởng"
+        },
+        "tokens": {
+            "title": "Token Airdrop",
+            "description": "Tìm kiếm và lọc token theo trạng thái.",
+            "newToken": "Token Mới",
+            "searchPlaceholder": "Tìm kiếm theo tên token hoặc mint...",
+            "filters": {
+                "roundAll": "Tất Cả",
+                "roundActive": "Hoạt Động",
+                "roundPause": "Tạm Dừng",
+                "roundEnd": "Kết Thúc",
+                "roundCancel": "Hủy Bỏ"
+            },
+            "table": {
+                "name": "Tên",
+                "mint": "Mint",
+                "amountRound": "Số lượng",
+                "statusRound": "Trạng thái",
+                "actions": "Hành Động",
+                "loading": "Đang tải...",
+                "noData": "Không có dữ liệu"
+            },
+            "create": {
+                "title": "Tạo Token Airdrop",
+                "description": "Điền form để tạo token airdrop mới.",
+                "tokenName": "Tên token",
+                "tokenMint": "Token mint",
+                "amountRound": "Số lượng",
+                "cancel": "Hủy",
+                "create": "Tạo",
+                "creating": "Đang tạo...",
+                "validation": {
+                    "fillRequired": "Vui lòng điền Tên token, Token mint và Số lượng (> 0)"
+                },
+                "success": "Token airdrop đã được tạo",
+                "error": "Tạo token thất bại",
+                "tokenExists": "Chương trình airdrop cho token này đã tồn tại"
+            },
+            "edit": {
+                "title": "Chỉnh Sửa Token Airdrop",
+                "description": "Cập nhật các trường token và trạng thái (chỉ demo).",
+                "tokenName": "Tên token",
+                "tokenMint": "Token mint",
+                "amountRound": "Số lượng",
+                "statusRound": "Trạng thái",
+                "cancel": "Hủy",
+                "save": "Lưu thay đổi",
+                "saving": "Đang lưu...",
+                "validation": {
+                    "fillRequired": "Vui lòng điền đầy đủ Tên token, Token mint và Số lượng (> 0)"
+                },
+                "success": "Token airdrop đã được cập nhật",
+                "error": "Cập nhật token thất bại"
+            },
+            "calculate": {
+                "button": "Tính Toán Phần Thưởng",
+                "calculating": "Đang tính toán...",
+                "success": "Phần thưởng đã được tính toán",
+                "error": "Tính toán thất bại",
+                "noActiveTokens": "Không tìm thấy token airdrop đang hoạt động"
+            },
+            "status": {
+                "active": "Hoạt Động",
+                "pause": "Tạm Dừng",
+                "end": "Kết Thúc",
+                "cancel": "Hủy Bỏ"
+            }
+        },
+        "rewards": {
+            "title": "Phần Thưởng Airdrop",
+            "description": "Danh sách phần thưởng được tạo bởi tính toán.",
+            "searchPlaceholder": "Tìm kiếm theo địa chỉ, email...",
+            "filters": {
+                "canWithdraw": "Có Thể Rút",
+                "withdrawn": "Đã Rút",
+                "all": "Tất cả"
+            },
+            "table": {
+                "token": "Token",
+                "mint": "Mint",
+                "walletAddress": "Địa Chỉ Ví",
+                "email": "Email",
+                "amount": "Số Lượng",
+                "status": "Trạng Thái",
+                "date": "Ngày",
+                "loading": "Đang tải...",
+                "noResults": "Không có kết quả"
+            },
+            "status": {
+                "can_withdraw": "Có Thể Rút",
+                "withdrawn": "Đã Rút"
+            }
+        },
+        "common": {
+            "copyFailed": "Sao chép thất bại"
+        },
+        "placeholders": {
+            "roundStatus": "Trạng thái",
+            "status": "Trạng thái"
+        },
+        "labels": {
+            "copyTokenMint": "Sao chép token mint",
+            "editToken": "Chỉnh sửa token",
+            "copyWalletAddress": "Sao chép địa chỉ ví"
         }
     },
     "pools-ranking": {

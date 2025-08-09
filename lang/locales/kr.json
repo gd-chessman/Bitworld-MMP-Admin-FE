@@ -343,6 +343,7 @@
         "normalAffiliate": "일반 추천",
         "pools": "풀",
         "bittworldRewards": "비트월드 보상",
+        "airdrops": "에어드롭",
         "settings": "설정",
         "admin": "관리자",
         "orders": "거래"
@@ -926,6 +927,118 @@
             "pending": "대기 중",
             "end": "종료",
             "error": "오류"
+        }
+    },
+    "airdrops": {
+        "title": "에어드롭 관리",
+        "description": "에어드롭 토큰 및 보상 관리",
+        "tabs": {
+            "tokens": "토큰",
+            "rewards": "보상"
+        },
+        "tokens": {
+            "title": "에어드롭 토큰",
+            "description": "상태별로 토큰을 검색하고 필터링합니다.",
+            "newToken": "새 토큰",
+            "searchPlaceholder": "토큰 이름 또는 민트로 검색...",
+            "filters": {
+                "roundAll": "전체",
+                "roundActive": "활성",
+                "roundPause": "일시정지",
+                "roundEnd": "종료",
+                "roundCancel": "취소"
+            },
+            "table": {
+                "name": "이름",
+                "mint": "민트",
+                "amountRound": "수량",
+                "statusRound": "상태",
+                "actions": "작업",
+                "loading": "로딩 중...",
+                "noData": "데이터 없음"
+            },
+            "create": {
+                "title": "에어드롭 토큰 생성",
+                "description": "새로운 에어드롭 토큰을 생성하기 위해 양식을 작성하세요.",
+                "tokenName": "토큰 이름",
+                "tokenMint": "토큰 민트",
+                "amountRound": "수량",
+                "cancel": "취소",
+                "create": "생성",
+                "creating": "생성 중...",
+                "validation": {
+                    "fillRequired": "토큰 이름, 토큰 민트 및 수량 (> 0)을 입력하세요"
+                },
+                "success": "에어드롭 토큰이 생성되었습니다",
+                "error": "토큰 생성 실패",
+                "tokenExists": "이 토큰에 대한 에어드롭 프로그램이 이미 존재합니다"
+            },
+            "edit": {
+                "title": "에어드롭 토큰 편집",
+                "description": "토큰 필드 및 상태를 업데이트합니다 (데모만).",
+                "tokenName": "토큰 이름",
+                "tokenMint": "토큰 민트",
+                "amountRound": "수량",
+                "statusRound": "상태",
+                "cancel": "취소",
+                "save": "변경사항 저장",
+                "saving": "저장 중...",
+                "validation": {
+                    "fillRequired": "토큰 이름, 토큰 민트 및 수량 (> 0)을 입력하세요"
+                },
+                "success": "에어드롭 토큰이 업데이트되었습니다",
+                "error": "토큰 업데이트 실패"
+            },
+            "calculate": {
+                "button": "보상 계산",
+                "calculating": "계산 중...",
+                "success": "보상이 계산되었습니다",
+                "error": "계산 실패",
+                "noActiveTokens": "활성화된 에어드롭 토큰을 찾을 수 없습니다"
+            },
+            "status": {
+                "active": "활성",
+                "pause": "일시정지",
+                "end": "종료",
+                "cancel": "취소"
+            }
+        },
+        "rewards": {
+            "title": "에어드롭 보상",
+            "description": "계산으로 생성된 보상 목록입니다.",
+            "searchPlaceholder": "주소, 이메일로 검색...",
+            "filters": {
+                "canWithdraw": "출금 가능",
+                "withdrawn": "출금됨",
+                "all": "전체"
+            },
+            "table": {
+                "token": "토큰",
+                "mint": "민트",
+                "walletAddress": "지갑 주소",
+                "email": "이메일",
+                "amount": "수량",
+                "status": "상태",
+                "date": "날짜",
+                "loading": "로딩 중...",
+                "noResults": "결과 없음"
+            },
+            "status": {
+                "can_withdraw": "출금 가능",
+                "withdrawn": "출금됨"
+            }
+        },
+        "common": {
+            "copyFailed": "복사 실패"
+        },
+        "placeholders": {
+            "roundStatus": "상태",
+            "status": "상태"
+        },
+        "labels": {
+            "copyTokenMint": "토큰 민트 복사",
+            "editToken": "토큰 편집",
+            "copyWalletAddress": "지갑 주소 복사"
         }
     },
     "pools-ranking": {
