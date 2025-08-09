@@ -414,7 +414,7 @@ export default function AirdropAdminPage() {
                             </div>
                           </TableCell>
                           <TableCell>{formatNumber(token.alt_amount_airdrop_1)}</TableCell>
-                          <TableCell>{getStatusBadge(token.alt_status_1)}</TableCell>
+                          <TableCell className="whitespace-nowrap">{getStatusBadge(token.alt_status_1)}</TableCell>
                           
                           <TableCell>
                             {!isPartner && (
