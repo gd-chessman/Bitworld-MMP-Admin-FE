@@ -16,11 +16,20 @@ import { Label } from "@/components/ui/label"
 import { useQuery } from "@tanstack/react-query"
 import { getAirdropTokens, createAirdropToken, updateAirdropToken, calculateAirdropRewards, getAirdropRewards } from "@/services/api/AirdropAdminService"
 import { useLang } from "@/lang/useLang"
+import { getMyInfor } from "@/services/api/UserAdminService"
 
 // Use implicit any-shaped objects from API
 
 export default function AirdropAdminPage() {
   const { t } = useLang()
+  const { data: myInfor } = useQuery({
+    queryKey: ["my-infor"],
+    queryFn: getMyInfor,
+    refetchOnMount: true,
+  });
+
+  // Check if user is partner (hide create, edit, calculate buttons)
+  const isPartner = myInfor?.role === "partner"
 
   // UI state for tokens
   const [searchToken, setSearchToken] = useState("")
@@ -277,12 +286,13 @@ export default function AirdropAdminPage() {
                   <CardDescription>{t("airdrops.tokens.description")}</CardDescription>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
-                    <DialogTrigger asChild>
-                      <Button>
-                        <Plus className="h-4 w-4 mr-2" />{t("airdrops.tokens.newToken")}
-                      </Button>
-                    </DialogTrigger>
+                  {!isPartner && (
+                    <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
+                      <DialogTrigger asChild>
+                        <Button>
+                          <Plus className="h-4 w-4 mr-2" />{t("airdrops.tokens.newToken")}
+                        </Button>
+                      </DialogTrigger>
                      <DialogContent>
                       <DialogHeader>
                         <DialogTitle>{t("airdrops.tokens.create.title")}</DialogTitle>
@@ -317,11 +327,13 @@ export default function AirdropAdminPage() {
                       </DialogFooter>
                     </DialogContent>
                   </Dialog>
-                  <Button 
-                    onClick={() => handleCalculateRewards(false)} 
-                    disabled={isCalculating}
-                    className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white border-0 shadow-lg"
-                  >
+                  )}
+                  {!isPartner && (
+                    <Button 
+                      onClick={() => handleCalculateRewards(false)} 
+                      disabled={isCalculating}
+                      className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white border-0 shadow-lg"
+                    >
                     {isCalculating ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -334,6 +346,7 @@ export default function AirdropAdminPage() {
                       </>
                     )}
                   </Button>
+                  )}
                 </div>
               </div>
             </CardHeader>
@@ -404,23 +417,24 @@ export default function AirdropAdminPage() {
                           <TableCell>{getStatusBadge(token.alt_status_1)}</TableCell>
                           
                           <TableCell>
-                            <Dialog open={isEditOpen && editingToken?.alt_id === token.alt_id} onOpenChange={(open) => {
-                              if (!open) { setIsEditOpen(false); setEditingToken(null) }
-                            }}>
-                              <DialogTrigger asChild>
-                                <Button
-                                  size="sm"
-                                  variant="ghost"
-                                  className={`h-8 w-8 p-0 ${token.alt_status_1 === 'end' || token.alt_status_1 === 'cancel' 
-                                    ? 'text-muted-foreground/50 cursor-not-allowed' 
-                                    : 'text-muted-foreground hover:text-emerald-300 hover:bg-muted/50'}`}
-                                  onClick={() => handleOpenEdit(token)}
-                                  aria-label={t("airdrops.labels.editToken")}
-                                  disabled={token.alt_status_1 === 'end' || token.alt_status_1 === 'cancel'}
-                                >
-                                  <Edit className="h-4 w-4" />
-                                </Button>
-                              </DialogTrigger>
+                            {!isPartner && (
+                              <Dialog open={isEditOpen && editingToken?.alt_id === token.alt_id} onOpenChange={(open) => {
+                                if (!open) { setIsEditOpen(false); setEditingToken(null) }
+                              }}>
+                                <DialogTrigger asChild>
+                                  <Button
+                                    size="sm"
+                                    variant="ghost"
+                                    className={`h-8 w-8 p-0 ${token.alt_status_1 === 'end' || token.alt_status_1 === 'cancel' 
+                                      ? 'text-muted-foreground/50 cursor-not-allowed' 
+                                      : 'text-muted-foreground hover:text-emerald-300 hover:bg-muted/50'}`}
+                                    onClick={() => handleOpenEdit(token)}
+                                    aria-label={t("airdrops.labels.editToken")}
+                                    disabled={token.alt_status_1 === 'end' || token.alt_status_1 === 'cancel'}
+                                  >
+                                    <Edit className="h-4 w-4" />
+                                  </Button>
+                                </DialogTrigger>
                               <DialogContent>
                                 <DialogHeader>
                                   <DialogTitle>{t("airdrops.tokens.edit.title")}</DialogTitle>
@@ -465,6 +479,7 @@ export default function AirdropAdminPage() {
                                 </DialogFooter>
                               </DialogContent>
                             </Dialog>
+                            )}
                           </TableCell>
                         </TableRow>
                       ))

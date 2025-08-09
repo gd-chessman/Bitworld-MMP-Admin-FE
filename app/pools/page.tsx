@@ -236,6 +236,7 @@ export default function PoolsPage() {
                 <TableRow>
                   <TableHead>{t('pools.list.table.pool')}</TableHead>
                   <TableHead>{t('pools.list.table.members')}</TableHead>
+                  <TableHead>{t('pools.list.table.firstRound')}</TableHead>
                   <TableHead>{t('pools.list.table.volume')}</TableHead>
                   <TableHead>{t('pools.list.table.status')}</TableHead>
                   <TableHead>{t('pools.list.table.creator')}</TableHead>
@@ -247,7 +248,7 @@ export default function PoolsPage() {
               <TableBody>
                 {isLoading ? (
                   <TableRow>
-                    <TableCell colSpan={8} className="text-center py-8">
+                    <TableCell colSpan={9} className="text-center py-8">
                       {t('pools.list.loading')}
                     </TableCell>
                   </TableRow>
@@ -275,6 +276,9 @@ export default function PoolsPage() {
                           <Users className="h-4 w-4 text-muted-foreground" />
                           <span>{pool.alp_member_num.toLocaleString()}</span>
                         </div>
+                      </TableCell>
+                      <TableCell>
+                        <div className="font-medium">{pool.apl_total_volume?.toLocaleString()}</div>
                       </TableCell>
                       <TableCell>
                         <div className="font-medium">{pool.apl_total_volume?.toLocaleString()}</div>

@@ -842,6 +842,7 @@
                 "pool": "풀",
                 "members": "멤버",
                 "volume": "총수량",
+                "firstRound": "1차 라운드",
                 "status": "상태",
                 "creator": "생성자",
                 "bittworldUid": "Bittworld UID",

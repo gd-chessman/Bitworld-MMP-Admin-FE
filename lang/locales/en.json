@@ -842,6 +842,7 @@
                 "pool": "Pool",
                 "members": "Members",
                 "volume": "Volume",
+                "firstRound": "1st Round",
                 "status": "Status",
                 "creator": "Creator",
                 "bittworldUid": "Bittworld UID",
