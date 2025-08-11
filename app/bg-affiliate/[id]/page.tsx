@@ -4,13 +4,19 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ChevronRight, ChevronDown, Percent, Users, Calendar, Wallet, Activity, Copy, Check, Power, Crown, TrendingUp, BarChart3 } from "lucide-react";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import {  SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
+import { ChevronRight, ChevronDown, Percent, Users, Calendar, Wallet, Activity, Copy, Check, Power, Crown, TrendingUp, BarChart3, Route, Plus } from "lucide-react";
 import { notFound, useParams } from "next/navigation";
 import { toast } from "sonner";
-import { getBgAffiliateTreeDetail, updateBgAffiliateNodeStatus } from '@/services/api/BgAffiliateService';
+import { getBgAffiliateTreeDetail, updateBgAffiliateNodeStatus, changeBgAffiliateFlow } from '@/services/api/BgAffiliateService';
 import { getMyInfor } from "@/services/api/UserAdminService";
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useLang } from "@/lang/useLang";
+import Select from "react-select";
+import { getListWallets } from '@/services/api/ListWalletsService';
+import { selectStyles } from "@/utils/common";
 
 // --- Helper: truncateAddress ---
 function truncateAddress(address: string, start: number = 4, end: number = 4): string {
@@ -319,6 +325,14 @@ export default function BgAffiliateTreeDetailPage() {
   const id = params?.id ? Number(params.id) : undefined;
   const queryClient = useQueryClient();
 
+  // Change Flow state
+  const [showChangeFlow, setShowChangeFlow] = useState(false);
+  const [changeFlowForm, setChangeFlowForm] = useState({
+    selectedWallet: null,
+    selectedNewParent: null
+  });
+  const [changeFlowWalletSearchQuery, setChangeFlowWalletSearchQuery] = useState("");
+
   // Get user info
   const { data: myInfor } = useQuery({
     queryKey: ["my-infor"],
@@ -331,6 +345,42 @@ export default function BgAffiliateTreeDetailPage() {
     queryKey: ['bg-affiliate-tree-detail', id],
     queryFn: () => getBgAffiliateTreeDetail(Number(id)),
     enabled: !!id,
+  });
+
+  // Fetch wallets for Change Flow dialog
+  const { data: changeFlowWallets = [], isLoading: changeFlowWalletsLoading } = useQuery({
+    queryKey: ["wallets-for-change-flow-detail", changeFlowWalletSearchQuery, myInfor?.role],
+    queryFn: () => {
+      const isBittworld = myInfor?.role === 'partner' ? true : undefined;
+      return getListWallets(changeFlowWalletSearchQuery, 1, 50, '', 'main', isBittworld, undefined, 'bg');
+    },
+    enabled: showChangeFlow,
+    placeholderData: (previousData) => previousData,
+  });
+
+  // Change Flow mutation
+  const changeFlowMutation = useMutation({
+    mutationFn: ({ walletId, newParentWalletId }: { walletId: number, newParentWalletId: number }) =>
+      changeBgAffiliateFlow(walletId, newParentWalletId),
+    onSuccess: (data) => {
+      console.log('BG affiliate flow changed successfully:', data);
+      setShowChangeFlow(false);
+      setChangeFlowForm({ selectedWallet: null, selectedNewParent: null });
+      queryClient.invalidateQueries({ queryKey: ['bg-affiliate-tree-detail', id] });
+      queryClient.invalidateQueries({ queryKey: ['bg-affiliate-trees'] });
+      toast.success(t('bg-affiliate.dialogs.changeFlow.success'));
+    },
+    onError: (error: any) => {
+      console.error('Error changing BG affiliate flow:', error);
+      const rawMsg = error?.response?.data?.message || error?.message || "";
+      if (typeof rawMsg === "string" && rawMsg.toLowerCase().includes("circular reference")) {
+        toast.error(t('bg-affiliate.dialogs.changeFlow.circularReferenceError'));
+      } else if (typeof rawMsg === "string" && rawMsg.toLowerCase().includes("cannot change flow of root")) {
+        toast.error(t('bg-affiliate.dialogs.changeFlow.cannotChangeRootError'));
+      } else {
+        toast.error(t('bg-affiliate.dialogs.changeFlow.error'));
+      }
+    }
   });
 
   // Update node status mutation
@@ -352,6 +402,18 @@ export default function BgAffiliateTreeDetailPage() {
   });
 
   const [copiedAddress, setCopiedAddress] = useState<string | null>(null);
+
+  // Helper functions
+  const handleChangeFlow = () => {
+    setChangeFlowForm({ selectedWallet: null, selectedNewParent: null });
+    setShowChangeFlow(true);
+  };
+
+  // Convert to react-select format for change flow dialog
+  const changeFlowWalletOptions = changeFlowWallets?.data?.map((wallet: any) => ({
+    value: wallet,
+    label: wallet.wallet_solana_address
+  }));
 
   // Sau đó mới return điều kiện
   if (isLoading) {
@@ -429,6 +491,16 @@ export default function BgAffiliateTreeDetailPage() {
               </>
             )}
           </p>
+        </div>
+        <div className="flex items-center gap-2">
+          <Button 
+            variant="outline"
+            onClick={handleChangeFlow}
+            className="border-orange-500/50 text-orange-400 hover:bg-orange-500/10 hover:text-orange-300"
+          >
+            <Route className="h-4 w-4 mr-2" />
+            {t('bg-affiliate.changeFlow')}
+          </Button>
         </div>
       </div>
 
@@ -524,6 +596,114 @@ export default function BgAffiliateTreeDetailPage() {
           )}
         </CardContent>
       </Card>
+
+      {/* Change Flow Dialog */}
+      <Dialog open={showChangeFlow} onOpenChange={setShowChangeFlow}>
+        <DialogContent className="max-w-xl">
+          <DialogHeader>
+            <DialogTitle className="text-foreground font-bold flex items-center gap-2">
+              <Route className="h-5 w-5 text-orange-400" />
+              {t('bg-affiliate.dialogs.changeFlow.title')}
+            </DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <label className="block text-sm font-medium">{t('bg-affiliate.dialogs.changeFlow.selectWallet')}</label>
+              <Select
+                options={changeFlowWalletOptions as any}
+                value={changeFlowForm.selectedWallet ? {
+                  value: changeFlowForm.selectedWallet,
+                  label: truncateAddress((changeFlowForm.selectedWallet as any).wallet_solana_address)
+                } : null}
+                onChange={(option: any) => setChangeFlowForm(prev => ({ 
+                  ...prev, 
+                  selectedWallet: option ? option.value : null 
+                }))}
+                onInputChange={(newValue) => setChangeFlowWalletSearchQuery(newValue)}
+                placeholder={t('bg-affiliate.dialogs.changeFlow.selectWalletPlaceholder')}
+                isClearable
+                isSearchable
+                styles={selectStyles}
+                noOptionsMessage={() => t('bg-affiliate.dialogs.changeFlow.noWalletsInSystem')}
+                loadingMessage={() => t('bg-affiliate.dialogs.changeFlow.loadingWallets')}
+                isLoading={changeFlowWalletsLoading}
+                isDisabled={changeFlowMutation.isPending}
+                filterOption={() => true}
+                isOptionDisabled={() => false}
+              />
+              <p className="text-xs text-muted-foreground">
+                {t('bg-affiliate.dialogs.changeFlow.walletHelp')}
+              </p>
+              <p className="text-xs text-muted-foreground">
+                {changeFlowWallets?.pagination?.total || 0} {t('bg-affiliate.dialogs.changeFlow.walletsInSystem')}
+              </p>
+            </div>
+            
+            <div className="space-y-2">
+              <label className="block text-sm font-medium">{t('bg-affiliate.dialogs.changeFlow.selectNewParent')}</label>
+              <Select
+                options={changeFlowWalletOptions as any}
+                value={changeFlowForm.selectedNewParent ? {
+                  value: changeFlowForm.selectedNewParent,
+                  label: truncateAddress((changeFlowForm.selectedNewParent as any).wallet_solana_address)
+                } : null}
+                onChange={(option: any) => setChangeFlowForm(prev => ({ 
+                  ...prev, 
+                  selectedNewParent: option ? option.value : null 
+                }))}
+                onInputChange={(newValue) => setChangeFlowWalletSearchQuery(newValue)}
+                placeholder={t('bg-affiliate.dialogs.changeFlow.selectNewParentPlaceholder')}
+                isClearable
+                isSearchable
+                styles={selectStyles}
+                noOptionsMessage={() => t('bg-affiliate.dialogs.changeFlow.noWalletsInSystem')}
+                loadingMessage={() => t('bg-affiliate.dialogs.changeFlow.loadingWallets')}
+                isLoading={changeFlowWalletsLoading}
+                isDisabled={changeFlowMutation.isPending}
+                filterOption={() => true}
+                isOptionDisabled={() => false}
+              />
+              <p className="text-xs text-muted-foreground">
+                {t('bg-affiliate.dialogs.changeFlow.newParentHelp')}
+              </p>
+            </div>
+
+            {changeFlowForm.selectedWallet && changeFlowForm.selectedNewParent && (
+              <div className="p-3 rounded-lg bg-orange-500/10 border border-orange-500/30">
+                <p className="text-sm text-orange-400 font-medium">
+                  {t('bg-affiliate.dialogs.changeFlow.confirmMessage')}
+                </p>
+                <p className="text-xs text-muted-foreground mt-1">
+                  {t('bg-affiliate.dialogs.changeFlow.warningMessage')}
+                </p>
+              </div>
+            )}
+          </div>
+          <DialogFooter>
+            <Button 
+              variant="outline"
+              onClick={() => setShowChangeFlow(false)}
+              disabled={changeFlowMutation.isPending}
+            >
+              {t('bg-affiliate.dialogs.changeFlow.cancel')}
+            </Button>
+            <Button 
+              className="bg-orange-500 hover:bg-orange-600 text-white font-medium" 
+              disabled={!changeFlowForm.selectedWallet || !changeFlowForm.selectedNewParent || changeFlowMutation.isPending || changeFlowForm.selectedWallet === changeFlowForm.selectedNewParent}
+              onClick={() => {
+                if (changeFlowForm.selectedWallet && changeFlowForm.selectedNewParent) {
+                  changeFlowMutation.mutate({
+                    walletId: (changeFlowForm.selectedWallet as any).wallet_id,
+                    newParentWalletId: (changeFlowForm.selectedNewParent as any).wallet_id
+                  });
+                }
+              }}
+            >
+              {changeFlowMutation.isPending ? t('bg-affiliate.dialogs.changeFlow.changing') : t('bg-affiliate.dialogs.changeFlow.changeButton')}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
