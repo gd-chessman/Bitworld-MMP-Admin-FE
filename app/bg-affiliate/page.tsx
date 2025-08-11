@@ -258,14 +258,14 @@ export default function BgAffiliateAdminPage() {
           <p className="text-muted-foreground text-sm">{t('bg-affiliate.description')}</p>
         </div>
         <div className="flex items-center gap-2">
-          <Button 
+          {/* <Button 
             variant="outline"
             onClick={handleChangeFlow}
             className="border-orange-500/50 text-orange-400 hover:bg-orange-500/10 hover:text-orange-300"
           >
             <Route className="h-4 w-4 mr-2" />
             {t('bg-affiliate.changeFlow')}
-          </Button>
+          </Button> */}
           <Button 
             className="bg-[#00e09e] hover:bg-[#00d08e] text-black font-medium"
             onClick={() => setShowCreate(true)}
