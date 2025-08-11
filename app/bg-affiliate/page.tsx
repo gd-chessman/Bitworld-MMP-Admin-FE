@@ -8,13 +8,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Select as UISelect, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Plus, Eye, Users, Wallet, Percent, Calendar, ChevronRight, ChevronDown, Search, MoreHorizontal, TrendingUp, Activity, Edit, Copy, Check } from "lucide-react";
+import { Plus, Eye, Users, Wallet, Percent, Calendar, ChevronRight, ChevronDown, Search, MoreHorizontal, TrendingUp, Activity, Edit, Copy, Check, Route } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import Select from "react-select";
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { getListWallets } from '@/services/api/ListWalletsService';
-import { createBgAffiliate, getBgAffiliateTrees, updateRootBgCommission, updateBgAffiliateNodeStatus, getBgAffiliateStatistics } from '@/services/api/BgAffiliateService';
+import { createBgAffiliate, getBgAffiliateTrees, updateRootBgCommission, updateBgAffiliateNodeStatus, getBgAffiliateStatistics, changeBgAffiliateFlow } from '@/services/api/BgAffiliateService';
 import { selectStyles } from "@/utils/common";
 import { toast } from "sonner";
 import { useLang } from "@/lang/useLang";
@@ -32,6 +32,7 @@ export default function BgAffiliateAdminPage() {
   const { t } = useLang();
   const [showCreate, setShowCreate] = useState(false);
   const [showUpdateCommission, setShowUpdateCommission] = useState(false);
+  const [showChangeFlow, setShowChangeFlow] = useState(false);
   const [selectedTree, setSelectedTree] = useState<any>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [isBittworldFilter, setIsBittworldFilter] = useState<'all' | 'true' | 'false'>('all');
@@ -58,6 +59,13 @@ export default function BgAffiliateAdminPage() {
     batAlias: ""
   });
 
+  const [changeFlowForm, setChangeFlowForm] = useState({
+    selectedWallet: null,
+    selectedNewParent: null
+  });
+
+  const [changeFlowWalletSearchQuery, setChangeFlowWalletSearchQuery] = useState("");
+
   // Fetch BG Affiliate trees
   const { data: bgAffiliateTrees = [], isLoading: treesLoading, error: treesError } = useQuery({
     queryKey: ['bg-affiliate-trees', isBittworldFilter],
@@ -72,7 +80,7 @@ export default function BgAffiliateAdminPage() {
     refetchInterval: 30000, // Refetch every 30 seconds
   });
 
-  // Fetch available wallets when dialog is open
+  // Fetch available wallets when create dialog is open
   const { data: availableWallets = [], isLoading: walletsLoading } = useQuery({
     queryKey: ["list-wallets-bg-affiliate", walletSearchQuery, 'all', 1, myInfor?.role],
     queryFn: () => {
@@ -80,7 +88,20 @@ export default function BgAffiliateAdminPage() {
       const isBittworld = myInfor?.role === 'partner' ? true : undefined;
       return getListWallets(walletSearchQuery, 1, 30, '', 'main', isBittworld);
     },
-    enabled: showCreate, // Only fetch when dialog is open
+    enabled: showCreate, // Only fetch when create dialog is open
+    placeholderData: (previousData) => previousData,
+  });
+
+  // Fetch wallets for Change Flow dialog (only wallets in BG affiliate system)
+  const { data: changeFlowWallets = [], isLoading: changeFlowWalletsLoading } = useQuery({
+    queryKey: ["wallets-for-change-flow", changeFlowWalletSearchQuery, myInfor?.role],
+    queryFn: () => {
+      // For partner role, only show Bittworld wallets
+      const isBittworld = myInfor?.role === 'partner' ? true : undefined;
+      // bgAffiliate: 'true' to get only wallets that are in BG affiliate system
+      return getListWallets(changeFlowWalletSearchQuery, 1, 50, '', 'main', isBittworld, undefined, 'bg');
+    },
+    enabled: showChangeFlow, // Only fetch when change flow dialog is open
     placeholderData: (previousData) => previousData,
   });
 
@@ -152,6 +173,33 @@ export default function BgAffiliateAdminPage() {
     }
   });
 
+  // Change Flow mutation
+  const changeFlowMutation = useMutation({
+    mutationFn: ({ walletId, newParentWalletId }: { walletId: number, newParentWalletId: number }) =>
+      changeBgAffiliateFlow(walletId, newParentWalletId),
+    onSuccess: (data) => {
+      console.log('BG affiliate flow changed successfully:', data);
+      // Close dialog and reset form
+      setShowChangeFlow(false);
+      setChangeFlowForm({ selectedWallet: null, selectedNewParent: null });
+      // Invalidate and refetch trees list
+      queryClient.invalidateQueries({ queryKey: ['bg-affiliate-trees'] });
+      // Show success toast
+      toast.success(t('bg-affiliate.dialogs.changeFlow.success'));
+    },
+    onError: (error: any) => {
+      console.error('Error changing BG affiliate flow:', error);
+      const rawMsg = error?.response?.data?.message || error?.message || "";
+      if (typeof rawMsg === "string" && rawMsg.toLowerCase().includes("circular reference")) {
+        toast.error(t('bg-affiliate.dialogs.changeFlow.circularReferenceError'));
+      } else if (typeof rawMsg === "string" && rawMsg.toLowerCase().includes("cannot change flow of root")) {
+        toast.error(t('bg-affiliate.dialogs.changeFlow.cannotChangeRootError'));
+      } else {
+        toast.error(t('bg-affiliate.dialogs.changeFlow.error'));
+      }
+    }
+  });
+
   // Filter trees based on search term
   const filteredTrees = bgAffiliateTrees.filter((tree: any) =>
     tree.rootWallet?.nickName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -159,8 +207,14 @@ export default function BgAffiliateAdminPage() {
     tree.treeId?.toString().includes(searchTerm)
   );
 
-  // Convert to react-select format
+  // Convert to react-select format for create dialog
   const walletOptions = availableWallets?.data?.map((wallet: any) => ({
+    value: wallet,
+    label: wallet.wallet_solana_address
+  }));
+
+  // Convert to react-select format for change flow dialog
+  const changeFlowWalletOptions = changeFlowWallets?.data?.map((wallet: any) => ({
     value: wallet,
     label: wallet.wallet_solana_address
   }));
@@ -176,6 +230,11 @@ export default function BgAffiliateAdminPage() {
       batAlias: tree.batAlias || ""
     });
     setShowUpdateCommission(true);
+  };
+
+  const handleChangeFlow = () => {
+    setChangeFlowForm({ selectedWallet: null, selectedNewParent: null });
+    setShowChangeFlow(true);
   };
 
   // Copy to clipboard function
@@ -198,13 +257,23 @@ export default function BgAffiliateAdminPage() {
           <h1 className="text-2xl font-bold">{t('bg-affiliate.title')}</h1>
           <p className="text-muted-foreground text-sm">{t('bg-affiliate.description')}</p>
         </div>
-        <Button 
-          className="bg-[#00e09e] hover:bg-[#00d08e] text-black font-medium"
-          onClick={() => setShowCreate(true)}
-        >
-          <Plus className="h-4 w-4 mr-2" />
-          {t('bg-affiliate.newBg')}
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button 
+            variant="outline"
+            onClick={handleChangeFlow}
+            className="border-orange-500/50 text-orange-400 hover:bg-orange-500/10 hover:text-orange-300"
+          >
+            <Route className="h-4 w-4 mr-2" />
+            {t('bg-affiliate.changeFlow')}
+          </Button>
+          <Button 
+            className="bg-[#00e09e] hover:bg-[#00d08e] text-black font-medium"
+            onClick={() => setShowCreate(true)}
+          >
+            <Plus className="h-4 w-4 mr-2" />
+            {t('bg-affiliate.newBg')}
+          </Button>
+        </div>
       </div>
 
       {/* Stats Cards */}
@@ -392,7 +461,7 @@ export default function BgAffiliateAdminPage() {
                                 size="icon"
                                 className="h-5 w-5 text-muted-foreground hover:text-cyan-300 hover:bg-muted/50"
                                 onClick={() => copyToClipboard(tree.rootWallet?.solanaAddress || '')}
-                                title="Copy address"
+                                title={t('bg-affiliate.table.copyAddress')}
                               >
                                 {copiedAddress === tree.rootWallet?.solanaAddress ? (
                                   <Check className="h-3 w-3 text-emerald-500" />
@@ -507,7 +576,7 @@ export default function BgAffiliateAdminPage() {
 
       {/* Create Tree Dialog */}
       <Dialog open={showCreate} onOpenChange={setShowCreate}>
-        <DialogContent>
+        <DialogContent className="max-w-xl">
           <DialogHeader>
             <DialogTitle className="text-foreground font-bold">{t('bg-affiliate.dialogs.create.title')}</DialogTitle>
           </DialogHeader>
@@ -530,8 +599,8 @@ export default function BgAffiliateAdminPage() {
                 isSearchable
                 styles={selectStyles}
 
-                noOptionsMessage={() => "No wallets available"}
-                loadingMessage={() => "Loading wallets..."}
+                noOptionsMessage={() => t('bg-affiliate.dialogs.changeFlow.noWalletsAvailable')}
+                loadingMessage={() => t('bg-affiliate.dialogs.changeFlow.loadingWallets')}
                 isLoading={walletsLoading}
                 isDisabled={createBgAffiliateMutation.isPending}
                 filterOption={() => true}
@@ -666,6 +735,114 @@ export default function BgAffiliateAdminPage() {
               }}
             >
               {updateCommissionMutation.isPending ? t('bg-affiliate.dialogs.updateCommission.updating') : t('bg-affiliate.dialogs.updateCommission.updateButton')}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Change Flow Dialog */}
+      <Dialog open={showChangeFlow} onOpenChange={setShowChangeFlow}>
+        <DialogContent className="max-w-xl">
+          <DialogHeader>
+            <DialogTitle className="text-foreground font-bold flex items-center gap-2">
+              <Route className="h-5 w-5 text-orange-400" />
+              {t('bg-affiliate.dialogs.changeFlow.title')}
+            </DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <label className="block text-sm font-medium">{t('bg-affiliate.dialogs.changeFlow.selectWallet')}</label>
+              <Select
+                options={changeFlowWalletOptions as any}
+                value={changeFlowForm.selectedWallet ? {
+                  value: changeFlowForm.selectedWallet,
+                  label: truncateAddress((changeFlowForm.selectedWallet as any).wallet_solana_address)
+                } : null}
+                onChange={(option: any) => setChangeFlowForm(prev => ({ 
+                  ...prev, 
+                  selectedWallet: option ? option.value : null 
+                }))}
+                onInputChange={(newValue) => setChangeFlowWalletSearchQuery(newValue)}
+                placeholder={t('bg-affiliate.dialogs.changeFlow.selectWalletPlaceholder')}
+                isClearable
+                isSearchable
+                styles={selectStyles}
+                noOptionsMessage={() => t('bg-affiliate.dialogs.changeFlow.noWalletsInSystem')}
+                loadingMessage={() => t('bg-affiliate.dialogs.changeFlow.loadingWallets')}
+                isLoading={changeFlowWalletsLoading}
+                isDisabled={changeFlowMutation.isPending}
+                filterOption={() => true}
+                isOptionDisabled={() => false}
+              />
+              <p className="text-xs text-muted-foreground">
+                {t('bg-affiliate.dialogs.changeFlow.walletHelp')}
+              </p>
+              <p className="text-xs text-muted-foreground">
+                {changeFlowWallets?.pagination?.total || 0} {t('bg-affiliate.dialogs.changeFlow.walletsInSystem')}
+              </p>
+            </div>
+            
+            <div className="space-y-2">
+              <label className="block text-sm font-medium">{t('bg-affiliate.dialogs.changeFlow.selectNewParent')}</label>
+              <Select
+                options={changeFlowWalletOptions as any}
+                value={changeFlowForm.selectedNewParent ? {
+                  value: changeFlowForm.selectedNewParent,
+                  label: truncateAddress((changeFlowForm.selectedNewParent as any).wallet_solana_address)
+                } : null}
+                onChange={(option: any) => setChangeFlowForm(prev => ({ 
+                  ...prev, 
+                  selectedNewParent: option ? option.value : null 
+                }))}
+                onInputChange={(newValue) => setChangeFlowWalletSearchQuery(newValue)}
+                placeholder={t('bg-affiliate.dialogs.changeFlow.selectNewParentPlaceholder')}
+                isClearable
+                isSearchable
+                styles={selectStyles}
+                noOptionsMessage={() => t('bg-affiliate.dialogs.changeFlow.noWalletsInSystem')}
+                loadingMessage={() => t('bg-affiliate.dialogs.changeFlow.loadingWallets')}
+                isLoading={changeFlowWalletsLoading}
+                isDisabled={changeFlowMutation.isPending}
+                filterOption={() => true}
+                isOptionDisabled={() => false}
+              />
+              <p className="text-xs text-muted-foreground">
+                {t('bg-affiliate.dialogs.changeFlow.newParentHelp')}
+              </p>
+            </div>
+
+            {changeFlowForm.selectedWallet && changeFlowForm.selectedNewParent && (
+              <div className="p-3 rounded-lg bg-orange-500/10 border border-orange-500/30">
+                <p className="text-sm text-orange-400 font-medium">
+                  {t('bg-affiliate.dialogs.changeFlow.confirmMessage')}
+                </p>
+                <p className="text-xs text-muted-foreground mt-1">
+                  {t('bg-affiliate.dialogs.changeFlow.warningMessage')}
+                </p>
+              </div>
+            )}
+          </div>
+          <DialogFooter>
+            <Button 
+              variant="outline"
+              onClick={() => setShowChangeFlow(false)}
+              disabled={changeFlowMutation.isPending}
+            >
+              {t('bg-affiliate.dialogs.changeFlow.cancel')}
+            </Button>
+            <Button 
+              className="bg-orange-500 hover:bg-orange-600 text-white font-medium" 
+              disabled={!changeFlowForm.selectedWallet || !changeFlowForm.selectedNewParent || changeFlowMutation.isPending || changeFlowForm.selectedWallet === changeFlowForm.selectedNewParent}
+              onClick={() => {
+                if (changeFlowForm.selectedWallet && changeFlowForm.selectedNewParent) {
+                  changeFlowMutation.mutate({
+                    walletId: (changeFlowForm.selectedWallet as any).wallet_id,
+                    newParentWalletId: (changeFlowForm.selectedNewParent as any).wallet_id
+                  });
+                }
+              }}
+            >
+              {changeFlowMutation.isPending ? t('bg-affiliate.dialogs.changeFlow.changing') : t('bg-affiliate.dialogs.changeFlow.changeButton')}
             </Button>
           </DialogFooter>
         </DialogContent>

@@ -106,3 +106,17 @@ export const getBgAffiliateStatistics = async () => {
     return [];
   }
 };
+
+// 8. Thay đổi luồng BG affiliate (change flow)
+export const changeBgAffiliateFlow = async (walletId: number, newParentWalletId: number) => {
+  try {
+    const response = await axiosClient.put('/bg-affiliate/change-flow', {
+      walletId,
+      newParentWalletId
+    });
+    return response.data;
+  } catch (error) {
+    console.log('Error changing BG affiliate flow:', error);
+    throw error;
+  }
+};

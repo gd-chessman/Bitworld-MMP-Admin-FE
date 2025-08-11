@@ -231,7 +231,7 @@ export default function OrdersPage() {
                       <td className="px-4 py-2">
                         <div className="font-semibold">{order.order_token_name || '-'}</div>
                         <div className="flex items-center gap-1 text-xs text-muted-foreground break-all">
-                          <span>{truncateMiddle(order.order_token_address)}</span>
+                          <span className="whitespace-nowrap">{truncateMiddle(order.order_token_address)}</span>
                           {order.order_token_address && (
                             <button
                               className="p-0.5 hover:bg-muted rounded"

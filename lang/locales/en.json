@@ -501,6 +501,7 @@
             "memepump": "Memepump"
         },
         "newBg": "New BG",
+        "changeFlow": "Change Flow",
             "stats": {
       "totalTrees": "Total Trees",
       "totalMembers": "Total Members",
@@ -521,12 +522,11 @@
             "inactive": "Inactive",
             "statusUpdated": "Tree status updated successfully!",
             "statusUpdateFailed": "Failed to update tree status. Please try again.",
+            "copyAddress": "Copy address",
             "loading": "Loading trees...",
             "error": "Error loading trees. Please try again.",
             "noTrees": "No trees found",
-            "membersCount": "members",
-            "active": "Active",
-            "inactive": "Inactive"
+            "membersCount": "members"
         },
         "dialogs": {
             "create": {
@@ -561,6 +561,28 @@
                 "updating": "Updating...",
                 "success": "BG Affiliate updated successfully!",
                 "error": "Failed to update BG Affiliate. Please try again."
+            },
+            "changeFlow": {
+                "title": "Change Affiliate Flow",
+                "selectWallet": "Select Wallet to Move",
+                "selectWalletPlaceholder": "Search and select a wallet...",
+                "walletHelp": "Choose the wallet that you want to move to a new parent",
+                "selectNewParent": "Select New Parent Wallet",
+                "selectNewParentPlaceholder": "Search and select new parent...",
+                "newParentHelp": "Choose the new parent wallet for the affiliate relationship",
+                "confirmMessage": "Ready to change affiliate flow",
+                "warningMessage": "This action will update the affiliate tree structure and all related commissions",
+                "changeButton": "Change Flow",
+                "changing": "Changing...",
+                "cancel": "Cancel",
+                "success": "Affiliate flow changed successfully!",
+                "error": "Failed to change affiliate flow. Please try again.",
+                "circularReferenceError": "This change would create a circular reference in the affiliate tree",
+                "cannotChangeRootError": "Cannot change flow of root BG wallet",
+                "noWalletsAvailable": "No wallets available",
+                "loadingWallets": "Loading wallets...",
+                "noWalletsInSystem": "No wallets in BG affiliate system",
+                "walletsInSystem": "wallets in BG affiliate system"
             }
         },
         "detail": {

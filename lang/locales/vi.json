@@ -501,6 +501,7 @@
             "memepump": "Memepump"
         },
         "newBg": "BG Mới",
+        "changeFlow": "Thay đổi luồng",
         "stats": {
             "totalTrees": "Tổng Cây",
             "totalMembers": "Tổng Thành Viên",
@@ -521,14 +522,11 @@
             "inactive": "Không Hoạt Động",
             "statusUpdated": "Cập nhật trạng thái cây thành công!",
             "statusUpdateFailed": "Cập nhật trạng thái cây thất bại. Vui lòng thử lại.",
+            "copyAddress": "Sao chép địa chỉ",
             "loading": "Đang tải cây...",
             "error": "Lỗi tải cây. Vui lòng thử lại.",
             "noTrees": "Không tìm thấy cây affiliate",
-            "membersCount": "thành viên",
-            "loading": "Đang tải...",
-            "error": "Lỗi tải dữ liệu",
-            "active": "Hoạt động",
-            "inactive": "Không hoạt động"
+            "membersCount": "thành viên"
         },
         "dialogs": {
             "create": {
@@ -563,6 +561,28 @@
                 "updating": "Đang cập nhật...",
                 "success": "Cập nhật BG Affiliate thành công!",
                 "error": "Cập nhật BG Affiliate thất bại. Vui lòng thử lại."
+            },
+            "changeFlow": {
+                "title": "Thay đổi luồng Affiliate",
+                "selectWallet": "Chọn ví cần di chuyển",
+                "selectWalletPlaceholder": "Tìm kiếm và chọn ví...",
+                "walletHelp": "Chọn ví mà bạn muốn di chuyển sang parent mới",
+                "selectNewParent": "Chọn ví parent mới",
+                "selectNewParentPlaceholder": "Tìm kiếm và chọn parent mới...",
+                "newParentHelp": "Chọn ví parent mới cho mối quan hệ affiliate",
+                "confirmMessage": "Sẵn sàng thay đổi luồng affiliate",
+                "warningMessage": "Hành động này sẽ cập nhật cấu trúc cây affiliate và tất cả hoa hồng liên quan",
+                "changeButton": "Thay đổi luồng",
+                "changing": "Đang thay đổi...",
+                "cancel": "Hủy",
+                "success": "Thay đổi luồng affiliate thành công!",
+                "error": "Thay đổi luồng affiliate thất bại. Vui lòng thử lại.",
+                "circularReferenceError": "Thay đổi này sẽ tạo ra vòng lặp trong cây affiliate",
+                "cannotChangeRootError": "Không thể thay đổi luồng của ví gốc BG",
+                "noWalletsAvailable": "Không có ví khả dụng",
+                "loadingWallets": "Đang tải ví...",
+                "noWalletsInSystem": "Không có ví trong hệ thống BG affiliate",
+                "walletsInSystem": "ví trong hệ thống BG affiliate"
             }
         },
         "detail": {

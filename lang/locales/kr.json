@@ -501,6 +501,7 @@
             "memepump": "Memepump"
         },
         "newBg": "새 BG",
+        "changeFlow": "플로우 변경",
         "stats": {
             "totalTrees": "총 트리",
             "totalMembers": "총 멤버",
@@ -521,12 +522,11 @@
             "inactive": "비활성",
             "statusUpdated": "트리 상태가 성공적으로 업데이트되었습니다!",
             "statusUpdateFailed": "트리 상태 업데이트에 실패했습니다. 다시 시도해 주세요.",
+            "copyAddress": "주소 복사",
             "loading": "트리 로딩 중...",
             "error": "트리 로딩 오류. 다시 시도해 주세요.",
             "noTrees": "트리를 찾을 수 없습니다",
-            "membersCount": "멤버",
-            "active": "활성",
-            "inactive": "비활성"
+            "membersCount": "멤버"
         },
         "dialogs": {
             "create": {
@@ -561,6 +561,28 @@
                 "updating": "업데이트 중...",
                 "success": "BG 제휴가 성공적으로 업데이트되었습니다!",
                 "error": "BG 제휴 업데이트에 실패했습니다. 다시 시도해 주세요."
+            },
+            "changeFlow": {
+                "title": "제휴 플로우 변경",
+                "selectWallet": "이동할 지갑 선택",
+                "selectWalletPlaceholder": "지갑 검색 및 선택...",
+                "walletHelp": "새로운 부모로 이동하려는 지갑을 선택하세요",
+                "selectNewParent": "새로운 부모 지갑 선택",
+                "selectNewParentPlaceholder": "새로운 부모 검색 및 선택...",
+                "newParentHelp": "제휴 관계를 위한 새로운 부모 지갑을 선택하세요",
+                "confirmMessage": "제휴 플로우 변경 준비 완료",
+                "warningMessage": "이 작업은 제휴 트리 구조와 모든 관련 수수료를 업데이트합니다",
+                "changeButton": "플로우 변경",
+                "changing": "변경 중...",
+                "cancel": "취소",
+                "success": "제휴 플로우가 성공적으로 변경되었습니다!",
+                "error": "제휴 플로우 변경에 실패했습니다. 다시 시도해 주세요.",
+                "circularReferenceError": "이 변경은 제휴 트리에서 순환 참조를 생성합니다",
+                "cannotChangeRootError": "루트 BG 지갑의 플로우를 변경할 수 없습니다",
+                "noWalletsAvailable": "사용 가능한 지갑이 없습니다",
+                "loadingWallets": "지갑 로딩 중...",
+                "noWalletsInSystem": "BG 제휴 시스템에 지갑이 없습니다",
+                "walletsInSystem": "BG 제휴 시스템의 지갑"
             }
         },
         "detail": {
