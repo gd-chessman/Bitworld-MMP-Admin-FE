@@ -344,6 +344,7 @@
         "pools": "Pools",
         "bittworldRewards": "Phần Thưởng Bittworld",
         "airdrops": "Airdrops",
+        "settingRound": "Cài Đặt Vòng",
         "settings": "Cài Đặt",
         "admin": "Quản Trị",
         "orders": "Giao dịch"
@@ -1096,6 +1097,66 @@
             "wallet": "Ví",
             "bittworldUid": "Bittworld UID",
             "created": "Ngày tạo"
+        }
+    },
+            "settingRound": {
+            "title": "Cài Đặt Vòng",
+            "description": "Cấu hình phần trăm vòng top và quản lý rút thưởng airdrop",
+            "placeholders": {
+                "selectCount": "Chọn số lượng"
+            },
+            "tabs": {
+                "topRound": "Cấu Hình Vòng Top",
+                "withdraw": "Rút Airdrop"
+            },
+        "topRound": {
+            "title": "Cấu Hình Vòng Top",
+            "description": "Đặt số lượng vị trí top và phần trăm thưởng tương ứng",
+            "countTopLabel": "Số Lượng Vị Trí Top (0-10)",
+            "percentageLabel": "Phần Trăm Cho Mỗi Vị Trí (1-99%)",
+            "totalPercentage": "Tổng Phần Trăm:",
+            "clearAll": "0 (Xóa Tất Cả)",
+            "positions": "vị trí",
+            "enterPercentage": "Nhập phần trăm",
+            "top": "Top",
+            "saveButton": "Lưu Cấu Hình",
+            "saving": "Đang lưu...",
+            "validation": {
+                "countTopRange": "Số lượng top phải từ 0 đến 10",
+                "percentRange": "Phần trăm cho Top {position} phải từ 1 đến 99",
+                "totalExceed": "Tổng phần trăm không thể vượt quá 100%",
+                "warningTitle": "Cảnh báo",
+                "warningDescription": "Tổng phần trăm không thể vượt quá 100%"
+            },
+            "messages": {
+                "saveSuccess": "Lưu cấu hình thành công",
+                "saveFailed": "Lưu thất bại",
+                "saveError": "Lỗi lưu"
+            }
+        },
+        "withdraw": {
+            "title": "Rút Airdrop",
+            "description": "Xử lý rút thưởng cho các rewards có trạng thái \"có thể rút\"",
+            "noticeTitle": "Thông báo",
+            "noticeDescription": "Điều này sẽ gửi token từ ví admin đến người dùng và cập nhật trạng thái thành \"đã rút\"",
+            "processButton": "Xử Lý Rút Thưởng",
+            "processing": "Đang xử lý...",
+            "results": {
+                "status": "Trạng thái",
+                "processed": "Đã xử lý",
+                "success": "Thành công",
+                "errors": "Lỗi",
+                "tableHeaders": {
+                    "id": "ID",
+                    "status": "Trạng thái",
+                    "hashError": "Hash/Lỗi"
+                }
+            },
+            "messages": {
+                "noRewards": "Không có phần thưởng để rút",
+                "completed": "Hoàn thành: {success} thành công, {errors} lỗi",
+                "failed": "Rút thưởng thất bại"
+            }
         }
     }
 }

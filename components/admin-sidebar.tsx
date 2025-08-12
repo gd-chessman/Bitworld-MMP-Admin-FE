@@ -115,7 +115,7 @@ export function AdminSidebar() {
       color: "text-orange-400 hover:text-orange-300",
     },
     {
-      title: "Setting Round",
+      title: t("navigation.settingRound"),
       href: "/setting-round",
       icon: Trophy,
       color: "text-amber-400 hover:text-amber-300",

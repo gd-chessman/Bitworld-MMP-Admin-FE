@@ -344,6 +344,7 @@
         "pools": "Pools",
         "bittworldRewards": "Bittworld Rewards",
         "airdrops": "Airdrops",
+        "settingRound": "Setting Round",
         "settings": "Settings",
         "admin": "Admin",
         "orders": "Transactions"
@@ -1095,6 +1096,66 @@
             "wallet": "Wallet",
             "bittworldUid": "Bittworld UID",
             "created": "Created"
+        }
+    },
+            "settingRound": {
+            "title": "Setting Round",
+            "description": "Configure top round percentages and manage airdrop withdrawals",
+            "placeholders": {
+                "selectCount": "Select count"
+            },
+            "tabs": {
+                "topRound": "Top Round Configuration",
+                "withdraw": "Airdrop Withdraw"
+            },
+        "topRound": {
+            "title": "Top Round Configuration",
+            "description": "Set number of top positions and their reward percentages",
+            "countTopLabel": "Number of Top Positions (0-10)",
+            "percentageLabel": "Percentage for Each Position (1-99%)",
+            "totalPercentage": "Total Percentage:",
+            "clearAll": "0 (Clear All)",
+            "positions": "positions",
+            "enterPercentage": "Enter percentage",
+            "top": "Top",
+            "saveButton": "Save Configuration",
+            "saving": "Saving...",
+            "validation": {
+                "countTopRange": "Count top must be between 0 and 10",
+                "percentRange": "Percentage for Top {position} must be between 1 and 99",
+                "totalExceed": "Total percentage cannot exceed 100%",
+                "warningTitle": "Warning",
+                "warningDescription": "Total percentage cannot exceed 100%"
+            },
+            "messages": {
+                "saveSuccess": "Configuration saved successfully",
+                "saveFailed": "Failed to save",
+                "saveError": "Save failed"
+            }
+        },
+        "withdraw": {
+            "title": "Airdrop Withdraw",
+            "description": "Process withdrawal for rewards with \"can-withdraw\" status",
+            "noticeTitle": "Notice",
+            "noticeDescription": "This will send tokens from admin wallet to users and update their status to \"withdrawn\"",
+            "processButton": "Process Withdrawals",
+            "processing": "Processing...",
+            "results": {
+                "status": "Status",
+                "processed": "Processed",
+                "success": "Success",
+                "errors": "Errors",
+                "tableHeaders": {
+                    "id": "ID",
+                    "status": "Status",
+                    "hashError": "Hash/Error"
+                }
+            },
+            "messages": {
+                "noRewards": "No rewards to withdraw",
+                "completed": "Completed: {success} successful, {errors} errors",
+                "failed": "Withdrawal failed"
+            }
         }
     }
 }
