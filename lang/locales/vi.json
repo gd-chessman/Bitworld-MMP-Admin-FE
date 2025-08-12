@@ -1017,7 +1017,15 @@
                 "calculating": "Đang trả thưởng...",
                 "success": "Đã trả thưởng thành công",
                 "error": "Trả thưởng thất bại",
-                "noActiveTokens": "Không tìm thấy token airdrop đang hoạt động"
+                "noActiveTokens": "Không tìm thấy token airdrop đang hoạt động",
+                "confirmTitle": "Xác Nhận Trả Thưởng Airdrop",
+                "confirmDescription": "Bạn có chắc chắn muốn trả thưởng airdrops cho những người dùng đủ điều kiện?",
+                "confirmWarning": "Thông báo quan trọng:",
+                "confirmWarning1": "Hành động này sẽ tính toán và trả thưởng cho tất cả người dùng đủ điều kiện",
+                "confirmWarning2": "Phần thưởng sẽ dựa trên các token airdrop đang hoạt động hiện tại",
+                "confirmWarning3": "Quá trình này không thể hoàn tác sau khi bắt đầu",
+                "confirmCancel": "Hủy bỏ",
+                "confirmProceed": "Tiếp tục trả thưởng"
             },
             "status": {
                 "active": "Hoạt Động",

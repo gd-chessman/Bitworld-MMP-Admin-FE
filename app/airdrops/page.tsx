@@ -49,6 +49,7 @@ export default function AirdropAdminPage() {
   const [isCreating, setIsCreating] = useState(false)
   const [isUpdating, setIsUpdating] = useState(false)
   const [isCalculating, setIsCalculating] = useState(false)
+  const [isConfirmDistributeOpen, setIsConfirmDistributeOpen] = useState(false)
 
   // Edit form state
   const [editTokenName, setEditTokenName] = useState("")
@@ -329,23 +330,78 @@ export default function AirdropAdminPage() {
                   </Dialog>
                   )}
                   {!isPartner && (
-                    <Button 
-                      onClick={() => handleCalculateRewards(false)} 
-                      disabled={isCalculating}
-                      className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white border-0 shadow-lg"
-                    >
-                    {isCalculating ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        {t("airdrops.tokens.calculate.calculating")}
-                      </>
-                    ) : (
-                      <>
-                        <Gift className="h-4 w-4 mr-2" />
-                        {t("airdrops.tokens.calculate.button")}
-                      </>
-                    )}
-                  </Button>
+                    <Dialog open={isConfirmDistributeOpen} onOpenChange={setIsConfirmDistributeOpen}>
+                      <DialogTrigger asChild>
+                        <Button 
+                          disabled={isCalculating}
+                          className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white border-0 shadow-lg"
+                        >
+                          {isCalculating ? (
+                            <>
+                              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                              {t("airdrops.tokens.calculate.calculating")}
+                            </>
+                          ) : (
+                            <>
+                              <Gift className="h-4 w-4 mr-2" />
+                              {t("airdrops.tokens.calculate.button")}
+                            </>
+                          )}
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent>
+                        <DialogHeader>
+                          <DialogTitle className="text-foreground font-bold flex items-center gap-2">
+                            <Gift className="h-5 w-5 text-emerald-400" />
+                            {t("airdrops.tokens.calculate.confirmTitle")}
+                          </DialogTitle>
+                          <DialogDescription>
+                            {t("airdrops.tokens.calculate.confirmDescription")}
+                          </DialogDescription>
+                        </DialogHeader>
+                        <div className="space-y-4">
+                          <div className="p-4 rounded-lg bg-amber-500/10 border border-amber-500/30">
+                            <p className="text-sm text-amber-600 font-medium">
+                              {t("airdrops.tokens.calculate.confirmWarning")}
+                            </p>
+                            <ul className="mt-2 text-xs text-amber-700/80 space-y-1 list-disc list-inside">
+                              <li>{t("airdrops.tokens.calculate.confirmWarning1")}</li>
+                              <li>{t("airdrops.tokens.calculate.confirmWarning2")}</li>
+                              <li>{t("airdrops.tokens.calculate.confirmWarning3")}</li>
+                            </ul>
+                          </div>
+                        </div>
+                        <DialogFooter>
+                          <Button 
+                            variant="outline"
+                            onClick={() => setIsConfirmDistributeOpen(false)}
+                            disabled={isCalculating}
+                          >
+                            {t("airdrops.tokens.calculate.confirmCancel")}
+                          </Button>
+                          <Button 
+                            className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white border-0"
+                            disabled={isCalculating}
+                            onClick={() => {
+                              setIsConfirmDistributeOpen(false)
+                              handleCalculateRewards(false)
+                            }}
+                          >
+                            {isCalculating ? (
+                              <>
+                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                {t("airdrops.tokens.calculate.calculating")}
+                              </>
+                            ) : (
+                              <>
+                                <Gift className="h-4 w-4 mr-2" />
+                                {t("airdrops.tokens.calculate.confirmProceed")}
+                              </>
+                            )}
+                          </Button>
+                        </DialogFooter>
+                      </DialogContent>
+                    </Dialog>
                   )}
                 </div>
               </div>

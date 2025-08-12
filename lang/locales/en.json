@@ -1016,7 +1016,15 @@
                 "calculating": "Distributing...",
                 "success": "Airdrops distributed successfully",
                 "error": "Distribution failed",
-                "noActiveTokens": "No active airdrop tokens found"
+                "noActiveTokens": "No active airdrop tokens found",
+                "confirmTitle": "Confirm Airdrop Distribution",
+                "confirmDescription": "Are you sure you want to distribute airdrops to eligible users?",
+                "confirmWarning": "Important Notice:",
+                "confirmWarning1": "This action will calculate and distribute rewards to all eligible users",
+                "confirmWarning2": "Rewards will be based on current active airdrop tokens",
+                "confirmWarning3": "This process cannot be undone once started",
+                "confirmCancel": "Cancel",
+                "confirmProceed": "Proceed with Distribution"
             },
             "status": {
                 "active": "Active",
