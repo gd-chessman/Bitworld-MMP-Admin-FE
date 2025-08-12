@@ -22,6 +22,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle, Settings, Percent, Trophy, Download, Loader2, Gift } from "lucide-react";
 import { useLang } from "@/lang/useLang";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 
 interface TopRoundConfig {
@@ -55,6 +56,7 @@ export default function SettingRoundPage() {
   // State for Withdraw process
   const [isWithdrawing, setIsWithdrawing] = useState(false);
   const [withdrawResults, setWithdrawResults] = useState<any>(null);
+  const [showWithdrawModal, setShowWithdrawModal] = useState(false);
 
   // Initialize form data when API data loads
   useEffect(() => {
@@ -183,25 +185,33 @@ export default function SettingRoundPage() {
 
   return (
     <div className="flex flex-col gap-6">
-              <div className="flex flex-col gap-1">
-          <h2 className="text-3xl font-bold tracking-tight">{t("settingRound.title")}</h2>
-          <p className="text-muted-foreground">
-            {t("settingRound.description")}
-          </p>
+              <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-1">
+            <h2 className="text-3xl font-bold tracking-tight">{t("settingRound.title")}</h2>
+            <p className="text-muted-foreground">
+              {t("settingRound.description")}
+            </p>
+          </div>
+          
+          {!isPartner && (
+            <Button 
+              onClick={() => setShowWithdrawModal(true)}
+              className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white border-0"
+            >
+              <Download className="mr-2 h-4 w-4" />
+              {t("settingRound.withdraw.processButton")}
+            </Button>
+          )}
         </div>
 
       <Tabs defaultValue="top-round" className="w-full">
-                  <TabsList>
-            <TabsTrigger value="top-round">{t("settingRound.tabs.topRound")}</TabsTrigger>
-            <TabsTrigger value="withdraw">{t("settingRound.tabs.withdraw")}</TabsTrigger>
-          </TabsList>
 
         {/* Top Round Configuration Tab */}
         <TabsContent value="top-round" className="space-y-6">
           <Card>
             <CardHeader>
               <div className="flex items-center gap-3">
-                                  <Trophy className="h-5 w-5 text-amber-500" />
+                     <Trophy className="h-5 w-5 text-amber-500" />
                   <div>
                     <CardTitle>{t("settingRound.topRound.title")}</CardTitle>
                     <CardDescription>
@@ -303,56 +313,53 @@ export default function SettingRoundPage() {
             </CardContent>
           </Card>
         </TabsContent>
-
-        {/* Airdrop Withdraw Tab */}
-        <TabsContent value="withdraw" className="space-y-6">
-          <Card>
-            <CardHeader>
-              <div className="flex items-center gap-3">
-                <Gift className="h-5 w-5 text-emerald-500" />
-                <div>
-                  <CardTitle>{t("settingRound.withdraw.title")}</CardTitle>
-                  <CardDescription>
-                    {t("settingRound.withdraw.description")}
-                  </CardDescription>
-                </div>
-              </div>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              
-              <Alert>
-                <AlertCircle className="h-4 w-4" />
-                <AlertTitle>{t("settingRound.withdraw.noticeTitle")}</AlertTitle>
-                <AlertDescription>
-                  {t("settingRound.withdraw.noticeDescription")}
-                </AlertDescription>
-              </Alert>
-
-              {!isPartner && (
-                <div className="flex justify-start">
-                  <Button 
-                    onClick={handleWithdraw} 
-                    disabled={isWithdrawing}
-                    className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white border-0"
-                  >
-                    {isWithdrawing ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        {t("settingRound.withdraw.processing")}
-                      </>
-                    ) : (
-                      <>
-                        <Download className="mr-2 h-4 w-4" />
-                        {t("settingRound.withdraw.processButton")}
-                      </>
-                    )}
-                  </Button>
-                </div>
-              )}
-            </CardContent>
-          </Card>
-        </TabsContent>
       </Tabs>
+
+      {/* Withdraw Confirmation Modal */}
+      <Dialog open={showWithdrawModal} onOpenChange={setShowWithdrawModal}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle>{t("settingRound.withdraw.confirmTitle")}</DialogTitle>
+            <DialogDescription>
+              {t("settingRound.withdraw.confirmDescription")}
+            </DialogDescription>
+          </DialogHeader>
+          
+          <Alert>
+            <AlertCircle className="h-4 w-4" />
+            <AlertTitle>{t("settingRound.withdraw.noticeTitle")}</AlertTitle>
+            <AlertDescription>
+              {t("settingRound.withdraw.noticeDescription")}
+            </AlertDescription>
+          </Alert>
+
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setShowWithdrawModal(false)}>
+              {t("settingRound.withdraw.confirmCancel")}
+            </Button>
+            <Button 
+              onClick={() => {
+                setShowWithdrawModal(false);
+                handleWithdraw();
+              }}
+              disabled={isWithdrawing}
+              className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white border-0"
+            >
+              {isWithdrawing ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  {t("settingRound.withdraw.processing")}
+                </>
+              ) : (
+                <>
+                  <Download className="mr-2 h-4 w-4" />
+                  {t("settingRound.withdraw.confirmProceed")}
+                </>
+              )}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

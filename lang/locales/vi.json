@@ -1156,7 +1156,11 @@
                 "noRewards": "Không có phần thưởng để rút",
                 "completed": "Hoàn thành: {success} thành công, {errors} lỗi",
                 "failed": "Rút thưởng thất bại"
-            }
+            },
+            "confirmTitle": "Xác Nhận Rút Thưởng",
+            "confirmDescription": "Bạn có chắc chắn muốn xử lý rút thưởng airdrop?",
+            "confirmCancel": "Hủy",
+            "confirmProceed": "Tiếp Tục"
         }
     }
 }
