@@ -10,11 +10,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Separator } from "@/components/ui/separator"
 import { toast } from "sonner"
-import { Search, Gift, Plus, Copy, Check, Loader2, Edit } from "lucide-react"
+import { Search, Gift, Plus, Copy, Check, Loader2, Edit, Download } from "lucide-react"
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Label } from "@/components/ui/label"
-import { useQuery } from "@tanstack/react-query"
+import { useQuery, useMutation } from "@tanstack/react-query"
 import { getAirdropTokens, createAirdropToken, updateAirdropToken, calculateAirdropRewards, getAirdropRewards } from "@/services/api/AirdropAdminService"
+import { airdropWithdraw } from "@/services/api/TopRoundService"
 import { useLang } from "@/lang/useLang"
 import { getMyInfor } from "@/services/api/UserAdminService"
 
@@ -50,6 +51,7 @@ export default function AirdropAdminPage() {
   const [isUpdating, setIsUpdating] = useState(false)
   const [isCalculating, setIsCalculating] = useState(false)
   const [isConfirmDistributeOpen, setIsConfirmDistributeOpen] = useState(false)
+  const [isWithdrawing, setIsWithdrawing] = useState(false)
 
   // Edit form state
   const [editTokenName, setEditTokenName] = useState("")
@@ -115,6 +117,32 @@ export default function AirdropAdminPage() {
     placeholderData: (prev) => prev,
   })
   const rewards: any[] = rewardsResp?.rewards ?? []
+
+  // Withdrawal mutation
+  const withdrawMutation = useMutation({
+    mutationFn: airdropWithdraw,
+    onSuccess: (data) => {
+      if (data.success) {
+        if (data.processed === 0) {
+          toast.success(t("airdrops.rewards.withdraw.messages.noRewards"))
+        } else {
+          toast.success(t("airdrops.rewards.withdraw.messages.completed", { 
+            success: data.success_count, 
+            errors: data.error_count 
+          }))
+        }
+        refetchRewards()
+      } else {
+        toast.error(t("airdrops.rewards.withdraw.messages.failed"))
+      }
+    },
+    onError: (error: any) => {
+      toast.error(t("airdrops.rewards.withdraw.messages.failed"))
+    },
+    onSettled: () => {
+      setIsWithdrawing(false)
+    }
+  })
 
   useEffect(() => {
     setTokensPage(1)
@@ -262,7 +290,17 @@ export default function AirdropAdminPage() {
     }
   }
 
-  console.log(endedTokens)
+  async function handleWithdraw() {
+    try {
+      setIsWithdrawing(true)
+      withdrawMutation.mutate()
+    } catch (error) {
+      console.error(t('airdrops.rewards.withdraw.messages.error'), error)
+      setIsWithdrawing(false)
+    }
+  }
+
+
 
   return (
     <div className="flex flex-col gap-6">
@@ -550,8 +588,31 @@ export default function AirdropAdminPage() {
         <TabsContent value="rewards" className="space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle>{t("airdrops.rewards.title")}</CardTitle>
-              <CardDescription>{t("airdrops.rewards.description")}</CardDescription>
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle>{t("airdrops.rewards.title")}</CardTitle>
+                  <CardDescription>{t("airdrops.rewards.description")}</CardDescription>
+                </div>
+                {!isPartner && (
+                  <Button 
+                    onClick={handleWithdraw} 
+                    disabled={isWithdrawing}
+                    className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white border-0"
+                  >
+                    {isWithdrawing ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        {t("airdrops.rewards.withdraw.processing")}
+                      </>
+                    ) : (
+                      <>
+                        <Download className="mr-2 h-4 w-4" />
+                        {t("airdrops.rewards.withdraw.processButton")}
+                      </>
+                    )}
+                  </Button>
+                )}
+              </div>
             </CardHeader>
             <CardContent>
               <div className="flex items-center gap-2 mb-3 flex-wrap">

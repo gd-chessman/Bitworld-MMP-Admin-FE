@@ -193,7 +193,7 @@ export default function SettingRoundPage() {
             </p>
           </div>
           
-          {!isPartner && (
+          {/* {!isPartner && (
             <Button 
               onClick={() => setShowWithdrawModal(true)}
               className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white border-0"
@@ -201,7 +201,7 @@ export default function SettingRoundPage() {
               <Download className="mr-2 h-4 w-4" />
               {t("settingRound.withdraw.processButton")}
             </Button>
-          )}
+          )} */}
         </div>
 
       <Tabs defaultValue="top-round" className="w-full">

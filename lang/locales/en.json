@@ -1058,6 +1058,16 @@
             "status": {
                 "can_withdraw": "Can Withdraw",
                 "withdrawn": "Withdrawn"
+            },
+            "withdraw": {
+                "processButton": "Process Withdrawals",
+                "processing": "Processing...",
+                "messages": {
+                    "noRewards": "No rewards to withdraw",
+                    "completed": "Completed: {success} successful, {errors} errors",
+                    "failed": "Withdrawal failed",
+                    "error": "Withdrawal error"
+                }
             }
         },
         "common": {

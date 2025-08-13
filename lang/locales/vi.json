@@ -1059,6 +1059,16 @@
             "status": {
                 "can_withdraw": "Có thể trả",
                 "withdrawn": "Đã trả"
+            },
+            "withdraw": {
+                "processButton": "Xử lý rút thưởng",
+                "processing": "Đang xử lý...",
+                "messages": {
+                    "noRewards": "Không có phần thưởng để rút",
+                    "completed": "Hoàn thành: {success} thành công, {errors} lỗi",
+                    "failed": "Rút thưởng thất bại",
+                    "error": "Lỗi rút thưởng"
+                }
             }
         },
         "common": {
