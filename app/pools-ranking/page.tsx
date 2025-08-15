@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { 
   ArrowLeft, 
   Crown, 
@@ -64,6 +65,7 @@ export default function PoolsRankingPage() {
   const [copiedAddress, setCopiedAddress] = useState<string | null>(null)
   const [selectedTier, setSelectedTier] = useState<'v7' | 'v6' | 'v5'>('v7')
   const [isSendingMail, setIsSendingMail] = useState(false)
+  const [showSendMailModal, setShowSendMailModal] = useState(false)
 
   // Get volume range based on selected tier
   const getVolumeRange = (tier: string) => {
@@ -139,6 +141,11 @@ export default function PoolsRankingPage() {
   }
 
   const handleSendMail = () => {
+    setShowSendMailModal(true)
+  }
+
+  const confirmSendMail = () => {
+    setShowSendMailModal(false)
     setIsSendingMail(true)
     sendMailMutation.mutate()
   }
@@ -354,6 +361,38 @@ export default function PoolsRankingPage() {
           </div>
         </CardContent>
       </Card>
+
+      {/* Send Mail Confirmation Modal */}
+      <Dialog open={showSendMailModal} onOpenChange={setShowSendMailModal}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle>{t('pools-ranking.mail.confirmTitle')}</DialogTitle>
+            <DialogDescription>{t('pools-ranking.mail.confirmDescription')}</DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setShowSendMailModal(false)}>
+              {t('pools-ranking.mail.confirmCancel')}
+            </Button>
+            <Button 
+              onClick={confirmSendMail} 
+              disabled={isSendingMail}
+              className="bg-green-600 hover:bg-green-700 text-white border-0"
+            >
+              {isSendingMail ? (
+                <>
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                  {t('pools-ranking.mail.sending')}
+                </>
+              ) : (
+                <>
+                  <Mail className="mr-2 h-4 w-4" />
+                  {t('pools-ranking.mail.confirmProceed')}
+                </>
+              )}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 } 

@@ -1113,7 +1113,11 @@
             "sending": "Đang gửi...",
             "success": "Gửi mail báo cáo thành công",
             "failed": "Gửi mail báo cáo thất bại",
-            "error": "Lỗi gửi mail báo cáo"
+            "error": "Lỗi gửi mail báo cáo",
+            "confirmTitle": "Xác nhận gửi báo cáo",
+            "confirmDescription": "Bạn có chắc chắn muốn gửi email báo cáo xếp hạng pools?",
+            "confirmCancel": "Hủy",
+            "confirmProceed": "Gửi báo cáo"
         }
     },
             "settingRound": {

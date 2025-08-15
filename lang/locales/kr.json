@@ -1113,7 +1113,11 @@
             "sending": "전송 중...",
             "success": "메일 보고서가 성공적으로 전송되었습니다",
             "failed": "메일 보고서 전송 실패",
-            "error": "메일 보고서 전송 오류"
+            "error": "메일 보고서 전송 오류",
+            "confirmTitle": "보고서 전송 확인",
+            "confirmDescription": "풀 순위 보고서 이메일을 보내시겠습니까?",
+            "confirmCancel": "취소",
+            "confirmProceed": "보고서 보내기"
         }
     },
             "settingRound": {

@@ -1112,7 +1112,11 @@
             "sending": "Sending...",
             "success": "Mail report sent successfully",
             "failed": "Failed to send mail report",
-            "error": "Error sending mail report"
+            "error": "Error sending mail report",
+            "confirmTitle": "Confirm Send Report",
+            "confirmDescription": "Are you sure you want to send the pools ranking report email?",
+            "confirmCancel": "Cancel",
+            "confirmProceed": "Send Report"
         }
     },
             "settingRound": {
