@@ -1106,6 +1106,13 @@
             "wallet": "Wallet",
             "bittworldUid": "Bittworld UID",
             "created": "Created"
+        },
+        "mail": {
+            "button": "Send mail report",
+            "sending": "Sending...",
+            "success": "Mail report sent successfully",
+            "failed": "Failed to send mail report",
+            "error": "Error sending mail report"
         }
     },
             "settingRound": {

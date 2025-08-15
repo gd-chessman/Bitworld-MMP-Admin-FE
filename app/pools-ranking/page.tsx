@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { useQuery } from "@tanstack/react-query"
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -18,10 +18,12 @@ import {
   TrendingUp,
   Eye,
   Copy,
-  Check
+  Check,
+  Mail
 } from "lucide-react"
 import { useLang } from "@/lang/useLang"
-import { getAirdropPoolLeaderboard } from "@/services/api/AirdropService"
+import { getAirdropPoolLeaderboard, sendMailLeaderboard } from "@/services/api/AirdropService"
+import { toast } from "sonner"
 import Image from "next/image"
 
 // Interface for leaderboard data
@@ -61,6 +63,7 @@ export default function PoolsRankingPage() {
   const router = useRouter()
   const [copiedAddress, setCopiedAddress] = useState<string | null>(null)
   const [selectedTier, setSelectedTier] = useState<'v7' | 'v6' | 'v5'>('v7')
+  const [isSendingMail, setIsSendingMail] = useState(false)
 
   // Get volume range based on selected tier
   const getVolumeRange = (tier: string) => {
@@ -84,6 +87,24 @@ export default function PoolsRankingPage() {
     queryKey: ['pools-leaderboard', selectedTier],
     queryFn: () => getAirdropPoolLeaderboard(volumeRange.minVolume, volumeRange.maxVolume),
     refetchInterval: 30000, // Refetch every 30 seconds
+  })
+
+  // Send mail mutation
+  const sendMailMutation = useMutation({
+    mutationFn: sendMailLeaderboard,
+    onSuccess: (data) => {
+      if (data.success) {
+        toast.success(t('pools-ranking.mail.success'))
+      } else {
+        toast.error(t('pools-ranking.mail.failed'))
+      }
+    },
+    onError: () => {
+      toast.error(t('pools-ranking.mail.error'))
+    },
+    onSettled: () => {
+      setIsSendingMail(false)
+    }
   })
 
   const leaderboardItems = leaderboardData?.data || []
@@ -117,6 +138,11 @@ export default function PoolsRankingPage() {
     }
   }
 
+  const handleSendMail = () => {
+    setIsSendingMail(true)
+    sendMailMutation.mutate()
+  }
+
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "active":
@@ -140,15 +166,27 @@ export default function PoolsRankingPage() {
           <h2 className="text-3xl font-bold tracking-tight">{t('pools-ranking.title')}</h2>
           <p className="text-muted-foreground">{t('pools-ranking.description')}</p>
         </div>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => router.back()}
-          className="flex items-center space-x-2"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          <span>{t('common.back')}</span>
-        </Button>
+        <div className="flex items-center space-x-3">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleSendMail}
+            disabled={isSendingMail}
+            className="border-green-500 text-green-600 hover:bg-green-600 hover:text-white hover:border-green-600 transition-colors"
+          >
+            <Mail className="mr-2 h-4 w-4" />
+            {isSendingMail ? t('pools-ranking.mail.sending') : t('pools-ranking.mail.button')}
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => router.back()}
+            className="flex items-center space-x-2"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            <span>{t('common.back')}</span>
+          </Button>
+        </div>
       </div>
 
       {/* VIP Pools Table */}
@@ -184,6 +222,7 @@ export default function PoolsRankingPage() {
               >
                 {t('pools-ranking.filters.vip5')}
               </Button>
+
             </div>
           </div>
         </CardHeader>
@@ -205,19 +244,19 @@ export default function PoolsRankingPage() {
               <TableBody>
                 {isLoading ? (
                   <TableRow>
-                    <TableCell colSpan={8} className="text-center py-8">
+                    <TableCell colSpan={9} className="text-center py-8">
                       <div className="text-muted-foreground">{t('pools-ranking.loading')}</div>
                     </TableCell>
                   </TableRow>
                 ) : error ? (
                   <TableRow>
-                    <TableCell colSpan={8} className="text-center py-8">
+                    <TableCell colSpan={9} className="text-center py-8">
                       <div className="text-red-400">{t('pools-ranking.error')}</div>
                     </TableCell>
                   </TableRow>
                 ) : leaderboardItems.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan={8} className="text-center py-8">
+                    <TableCell colSpan={9} className="text-center py-8">
                       <div className="text-muted-foreground">{t('pools-ranking.noData')}</div>
                     </TableCell>
                   </TableRow>

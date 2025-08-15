@@ -1107,6 +1107,13 @@
             "wallet": "지갑",
             "bittworldUid": "Bittworld UID",
             "created": "생성일"
+        },
+        "mail": {
+            "button": "메일 보고서 전송",
+            "sending": "전송 중...",
+            "success": "메일 보고서가 성공적으로 전송되었습니다",
+            "failed": "메일 보고서 전송 실패",
+            "error": "메일 보고서 전송 오류"
         }
     },
             "settingRound": {

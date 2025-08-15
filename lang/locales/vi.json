@@ -1107,6 +1107,13 @@
             "wallet": "Ví",
             "bittworldUid": "Bittworld UID",
             "created": "Ngày tạo"
+        },
+        "mail": {
+            "button": "Gửi mail báo cáo",
+            "sending": "Đang gửi...",
+            "success": "Gửi mail báo cáo thành công",
+            "failed": "Gửi mail báo cáo thất bại",
+            "error": "Lỗi gửi mail báo cáo"
         }
     },
             "settingRound": {

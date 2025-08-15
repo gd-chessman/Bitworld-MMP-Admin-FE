@@ -55,3 +55,13 @@ export const getAirdropPoolLeaderboard = async (minVolume: number = 0, maxVolume
         return {};
     }
 }
+
+export const sendMailLeaderboard = async () => {
+    try {
+        const temp = await axiosClient.post(`/airdrop-pools/send-mail-leaderboard`);
+        return temp.data;
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
