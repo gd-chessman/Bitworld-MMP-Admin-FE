@@ -14,7 +14,7 @@ import Image from "next/image"
 export default function OrdersPage() {
   const { t } = useLang()
   const [search, setSearch] = useState('')
-  const [isBittworldFilter, setIsBittworldFilter] = useState<'all' | 'true' | 'false'>('all')
+  const [isBittworldFilter, setIsBittworldFilter] = useState<'all' | 'true' | 'false'>('true')
   const [page, setPage] = useState(1)
   const limit = 10
   const [copiedTxHash, setCopiedTxHash] = useState<string | null>(null)
@@ -140,7 +140,7 @@ export default function OrdersPage() {
                 onChange={e => setSearch(e.target.value)}
               />
             </div>
-            <Select 
+            {/* <Select 
               value={isBittworldFilter} 
               onValueChange={(value: 'all' | 'true' | 'false') => setIsBittworldFilter(value)}
             >
@@ -152,7 +152,7 @@ export default function OrdersPage() {
                 <SelectItem value="true">{t("orders.filters.bittworld")}</SelectItem>
                 <SelectItem value="false">{t("orders.filters.nonBittworld")}</SelectItem>
               </SelectContent>
-            </Select>
+            </Select> */}
           </div>
           <div className="rounded-md border overflow-x-auto">
             <table className="w-full text-sm">

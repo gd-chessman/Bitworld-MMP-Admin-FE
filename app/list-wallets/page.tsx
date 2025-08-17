@@ -26,7 +26,7 @@ export default function UserWalletsPage() {
   const [isRefreshing, setIsRefreshing] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
   const [copiedAddress, setCopiedAddress] = useState<string | null>(null)
-  const [isBittworldFilter, setIsBittworldFilter] = useState<boolean | undefined>(undefined)
+  const [isBittworldFilter, setIsBittworldFilter] = useState<boolean | undefined>(true)
   const [bittworldUidFilter, setBittworldUidFilter] = useState<string>('has_uid')
   const [bgAffiliateFilter, setBgAffiliateFilter] = useState<string>('all')
 
@@ -118,7 +118,7 @@ export default function UserWalletsPage() {
               />
             </div>
             <div className="flex items-center gap-2 overflow-x-auto">
-            <Select value={isBittworldFilter === undefined ? "all" : isBittworldFilter ? "bittworld" : "non-bittworld"} onValueChange={(value) => {
+            {/* <Select value={isBittworldFilter === undefined ? "all" : isBittworldFilter ? "bittworld" : "non-bittworld"} onValueChange={(value) => {
               if (value === "all") {
                 setIsBittworldFilter(undefined)
               } else if (value === "bittworld") {
@@ -132,10 +132,9 @@ export default function UserWalletsPage() {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">{t('list-wallets.filters.allTypes')}</SelectItem>
-                <SelectItem value="bittworld">{t('list-wallets.filters.bittworld')}</SelectItem>
                 <SelectItem value="non-bittworld">{t('list-wallets.filters.nonBittworld')}</SelectItem>
               </SelectContent>
-            </Select>
+            </Select> */}
             <Select value={bgAffiliateFilter} onValueChange={setBgAffiliateFilter}>
               <SelectTrigger className="w-[180px]">
                 <SelectValue />

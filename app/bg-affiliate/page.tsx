@@ -35,7 +35,7 @@ export default function BgAffiliateAdminPage() {
   const [showChangeFlow, setShowChangeFlow] = useState(false);
   const [selectedTree, setSelectedTree] = useState<any>(null);
   const [searchTerm, setSearchTerm] = useState("");
-  const [isBittworldFilter, setIsBittworldFilter] = useState<'all' | 'true' | 'false'>('all');
+  const [isBittworldFilter, setIsBittworldFilter] = useState<'all' | 'true' | 'false'>('true');
   const [walletSearchQuery, setWalletSearchQuery] = useState("");
   const [copiedAddress, setCopiedAddress] = useState<string | null>(null);
   const queryClient = useQueryClient();
@@ -397,7 +397,7 @@ export default function BgAffiliateAdminPage() {
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
-            <UISelect 
+            {/* <UISelect 
               value={isBittworldFilter} 
               onValueChange={(value: 'all' | 'true' | 'false') => setIsBittworldFilter(value)}
             >
@@ -409,7 +409,7 @@ export default function BgAffiliateAdminPage() {
                 <SelectItem value="true">{t('bg-affiliate.filters.bittworld')}</SelectItem>
                 <SelectItem value="false">{t('bg-affiliate.filters.memepump')}</SelectItem>
               </SelectContent>
-            </UISelect>
+            </UISelect> */}
           </div>
           {treesLoading ? (
             <div className="flex items-center justify-center py-8">
