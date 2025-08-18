@@ -408,7 +408,7 @@
         "bittworldUid": "Bittworld UID",
         "trade": "Loại giao dịch",
         "token": "Token",
-        "quantity": "Số lượng giao dịch",
+        "quantity": "Số lượng token",
         "price": "Giá thời điểm giao dịch $",
         "total": "Tổng giao dịch $",
         "status": "Trạng thái",

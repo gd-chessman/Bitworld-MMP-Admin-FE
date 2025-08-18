@@ -408,7 +408,7 @@
         "bittworldUid": "Bittworld UID",
         "trade": "Trade",
         "token": "Token",
-        "quantity": "Transaction Quantity",
+        "quantity": "Token Quantity",
         "price": "Price at Transaction Time $",
         "total": "Total Transaction $",
         "status": "Status",
