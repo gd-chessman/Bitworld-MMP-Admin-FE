@@ -10,7 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Separator } from "@/components/ui/separator"
 import { toast } from "sonner"
-import { Search, Gift, Plus, Copy, Check, Loader2, Edit, Download } from "lucide-react"
+import { Search, Gift, Plus, Copy, Check, Loader2, Edit, Download, ChevronLeft } from "lucide-react"
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Label } from "@/components/ui/label"
 import { useQuery, useMutation } from "@tanstack/react-query"
@@ -68,7 +68,7 @@ export default function AirdropAdminPage() {
 
   // Server data: Tokens
   const [tokensPage, setTokensPage] = useState(1)
-  const tokensLimit = 20
+  const tokensLimit = 10
   const { data: tokensResp, isLoading: tokensLoading, refetch: refetchTokens } = useQuery({
     queryKey: ["airdrop-tokens", tokensPage, searchToken, status1, status2],
     queryFn: () =>
@@ -103,7 +103,7 @@ export default function AirdropAdminPage() {
 
   // Server data: Rewards
   const [rewardsPage, setRewardsPage] = useState(1)
-  const rewardsLimit = 20
+  const rewardsLimit = 10
   const { data: rewardsResp, isLoading: rewardsLoading, refetch: refetchRewards } = useQuery({
     queryKey: ["airdrop-rewards", rewardsPage, searchReward, rewardStatus, rewardTokenMint],
     queryFn: () =>
@@ -719,6 +719,31 @@ export default function AirdropAdminPage() {
                   </TableBody>
                 </Table>
               </div>
+              
+              {/* Pagination for rewards */}
+              {rewardsResp?.pagination && (
+                <div className="flex items-center justify-center space-x-4 mt-4">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setRewardsPage(p => Math.max(1, p - 1))}
+                    disabled={rewardsPage <= 1}
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </Button>
+                  <span className="text-sm text-muted-foreground">
+                    {rewardsPage} / {rewardsResp.pagination.totalPages || 1}
+                  </span>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setRewardsPage(p => Math.min(rewardsResp.pagination.totalPages, p + 1))}
+                    disabled={!rewardsResp.pagination.totalPages || rewardsPage >= rewardsResp.pagination.totalPages}
+                  >
+                    <ChevronLeft className="h-4 w-4 rotate-180" />
+                  </Button>
+                </div>
+              )}
             </CardContent>
           </Card>
         </TabsContent>
