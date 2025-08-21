@@ -986,7 +986,8 @@
                 "description": "새로운 에어드롭 토큰을 생성하기 위해 양식을 작성하세요.",
                 "tokenName": "토큰 이름",
                 "tokenMint": "토큰 민트",
-                "amountRound": "수량",
+                "amountRound": "총 수량",
+                "amountRound2": "수량 2",
                 "cancel": "취소",
                 "create": "생성",
                 "creating": "생성 중...",
@@ -995,7 +996,13 @@
                 },
                 "success": "에어드롭 토큰이 생성되었습니다",
                 "error": "토큰 생성 실패",
-                "tokenExists": "이 토큰에 대한 에어드롭 프로그램이 이미 존재합니다"
+                "tokenExists": "이 토큰에 대한 에어드롭 프로그램이 이미 존재합니다",
+                "type": {
+                    "participationShare": "참여 분배",
+                    "leaderBonus": "리더 보너스",
+                    "topPoolReward": "상위 풀 보상",
+                    "airdrop": "에어드롭"
+                }
             },
             "edit": {
                 "title": "에어드롭 토큰 편집",
@@ -1051,6 +1058,7 @@
                 "walletAddress": "지갑 주소",
                 "email": "이메일",
                 "amount": "수량",
+                "type": "유형",
                 "status": "상태",
                 "date": "날짜",
                 "loading": "로딩 중...",
@@ -1072,7 +1080,8 @@
             }
         },
         "common": {
-            "copyFailed": "복사 실패"
+            "copyFailed": "복사 실패",
+            "totalAmountNote": "참고: 총 수량 = 풀에 분배되는 수량 (70%) + TOP 풀에 분배되는 수량 (30%)"
         },
         "placeholders": {
             "roundStatus": "상태",

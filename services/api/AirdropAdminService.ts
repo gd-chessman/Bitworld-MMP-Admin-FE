@@ -49,7 +49,7 @@ export const calculateAirdropRewards = async (forceRecalculate: boolean) => {
 
 export const getAirdropRewards = async (paramsIn: any = {}) => {
   try {
-    const { page = 1, limit = 20, token_mint, alt_id, status, search } = paramsIn;
+    const { page = 1, limit = 20, token_mint, alt_id, status, search, sub_type } = paramsIn;
     const params = new URLSearchParams();
     params.append("page", String(page));
     params.append("limit", String(limit));
@@ -57,6 +57,7 @@ export const getAirdropRewards = async (paramsIn: any = {}) => {
     if (alt_id) params.append("alt_id", String(alt_id));
     if (status) params.append("status", status);
     if (search) params.append("search", search);
+    if (sub_type) params.append("sub_type", sub_type);
     const temp = await axiosClient.get(`/airdrop-rewards?${params.toString()}`);
     return temp.data;
   } catch (error) {

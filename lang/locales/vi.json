@@ -986,7 +986,8 @@
                 "description": "Điền form để tạo token airdrop mới.",
                 "tokenName": "Tên token",
                 "tokenMint": "Token mint",
-                "amountRound": "Số lượng",
+                "amountRound": "Tổng số lượng",
+                "amountRound2": "Số lượng 2",
                 "cancel": "Hủy",
                 "create": "Tạo",
                 "creating": "Đang tạo...",
@@ -995,7 +996,13 @@
                 },
                 "success": "Token airdrop đã được tạo",
                 "error": "Tạo token thất bại",
-                "tokenExists": "Chương trình airdrop cho token này đã tồn tại"
+                "tokenExists": "Chương trình airdrop cho token này đã tồn tại",
+                "type": {
+                    "participationShare": "Chia sẻ tham gia",
+                    "leaderBonus": "Thưởng trưởng nhóm",
+                    "topPoolReward": "Phần thưởng top pool",
+                    "airdrop": "Airdrop"
+                }
             },
             "edit": {
                 "title": "Chỉnh Sửa Token Airdrop",
@@ -1051,6 +1058,7 @@
                 "walletAddress": "Địa Chỉ Ví",
                 "email": "Email",
                 "amount": "Số Lượng",
+                "type": "Loại",
                 "status": "Trạng Thái",
                 "date": "Ngày",
                 "loading": "Đang tải...",
@@ -1072,7 +1080,8 @@
             }
         },
         "common": {
-            "copyFailed": "Sao chép thất bại"
+            "copyFailed": "Sao chép thất bại",
+            "totalAmountNote": "Lưu ý: Tổng Số Lượng = Số lượng phân phối cho các pool (70%) + Số lượng phân phối cho TOP Pool (30%)"
         },
         "placeholders": {
             "roundStatus": "Trạng thái",

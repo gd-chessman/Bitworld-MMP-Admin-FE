@@ -41,7 +41,6 @@ export default function AirdropAdminPage() {
   const [newTokenName, setNewTokenName] = useState("")
   const [newTokenMint, setNewTokenMint] = useState("")
   const [newAmount1, setNewAmount1] = useState<string>("")
-  const [newAmount2, setNewAmount2] = useState<string>("")
 
   // Modal states
   const [isCreateOpen, setIsCreateOpen] = useState(false)
@@ -65,6 +64,7 @@ export default function AirdropAdminPage() {
   const [searchReward, setSearchReward] = useState("")
   const [rewardStatus, setRewardStatus] = useState<"can_withdraw" | "withdrawn" | "all">("can_withdraw")
   const [rewardTokenMint, setRewardTokenMint] = useState<string>("all")
+  const [rewardType, setRewardType] = useState<"all" | "participation_share" | "leader_bonus" | "top_pool_reward">("all")
 
   // Server data: Tokens
   const [tokensPage, setTokensPage] = useState(1)
@@ -95,9 +95,9 @@ export default function AirdropAdminPage() {
     placeholderData: (prev) => prev,
   })
   const allEndedTokens: any[] = endedTokensResp?.data ?? []
-  
+
   // Remove duplicate tokens by alt_token_mint
-  const endedTokens: any[] = allEndedTokens.filter((token, index, arr) => 
+  const endedTokens: any[] = allEndedTokens.filter((token, index, arr) =>
     arr.findIndex(t => t.alt_token_mint === token.alt_token_mint) === index
   )
 
@@ -105,7 +105,7 @@ export default function AirdropAdminPage() {
   const [rewardsPage, setRewardsPage] = useState(1)
   const rewardsLimit = 10
   const { data: rewardsResp, isLoading: rewardsLoading, refetch: refetchRewards } = useQuery({
-    queryKey: ["airdrop-rewards", rewardsPage, searchReward, rewardStatus, rewardTokenMint],
+    queryKey: ["airdrop-rewards", rewardsPage, searchReward, rewardStatus, rewardTokenMint, rewardType],
     queryFn: () =>
       getAirdropRewards({
         page: rewardsPage,
@@ -113,6 +113,7 @@ export default function AirdropAdminPage() {
         status: (rewardStatus === "all" ? undefined : rewardStatus) as any,
         search: searchReward || undefined,
         token_mint: (rewardTokenMint === "all" ? undefined : rewardTokenMint),
+        sub_type: (rewardType === "all" ? undefined : rewardType),
       }),
     placeholderData: (prev) => prev,
   })
@@ -126,9 +127,9 @@ export default function AirdropAdminPage() {
         if (data.processed === 0) {
           toast.success(t("airdrops.rewards.withdraw.messages.noRewards"))
         } else {
-          toast.success(t("airdrops.rewards.withdraw.messages.completed", { 
-            success: data.success_count, 
-            errors: data.error_count 
+          toast.success(t("airdrops.rewards.withdraw.messages.completed", {
+            success: data.success_count,
+            errors: data.error_count
           }))
         }
         refetchRewards()
@@ -150,13 +151,12 @@ export default function AirdropAdminPage() {
 
   useEffect(() => {
     setRewardsPage(1)
-  }, [searchReward, rewardStatus, rewardTokenMint])
+  }, [searchReward, rewardStatus, rewardTokenMint, rewardType])
 
   // Handlers (call services directly like other pages)
 
   async function handleCreateToken() {
     const amount1 = Number(newAmount1) || 0
-    const amount2 = Number(newAmount2) || 0
 
     if (!newTokenName.trim() || !newTokenMint.trim() || amount1 <= 0) {
       toast.error(t("airdrops.tokens.create.validation.fillRequired"))
@@ -168,8 +168,9 @@ export default function AirdropAdminPage() {
       const res = await createAirdropToken({
         token_name: newTokenName.trim(),
         token_mint: newTokenMint.trim(),
-        amount_round_1: amount1,
-      })
+        amount_round_1: amount1 * 7/10,
+        amount_round_2: (amount1 - amount1 * 7/10),
+      })  
       if (!(res && res.success)) {
         throw new Error(res?.message || t("airdrops.tokens.create.error"))
       }
@@ -179,7 +180,6 @@ export default function AirdropAdminPage() {
       setNewTokenName("")
       setNewTokenMint("")
       setNewAmount1("")
-      setNewAmount2("")
     } catch (e: any) {
       const rawMsg = e?.response?.data?.message || e?.message || ""
       if (typeof rawMsg === "string" && rawMsg.toLowerCase().includes("airdrop program for this token already exists")) {
@@ -215,8 +215,10 @@ export default function AirdropAdminPage() {
       const res = await updateAirdropToken(editingToken.alt_id, {
         token_name: editTokenName.trim(),
         token_mint: editTokenMint.trim(),
-        amount_round_1: amount1,
+        amount_round_1: amount1 * 7/10,
+        amount_round_2: (amount1 - amount1 * 7/10),
         status_round_1: editStatus1,
+        status_round_2: editStatus2,
       })
       if (!(res && res.success)) {
         throw new Error(res?.message || t("airdrops.tokens.edit.error"))
@@ -300,7 +302,18 @@ export default function AirdropAdminPage() {
     }
   }
 
-
+  function handleType(type: any) {
+    switch (type) {
+      case "participation_share":
+        return t("airdrops.tokens.create.type.participationShare")
+      case "leader_bonus":
+        return t("airdrops.tokens.create.type.leaderBonus")
+      case "top_pool_reward":
+        return t("airdrops.tokens.create.type.topPoolReward")
+      default:
+        return t("airdrops.tokens.create.type.airdrop")
+    }
+  }
 
   return (
     <div className="flex flex-col gap-6">
@@ -316,61 +329,62 @@ export default function AirdropAdminPage() {
         </TabsList>
 
         <TabsContent value="tokens" className="space-y-6">
-          
-          <Card className="dashboard-card p-0 md:p-4">
+
+          <Card className="dashboard-card p-0">
             <CardHeader className="pb-2">
               <div className="flex items-center justify-between gap-3 flex-wrap">
-                <div>
+                <div className="flex flex-col gap-1">
                   <CardTitle>{t("airdrops.tokens.title")}</CardTitle>
                   <CardDescription>{t("airdrops.tokens.description")}</CardDescription>
                 </div>
                 <div className="flex items-center gap-2">
                   {!isPartner && (
-                    <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
+                    <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen} >
                       <DialogTrigger asChild>
                         <Button>
                           <Plus className="h-4 w-4 mr-2" />{t("airdrops.tokens.newToken")}
                         </Button>
                       </DialogTrigger>
-                     <DialogContent>
-                      <DialogHeader>
-                        <DialogTitle>{t("airdrops.tokens.create.title")}</DialogTitle>
-                         <DialogDescription>{t("airdrops.tokens.create.description")}</DialogDescription>
-                      </DialogHeader>
-                      <div className="grid grid-cols-1 gap-3">
-                        <div className="space-y-1">
-                          <Label>{t("airdrops.tokens.create.tokenName")}</Label>
-                          <Input placeholder={t("airdrops.tokens.create.tokenName")} value={newTokenName} onChange={(e) => setNewTokenName(e.target.value)} />
+                      <DialogContent className="max-w-2xl">
+                        <DialogHeader>
+                          <DialogTitle>{t("airdrops.tokens.create.title")}</DialogTitle>
+                          <DialogDescription>{t("airdrops.tokens.create.description")}</DialogDescription>
+                        </DialogHeader>
+                        <div className="grid grid-cols-1 gap-3">
+                          <div className="space-y-1">
+                            <Label>{t("airdrops.tokens.create.tokenName")}</Label>
+                            <Input placeholder={t("airdrops.tokens.create.tokenName")} value={newTokenName} onChange={(e) => setNewTokenName(e.target.value)} />
+                          </div>
+                          <div className="space-y-1">
+                            <Label>{t("airdrops.tokens.create.tokenMint")}</Label>
+                            <Input placeholder={t("airdrops.tokens.create.tokenMint")} value={newTokenMint} onChange={(e) => setNewTokenMint(e.target.value)} />
+                          </div>
+                          <div className="space-y-1">
+                            <Label>{t("airdrops.tokens.create.amountRound")}</Label>
+                            <Input placeholder={t("airdrops.tokens.create.amountRound")} type="number" value={newAmount1} onChange={(e) => setNewAmount1(e.target.value)} />
+                          </div>
                         </div>
-                        <div className="space-y-1">
-                          <Label>{t("airdrops.tokens.create.tokenMint")}</Label>
-                          <Input placeholder={t("airdrops.tokens.create.tokenMint")} value={newTokenMint} onChange={(e) => setNewTokenMint(e.target.value)} />
-                        </div>
-                        <div className="space-y-1">
-                          <Label>{t("airdrops.tokens.create.amountRound")}</Label>
-                          <Input placeholder={t("airdrops.tokens.create.amountRound")} type="number" value={newAmount1} onChange={(e) => setNewAmount1(e.target.value)} />
-                        </div>
-                      </div>
-                      <DialogFooter className="gap-2">
-                        <Button variant="outline" onClick={() => setIsCreateOpen(false)} disabled={isCreating}>{t("airdrops.tokens.create.cancel")}</Button>
-                        <Button onClick={handleCreateToken} disabled={isCreating}>
-                          {isCreating ? (
-                            <>
-                              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                              {t("airdrops.tokens.create.creating")}
-                            </>
-                          ) : (
-                            t("airdrops.tokens.create.create")
-                          )}
-                        </Button>
-                      </DialogFooter>
-                    </DialogContent>
-                  </Dialog>
+                        <span className="text-xs text-muted-foreground text-yellow-500 italic">{t("airdrops.common.totalAmountNote")}</span>
+                        <DialogFooter className="gap-2">
+                          <Button variant="outline" onClick={() => setIsCreateOpen(false)} disabled={isCreating}>{t("airdrops.tokens.create.cancel")}</Button>
+                          <Button onClick={handleCreateToken} disabled={isCreating}>
+                            {isCreating ? (
+                              <>
+                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                {t("airdrops.tokens.create.creating")}
+                              </>
+                            ) : (
+                              t("airdrops.tokens.create.create")
+                            )}
+                          </Button>
+                        </DialogFooter>
+                      </DialogContent>
+                    </Dialog>
                   )}
                   {!isPartner && (
                     <Dialog open={isConfirmDistributeOpen} onOpenChange={setIsConfirmDistributeOpen}>
                       <DialogTrigger asChild>
-                        <Button 
+                        <Button
                           disabled={isCalculating}
                           className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white border-0 shadow-lg"
                         >
@@ -410,14 +424,14 @@ export default function AirdropAdminPage() {
                           </div>
                         </div>
                         <DialogFooter>
-                          <Button 
+                          <Button
                             variant="outline"
                             onClick={() => setIsConfirmDistributeOpen(false)}
                             disabled={isCalculating}
                           >
                             {t("airdrops.tokens.calculate.confirmCancel")}
                           </Button>
-                          <Button 
+                          <Button
                             className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white border-0"
                             disabled={isCalculating}
                             onClick={() => {
@@ -444,7 +458,7 @@ export default function AirdropAdminPage() {
                 </div>
               </div>
             </CardHeader>
-            <CardContent>
+            <CardContent className="pt-2">
               <div className="flex items-center gap-2 mb-3 flex-wrap">
                 <div className="relative flex-1 min-w-[220px]">
                   <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
@@ -471,8 +485,9 @@ export default function AirdropAdminPage() {
                       <TableHead>{t("airdrops.tokens.table.name")}</TableHead>
                       <TableHead>{t("airdrops.tokens.table.mint")}</TableHead>
                       <TableHead>{t("airdrops.tokens.table.amountRound")}</TableHead>
+                      <TableHead>{t("airdrops.tokens.create.amountRound2")}</TableHead>
                       <TableHead>{t("airdrops.tokens.table.statusRound")}</TableHead>
-                      
+
                       <TableHead>{t("airdrops.tokens.table.actions")}</TableHead>
                     </TableRow>
                   </TableHeader>
@@ -508,8 +523,9 @@ export default function AirdropAdminPage() {
                             </div>
                           </TableCell>
                           <TableCell>{formatNumber(token.alt_amount_airdrop_1)}</TableCell>
+                          <TableCell>{formatNumber(token.alt_amount_airdrop_2)}</TableCell>
                           <TableCell className="whitespace-nowrap">{getStatusBadge(token.alt_status_1)}</TableCell>
-                          
+
                           <TableCell>
                             {!isPartner && (
                               <Dialog open={isEditOpen && editingToken?.alt_id === token.alt_id} onOpenChange={(open) => {
@@ -519,8 +535,8 @@ export default function AirdropAdminPage() {
                                   <Button
                                     size="sm"
                                     variant="ghost"
-                                    className={`h-8 w-8 p-0 ${token.alt_status_1 === 'end' || token.alt_status_1 === 'cancel' 
-                                      ? 'text-muted-foreground/50 cursor-not-allowed' 
+                                    className={`h-8 w-8 p-0 ${token.alt_status_1 === 'end' || token.alt_status_1 === 'cancel'
+                                      ? 'text-muted-foreground/50 cursor-not-allowed'
                                       : 'text-muted-foreground hover:text-emerald-300 hover:bg-muted/50'}`}
                                     onClick={() => handleOpenEdit(token)}
                                     aria-label={t("airdrops.labels.editToken")}
@@ -529,50 +545,50 @@ export default function AirdropAdminPage() {
                                     <Edit className="h-4 w-4" />
                                   </Button>
                                 </DialogTrigger>
-                              <DialogContent>
-                                <DialogHeader>
-                                  <DialogTitle>{t("airdrops.tokens.edit.title")}</DialogTitle>
-                                  <DialogDescription>{t("airdrops.tokens.edit.description")}</DialogDescription>
-                                </DialogHeader>
-                                <div className="grid grid-cols-1 gap-3">
-                                  <div className="space-y-1">
-                                    <Label>{t("airdrops.tokens.edit.tokenName")}</Label>
-                                    <Input value={editTokenName} onChange={(e) => setEditTokenName(e.target.value)} />
+                                <DialogContent>
+                                  <DialogHeader>
+                                    <DialogTitle>{t("airdrops.tokens.edit.title")}</DialogTitle>
+                                    <DialogDescription>{t("airdrops.tokens.edit.description")}</DialogDescription>
+                                  </DialogHeader>
+                                  <div className="grid grid-cols-1 gap-3">
+                                    <div className="space-y-1">
+                                      <Label>{t("airdrops.tokens.edit.tokenName")}</Label>
+                                      <Input value={editTokenName} onChange={(e) => setEditTokenName(e.target.value)} />
+                                    </div>
+                                    <div className="space-y-1">
+                                      <Label>{t("airdrops.tokens.edit.tokenMint")}</Label>
+                                      <Input value={editTokenMint} onChange={(e) => setEditTokenMint(e.target.value)} />
+                                    </div>
+                                    <div className="space-y-1">
+                                      <Label>{t("airdrops.tokens.edit.amountRound")} </Label>
+                                      <Input type="number" value={editAmount1} onChange={(e) => setEditAmount1(e.target.value)} />
+                                    </div>
+                                    <div className="space-y-1">
+                                      <Label>{t("airdrops.tokens.edit.statusRound")}</Label>
+                                      <Select value={editStatus1} onValueChange={(v) => setEditStatus1(v as any)}>
+                                        <SelectTrigger className="w-full"><SelectValue /></SelectTrigger>
+                                        <SelectContent>
+                                          <SelectItem value="active">{t("airdrops.tokens.status.active")}</SelectItem>
+                                          <SelectItem value="pause">{t("airdrops.tokens.status.pause")}</SelectItem>
+                                        </SelectContent>
+                                      </Select>
+                                    </div>
                                   </div>
-                                  <div className="space-y-1">
-                                    <Label>{t("airdrops.tokens.edit.tokenMint")}</Label>
-                                    <Input value={editTokenMint} onChange={(e) => setEditTokenMint(e.target.value)} />
-                                  </div>
-                                  <div className="space-y-1">
-                                    <Label>{t("airdrops.tokens.edit.amountRound")}</Label>
-                                    <Input type="number" value={editAmount1} onChange={(e) => setEditAmount1(e.target.value)} />
-                                  </div>
-                                  <div className="space-y-1">
-                                    <Label>{t("airdrops.tokens.edit.statusRound")}</Label>
-                                    <Select value={editStatus1} onValueChange={(v) => setEditStatus1(v as any)}>
-                                      <SelectTrigger className="w-full"><SelectValue /></SelectTrigger>
-                                      <SelectContent>
-                                        <SelectItem value="active">{t("airdrops.tokens.status.active")}</SelectItem>
-                                        <SelectItem value="pause">{t("airdrops.tokens.status.pause")}</SelectItem>
-                                      </SelectContent>
-                                    </Select>
-                                  </div>
-                                </div>
-                                <DialogFooter className="gap-2">
-                                  <Button variant="outline" onClick={() => { setIsEditOpen(false); setEditingToken(null) }} disabled={isUpdating}>{t("airdrops.tokens.edit.cancel")}</Button>
-                                  <Button onClick={handleUpdateToken} disabled={isUpdating}>
-                                    {isUpdating ? (
-                                      <>
-                                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                                        {t("airdrops.tokens.edit.saving")}
-                                      </>
-                                    ) : (
-                                      t("airdrops.tokens.edit.save")
-                                    )}
-                                  </Button>
-                                </DialogFooter>
-                              </DialogContent>
-                            </Dialog>
+                                  <DialogFooter className="gap-2">
+                                    <Button variant="outline" onClick={() => { setIsEditOpen(false); setEditingToken(null) }} disabled={isUpdating}>{t("airdrops.tokens.edit.cancel")}</Button>
+                                    <Button onClick={handleUpdateToken} disabled={isUpdating}>
+                                      {isUpdating ? (
+                                        <>
+                                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                          {t("airdrops.tokens.edit.saving")}
+                                        </>
+                                      ) : (
+                                        t("airdrops.tokens.edit.save")
+                                      )}
+                                    </Button>
+                                  </DialogFooter>
+                                </DialogContent>
+                              </Dialog>
                             )}
                           </TableCell>
                         </TableRow>
@@ -594,8 +610,8 @@ export default function AirdropAdminPage() {
                   <CardDescription>{t("airdrops.rewards.description")}</CardDescription>
                 </div>
                 {!isPartner && (
-                  <Button 
-                    onClick={handleWithdraw} 
+                  <Button
+                    onClick={handleWithdraw}
                     disabled={isWithdrawing}
                     className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white border-0"
                   >
@@ -639,6 +655,15 @@ export default function AirdropAdminPage() {
                       <SelectItem value="withdrawn">{t("airdrops.rewards.filters.withdrawn")}</SelectItem>
                     </SelectContent>
                   </Select>
+                  <Select value={rewardType} onValueChange={(v) => setRewardType(v as any)}>
+                    <SelectTrigger className="w-[200px]"><SelectValue placeholder={t("airdrops.placeholders.type")} /></SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">{t("airdrops.rewards.filters.allTypes")}</SelectItem>
+                      <SelectItem value="participation_share">{t("airdrops.rewards.filters.participationShare")}</SelectItem>
+                      <SelectItem value="leader_bonus">{t("airdrops.rewards.filters.leaderBonus")}</SelectItem>
+                      <SelectItem value="top_pool_reward">{t("airdrops.rewards.filters.topPoolReward")}</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
               </div>
 
@@ -651,6 +676,7 @@ export default function AirdropAdminPage() {
                       <TableHead>{t("airdrops.rewards.table.walletAddress")}</TableHead>
                       <TableHead>{t("airdrops.rewards.table.email")}</TableHead>
                       <TableHead>{t("airdrops.rewards.table.amount")}</TableHead>
+                      <TableHead>{t("airdrops.rewards.table.type")}</TableHead>
                       <TableHead>{t("airdrops.rewards.table.status")}</TableHead>
                       <TableHead>{t("airdrops.rewards.table.date")}</TableHead>
                     </TableRow>
@@ -688,7 +714,7 @@ export default function AirdropAdminPage() {
                           </TableCell>
                           <TableCell>
                             <div className="flex items-center gap-2">
-                              <span className="font-mono text-xs whitespace-nowrap">{truncateMiddle(r.ar_wallet_address, 6, 6)}</span>
+                              <span className="font-mono text-xs whitespace-nowrap text-yellow-500 italic">{truncateMiddle(r.ar_wallet_address, 6, 6)}</span>
                               <Button
                                 variant="ghost"
                                 size="icon"
@@ -706,6 +732,7 @@ export default function AirdropAdminPage() {
                           </TableCell>
                           <TableCell>{r.wallet_email}</TableCell>
                           <TableCell>{formatNumber(r.ar_amount)}</TableCell>
+                          <TableCell>{handleType(r.ar_sub_type)}</TableCell>
                           <TableCell className="whitespace-nowrap">
                             <Badge variant="outline" className={r.ar_status === "can_withdraw" ? "text-emerald-600 border-emerald-300" : "text-blue-600 border-blue-300"}>
                               {t(`airdrops.rewards.status.${r.ar_status}`)}
@@ -718,7 +745,7 @@ export default function AirdropAdminPage() {
                   </TableBody>
                 </Table>
               </div>
-              
+
               {/* Pagination for rewards */}
               {rewardsResp?.pagination && (
                 <div className="flex items-center justify-center space-x-4 mt-4">

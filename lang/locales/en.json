@@ -985,7 +985,8 @@
                 "description": "Fill the form to create a new airdrop token.",
                 "tokenName": "Token name",
                 "tokenMint": "Token mint",
-                "amountRound": "Amount",
+                "amountRound": "Total Amount",
+                "amountRound2": "Amount 2",
                 "cancel": "Cancel",
                 "create": "Create",
                 "creating": "Creating...",
@@ -994,7 +995,13 @@
                 },
                 "success": "Airdrop token created",
                 "error": "Create token failed",
-                "tokenExists": "Airdrop program for this token already exists"
+                "tokenExists": "Airdrop program for this token already exists",
+                "type": {
+                    "participationShare": "Participation Share",
+                    "leaderBonus": "Leader Bonus",
+                    "topPoolReward": "Top Pool Reward",
+                    "airdrop": "Airdrop"
+                }
             },
             "edit": {
                 "title": "Edit Airdrop Token",
@@ -1042,7 +1049,11 @@
                 "canWithdraw": "Can Withdraw",
                 "withdrawn": "Withdrawn",
                 "all": "All",
-                "allTokens": "All Tokens"
+                "allTokens": "All Tokens",
+                "allTypes": "All Types",
+                "participationShare": "Participation Share",
+                "leaderBonus": "Leader Bonus",
+                "topPoolReward": "Top Pool Reward"
             },
             "table": {
                 "token": "Token",
@@ -1050,6 +1061,7 @@
                 "walletAddress": "Wallet Address",
                 "email": "Email",
                 "amount": "Amount",
+                "type": "Type",
                 "status": "Status",
                 "date": "Date",
                 "loading": "Loading...",
@@ -1071,7 +1083,8 @@
             }
         },
         "common": {
-            "copyFailed": "Copy failed"
+            "copyFailed": "Copy failed",
+            "totalAmountNote": "Note: Total Amount = Amount distributed to pools (70%) + Amount distributed to TOP Pool (30%)"
         },
         "placeholders": {
             "roundStatus": "Status",
