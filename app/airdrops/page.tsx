@@ -637,7 +637,6 @@ export default function AirdropAdminPage() {
                     <SelectContent>
                       <SelectItem value="can_withdraw">{t("airdrops.rewards.filters.canWithdraw")}</SelectItem>
                       <SelectItem value="withdrawn">{t("airdrops.rewards.filters.withdrawn")}</SelectItem>
-                      <SelectItem value="all">{t("airdrops.rewards.filters.all")}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
