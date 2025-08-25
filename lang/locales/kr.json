@@ -347,7 +347,8 @@
         "settingRound": "라운드 설정",
         "settings": "설정",
         "admin": "관리자",
-        "orders": "거래"
+        "orders": "거래",
+        "createToken": "토큰 생성"
     },
     "header": {
         "accountInformation": "계정 정보",
@@ -1191,6 +1192,95 @@
             "confirmDescription": "에어드롭 출금을 처리하시겠습니까?",
             "confirmCancel": "취소",
             "confirmProceed": "진행"
+        }
+    },
+    "create-token": {
+        "title": "토큰 관리",
+        "description": "시스템에서 토큰 생성 및 관리",
+        "pageTitle": "토큰 관리",
+        "pageDescription": "시스템의 모든 토큰 생성 및 관리",
+        "createNewToken": "새 토큰 생성",
+        "tokenList": "토큰 목록",
+        "tokenListDescription": "시스템의 모든 토큰 관리 • 총: {total}개 토큰",
+        "loading": "로딩 중...",
+        "noTokens": "사용 가능한 토큰이 없습니다",
+        "table": {
+            "logo": "로고",
+            "name": "이름",
+            "symbol": "심볼",
+            "address": "주소",
+            "status": "상태",
+            "createdAt": "생성일",
+            "actions": "작업",
+            "active": "활성",
+            "hidden": "숨김"
+        },
+        "create": {
+            "title": "새 토큰 생성",
+            "description": "시스템에 새 토큰을 생성하기 위한 정보를 입력하세요",
+            "tokenName": "토큰 이름 *",
+            "tokenNamePlaceholder": "예: Bitcoin",
+            "symbol": "심볼 *",
+            "symbolPlaceholder": "예: BTC",
+            "address": "토큰 주소 *",
+            "addressPlaceholder": "토큰 주소 입력",
+            "logoUrl": "로고 URL",
+            "logoUrlPlaceholder": "https://example.com/logo.png",
+            "activateToken": "토큰 활성화",
+            "cancel": "취소",
+            "create": "토큰 생성",
+            "creating": "생성 중...",
+            "validation": {
+                "tokenNameRequired": "토큰 이름이 필요합니다",
+                "symbolRequired": "토큰 심볼이 필요합니다",
+                "symbolMaxLength": "심볼은 최대 10자까지 가능합니다",
+                "addressRequired": "토큰 주소가 필요합니다",
+                "invalidLogoUrl": "잘못된 로고 URL입니다"
+            },
+            "success": "토큰이 성공적으로 생성되었습니다!",
+            "error": "토큰 생성 오류: {message}"
+        },
+        "edit": {
+            "title": "토큰 편집",
+            "description": "토큰 정보 업데이트",
+            "tokenName": "토큰 이름 *",
+            "tokenNamePlaceholder": "예: Bitcoin",
+            "symbol": "심볼 *",
+            "symbolPlaceholder": "예: BTC",
+            "address": "토큰 주소 *",
+            "addressPlaceholder": "토큰 주소 입력",
+            "addressDisabled": "토큰 주소는 변경할 수 없습니다",
+            "logoUrl": "로고 URL",
+            "logoUrlPlaceholder": "https://example.com/logo.png",
+            "activateToken": "토큰 활성화",
+            "cancel": "취소",
+            "update": "업데이트",
+            "updating": "업데이트 중...",
+            "validation": {
+                "tokenNameRequired": "토큰 이름이 필요합니다",
+                "symbolRequired": "토큰 심볼이 필요합니다",
+                "symbolMaxLength": "심볼은 최대 10자까지 가능합니다",
+                "addressRequired": "토큰 주소가 필요합니다",
+                "invalidLogoUrl": "잘못된 로고 URL입니다"
+            },
+            "success": "토큰이 성공적으로 업데이트되었습니다!",
+            "error": "토큰 업데이트 오류: {message}"
+        },
+        "delete": {
+            "title": "삭제 확인",
+            "description": "토큰 \"{name}\"을(를) 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.",
+            "cancel": "취소",
+            "confirm": "삭제",
+            "success": "토큰이 성공적으로 삭제되었습니다!",
+            "error": "토큰 삭제 오류: {message}"
+        },
+        "pagination": {
+            "previous": "이전",
+            "next": "다음",
+            "page": "페이지 {current} / {total}"
+        },
+        "errors": {
+            "loadTokensFailed": "토큰 목록 로딩 오류: {message}"
         }
     }
 }

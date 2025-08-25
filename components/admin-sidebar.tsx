@@ -27,6 +27,7 @@ import {
   Database,
   Coins,
   Gift,
+  Plus,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -112,6 +113,12 @@ export function AdminSidebar() {
       title: t("navigation.airdrops"),
       href: "/airdrops",
       icon: Gift,
+      color: "text-orange-400 hover:text-orange-300",
+    },
+    {
+      title: t("navigation.createToken"),
+      href: "/create-token",
+      icon: Plus,
       color: "text-orange-400 hover:text-orange-300",
     },
     {

@@ -347,7 +347,8 @@
         "settingRound": "Cài Đặt Vòng",
         "settings": "Cài Đặt",
         "admin": "Quản Trị",
-        "orders": "Giao dịch"
+        "orders": "Giao dịch",
+        "createToken": "Tạo Token"
     },
     "header": {
         "accountInformation": "THÔNG TIN TÀI KHOẢN",
@@ -1191,6 +1192,95 @@
             "confirmDescription": "Bạn có chắc chắn muốn xử lý rút thưởng airdrop?",
             "confirmCancel": "Hủy",
             "confirmProceed": "Tiếp Tục"
+        }
+    },
+    "create-token": {
+        "title": "Quản lý Token",
+        "description": "Tạo và quản lý các token trong hệ thống",
+        "pageTitle": "Quản lý Token",
+        "pageDescription": "Tạo và quản lý tất cả token trong hệ thống",
+        "createNewToken": "Tạo Token Mới",
+        "tokenList": "Danh sách Token",
+        "tokenListDescription": "Quản lý tất cả token trong hệ thống • Tổng cộng: {total} token",
+        "loading": "Đang tải...",
+        "noTokens": "Chưa có token nào",
+        "table": {
+            "logo": "Logo",
+            "name": "Tên",
+            "symbol": "Ký hiệu",
+            "address": "Địa chỉ",
+            "status": "Trạng thái",
+            "createdAt": "Ngày tạo",
+            "actions": "Thao tác",
+            "active": "Hoạt động",
+            "hidden": "Ẩn"
+        },
+        "create": {
+            "title": "Tạo Token Mới",
+            "description": "Điền thông tin để tạo token mới trong hệ thống",
+            "tokenName": "Tên Token *",
+            "tokenNamePlaceholder": "Ví dụ: Bitcoin",
+            "symbol": "Ký hiệu *",
+            "symbolPlaceholder": "Ví dụ: BTC",
+            "address": "Địa chỉ Token *",
+            "addressPlaceholder": "Nhập địa chỉ token",
+            "logoUrl": "URL Logo",
+            "logoUrlPlaceholder": "https://example.com/logo.png",
+            "activateToken": "Kích hoạt token",
+            "cancel": "Hủy",
+            "create": "Tạo Token",
+            "creating": "Đang tạo...",
+            "validation": {
+                "tokenNameRequired": "Tên token là bắt buộc",
+                "symbolRequired": "Ký hiệu token là bắt buộc",
+                "symbolMaxLength": "Ký hiệu tối đa 10 ký tự",
+                "addressRequired": "Địa chỉ token là bắt buộc",
+                "invalidLogoUrl": "URL logo không hợp lệ"
+            },
+            "success": "Tạo token thành công!",
+            "error": "Lỗi khi tạo token: {message}"
+        },
+        "edit": {
+            "title": "Chỉnh sửa Token",
+            "description": "Cập nhật thông tin token",
+            "tokenName": "Tên Token *",
+            "tokenNamePlaceholder": "Ví dụ: Bitcoin",
+            "symbol": "Ký hiệu *",
+            "symbolPlaceholder": "Ví dụ: BTC",
+            "address": "Địa chỉ Token *",
+            "addressPlaceholder": "Nhập địa chỉ token",
+            "addressDisabled": "Địa chỉ token không thể thay đổi",
+            "logoUrl": "URL Logo",
+            "logoUrlPlaceholder": "https://example.com/logo.png",
+            "activateToken": "Kích hoạt token",
+            "cancel": "Hủy",
+            "update": "Cập nhật",
+            "updating": "Đang cập nhật...",
+            "validation": {
+                "tokenNameRequired": "Tên token là bắt buộc",
+                "symbolRequired": "Ký hiệu token là bắt buộc",
+                "symbolMaxLength": "Ký hiệu tối đa 10 ký tự",
+                "addressRequired": "Địa chỉ token là bắt buộc",
+                "invalidLogoUrl": "URL logo không hợp lệ"
+            },
+            "success": "Cập nhật token thành công!",
+            "error": "Lỗi khi cập nhật token: {message}"
+        },
+        "delete": {
+            "title": "Xác nhận xóa",
+            "description": "Bạn có chắc chắn muốn xóa token \"{name}\"? Hành động này không thể hoàn tác.",
+            "cancel": "Hủy",
+            "confirm": "Xóa",
+            "success": "Xóa token thành công!",
+            "error": "Lỗi khi xóa token: {message}"
+        },
+        "pagination": {
+            "previous": "Trước",
+            "next": "Sau",
+            "page": "Trang {current} / {total}"
+        },
+        "errors": {
+            "loadTokensFailed": "Lỗi khi tải danh sách token: {message}"
         }
     }
 }

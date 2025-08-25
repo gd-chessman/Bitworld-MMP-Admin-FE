@@ -347,7 +347,8 @@
         "settingRound": "Setting Round",
         "settings": "Settings",
         "admin": "Admin",
-        "orders": "Transactions"
+        "orders": "Transactions",
+        "createToken": "Create Token"
     },
     "header": {
         "accountInformation": "ACCOUNT INFORMATION",
@@ -1194,6 +1195,95 @@
             "confirmDescription": "Are you sure you want to process airdrop withdrawals?",
             "confirmCancel": "Cancel",
             "confirmProceed": "Proceed"
+        }
+    },
+    "create-token": {
+        "title": "Token Management",
+        "description": "Create and manage tokens in the system",
+        "pageTitle": "Token Management",
+        "pageDescription": "Create and manage all tokens in the system",
+        "createNewToken": "Create New Token",
+        "tokenList": "Token List",
+        "tokenListDescription": "Manage all tokens in the system • Total: {total} tokens",
+        "loading": "Loading...",
+        "noTokens": "No tokens available",
+        "table": {
+            "logo": "Logo",
+            "name": "Name",
+            "symbol": "Symbol",
+            "address": "Address",
+            "status": "Status",
+            "createdAt": "Created At",
+            "actions": "Actions",
+            "active": "Active",
+            "hidden": "Hidden"
+        },
+        "create": {
+            "title": "Create New Token",
+            "description": "Fill in the information to create a new token in the system",
+            "tokenName": "Token Name *",
+            "tokenNamePlaceholder": "e.g., Bitcoin",
+            "symbol": "Symbol *",
+            "symbolPlaceholder": "e.g., BTC",
+            "address": "Token Address *",
+            "addressPlaceholder": "Enter token address",
+            "logoUrl": "Logo URL",
+            "logoUrlPlaceholder": "https://example.com/logo.png",
+            "activateToken": "Activate token",
+            "cancel": "Cancel",
+            "create": "Create Token",
+            "creating": "Creating...",
+            "validation": {
+                "tokenNameRequired": "Token name is required",
+                "symbolRequired": "Token symbol is required",
+                "symbolMaxLength": "Symbol maximum 10 characters",
+                "addressRequired": "Token address is required",
+                "invalidLogoUrl": "Invalid logo URL"
+            },
+            "success": "Token created successfully!",
+            "error": "Error creating token: {message}"
+        },
+        "edit": {
+            "title": "Edit Token",
+            "description": "Update token information",
+            "tokenName": "Token Name *",
+            "tokenNamePlaceholder": "e.g., Bitcoin",
+            "symbol": "Symbol *",
+            "symbolPlaceholder": "e.g., BTC",
+            "address": "Token Address *",
+            "addressPlaceholder": "Enter token address",
+            "addressDisabled": "Token address cannot be changed",
+            "logoUrl": "Logo URL",
+            "logoUrlPlaceholder": "https://example.com/logo.png",
+            "activateToken": "Activate token",
+            "cancel": "Cancel",
+            "update": "Update",
+            "updating": "Updating...",
+            "validation": {
+                "tokenNameRequired": "Token name is required",
+                "symbolRequired": "Token symbol is required",
+                "symbolMaxLength": "Symbol maximum 10 characters",
+                "addressRequired": "Token address is required",
+                "invalidLogoUrl": "Invalid logo URL"
+            },
+            "success": "Token updated successfully!",
+            "error": "Error updating token: {message}"
+        },
+        "delete": {
+            "title": "Confirm Delete",
+            "description": "Are you sure you want to delete token \"{name}\"? This action cannot be undone.",
+            "cancel": "Cancel",
+            "confirm": "Delete",
+            "success": "Token deleted successfully!",
+            "error": "Error deleting token: {message}"
+        },
+        "pagination": {
+            "previous": "Previous",
+            "next": "Next",
+            "page": "Page {current} of {total}"
+        },
+        "errors": {
+            "loadTokensFailed": "Error loading token list: {message}"
         }
     }
 }
