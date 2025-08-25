@@ -352,21 +352,21 @@ export default function CreateTokenPage() {
     }
 
     return (
-        <div className="p-6 pt-0 space-y-6">
-            <div className="flex justify-between items-center">
+        <div className="p-6 pt-0 space-y-6 flex flex-col">
+            <div className="sticky top-16 pb-4 dark:bg-background bg-white z-40 backdrop-blur-sm flex justify-between items-center">
                 <div>
                     <h1 className="text-3xl font-bold">{t('create-token.title')}</h1>
                     <p className="text-muted-foreground">{t('create-token.description')}</p>
                 </div>
 
-                <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
+                <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen} modal={true}>
                     <DialogTrigger asChild>
                         <Button>
                             <Plus className="mr-2 h-4 w-4" />
                             {t('create-token.createNewToken')}
                         </Button>
                     </DialogTrigger>
-                    <DialogContent className="sm:max-w-[500px]">
+                    <DialogContent className="sm:max-w-[500px]" onPointerDownOutside={(e) => e.preventDefault()}>
                         <DialogHeader>
                             <DialogTitle>{t('create-token.create.title')}</DialogTitle>
                             <DialogDescription>
@@ -447,7 +447,7 @@ export default function CreateTokenPage() {
 
             <Separator />
 
-            <Card>
+            <Card className='mt-0 flex-1'>
                 <CardHeader>
                     <CardTitle>{t('create-token.tokenList')}</CardTitle>
                     <div className='flex justify-between items-center'>
@@ -508,7 +508,7 @@ export default function CreateTokenPage() {
                     ) : (
                         <Table>
                             <TableHeader>
-                                <TableRow>
+                                <TableRow className="bg-background">
                                     <TableHead>{t('create-token.table.logo')}</TableHead>
                                     <TableHead>{t('create-token.table.name')}</TableHead>
                                     <TableHead>{t('create-token.table.symbol')}</TableHead>
