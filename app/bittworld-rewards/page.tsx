@@ -135,7 +135,7 @@ export default function BittworldRewardsPage() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              ${isLoadingStats ? '...' : (overview?.totalAmountUSD ?? 0).toLocaleString()}
+              ${isLoadingStats ? '...' : (overview?.totalAmountUSD.toFixed(2) ?? 0).toLocaleString()}
             </div>
           </CardContent>
         </Card>
@@ -208,7 +208,7 @@ export default function BittworldRewardsPage() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              ${isLoadingStats ? '...' : (overview?.averageRewardPerTransaction ?? 0)}
+              ${isLoadingStats ? '...' : (overview?.averageRewardPerTransaction.toFixed(4) ?? 0)}
             </div>
           </CardContent>
         </Card>

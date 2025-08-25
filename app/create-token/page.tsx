@@ -603,102 +603,27 @@ export default function CreateTokenPage() {
                     )}
                 </CardContent>
 
-                                {/* Enhanced Pagination */}
-                <div className="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0 mt-4 pb-4 px-4">
-                    {/* Items per page selector */}
-                    <div className="flex items-center space-x-2">
-                        <span className="text-sm text-muted-foreground">
-                            {t('create-token.pagination.itemsPerPage')}:
-                        </span>
-                        <select
-                            value={pagination.limit}
-                            onChange={(e) => handleItemsPerPageChange(Number(e.target.value))}
-                            className="border border-input bg-background px-3 py-1 text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
-                        >
-                            {itemsPerPageOptions.map(option => (
-                                <option key={option} value={option}>
-                                    {option}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-
-                    {/* Pagination info */}
-                    <div className="text-sm text-muted-foreground">
-                        {t('create-token.pagination.showing', {
-                            from: ((currentPage - 1) * pagination.limit) + 1,
-                            to: Math.min(currentPage * pagination.limit, pagination.total),
-                            total: pagination.total
-                        })}
-                    </div>
-
-                    {/* Pagination controls */}
-                    {pagination.totalPages > 1 && (
-                        <div className="flex items-center space-x-2">
-                            <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={handlePreviousPage}
-                                disabled={!pagination.hasPrev}
-                            >
-                                <ChevronLeft className="h-4 w-4" />
-                                {t('create-token.pagination.previous')}
-                            </Button>
-                            
-                            {getPageNumbers().map((page, index) => (
-                                <React.Fragment key={index}>
-                                    {page === '...' ? (
-                                        <span className="text-sm text-muted-foreground px-2">...</span>
-                                    ) : (
-                                        <Button
-                                            variant={page === currentPage ? "default" : "outline"}
-                                            size="sm"
-                                            onClick={() => handlePageChange(page as number)}
-                                            className="min-w-[40px]"
-                                        >
-                                            {page}
-                                        </Button>
-                                    )}
-                                </React.Fragment>
-                            ))}
-                            
-                            <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={handleNextPage}
-                                disabled={!pagination.hasNext}
-                            >
-                                {t('create-token.pagination.next')}
-                                <ChevronLeft className="h-4 w-4 rotate-180" />
-                            </Button>
-
-                            {/* Go to page input */}
-                            <div className="flex items-center space-x-2 ml-4">
-                                <span className="text-sm text-muted-foreground">
-                                    {t('create-token.pagination.goToPage')}:
-                                </span>
-                                <form onSubmit={handleGoToPage} className="flex items-center space-x-1">
-                                    <Input
-                                        name="page"
-                                        type="number"
-                                        min={1}
-                                        max={pagination.totalPages}
-                                        placeholder={currentPage.toString()}
-                                        className="w-16 h-8 text-sm"
-                                    />
-                                    <Button
-                                        type="submit"
-                                        variant="outline"
-                                        size="sm"
-                                        className="h-8 px-2"
-                                    >
-                                        {t('create-token.pagination.go')}
-                                    </Button>
-                                </form>
-                            </div>
-                        </div>
-                    )}
-                </div>
+                            <div className="flex items-center justify-center space-x-4">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handlePreviousPage}
+                disabled={currentPage <= 1}
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </Button>
+              <span className="text-sm text-muted-foreground">
+                {currentPage} / {pagination.totalPages || 1}
+              </span>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleNextPage}
+                disabled={!pagination.totalPages || currentPage >= pagination.totalPages}
+              >
+                <ChevronLeft className="h-4 w-4 rotate-180" />
+              </Button>
+            </div>
             </Card>
 
             {/* Dialog Edit Token */}
