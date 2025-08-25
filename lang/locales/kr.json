@@ -1202,6 +1202,9 @@
         "createNewToken": "새 토큰 생성",
         "tokenList": "토큰 목록",
         "tokenListDescription": "시스템의 모든 토큰 관리 • 총: {total}개 토큰",
+        "searchPlaceholder": "이름, 심볼 또는 주소로 토큰 검색...",
+        "searchResults": "\"{search}\"와 일치하는 {count}개 토큰을 찾았습니다 (페이지 {page} / {totalPages})",
+        "noSearchResults": "\"{search}\"와 일치하는 토큰을 찾을 수 없습니다",
         "loading": "로딩 중...",
         "noTokens": "사용 가능한 토큰이 없습니다",
         "table": {
@@ -1277,7 +1280,11 @@
         "pagination": {
             "previous": "이전",
             "next": "다음",
-            "page": "페이지 {current} / {total}"
+            "page": "페이지 {current} / {total}",
+            "itemsPerPage": "페이지당 항목 수",
+            "showing": "총 {total}개 토큰 중 {from}~{to}개 표시",
+            "goToPage": "페이지로 이동",
+            "go": "이동"
         },
         "errors": {
             "loadTokensFailed": "토큰 목록 로딩 오류: {message}"

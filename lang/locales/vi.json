@@ -1202,6 +1202,9 @@
         "createNewToken": "Tạo Token Mới",
         "tokenList": "Danh sách Token",
         "tokenListDescription": "Quản lý tất cả token trong hệ thống • Tổng cộng: {total} token",
+        "searchPlaceholder": "Tìm kiếm token theo tên, ký hiệu hoặc địa chỉ...",
+        "searchResults": "Tìm thấy {count} token khớp với \"{search}\" (Trang {page} / {totalPages})",
+        "noSearchResults": "Không tìm thấy token nào khớp với \"{search}\"",
         "loading": "Đang tải...",
         "noTokens": "Chưa có token nào",
         "table": {
@@ -1277,7 +1280,11 @@
         "pagination": {
             "previous": "Trước",
             "next": "Sau",
-            "page": "Trang {current} / {total}"
+            "page": "Trang {current} / {total}",
+            "itemsPerPage": "Số mục mỗi trang",
+            "showing": "Hiển thị {from} đến {to} trong tổng số {total} token",
+            "goToPage": "Đi đến trang",
+            "go": "Đi"
         },
         "errors": {
             "loadTokensFailed": "Lỗi khi tải danh sách token: {message}"

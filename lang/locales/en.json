@@ -1205,6 +1205,9 @@
         "createNewToken": "Create New Token",
         "tokenList": "Token List",
         "tokenListDescription": "Manage all tokens in the system • Total: {total} tokens",
+        "searchPlaceholder": "Search tokens by name, symbol, or address...",
+        "searchResults": "Found {count} tokens matching \"{search}\" (Page {page} of {totalPages})",
+        "noSearchResults": "No tokens found matching \"{search}\"",
         "loading": "Loading...",
         "noTokens": "No tokens available",
         "table": {
@@ -1280,7 +1283,11 @@
         "pagination": {
             "previous": "Previous",
             "next": "Next",
-            "page": "Page {current} of {total}"
+            "page": "Page {current} of {total}",
+            "itemsPerPage": "Items per page",
+            "showing": "Showing {from} to {to} of {total} tokens",
+            "goToPage": "Go to page",
+            "go": "Go"
         },
         "errors": {
             "loadTokensFailed": "Error loading token list: {message}"

@@ -48,9 +48,13 @@ export interface ApiResponse<T> {
 
 class TokenBittWorldService {
   // Lấy danh sách token
-  async getTokens(): Promise<ApiResponse<TokensResponse>> {
-    const response = await axiosClient.get('/bittworld-token');
-    return response.data;
+  async getTokens(search?: string, page: number = 1, limit: number = 20): Promise<ApiResponse<TokensResponse>> {
+    const params: any = { page, limit }
+    if (search && search.trim()) {
+      params.search = search.trim()
+    }
+    const response = await axiosClient.get('/bittworld-token', { params })
+    return response.data
   }
 
   // Tạo token mới
