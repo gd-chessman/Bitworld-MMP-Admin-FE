@@ -471,7 +471,9 @@
             "totalAmount": "Tổng Số Tiền: ${amount}",
             "cancel": "Hủy",
             "confirm": "Xác Nhận Rút Tiền",
-            "processing": "Đang Xử Lý..."
+            "processing": "Đang Xử Lý...",
+            "minimumAmount": "Số tiền rút tối thiểu là $5",
+            "failed": "Lỗi khi kích hoạt rút tiền!"
         },
         "table": {
             "id": "ID",

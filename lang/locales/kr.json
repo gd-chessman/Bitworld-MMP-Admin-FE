@@ -471,7 +471,9 @@
             "totalAmount": "총 금액: ${amount}",
             "cancel": "취소",
             "confirm": "출금 확인",
-            "processing": "처리 중..."
+            "processing": "처리 중...",
+            "minimumAmount": "최소 $5 필요",
+            "failed": "출금 트리거 실패!"
         },
         "table": {
             "id": "ID",

@@ -471,7 +471,9 @@
             "totalAmount": "Total Amount: ${amount}",
             "cancel": "Cancel",
             "confirm": "Confirm Withdrawal",
-            "processing": "Processing..."
+            "processing": "Processing...",
+            "minimumAmount": "Minimum $5 required",
+            "failed": "Failed to trigger withdrawal!"
         },
         "table": {
             "id": "ID",

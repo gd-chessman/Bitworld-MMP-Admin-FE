@@ -54,8 +54,12 @@ export default function BittworldRewardsPage() {
       toast.success("Withdrawal triggered successfully!")
       setOpenWithdrawDialog(false)
       window.location.reload()
-    } catch (error) {
-      toast.error("Failed to trigger withdrawal!")
+    } catch (error: any) {
+      if(error.response.data.message.includes('Minimum $5 required')) {
+        toast.error(t('bittworld-rewards.dialog.minimumAmount'))
+      }else{
+        toast.error(error.response.data.message)
+      }
     } finally {
       setIsWithdrawing(false)
     }
@@ -151,8 +155,7 @@ export default function BittworldRewardsPage() {
           <CardContent>
             <div className="flex items-center justify-between">
               <div className="text-2xl font-bold">{isLoadingStats ? '...' : overview?.canWithdrawRewards ?? 0}</div>
-              {!isLoadingStats && currentUser?.role === "admin" && (
-                <Dialog open={openWithdrawDialog} onOpenChange={setOpenWithdrawDialog}>
+              <Dialog open={openWithdrawDialog} onOpenChange={setOpenWithdrawDialog}>
                   <DialogTrigger asChild>
                     <Button 
                       size="sm" 
@@ -193,7 +196,6 @@ export default function BittworldRewardsPage() {
                     </DialogFooter>
                   </DialogContent>
                 </Dialog>
-              )}
             </div>
           </CardContent>
         </Card>
