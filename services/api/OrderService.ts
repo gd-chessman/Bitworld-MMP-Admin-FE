@@ -21,7 +21,7 @@ export const getOrderHistory = async (search: string = '', page: number = 1, lim
 
 export const getOrderStatistics = async () => {
     try {
-        const temp = await axiosClient.get(`/order-statistics`)
+        const temp = await axiosClient.get(`/order-statistics?isBittworld=true`)
         return temp.data;
     } catch (error) {
         console.log(error)

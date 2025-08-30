@@ -99,7 +99,7 @@ export const updateBgAffiliateNodeStatus = async (walletId: number, status: bool
 
 export const getBgAffiliateStatistics = async () => {
   try {
-    const response = await axiosClient.get('/bg-affiliate/statistics');
+    const response = await axiosClient.get('/bg-affiliate/statistics?isBittworld=true');
     return response.data;
   } catch (error) {
     console.log('Error fetching BG affiliate statistics:', error);
